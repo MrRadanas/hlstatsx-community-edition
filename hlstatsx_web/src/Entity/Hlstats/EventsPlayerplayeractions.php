@@ -6,156 +6,92 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\EventsPlayerplayeractionsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
- * HlstatsEventsPlayerplayeractions.
- *
- * @ORM\Table(name="hlstats_Events_PlayerPlayerActions", indexes={@ORM\Index(name="playerId", columns={"playerId"}), @ORM\Index(name="actionId", columns={"actionId"}), @ORM\Index(name="victimId", columns={"victimId"})})
- *
- * @ORM\Entity(repositoryClass=EventsPlayerplayeractionsRepository::class)
+ * @todo $serverid скорее всего ведет на Servers
  */
+#[ORM\Table(name: 'hlstats_Events_PlayerPlayerActions')]
+#[ORM\Index(name: 'playerId', columns: ['playerId'])]
+#[ORM\Index(name: 'actionId', columns: ['actionId'])]
+#[ORM\Index(name: 'victimId', columns: ['victimId'])]
+#[ORM\Entity(repositoryClass: EventsPlayerplayeractionsRepository::class)]
 class EventsPlayerplayeractions
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private int $id;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="eventTime", type="datetime", nullable=true)
-     */
-    private $eventtime;
+    #[ORM\Column(name: 'eventTime', type: 'datetime', nullable: true)]
+    private ?DateTime $eventtime;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="serverId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $serverid = '0';
+    #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $serverid = 0;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="map", type="string", length=64, nullable=false)
-     */
-    private $map = '';
+    #[ORM\Column(name: 'map', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $map = '';
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="playerId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $playerid = '0';
+    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $playerid = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="victimId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $victimid = '0';
+    #[ORM\Column(name: 'victimId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $victimid = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="actionId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $actionid = '0';
+    #[ORM\Column(name: 'actionId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $actionid = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="bonus", type="integer", nullable=false)
-     */
-    private $bonus = '0';
+    #[ORM\Column(name: 'bonus', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $bonus = 0;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="pos_x", type="integer", nullable=true)
-     */
-    private $posX;
+    #[ORM\Column(name: 'pos_x', type: 'integer', nullable: true)]
+    private ?int $posX;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="pos_y", type="integer", nullable=true)
-     */
-    private $posY;
+    #[ORM\Column(name: 'pos_y', type: 'integer', nullable: true)]
+    private ?int $posY;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="pos_z", type="integer", nullable=true)
-     */
-    private $posZ;
+    #[ORM\Column(name: 'pos_z', type: 'integer', nullable: true)]
+    private ?int $posZ;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="pos_victim_x", type="integer", nullable=true)
-     */
-    private $posVictimX;
+    #[ORM\Column(name: 'pos_victim_x', type: 'integer', nullable: true)]
+    private ?int $posVictimX;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="pos_victim_y", type="integer", nullable=true)
-     */
-    private $posVictimY;
+    #[ORM\Column(name: 'pos_victim_y', type: 'integer', nullable: true)]
+    private ?int $posVictimY;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="pos_victim_z", type="integer", nullable=true)
-     */
-    private $posVictimZ;
+    #[ORM\Column(name: 'pos_victim_z', type: 'integer', nullable: true)]
+    private ?int $posVictimZ;
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): EventsPlayerplayeractions
+    public function setId(int $id): static
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getEventtime(): \DateTime
+    public function getEventtime(): ?DateTime
     {
         return $this->eventtime;
     }
 
-    public function setEventtime(\DateTime $eventtime): EventsPlayerplayeractions
+    public function setEventtime(?DateTime $eventtime): static
     {
         $this->eventtime = $eventtime;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getServerid()
+    public function getServerid(): int
     {
         return $this->serverid;
     }
 
-    /**
-     * @param int|string $serverid
-     *
-     * @return EventsPlayerplayeractions
-     */
-    public function setServerid($serverid)
+    public function setServerid(int $serverid):static
     {
         $this->serverid = $serverid;
 
@@ -167,159 +103,129 @@ class EventsPlayerplayeractions
         return $this->map;
     }
 
-    public function setMap(string $map): EventsPlayerplayeractions
+    public function setMap(string $map): static
     {
         $this->map = $map;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getPlayerid()
+    public function getPlayerid(): int
     {
         return $this->playerid;
     }
 
-    /**
-     * @param int|string $playerid
-     *
-     * @return EventsPlayerplayeractions
-     */
-    public function setPlayerid($playerid)
+    public function setPlayerid(int $playerid): static
     {
         $this->playerid = $playerid;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getVictimid()
+    public function getVictimid(): int
     {
         return $this->victimid;
     }
 
-    /**
-     * @param int|string $victimid
-     *
-     * @return EventsPlayerplayeractions
-     */
-    public function setVictimid($victimid)
+    public function setVictimid(int $victimid): static
     {
         $this->victimid = $victimid;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getActionid()
+
+    public function getActionid(): int
     {
         return $this->actionid;
     }
 
-    /**
-     * @param int|string $actionid
-     *
-     * @return EventsPlayerplayeractions
-     */
-    public function setActionid($actionid)
+
+    public function setActionid(int $actionid): static
     {
         $this->actionid = $actionid;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getBonus()
+    public function getBonus(): int
     {
         return $this->bonus;
     }
 
-    /**
-     * @param int|string $bonus
-     *
-     * @return EventsPlayerplayeractions
-     */
-    public function setBonus($bonus)
+    public function setBonus(int $bonus): static
     {
         $this->bonus = $bonus;
 
         return $this;
     }
 
-    public function getPosX(): int
+    public function getPosX(): ?int
     {
         return $this->posX;
     }
 
-    public function setPosX(int $posX): EventsPlayerplayeractions
+    public function setPosX(?int $posX): static
     {
         $this->posX = $posX;
 
         return $this;
     }
 
-    public function getPosY(): int
+    public function getPosY(): ?int
     {
         return $this->posY;
     }
 
-    public function setPosY(int $posY): EventsPlayerplayeractions
+    public function setPosY(?int $posY): static
     {
         $this->posY = $posY;
 
         return $this;
     }
 
-    public function getPosZ(): int
+    public function getPosZ(): ?int
     {
         return $this->posZ;
     }
 
-    public function setPosZ(int $posZ): EventsPlayerplayeractions
+    public function setPosZ(?int $posZ): static
     {
         $this->posZ = $posZ;
 
         return $this;
     }
 
-    public function getPosVictimX(): int
+    public function getPosVictimX(): ?int
     {
         return $this->posVictimX;
     }
 
-    public function setPosVictimX(int $posVictimX): EventsPlayerplayeractions
+    public function setPosVictimX(?int $posVictimX): static
     {
         $this->posVictimX = $posVictimX;
 
         return $this;
     }
 
-    public function getPosVictimY(): int
+    public function getPosVictimY(): ?int
     {
         return $this->posVictimY;
     }
 
-    public function setPosVictimY(int $posVictimY): EventsPlayerplayeractions
+    public function setPosVictimY(?int $posVictimY): static
     {
         $this->posVictimY = $posVictimY;
 
         return $this;
     }
 
-    public function getPosVictimZ(): int
+    public function getPosVictimZ(): ?int
     {
         return $this->posVictimZ;
     }
 
-    public function setPosVictimZ(int $posVictimZ): EventsPlayerplayeractions
+    public function setPosVictimZ(?int $posVictimZ): static
     {
         $this->posVictimZ = $posVictimZ;
 

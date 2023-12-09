@@ -7,8 +7,9 @@ doctrine:
         #server_version: '15'
 
         profiling_collect_backtrace: '%kernel.debug%'
-#        types:
-#            enum: App\Doctine\DBAL\Types\Enum
+        types:
+            BinaryType: App\DBAL\Types\BinaryType
+            ClanTagsPosition: App\DBAL\Types\ClanTagsPosition
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
@@ -23,12 +24,6 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
-            Geolitecity:
-                type: attribute
-                is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity/Geolitecity'
-                prefix: 'App\Entity\Geolitecity'
-                alias: Geolitecity
 
 when@test:
     doctrine:

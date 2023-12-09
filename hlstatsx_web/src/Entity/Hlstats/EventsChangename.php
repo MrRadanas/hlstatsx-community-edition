@@ -6,107 +6,69 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\EventsChangenameRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
- * HlstatsEventsChangename.
- *
- * @ORM\Table(name="hlstats_Events_ChangeName", indexes={@ORM\Index(name="playerId", columns={"playerId"})})
- *
- * @ORM\Entity(repositoryClass=EventsChangenameRepository::class)
+ * @todo $serverid скорее всего ведет на Servers
  */
+#[ORM\Table(name: 'hlstats_Events_ChangeName')]
+#[ORM\Index(name: 'playerId', columns: ['playerId'])]
+#[ORM\Entity(repositoryClass: EventsChangenameRepository::class)]
 class EventsChangename
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private int $id;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="eventTime", type="datetime", nullable=true)
-     */
-    private $eventtime;
+    #[ORM\Column(name: 'eventTime', type: 'datetime', nullable: true)]
+    private ?DateTime $eventtime;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="serverId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $serverid = '0';
+    #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $serverid = 0;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="map", type="string", length=64, nullable=false)
-     */
-    private $map = '';
+    #[ORM\Column(name: 'map', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $map = '';
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="playerId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $playerid = '0';
+    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $playerid = 0;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="oldName", type="string", length=64, nullable=false)
-     */
-    private $oldname = '';
+    #[ORM\Column(name: 'oldName', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $oldname = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="newName", type="string", length=64, nullable=false)
-     */
-    private $newname = '';
+    #[ORM\Column(name: 'newName', type: 'string', length: 64, nullable: false)]
+    private string $newname = '';
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): EventsChangename
+    public function setId(int $id): static
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getEventtime(): \DateTime
+    public function getEventtime(): ?DateTime
     {
         return $this->eventtime;
     }
 
-    public function setEventtime(\DateTime $eventtime): EventsChangename
+    public function setEventtime(?DateTime $eventtime): static
     {
         $this->eventtime = $eventtime;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getServerid()
+    public function getServerid(): int
     {
         return $this->serverid;
     }
 
-    /**
-     * @param int|string $serverid
-     *
-     * @return EventsChangename
-     */
-    public function setServerid($serverid)
+    public function setServerid(int $serverid): static
     {
         $this->serverid = $serverid;
 
@@ -118,27 +80,19 @@ class EventsChangename
         return $this->map;
     }
 
-    public function setMap(string $map): EventsChangename
+    public function setMap(string $map): static
     {
         $this->map = $map;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getPlayerid()
+    public function getPlayerid(): int
     {
         return $this->playerid;
     }
 
-    /**
-     * @param int|string $playerid
-     *
-     * @return EventsChangename
-     */
-    public function setPlayerid($playerid)
+    public function setPlayerid(int $playerid): static
     {
         $this->playerid = $playerid;
 
@@ -150,7 +104,7 @@ class EventsChangename
         return $this->oldname;
     }
 
-    public function setOldname(string $oldname): EventsChangename
+    public function setOldname(string $oldname): static
     {
         $this->oldname = $oldname;
 
@@ -162,7 +116,7 @@ class EventsChangename
         return $this->newname;
     }
 
-    public function setNewname(string $newname): EventsChangename
+    public function setNewname(string $newname): static
     {
         $this->newname = $newname;
 

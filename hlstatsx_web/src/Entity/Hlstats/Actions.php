@@ -4,112 +4,64 @@ declare(strict_types=1);
 
 namespace App\Entity\Hlstats;
 
+use App\DBAL\Types\BinaryType;
 use App\Repository\Hlstats\ActionsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
-/**
- * HlstatsActions.
- *
- * @ORM\Table(name="hlstats_Actions", uniqueConstraints={@ORM\UniqueConstraint(name="gamecode", columns={"code", "game", "team"})}, indexes={@ORM\Index(name="code", columns={"code"})})
- *
- * @ORM\Entity(repositoryClass=ActionsRepository::class)
- */
+#[ORM\Table(name: 'hlstats_Actions')]
+#[ORM\Index(name: 'code', columns: ['code'])]
+#[ORM\UniqueConstraint(name: 'gamecode', columns: ['code', 'game', 'team'])]
+#[ORM\Entity(repositoryClass: ActionsRepository::class)]
 class Actions
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
+    #[ORM\Column(name: 'id', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     private int $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=32, nullable=false, options={"default": "valve"})
-     */
+    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false, options: ['default' => 'valve'])]
     private string $game = 'valve';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="code", type="string", length=64, nullable=false)
-     */
+    #[ORM\Column(name: 'code', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
     private string $code = '';
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="reward_player", type="integer", nullable=false, options={"default": "10"})
-     */
+    #[ORM\Column(name: 'reward_player', type: 'integer', nullable: false, options: ['default' => 10])]
     private int $rewardPlayer = 10;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="reward_team", type="integer", nullable=false)
-     */
+    #[ORM\Column(name: 'reward_team', type: 'integer', nullable: false, options: ['default' => 0])]
     private int $rewardTeam = 0;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="team", type="string", length=64, nullable=false)
-     */
+    #[ORM\Column(name: 'team', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
     private string $team = '';
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="description", type="string", length=128, nullable=true)
-     */
+    #[ORM\Column(name: 'description', type: 'string', length: 128, nullable: true)]
     private string $description;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="for_PlayerActions", type="string", length=0, nullable=false)
-     */
+    #[ORM\Column(type: 'BinaryType')]
+    #[DoctrineAssert\EnumType(entity: BinaryType::class)]
     private string $forPlayeractions = '0';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="for_PlayerPlayerActions", type="string", length=0, nullable=false)
-     */
+    #[ORM\Column(type: 'BinaryType')]
+    #[DoctrineAssert\EnumType(entity: BinaryType::class)]
     private string $forPlayerplayeractions = '0';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="for_TeamActions", type="string", length=0, nullable=false)
-     */
+    #[ORM\Column(type: 'BinaryType')]
+    #[DoctrineAssert\EnumType(entity: BinaryType::class)]
     private string $forTeamactions = '0';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="for_WorldActions", type="string", length=0, nullable=false)
-     */
+    #[ORM\Column(type: 'BinaryType')]
+    #[DoctrineAssert\EnumType(entity: BinaryType::class)]
     private string $forWorldactions = '0';
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="count", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $count = '0';
+    #[ORM\Column(name: 'count', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $count = 0;
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): Actions
+    public function setId(int $id): static
     {
         $this->id = $id;
 
@@ -121,7 +73,7 @@ class Actions
         return $this->game;
     }
 
-    public function setGame(string $game): Actions
+    public function setGame(string $game): static
     {
         $this->game = $game;
 
@@ -133,7 +85,7 @@ class Actions
         return $this->code;
     }
 
-    public function setCode(string $code): Actions
+    public function setCode(string $code): static
     {
         $this->code = $code;
 
@@ -145,27 +97,19 @@ class Actions
         return $this->rewardPlayer;
     }
 
-    public function setRewardPlayer(int $rewardPlayer): Actions
+    public function setRewardPlayer(int $rewardPlayer): static
     {
         $this->rewardPlayer = $rewardPlayer;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getRewardTeam()
+    public function getRewardTeam(): int
     {
         return $this->rewardTeam;
     }
 
-    /**
-     * @param int|string $rewardTeam
-     *
-     * @return Actions
-     */
-    public function setRewardTeam($rewardTeam)
+    public function setRewardTeam(int $rewardTeam): static
     {
         $this->rewardTeam = $rewardTeam;
 
@@ -177,7 +121,7 @@ class Actions
         return $this->team;
     }
 
-    public function setTeam(string $team): Actions
+    public function setTeam(string $team): static
     {
         $this->team = $team;
 
@@ -189,7 +133,7 @@ class Actions
         return $this->description;
     }
 
-    public function setDescription(string $description): Actions
+    public function setDescription(string $description): static
     {
         $this->description = $description;
 
@@ -201,8 +145,9 @@ class Actions
         return $this->forPlayeractions;
     }
 
-    public function setForPlayeractions(string $forPlayeractions): Actions
+    public function setForPlayeractions(string $forPlayeractions): static
     {
+        BinaryType::assertValidChoice($forPlayeractions);
         $this->forPlayeractions = $forPlayeractions;
 
         return $this;
@@ -213,8 +158,9 @@ class Actions
         return $this->forPlayerplayeractions;
     }
 
-    public function setForPlayerplayeractions(string $forPlayerplayeractions): Actions
+    public function setForPlayerplayeractions(string $forPlayerplayeractions): static
     {
+        BinaryType::assertValidChoice($forPlayerplayeractions);
         $this->forPlayerplayeractions = $forPlayerplayeractions;
 
         return $this;
@@ -225,8 +171,9 @@ class Actions
         return $this->forTeamactions;
     }
 
-    public function setForTeamactions(string $forTeamactions): Actions
+    public function setForTeamactions(string $forTeamactions): static
     {
+        BinaryType::assertValidChoice($forTeamactions);
         $this->forTeamactions = $forTeamactions;
 
         return $this;
@@ -237,27 +184,20 @@ class Actions
         return $this->forWorldactions;
     }
 
-    public function setForWorldactions(string $forWorldactions): Actions
+    public function setForWorldactions(string $forWorldactions): static
     {
+        BinaryType::assertValidChoice($forWorldactions);
         $this->forWorldactions = $forWorldactions;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getCount()
+    public function getCount(): int
     {
         return $this->count;
     }
 
-    /**
-     * @param int|string $count
-     *
-     * @return Actions
-     */
-    public function setCount($count)
+    public function setCount(int $count): static
     {
         $this->count = $count;
 

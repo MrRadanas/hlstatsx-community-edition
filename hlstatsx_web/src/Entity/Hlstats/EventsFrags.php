@@ -4,170 +4,102 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\EventsFragsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
- * HlstatsEventsFrags.
- *
- * @ORM\Table(name="hlstats_Events_Frags", indexes={@ORM\Index(name="killerId", columns={"killerId"}), @ORM\Index(name="victimId", columns={"victimId"}), @ORM\Index(name="serverId", columns={"serverId"}), @ORM\Index(name="headshot", columns={"headshot"}), @ORM\Index(name="map", columns={"map"}), @ORM\Index(name="weapon16", columns={"weapon"}), @ORM\Index(name="killerRole", columns={"killerRole"})})
- *
- * @ORM\Entity(repositoryClass=EventsFragsRepository::class)
+ * @todo $serverid скорее всего ведет на Servers
  */
+#[ORM\Table(name: 'hlstats_Events_Frags')]
+#[ORM\Index(name: 'killerId', columns: ['killerId'])]
+#[ORM\Index(name: 'victimId', columns: ['victimId'])]
+#[ORM\Index(name: 'serverId', columns: ['serverId'])]
+#[ORM\Index(name: 'headshot', columns: ['headshot'])]
+#[ORM\Index(name: 'map', columns: ['map'])]
+#[ORM\Index(name: 'weapon16', columns: ['weapon'])]
+#[ORM\Index(name: 'killerRole', columns: ['killerRole'])]
+#[ORM\Entity(repositoryClass: EventsFragsRepository::class)]
 class EventsFrags
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private int $id;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="eventTime", type="datetime", nullable=true)
-     */
-    private $eventtime;
+    #[ORM\Column(name: 'eventTime', type: 'datetime', nullable: true)]
+    private ?DateTime $eventtime;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="serverId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $serverid = '0';
+    #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $serverid = 0;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="map", type="string", length=64, nullable=false)
-     */
-    private $map = '';
+    #[ORM\Column(name: 'map', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $map = '';
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="killerId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $killerid = '0';
+    #[ORM\Column(name: 'killerId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $killerid = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="victimId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $victimid = '0';
+    #[ORM\Column(name: 'victimId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $victimid = 0;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="weapon", type="string", length=64, nullable=false)
-     */
-    private $weapon = '';
+    #[ORM\Column(name: 'weapon', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $weapon = '';
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="headshot", type="boolean", nullable=false)
-     */
-    private $headshot = '0';
+    #[ORM\Column(name: 'headshot', type: 'boolean', nullable: false, options: ['default' => false])]
+    private bool $headshot = false;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="killerRole", type="string", length=64, nullable=false)
-     */
-    private $killerrole = '';
+    #[ORM\Column(name: 'killerRole', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $killerrole = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="victimRole", type="string", length=64, nullable=false)
-     */
-    private $victimrole = '';
+    #[ORM\Column(name: 'victimRole', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $victimrole = '';
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="pos_x", type="integer", nullable=true)
-     */
-    private $posX;
+    #[ORM\Column(name: 'pos_x', type: 'integer', nullable: true)]
+    private ?int $posX;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="pos_y", type="integer", nullable=true)
-     */
-    private $posY;
+    #[ORM\Column(name: 'pos_y', type: 'integer', nullable: true)]
+    private ?int $posY;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="pos_z", type="integer", nullable=true)
-     */
-    private $posZ;
+    #[ORM\Column(name: 'pos_z', type: 'integer', nullable: true)]
+    private ?int $posZ;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="pos_victim_x", type="integer", nullable=true)
-     */
-    private $posVictimX;
+    #[ORM\Column(name: 'pos_victim_x', type: 'integer', nullable: true)]
+    private ?int $posVictimX;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="pos_victim_y", type="integer", nullable=true)
-     */
-    private $posVictimY;
+    #[ORM\Column(name: 'pos_victim_y', type: 'integer', nullable: true)]
+    private ?int $posVictimY;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="pos_victim_z", type="integer", nullable=true)
-     */
-    private $posVictimZ;
+    #[ORM\Column(name: 'pos_victim_z', type: 'integer', nullable: true)]
+    private ?int $posVictimZ;
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): EventsFrags
+    public function setId(int $id): static
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getEventtime(): \DateTime
+    public function getEventtime(): ?DateTime
     {
         return $this->eventtime;
     }
 
-    public function setEventtime(\DateTime $eventtime): EventsFrags
+    public function setEventtime(?DateTime $eventtime): static
     {
         $this->eventtime = $eventtime;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getServerid()
+    public function getServerid(): int
     {
         return $this->serverid;
     }
 
-    /**
-     * @param int|string $serverid
-     *
-     * @return EventsFrags
-     */
-    public function setServerid($serverid)
+    public function setServerid(int $serverid): static
     {
         $this->serverid = $serverid;
 
@@ -179,47 +111,31 @@ class EventsFrags
         return $this->map;
     }
 
-    public function setMap(string $map): EventsFrags
+    public function setMap(string $map): static
     {
         $this->map = $map;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getKillerid()
+    public function getKillerid(): int
     {
         return $this->killerid;
     }
 
-    /**
-     * @param int|string $killerid
-     *
-     * @return EventsFrags
-     */
-    public function setKillerid($killerid)
+    public function setKillerid(int $killerid): static
     {
         $this->killerid = $killerid;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getVictimid()
+    public function getVictimid(): int
     {
         return $this->victimid;
     }
 
-    /**
-     * @param int|string $victimid
-     *
-     * @return EventsFrags
-     */
-    public function setVictimid($victimid)
+    public function setVictimid(int $victimid): static
     {
         $this->victimid = $victimid;
 
@@ -231,27 +147,19 @@ class EventsFrags
         return $this->weapon;
     }
 
-    public function setWeapon(string $weapon): EventsFrags
+    public function setWeapon(string $weapon): static
     {
         $this->weapon = $weapon;
 
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getHeadshot()
+    public function getHeadshot(): bool
     {
         return $this->headshot;
     }
 
-    /**
-     * @param bool|string $headshot
-     *
-     * @return EventsFrags
-     */
-    public function setHeadshot($headshot)
+    public function setHeadshot(bool $headshot): static
     {
         $this->headshot = $headshot;
 
@@ -263,7 +171,7 @@ class EventsFrags
         return $this->killerrole;
     }
 
-    public function setKillerrole(string $killerrole): EventsFrags
+    public function setKillerrole(string $killerrole): static
     {
         $this->killerrole = $killerrole;
 
@@ -275,79 +183,79 @@ class EventsFrags
         return $this->victimrole;
     }
 
-    public function setVictimrole(string $victimrole): EventsFrags
+    public function setVictimrole(string $victimrole): static
     {
         $this->victimrole = $victimrole;
 
         return $this;
     }
 
-    public function getPosX(): int
+    public function getPosX(): ?int
     {
         return $this->posX;
     }
 
-    public function setPosX(int $posX): EventsFrags
+    public function setPosX(?int $posX): static
     {
         $this->posX = $posX;
 
         return $this;
     }
 
-    public function getPosY(): int
+    public function getPosY(): ?int
     {
         return $this->posY;
     }
 
-    public function setPosY(int $posY): EventsFrags
+    public function setPosY(?int $posY): static
     {
         $this->posY = $posY;
 
         return $this;
     }
 
-    public function getPosZ(): int
+    public function getPosZ(): ?int
     {
         return $this->posZ;
     }
 
-    public function setPosZ(int $posZ): EventsFrags
+    public function setPosZ(?int $posZ): static
     {
         $this->posZ = $posZ;
 
         return $this;
     }
 
-    public function getPosVictimX(): int
+    public function getPosVictimX(): ?int
     {
         return $this->posVictimX;
     }
 
-    public function setPosVictimX(int $posVictimX): EventsFrags
+    public function setPosVictimX(?int $posVictimX): static
     {
         $this->posVictimX = $posVictimX;
 
         return $this;
     }
 
-    public function getPosVictimY(): int
+    public function getPosVictimY(): ?int
     {
         return $this->posVictimY;
     }
 
-    public function setPosVictimY(int $posVictimY): EventsFrags
+    public function setPosVictimY(?int $posVictimY): static
     {
         $this->posVictimY = $posVictimY;
 
         return $this;
     }
 
-    public function getPosVictimZ(): int
+    public function getPosVictimZ(): ?int
     {
         return $this->posVictimZ;
     }
 
-    public function setPosVictimZ(int $posVictimZ): EventsFrags
+    public function setPosVictimZ(?int $posVictimZ): static
     {
         $this->posVictimZ = $posVictimZ;
 

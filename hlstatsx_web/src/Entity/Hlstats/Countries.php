@@ -1,43 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\CountriesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * HlstatsCountries.
- *
- * @ORM\Table(name="hlstats_Countries")
- *
- * @ORM\Entity(repositoryClass=CountriesRepository::class)
- */
+#[ORM\Table(name: 'hlstats_Countries')]
+#[ORM\Entity(repositoryClass: CountriesRepository::class)]
 class Countries
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="flag", type="string", length=16, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $flag;
+    #[ORM\Column(name: 'flag', type: 'string', length: 16, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private string $flag;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=50, nullable=false)
-     */
-    private $name;
+    #[ORM\Column(name: 'name', type: 'string', length: 50, nullable: false)]
+    private string $name;
 
     public function getFlag(): string
     {
         return $this->flag;
     }
 
-    public function setFlag(string $flag): Countries
+    public function setFlag(string $flag): static
     {
         $this->flag = $flag;
 
@@ -49,7 +36,7 @@ class Countries
         return $this->name;
     }
 
-    public function setName(string $name): Countries
+    public function setName(string $name): static
     {
         $this->name = $name;
 

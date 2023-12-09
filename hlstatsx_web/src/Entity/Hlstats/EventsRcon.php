@@ -6,114 +6,71 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\EventsRconRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
- * HlstatsEventsRcon.
- *
- * @ORM\Table(name="hlstats_Events_Rcon")
- *
- * @ORM\Entity(repositoryClass=EventsRconRepository::class)
+ * @todo $serverid скорее всего ведет на Servers
  */
+#[ORM\Table(name: 'hlstats_Events_Rcon')]
+#[ORM\Entity(repositoryClass: EventsRconRepository::class)]
 class EventsRcon
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private int $id;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="eventTime", type="datetime", nullable=true)
-     */
-    private $eventtime;
+    #[ORM\Column(name: 'eventTime', type: 'datetime', nullable: true)]
+    private ?DateTime $eventtime;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="serverId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $serverid = '0';
+    #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $serverid = 0;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="map", type="string", length=64, nullable=false)
-     */
-    private $map = '';
+    #[ORM\Column(name: 'map', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $map = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=6, nullable=false, options={"default": "UNK"})
-     */
-    private $type = 'UNK';
+    #[ORM\Column(name: 'type', type: 'string', length: 6, nullable: false, options: ['default' => 'UNK'])]
+    private string $type = 'UNK';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="remoteIp", type="string", length=32, nullable=false)
-     */
-    private $remoteip = '';
+    #[ORM\Column(name: 'remoteIp', type: 'string', length: 32, nullable: false, options: ['default' => ''])]
+    private string $remoteip = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=128, nullable=false)
-     */
-    private $password = '';
+    #[ORM\Column(name: 'password', type: 'string', length: 128, nullable: false, options: ['default' => ''])]
+    private string $password = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="command", type="string", length=255, nullable=false)
-     */
-    private $command = '';
+    #[ORM\Column(name: 'command', type: 'string', length: 255, nullable: false, options: ['default' => ''])]
+    private string $command = '';
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): EventsRcon
+    public function setId(int $id): static
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getEventtime(): \DateTime
+    public function getEventtime(): ?DateTime
     {
         return $this->eventtime;
     }
 
-    public function setEventtime(\DateTime $eventtime): EventsRcon
+    public function setEventtime(?DateTime $eventtime): static
     {
         $this->eventtime = $eventtime;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getServerid()
+    public function getServerid(): int
     {
         return $this->serverid;
     }
 
-    /**
-     * @param int|string $serverid
-     *
-     * @return EventsRcon
-     */
-    public function setServerid($serverid)
+    public function setServerid(int $serverid): static
     {
         $this->serverid = $serverid;
 
@@ -125,7 +82,7 @@ class EventsRcon
         return $this->map;
     }
 
-    public function setMap(string $map): EventsRcon
+    public function setMap(string $map): static
     {
         $this->map = $map;
 
@@ -137,7 +94,7 @@ class EventsRcon
         return $this->type;
     }
 
-    public function setType(string $type): EventsRcon
+    public function setType(string $type): static
     {
         $this->type = $type;
 
@@ -149,7 +106,7 @@ class EventsRcon
         return $this->remoteip;
     }
 
-    public function setRemoteip(string $remoteip): EventsRcon
+    public function setRemoteip(string $remoteip): static
     {
         $this->remoteip = $remoteip;
 
@@ -161,7 +118,7 @@ class EventsRcon
         return $this->password;
     }
 
-    public function setPassword(string $password): EventsRcon
+    public function setPassword(string $password): static
     {
         $this->password = $password;
 
@@ -173,7 +130,7 @@ class EventsRcon
         return $this->command;
     }
 
-    public function setCommand(string $command): EventsRcon
+    public function setCommand(string $command): static
     {
         $this->command = $command;
 

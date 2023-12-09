@@ -4,49 +4,34 @@ declare(strict_types=1);
 
 namespace App\Entity\Hlstats;
 
+use App\DBAL\Types\ClanTagsPosition;
 use App\Repository\Hlstats\ClantagsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
-/**
- * HlstatsClantags.
- *
- * @ORM\Table(name="hlstats_ClanTags", uniqueConstraints={@ORM\UniqueConstraint(name="pattern", columns={"pattern"})})
- *
- * @ORM\Entity(repositoryClass=ClantagsRepository::class)
- */
+#[ORM\Table(name: 'hlstats_ClanTags')]
+#[ORM\UniqueConstraint(name: 'pattern', columns: ['pattern'])]
+#[ORM\Entity(repositoryClass: ClantagsRepository::class)]
 class Clantags
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private int $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="pattern", type="string", length=64, nullable=false)
-     */
-    private $pattern;
+    #[ORM\Column(name: 'pattern', type: 'string', length: 64, nullable: false)]
+    private string $pattern;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="position", type="string", length=0, nullable=false, options={"default": "EITHER"})
-     */
-    private $position = 'EITHER';
+    #[ORM\Column(type: 'BinaryType')]
+    #[DoctrineAssert\EnumType(entity: ClanTagsPosition::class)]
+    private string $position = 'EITHER';
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): Clantags
+    public function setId(int $id): static
     {
         $this->id = $id;
 
@@ -58,7 +43,7 @@ class Clantags
         return $this->pattern;
     }
 
-    public function setPattern(string $pattern): Clantags
+    public function setPattern(string $pattern): static
     {
         $this->pattern = $pattern;
 
@@ -70,8 +55,9 @@ class Clantags
         return $this->position;
     }
 
-    public function setPosition(string $position): Clantags
+    public function setPosition(string $position): static
     {
+        ClanTagsPosition::assertValidChoice($position);
         $this->position = $position;
 
         return $this;

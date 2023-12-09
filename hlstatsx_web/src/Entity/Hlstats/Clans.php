@@ -8,75 +8,45 @@ use App\Repository\Hlstats\ClansRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * HlstatsClans.
- *
- * @ORM\Table(name="hlstats_Clans", uniqueConstraints={@ORM\UniqueConstraint(name="tag", columns={"game", "tag"})}, indexes={@ORM\Index(name="game", columns={"game"})})
- *
- * @ORM\Entity(repositoryClass=ClansRepository::class)(repositoryClass=ClansRepository::class)
+ * @todo разобраться с clan_tag
  */
+#[ORM\Table(name: 'hlstats_Clans')]
+#[ORM\Index(name: 'game', columns: ['game'])]
+#[ORM\UniqueConstraint(name: 'tag', columns: ['game', 'tag'])]
+#[ORM\Entity(repositoryClass: ClansRepository::class)]
 class Clans
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="clanId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $clanid;
+    #[ORM\Column(name: 'clanId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private int $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="tag", type="string", length=64, nullable=false)
-     */
-    private $tag = '';
+    #[ORM\Column(name: 'tag', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $tag = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=128, nullable=false)
-     */
-    private $name = '';
+    #[ORM\Column(name: 'name', type: 'string', length: 128, nullable: false, options: ['default' => ''])]
+    private string $name = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="homepage", type="string", length=64, nullable=false)
-     */
-    private $homepage = '';
+    #[ORM\Column(name: 'homepage', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $homepage = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=32, nullable=false)
-     */
-    private $game = '';
+    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false, options: ['default' => ''])]
+    private string $game = '';
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="hidden", type="boolean", nullable=false)
-     */
-    private $hidden = '0';
+    #[ORM\Column(name: 'hidden', type: 'boolean', nullable: false, options: ['default' => false])]
+    private bool $hidden = false;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mapregion", type="string", length=128, nullable=false)
-     */
-    private $mapregion = '';
+    #[ORM\Column(name: 'mapregion', type: 'string', length: 128, nullable: false, options: ['default' => ''])]
+    private string $mapregion = '';
 
-    public function getClanid(): int
+    public function getId(): int
     {
-        return $this->clanid;
+        return $this->id;
     }
 
-    public function setClanid(int $clanid): Clans
+    public function setId(int $id): static
     {
-        $this->clanid = $clanid;
+        $this->id = $id;
 
         return $this;
     }
@@ -86,7 +56,7 @@ class Clans
         return $this->tag;
     }
 
-    public function setTag(string $tag): Clans
+    public function setTag(string $tag): static
     {
         $this->tag = $tag;
 
@@ -98,7 +68,7 @@ class Clans
         return $this->name;
     }
 
-    public function setName(string $name): Clans
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -110,7 +80,7 @@ class Clans
         return $this->homepage;
     }
 
-    public function setHomepage(string $homepage): Clans
+    public function setHomepage(string $homepage): static
     {
         $this->homepage = $homepage;
 
@@ -122,27 +92,19 @@ class Clans
         return $this->game;
     }
 
-    public function setGame(string $game): Clans
+    public function setGame(string $game): static
     {
         $this->game = $game;
 
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getHidden()
+    public function getHidden(): bool
     {
         return $this->hidden;
     }
 
-    /**
-     * @param bool|string $hidden
-     *
-     * @return Clans
-     */
-    public function setHidden($hidden)
+    public function setHidden(bool $hidden): static
     {
         $this->hidden = $hidden;
 
@@ -154,7 +116,7 @@ class Clans
         return $this->mapregion;
     }
 
-    public function setMapregion(string $mapregion): Clans
+    public function setMapregion(string $mapregion): static
     {
         $this->mapregion = $mapregion;
 

@@ -7,62 +7,41 @@ namespace App\Entity\Geolitecity;
 use App\Repository\Geolitecity\LocationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * GeolitecityLocation.
- *
- * @ORM\Table(name="geoLiteCity_Location")
- *
- * @ORM\Entity(repositoryClass=LocationRepository::class)
- */
+#[ORM\Table(name: 'geoLiteCity_Location')]
+#[ORM\Entity(repositoryClass: LocationRepository::class)]
 class Location
 {
-    /**
-     * @ORM\Column(name="locId", type="bigint", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private string $locid = '0';
+    #[ORM\Column(name: 'locId', type: 'bigint', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private string $id;
 
-    /**
-     * @ORM\Column(name="country", type="string", length=2, nullable=false)
-     */
+    #[ORM\Column(name: 'country', type: 'string', length: 2, nullable: false)]
     private string $country;
 
-    /**
-     * @ORM\Column(name="region", type="string", length=50, nullable=true)
-     */
+    #[ORM\Column(name: 'region', type: 'string', length: 50, nullable: true)]
     private ?string $region;
 
-    /**
-     * @ORM\Column(name="city", type="string", length=50, nullable=true)
-     */
+    #[ORM\Column(name: 'city', type: 'string', length: 50, nullable: true)]
     private ?string $city;
 
-    /**
-     * @ORM\Column(name="postalCode", type="string", length=10, nullable=true)
-     */
+    #[ORM\Column(name: 'postalCode', type: 'string', length: 10, nullable: true)]
     private ?string $postalcode;
 
-    /**
-     * @ORM\Column(name="latitude", type="decimal", precision=14, scale=4, nullable=true)
-     */
+    #[ORM\Column(name: 'latitude', type: 'decimal', precision: 14, scale: 4, nullable: true)]
     private ?string $latitude;
 
-    /**
-     * @ORM\Column(name="longitude", type="decimal", precision=14, scale=4, nullable=true)
-     */
+    #[ORM\Column(name: 'longitude', type: 'decimal', precision: 14, scale: 4, nullable: true)]
     private ?string $longitude;
 
-    public function getLocid(): string
+    public function getId(): string
     {
-        return $this->locid;
+        return $this->id;
     }
 
-    public function setLocid(string $locid): Location
+    public function setId(string $id): Location
     {
-        $this->locid = $locid;
+        $this->id = $id;
 
         return $this;
     }
