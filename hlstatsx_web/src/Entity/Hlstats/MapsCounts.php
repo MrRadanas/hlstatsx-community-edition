@@ -6,65 +6,53 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\MapsCountsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
-/**
- * HlstatsMapsCounts.
- *
- * @ORM\Table(name="hlstats_Maps_Counts", indexes={@ORM\Index(name="rowId", columns={"rowId"})})
- *
- * @ORM\Entity(repositoryClass=MapsCountsRepository::class)
- */
+#[ORM\Table(name: 'hlstats_Maps_Counts')]
+#[ORM\Index(name: 'rowId', columns: ['rowId'])]
+#[ORM\Entity(repositoryClass: MapsCountsRepository::class)]
 class MapsCounts
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=32, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $game;
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(name: 'rowId', type: 'integer', nullable: false)]
+    private int $rowid;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="map", type="string", length=64, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $map;
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'code', referencedColumnName: 'code')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private Games $game;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="rowId", type="integer", nullable=false)
-     */
-    private $rowid;
+    #[ORM\Column(name: 'map', type: 'string', length: 64, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private string $map;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="kills", type="integer", nullable=false)
-     */
-    private $kills;
+    #[ORM\Column(name: 'kills', type: 'integer', nullable: false)]
+    private int $kills;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="headshots", type="integer", nullable=false)
-     */
-    private $headshots;
+    #[ORM\Column(name: 'headshots', type: 'integer', nullable: false)]
+    private int $headshots;
 
-    public function getGame(): string
+    public function getRowid(): int
+    {
+        return $this->rowid;
+    }
+
+    public function setRowid(int $rowid): MapsCounts
+    {
+        $this->rowid = $rowid;
+
+        return $this;
+    }
+
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): MapsCounts
+    public function setGame(Games $game): MapsCounts
     {
         $this->game = $game;
 
@@ -79,18 +67,6 @@ class MapsCounts
     public function setMap(string $map): MapsCounts
     {
         $this->map = $map;
-
-        return $this;
-    }
-
-    public function getRowid(): int
-    {
-        return $this->rowid;
-    }
-
-    public function setRowid(int $rowid): MapsCounts
-    {
-        $this->rowid = $rowid;
 
         return $this;
     }

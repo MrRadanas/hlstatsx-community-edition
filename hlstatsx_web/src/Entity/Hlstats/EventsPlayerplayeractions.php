@@ -6,7 +6,6 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\EventsPlayerplayeractionsRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @todo $serverid скорее всего ведет на Servers
@@ -24,7 +23,7 @@ class EventsPlayerplayeractions
     private int $id;
 
     #[ORM\Column(name: 'eventTime', type: 'datetime', nullable: true)]
-    private ?DateTime $eventtime;
+    private ?\DateTime $eventtime;
 
     #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
     private int $serverid = 0;
@@ -74,12 +73,12 @@ class EventsPlayerplayeractions
         return $this;
     }
 
-    public function getEventtime(): ?DateTime
+    public function getEventtime(): ?\DateTime
     {
         return $this->eventtime;
     }
 
-    public function setEventtime(?DateTime $eventtime): static
+    public function setEventtime(?\DateTime $eventtime): static
     {
         $this->eventtime = $eventtime;
 
@@ -91,7 +90,7 @@ class EventsPlayerplayeractions
         return $this->serverid;
     }
 
-    public function setServerid(int $serverid):static
+    public function setServerid(int $serverid): static
     {
         $this->serverid = $serverid;
 
@@ -134,12 +133,10 @@ class EventsPlayerplayeractions
         return $this;
     }
 
-
     public function getActionid(): int
     {
         return $this->actionid;
     }
-
 
     public function setActionid(int $actionid): static
     {

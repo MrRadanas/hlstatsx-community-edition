@@ -9,64 +9,54 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsRibbons.
- *
- * @ORM\Table(name="hlstats_Ribbons", uniqueConstraints={@ORM\UniqueConstraint(name="award", columns={"awardCode", "awardCount", "game", "special"})})
- *
- * @ORM\Entity(repositoryClass=RibbonsRepository::class)
  */
+#[ORM\Table(name: 'hlstats_Ribbons')]
+#[ORM\UniqueConstraint(name: 'award', columns: ['awardCode', 'awardCount', 'game', 'special'])]
+#[ORM\Entity(repositoryClass: RibbonsRepository::class)]
 class Ribbons
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="ribbonId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
+    #[ORM\Column(name: 'ribbonId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     private $ribbonid;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="awardCode", type="string", length=50, nullable=false)
      */
+    #[ORM\Column(name: 'awardCode', type: 'string', length: 50, nullable: false)]
     private $awardcode;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="awardCount", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'awardCount', type: 'integer', nullable: false)]
     private $awardcount = '0';
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="special", type="boolean", nullable=false)
      */
+    #[ORM\Column(name: 'special', type: 'boolean', nullable: false)]
     private $special = '0';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=32, nullable=false)
      */
+    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false)]
     private $game;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=50, nullable=false)
      */
+    #[ORM\Column(name: 'image', type: 'string', length: 50, nullable: false)]
     private $image;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="ribbonName", type="string", length=50, nullable=false)
      */
+    #[ORM\Column(name: 'ribbonName', type: 'string', length: 50, nullable: false)]
     private $ribbonname;
 
     public function getRibbonid(): int

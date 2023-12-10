@@ -8,140 +8,82 @@ use App\Repository\Hlstats\EventsStatsmeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * HlstatsEventsStatsme.
- *
- * @ORM\Table(name="hlstats_Events_Statsme", indexes={@ORM\Index(name="playerId", columns={"playerId"}), @ORM\Index(name="weapon", columns={"weapon"})})
- *
- * @ORM\Entity(repositoryClass=EventsStatsmeRepository::class)
+ * @todo $serverid скорее всего ведет на Servers
  */
+#[ORM\Table(name: 'hlstats_Events_Statsme')]
+#[ORM\Index(name: 'playerId', columns: ['playerId'])]
+#[ORM\Index(name: 'weapon', columns: ['weapon'])]
+#[ORM\Entity(repositoryClass: EventsStatsmeRepository::class)]
 class EventsStatsme
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private int $id;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="eventTime", type="datetime", nullable=true)
-     */
-    private $eventtime;
+    #[ORM\Column(name: 'eventTime', type: 'datetime', nullable: true)]
+    private ?\DateTime $eventtime;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="serverId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $serverid = '0';
+    #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $serverid = 0;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="map", type="string", length=64, nullable=false)
-     */
-    private $map = '';
+    #[ORM\Column(name: 'map', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $map = '';
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="playerId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $playerid = '0';
+    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $playerid = 0;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="weapon", type="string", length=64, nullable=false)
-     */
-    private $weapon = '';
+    #[ORM\Column(name: 'weapon', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $weapon = '';
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="shots", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $shots = '0';
+    #[ORM\Column(name: 'shots', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $shots = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="hits", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $hits = '0';
+    #[ORM\Column(name: 'hits', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $hits = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="headshots", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $headshots = '0';
+    #[ORM\Column(name: 'headshots', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $headshots = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="damage", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $damage = '0';
+    #[ORM\Column(name: 'damage', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $damage = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="kills", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $kills = '0';
+    #[ORM\Column(name: 'kills', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $kills = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="deaths", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $deaths = '0';
+    #[ORM\Column(name: 'deaths', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $deaths = 0;
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): EventsStatsme
+    public function setId(int $id): static
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getEventtime(): \DateTime
+    public function getEventtime(): ?\DateTime
     {
         return $this->eventtime;
     }
 
-    public function setEventtime(\DateTime $eventtime): EventsStatsme
+    public function setEventtime(?\DateTime $eventtime): static
     {
         $this->eventtime = $eventtime;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getServerid()
+    public function getServerid(): int
     {
         return $this->serverid;
     }
 
-    /**
-     * @param int|string $serverid
-     *
-     * @return EventsStatsme
-     */
-    public function setServerid($serverid)
+    public function setServerid(int $serverid): static
     {
         $this->serverid = $serverid;
 
@@ -153,27 +95,19 @@ class EventsStatsme
         return $this->map;
     }
 
-    public function setMap(string $map): EventsStatsme
+    public function setMap(string $map): static
     {
         $this->map = $map;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getPlayerid()
+    public function getPlayerid(): int
     {
         return $this->playerid;
     }
 
-    /**
-     * @param int|string $playerid
-     *
-     * @return EventsStatsme
-     */
-    public function setPlayerid($playerid)
+    public function setPlayerid(int $playerid): static
     {
         $this->playerid = $playerid;
 
@@ -185,127 +119,79 @@ class EventsStatsme
         return $this->weapon;
     }
 
-    public function setWeapon(string $weapon): EventsStatsme
+    public function setWeapon(string $weapon): static
     {
         $this->weapon = $weapon;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getShots()
+    public function getShots(): int
     {
         return $this->shots;
     }
 
-    /**
-     * @param int|string $shots
-     *
-     * @return EventsStatsme
-     */
-    public function setShots($shots)
+    public function setShots(int $shots): static
     {
         $this->shots = $shots;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getHits()
+    public function getHits(): int
     {
         return $this->hits;
     }
 
-    /**
-     * @param int|string $hits
-     *
-     * @return EventsStatsme
-     */
-    public function setHits($hits)
+    public function setHits(int $hits): static
     {
         $this->hits = $hits;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getHeadshots()
+    public function getHeadshots(): int
     {
         return $this->headshots;
     }
 
-    /**
-     * @param int|string $headshots
-     *
-     * @return EventsStatsme
-     */
-    public function setHeadshots($headshots)
+    public function setHeadshots(int $headshots): static
     {
         $this->headshots = $headshots;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getDamage()
+    public function getDamage(): int
     {
         return $this->damage;
     }
 
-    /**
-     * @param int|string $damage
-     *
-     * @return EventsStatsme
-     */
-    public function setDamage($damage)
+    public function setDamage(int $damage): static
     {
         $this->damage = $damage;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getKills()
+    public function getKills(): int
     {
         return $this->kills;
     }
 
-    /**
-     * @param int|string $kills
-     *
-     * @return EventsStatsme
-     */
-    public function setKills($kills)
+    public function setKills(int $kills): static
     {
         $this->kills = $kills;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getDeaths()
+    public function getDeaths(): int
     {
         return $this->deaths;
     }
 
-    /**
-     * @param int|string $deaths
-     *
-     * @return EventsStatsme
-     */
-    public function setDeaths($deaths)
+    public function setDeaths(int $deaths): static
     {
         $this->deaths = $deaths;
 

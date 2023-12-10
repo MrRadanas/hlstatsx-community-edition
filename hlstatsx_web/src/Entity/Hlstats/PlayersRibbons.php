@@ -9,40 +9,31 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsPlayersRibbons.
- *
- * @ORM\Table(name="hlstats_Players_Ribbons")
- *
- * @ORM\Entity(repositoryClass=PlayersRibbonsRepository::class)
  */
+#[ORM\Table(name: 'hlstats_Players_Ribbons')]
+#[ORM\Entity(repositoryClass: PlayersRibbonsRepository::class)]
 class PlayersRibbons
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="playerId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
      */
+    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     private $playerid = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="ribbonId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
      */
+    #[ORM\Column(name: 'ribbonId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     private $ribbonid = '0';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=32, nullable=false)
      */
+    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false)]
     private $game;
 
     /**

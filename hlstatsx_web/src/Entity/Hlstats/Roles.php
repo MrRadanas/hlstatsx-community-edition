@@ -9,71 +9,60 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsRoles.
- *
- * @ORM\Table(name="hlstats_Roles", uniqueConstraints={@ORM\UniqueConstraint(name="gamecode", columns={"game", "code"})})
- *
- * @ORM\Entity(repositoryClass=RolesRepository::class)
  */
+#[ORM\Table(name: 'hlstats_Roles')]
+#[ORM\UniqueConstraint(name: 'gamecode', columns: ['game', 'code'])]
+#[ORM\Entity(repositoryClass: RolesRepository::class)]
 class Roles
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="roleId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
+    #[ORM\Column(name: 'roleId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     private $roleid;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=32, nullable=false, options={"default": "valve"})
      */
+    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false, options: ['default' => 'valve'])]
     private $game = 'valve';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="code", type="string", length=64, nullable=false)
      */
+    #[ORM\Column(name: 'code', type: 'string', length: 64, nullable: false)]
     private $code = '';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=64, nullable=false)
      */
+    #[ORM\Column(name: 'name', type: 'string', length: 64, nullable: false)]
     private $name = '';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="hidden", type="string", length=0, nullable=false)
      */
+    #[ORM\Column(name: 'hidden', type: 'string', length: 0, nullable: false)]
     private $hidden = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="picked", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'picked', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $picked = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="kills", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'kills', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $kills = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="deaths", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'deaths', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $deaths = '0';
 
     public function getRoleid(): int

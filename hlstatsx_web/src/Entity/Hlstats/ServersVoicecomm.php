@@ -9,71 +9,60 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsServersVoicecomm.
- *
- * @ORM\Table(name="hlstats_Servers_VoiceComm", uniqueConstraints={@ORM\UniqueConstraint(name="address", columns={"addr", "UDPPort", "queryPort"})})
- *
- * @ORM\Entity(repositoryClass=ServersVoicecommRepository::class)
  */
+#[ORM\Table(name: 'hlstats_Servers_VoiceComm')]
+#[ORM\UniqueConstraint(name: 'address', columns: ['addr', 'UDPPort', 'queryPort'])]
+#[ORM\Entity(repositoryClass: ServersVoicecommRepository::class)]
 class ServersVoicecomm
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="serverId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
+    #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     private $serverid;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=128, nullable=false)
      */
+    #[ORM\Column(name: 'name', type: 'string', length: 128, nullable: false)]
     private $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="addr", type="string", length=128, nullable=false)
      */
+    #[ORM\Column(name: 'addr', type: 'string', length: 128, nullable: false)]
     private $addr;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="password", type="string", length=128, nullable=true)
      */
+    #[ORM\Column(name: 'password', type: 'string', length: 128, nullable: true)]
     private $password;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="descr", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'descr', type: 'string', length: 255, nullable: true)]
     private $descr;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="queryPort", type="integer", nullable=false, options={"default": "51234", "unsigned": true})
      */
+    #[ORM\Column(name: 'queryPort', type: 'integer', nullable: false, options: ['default' => '51234', 'unsigned' => true])]
     private $queryport = 51234;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="UDPPort", type="integer", nullable=false, options={"default": "8767", "unsigned": true})
      */
+    #[ORM\Column(name: 'UDPPort', type: 'integer', nullable: false, options: ['default' => '8767', 'unsigned' => true])]
     private $udpport = 8767;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="serverType", type="boolean", nullable=false)
      */
+    #[ORM\Column(name: 'serverType', type: 'boolean', nullable: false)]
     private $servertype = '0';
 
     public function getServerid(): int

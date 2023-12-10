@@ -7,99 +7,47 @@ namespace App\Entity\Hlstats;
 use App\Repository\Hlstats\PlayernamesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * HlstatsPlayernames.
- *
- * @ORM\Table(name="hlstats_PlayerNames", indexes={@ORM\Index(name="name16", columns={"name"})})
- *
- * @ORM\Entity(repositoryClass=PlayernamesRepository::class)
- */
+#[ORM\Table(name: 'hlstats_PlayerNames')]
+#[ORM\Index(name: 'name16', columns: ['name'])]
+#[ORM\Entity(repositoryClass: PlayernamesRepository::class)]
 class Playernames
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=64, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $name = '';
+    #[ORM\Column(name: 'name', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private string $name = '';
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="playerId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $playerid = '0';
+    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private int $playerid = 0;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="lastuse", type="datetime", nullable=true)
-     */
-    private $lastuse;
+    #[ORM\Column(name: 'lastuse', type: 'datetime', nullable: true)]
+    private ?\DateTime $lastuse;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="connection_time", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $connectionTime = '0';
+    #[ORM\Column(name: 'connection_time', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $connectionTime = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="numuses", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $numuses = '0';
+    #[ORM\Column(name: 'numuses', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $numuses = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="kills", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $kills = '0';
+    #[ORM\Column(name: 'kills', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $kills = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="deaths", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $deaths = '0';
+    #[ORM\Column(name: 'deaths', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $deaths = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="suicides", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $suicides = '0';
+    #[ORM\Column(name: 'suicides', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $suicides = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="headshots", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $headshots = '0';
+    #[ORM\Column(name: 'headshots', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $headshots = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="shots", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $shots = '0';
+    #[ORM\Column(name: 'shots', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $shots = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="hits", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $hits = '0';
+    #[ORM\Column(name: 'hits', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $hits = 0;
 
     public function getName(): string
     {
@@ -113,192 +61,120 @@ class Playernames
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getPlayerid()
+    public function getPlayerid(): int
     {
         return $this->playerid;
     }
 
-    /**
-     * @param int|string $playerid
-     *
-     * @return Playernames
-     */
-    public function setPlayerid($playerid)
+    public function setPlayerid(int $playerid): Playernames
     {
         $this->playerid = $playerid;
 
         return $this;
     }
 
-    public function getLastuse(): \DateTime
+    public function getLastuse(): ?\DateTime
     {
         return $this->lastuse;
     }
 
-    public function setLastuse(\DateTime $lastuse): Playernames
+    public function setLastuse(?\DateTime $lastuse): Playernames
     {
         $this->lastuse = $lastuse;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getConnectionTime()
+    public function getConnectionTime(): int
     {
         return $this->connectionTime;
     }
 
-    /**
-     * @param int|string $connectionTime
-     *
-     * @return Playernames
-     */
-    public function setConnectionTime($connectionTime)
+    public function setConnectionTime(int $connectionTime): Playernames
     {
         $this->connectionTime = $connectionTime;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getNumuses()
+    public function getNumuses(): int
     {
         return $this->numuses;
     }
 
-    /**
-     * @param int|string $numuses
-     *
-     * @return Playernames
-     */
-    public function setNumuses($numuses)
+    public function setNumuses(int $numuses): Playernames
     {
         $this->numuses = $numuses;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getKills()
+    public function getKills(): int
     {
         return $this->kills;
     }
 
-    /**
-     * @param int|string $kills
-     *
-     * @return Playernames
-     */
-    public function setKills($kills)
+    public function setKills(int $kills): Playernames
     {
         $this->kills = $kills;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getDeaths()
+    public function getDeaths(): int
     {
         return $this->deaths;
     }
 
-    /**
-     * @param int|string $deaths
-     *
-     * @return Playernames
-     */
-    public function setDeaths($deaths)
+    public function setDeaths(int $deaths): Playernames
     {
         $this->deaths = $deaths;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getSuicides()
+    public function getSuicides(): int
     {
         return $this->suicides;
     }
 
-    /**
-     * @param int|string $suicides
-     *
-     * @return Playernames
-     */
-    public function setSuicides($suicides)
+    public function setSuicides(int $suicides): Playernames
     {
         $this->suicides = $suicides;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getHeadshots()
+    public function getHeadshots(): int
     {
         return $this->headshots;
     }
 
-    /**
-     * @param int|string $headshots
-     *
-     * @return Playernames
-     */
-    public function setHeadshots($headshots)
+    public function setHeadshots(int $headshots): Playernames
     {
         $this->headshots = $headshots;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getShots()
+    public function getShots(): int
     {
         return $this->shots;
     }
 
-    /**
-     * @param int|string $shots
-     *
-     * @return Playernames
-     */
-    public function setShots($shots)
+    public function setShots(int $shots): Playernames
     {
         $this->shots = $shots;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getHits()
+    public function getHits(): int
     {
         return $this->hits;
     }
 
-    /**
-     * @param int|string $hits
-     *
-     * @return Playernames
-     */
-    public function setHits($hits)
+    public function setHits(int $hits): Playernames
     {
         $this->hits = $hits;
 

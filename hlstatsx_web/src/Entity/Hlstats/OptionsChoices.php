@@ -9,48 +9,27 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsOptionsChoices.
- *
- * @ORM\Table(name="hlstats_Options_Choices", indexes={@ORM\Index(name="keyname", columns={"keyname"})})
- *
- * @ORM\Entity(repositoryClass=OptionsChoicesRepository::class)
  */
+#[ORM\Table(name: 'hlstats_Options_Choices')]
+#[ORM\Index(name: 'keyname', columns: ['keyname'])]
+#[ORM\Entity(repositoryClass: OptionsChoicesRepository::class)]
 class OptionsChoices
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="keyname", type="string", length=32, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $keyname;
+    #[ORM\Column(name: 'keyname', type: 'string', length: 32, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private string $keyname;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="value", type="string", length=128, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $value;
+    #[ORM\Column(name: 'value', type: 'string', length: 128, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private string $value;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="text", type="string", length=128, nullable=false)
-     */
-    private $text = '';
+    #[ORM\Column(name: 'text', type: 'string', length: 128, nullable: false, options: ['default' => ''])]
+    private string $text = '';
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="isDefault", type="boolean", nullable=false)
-     */
-    private $isdefault = '0';
+    #[ORM\Column(name: 'isDefault', type: 'boolean', nullable: false, options: ['default' => false])]
+    private bool $isdefault = false;
 
     public function getKeyname(): string
     {
@@ -88,20 +67,12 @@ class OptionsChoices
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getIsdefault()
+    public function isIsdefault(): bool
     {
         return $this->isdefault;
     }
 
-    /**
-     * @param bool|string $isdefault
-     *
-     * @return OptionsChoices
-     */
-    public function setIsdefault($isdefault)
+    public function setIsdefault(bool $isdefault): OptionsChoices
     {
         $this->isdefault = $isdefault;
 

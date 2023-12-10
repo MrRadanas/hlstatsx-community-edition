@@ -4,56 +4,36 @@ declare(strict_types=1);
 
 namespace App\Entity\Hlstats;
 
+use App\DBAL\Types\BinaryType;
 use App\Repository\Hlstats\GamesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
-/**
- * HlstatsGames.
- *
- * @ORM\Table(name="hlstats_Games")
- *
- * @ORM\Entity(repositoryClass=GamesRepository::class)
- */
+#[ORM\Table(name: 'hlstats_Games')]
+#[ORM\Entity(repositoryClass: GamesRepository::class)]
 class Games
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="code", type="string", length=32, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $code = '';
+    #[ORM\Column(name: 'code', type: 'string', length: 32, nullable: false, options: ['default' => ''])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private string $code = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=128, nullable=false)
-     */
-    private $name = '';
+    #[ORM\Column(name: 'name', type: 'string', length: 128, nullable: false, options: ['default' => ''])]
+    private string $name = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="hidden", type="string", length=0, nullable=false)
-     */
-    private $hidden = '0';
+    #[ORM\Column(type: 'BinaryType')]
+    #[DoctrineAssert\EnumType(entity: BinaryType::class)]
+    private string $hidden = '0';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="realgame", type="string", length=32, nullable=false, options={"default": "hl2mp"})
-     */
-    private $realgame = 'hl2mp';
+    #[ORM\Column(name: 'realgame', type: 'string', length: 32, nullable: false, options: ['default' => 'hl2mp'])]
+    private string $realgame = 'hl2mp';
 
     public function getCode(): string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): Games
+    public function setCode(string $code): static
     {
         $this->code = $code;
 
@@ -65,7 +45,7 @@ class Games
         return $this->name;
     }
 
-    public function setName(string $name): Games
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -77,8 +57,9 @@ class Games
         return $this->hidden;
     }
 
-    public function setHidden(string $hidden): Games
+    public function setHidden(string $hidden): static
     {
+        BinaryType::assertValidChoice($hidden);
         $this->hidden = $hidden;
 
         return $this;
@@ -89,7 +70,7 @@ class Games
         return $this->realgame;
     }
 
-    public function setRealgame(string $realgame): Games
+    public function setRealgame(string $realgame): static
     {
         $this->realgame = $realgame;
 

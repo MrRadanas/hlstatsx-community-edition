@@ -4,223 +4,105 @@ declare(strict_types=1);
 
 namespace App\Entity\Hlstats;
 
+use App\Repository\Hlstats\LivestatsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * HlstatsLivestats.
- *
- * @ORM\Table(name="hlstats_Livestats")
- *
- * @ORM\Entity
- */
+#[ORM\Table(name: 'hlstats_Livestats')]
+#[ORM\Entity(repositoryClass: LivestatsRepository::class)]
 class Livestats
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="player_id", type="integer", nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $playerId = '0';
+    #[ORM\Column(name: 'player_id', type: 'integer', nullable: false, options: ['default' => 0])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private int $playerId = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="server_id", type="integer", nullable=false)
-     */
-    private $serverId = '0';
+    #[ORM\Column(name: 'server_id', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $serverId = 0;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="cli_address", type="string", length=32, nullable=false)
-     */
-    private $cliAddress = '';
+    #[ORM\Column(name: 'cli_address', type: 'string', length: 32, nullable: false, options: ['default' => ''])]
+    private string $cliAddress = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="cli_city", type="string", length=64, nullable=false)
-     */
-    private $cliCity = '';
+    #[ORM\Column(name: 'cli_city', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $cliCity = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="cli_country", type="string", length=64, nullable=false)
-     */
-    private $cliCountry = '';
+    #[ORM\Column(name: 'cli_country', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $cliCountry = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="cli_flag", type="string", length=16, nullable=false)
-     */
-    private $cliFlag = '';
+    #[ORM\Column(name: 'cli_flag', type: 'string', length: 16, nullable: false, options: ['default' => ''])]
+    private string $cliFlag = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="cli_state", type="string", length=64, nullable=false)
-     */
-    private $cliState = '';
+    #[ORM\Column(name: 'cli_state', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $cliState = '';
 
-    /**
-     * @var float|null
-     *
-     * @ORM\Column(name="cli_lat", type="float", precision=7, scale=4, nullable=true)
-     */
-    private $cliLat;
+    #[ORM\Column(name: 'cli_lat', type: 'float', precision: 7, scale: 4, nullable: true)]
+    private ?float $cliLat;
 
-    /**
-     * @var float|null
-     *
-     * @ORM\Column(name="cli_lng", type="float", precision=7, scale=4, nullable=true)
-     */
-    private $cliLng;
+    #[ORM\Column(name: 'cli_lng', type: 'float', precision: 7, scale: 4, nullable: true)]
+    private ?float $cliLng;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="steam_id", type="string", length=64, nullable=false)
-     */
-    private $steamId = '';
+    #[ORM\Column(name: 'steam_id', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $steamId = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=64, nullable=false)
-     */
-    private $name;
+    #[ORM\Column(name: 'name', type: 'string', length: 64, nullable: false)]
+    private string $name;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="team", type="string", length=64, nullable=false)
-     */
-    private $team = '';
+    #[ORM\Column(name: 'team', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $team = '';
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="kills", type="integer", nullable=false)
-     */
-    private $kills = '0';
+    #[ORM\Column(name: 'kills', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $kills = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="deaths", type="integer", nullable=false)
-     */
-    private $deaths = '0';
+    #[ORM\Column(name: 'deaths', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $deaths = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="suicides", type="integer", nullable=false)
-     */
-    private $suicides = '0';
+    #[ORM\Column(name: 'suicides', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $suicides = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="headshots", type="integer", nullable=false)
-     */
-    private $headshots = '0';
+    #[ORM\Column(name: 'headshots', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $headshots = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="shots", type="integer", nullable=false)
-     */
-    private $shots = '0';
+    #[ORM\Column(name: 'shots', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $shots = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="hits", type="integer", nullable=false)
-     */
-    private $hits = '0';
+    #[ORM\Column(name: 'hits', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $hits = 0;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_dead", type="boolean", nullable=false)
-     */
-    private $isDead = '0';
+    #[ORM\Column(name: 'is_dead', type: 'boolean', nullable: false, options: ['default' => false])]
+    private bool $isDead = false;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="has_bomb", type="integer", nullable=false)
-     */
-    private $hasBomb = '0';
+    #[ORM\Column(name: 'has_bomb', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $hasBomb = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ping", type="integer", nullable=false)
-     */
-    private $ping = '0';
+    #[ORM\Column(name: 'ping', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $ping = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="connected", type="integer", nullable=false)
-     */
-    private $connected = '0';
+    #[ORM\Column(name: 'connected', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $connected = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="skill_change", type="integer", nullable=false)
-     */
-    private $skillChange = '0';
+    #[ORM\Column(name: 'skill_change', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $skillChange = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="skill", type="integer", nullable=false)
-     */
-    private $skill = '0';
+    #[ORM\Column(name: 'skill', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $skill = 0;
 
-    /**
-     * @return int|string
-     */
-    public function getPlayerId()
+    public function getPlayerId(): int
     {
         return $this->playerId;
     }
 
-    /**
-     * @param int|string $playerId
-     *
-     * @return Livestats
-     */
-    public function setPlayerId($playerId)
+    public function setPlayerId(int $playerId): static
     {
         $this->playerId = $playerId;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getServerId()
+    public function getServerId(): int
     {
         return $this->serverId;
     }
 
-    /**
-     * @param int|string $serverId
-     *
-     * @return Livestats
-     */
-    public function setServerId($serverId)
+    public function setServerId(int $serverId): static
     {
         $this->serverId = $serverId;
 
@@ -232,7 +114,7 @@ class Livestats
         return $this->cliAddress;
     }
 
-    public function setCliAddress(string $cliAddress): Livestats
+    public function setCliAddress(string $cliAddress): static
     {
         $this->cliAddress = $cliAddress;
 
@@ -244,7 +126,7 @@ class Livestats
         return $this->cliCity;
     }
 
-    public function setCliCity(string $cliCity): Livestats
+    public function setCliCity(string $cliCity): static
     {
         $this->cliCity = $cliCity;
 
@@ -256,7 +138,7 @@ class Livestats
         return $this->cliCountry;
     }
 
-    public function setCliCountry(string $cliCountry): Livestats
+    public function setCliCountry(string $cliCountry): static
     {
         $this->cliCountry = $cliCountry;
 
@@ -268,7 +150,7 @@ class Livestats
         return $this->cliFlag;
     }
 
-    public function setCliFlag(string $cliFlag): Livestats
+    public function setCliFlag(string $cliFlag): static
     {
         $this->cliFlag = $cliFlag;
 
@@ -280,31 +162,31 @@ class Livestats
         return $this->cliState;
     }
 
-    public function setCliState(string $cliState): Livestats
+    public function setCliState(string $cliState): static
     {
         $this->cliState = $cliState;
 
         return $this;
     }
 
-    public function getCliLat(): float
+    public function getCliLat(): ?float
     {
         return $this->cliLat;
     }
 
-    public function setCliLat(float $cliLat): Livestats
+    public function setCliLat(?float $cliLat): static
     {
         $this->cliLat = $cliLat;
 
         return $this;
     }
 
-    public function getCliLng(): float
+    public function getCliLng(): ?float
     {
         return $this->cliLng;
     }
 
-    public function setCliLng(float $cliLng): Livestats
+    public function setCliLng(?float $cliLng): static
     {
         $this->cliLng = $cliLng;
 
@@ -316,7 +198,7 @@ class Livestats
         return $this->steamId;
     }
 
-    public function setSteamId(string $steamId): Livestats
+    public function setSteamId(string $steamId): static
     {
         $this->steamId = $steamId;
 
@@ -328,7 +210,7 @@ class Livestats
         return $this->name;
     }
 
-    public function setName(string $name): Livestats
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -340,247 +222,151 @@ class Livestats
         return $this->team;
     }
 
-    public function setTeam(string $team): Livestats
+    public function setTeam(string $team): static
     {
         $this->team = $team;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getKills()
+    public function getKills(): int
     {
         return $this->kills;
     }
 
-    /**
-     * @param int|string $kills
-     *
-     * @return Livestats
-     */
-    public function setKills($kills)
+    public function setKills(int $kills): static
     {
         $this->kills = $kills;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getDeaths()
+    public function getDeaths(): int
     {
         return $this->deaths;
     }
 
-    /**
-     * @param int|string $deaths
-     *
-     * @return Livestats
-     */
-    public function setDeaths($deaths)
+    public function setDeaths(int $deaths): static
     {
         $this->deaths = $deaths;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getSuicides()
+    public function getSuicides(): int
     {
         return $this->suicides;
     }
 
-    /**
-     * @param int|string $suicides
-     *
-     * @return Livestats
-     */
-    public function setSuicides($suicides)
+    public function setSuicides(int $suicides): static
     {
         $this->suicides = $suicides;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getHeadshots()
+    public function getHeadshots(): int
     {
         return $this->headshots;
     }
 
-    /**
-     * @param int|string $headshots
-     *
-     * @return Livestats
-     */
-    public function setHeadshots($headshots)
+    public function setHeadshots(int $headshots): static
     {
         $this->headshots = $headshots;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getShots()
+    public function getShots(): int
     {
         return $this->shots;
     }
 
-    /**
-     * @param int|string $shots
-     *
-     * @return Livestats
-     */
-    public function setShots($shots)
+    public function setShots(int $shots): static
     {
         $this->shots = $shots;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getHits()
+    public function getHits(): int
     {
         return $this->hits;
     }
 
-    /**
-     * @param int|string $hits
-     *
-     * @return Livestats
-     */
-    public function setHits($hits)
+    public function setHits(int $hits): static
     {
         $this->hits = $hits;
 
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getIsDead()
+    public function isDead(): bool
     {
         return $this->isDead;
     }
 
-    /**
-     * @param bool|string $isDead
-     *
-     * @return Livestats
-     */
-    public function setIsDead($isDead)
+    public function setIsDead(bool $isDead): static
     {
         $this->isDead = $isDead;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getHasBomb()
+    public function getHasBomb(): int
     {
         return $this->hasBomb;
     }
 
-    /**
-     * @param int|string $hasBomb
-     *
-     * @return Livestats
-     */
-    public function setHasBomb($hasBomb)
+    public function setHasBomb(int $hasBomb): static
     {
         $this->hasBomb = $hasBomb;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getPing()
+    public function getPing(): int
     {
         return $this->ping;
     }
 
-    /**
-     * @param int|string $ping
-     *
-     * @return Livestats
-     */
-    public function setPing($ping)
+    public function setPing(int $ping): static
     {
         $this->ping = $ping;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getConnected()
+    public function getConnected(): int
     {
         return $this->connected;
     }
 
-    /**
-     * @param int|string $connected
-     *
-     * @return Livestats
-     */
-    public function setConnected($connected)
+    public function setConnected(int $connected): static
     {
         $this->connected = $connected;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getSkillChange()
+    public function getSkillChange(): int
     {
         return $this->skillChange;
     }
 
-    /**
-     * @param int|string $skillChange
-     *
-     * @return Livestats
-     */
-    public function setSkillChange($skillChange)
+    public function setSkillChange(int $skillChange): static
     {
         $this->skillChange = $skillChange;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getSkill()
+    public function getSkill(): int
     {
         return $this->skill;
     }
 
-    /**
-     * @param int|string $skill
-     *
-     * @return Livestats
-     */
-    public function setSkill($skill)
+    public function setSkill(int $skill): static
     {
         $this->skill = $skill;
 

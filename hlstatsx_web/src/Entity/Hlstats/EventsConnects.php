@@ -6,7 +6,6 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\EventsConnectsRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @todo $serverid скорее всего ведет на Servers
@@ -22,7 +21,7 @@ class EventsConnects
     private int $id;
 
     #[ORM\Column(name: 'eventTime', type: 'datetime', nullable: true)]
-    private ?DateTime $eventtime;
+    private ?\DateTime $eventtime;
 
     #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
     private int $serverid = 0;
@@ -43,7 +42,7 @@ class EventsConnects
     private string $hostgroup = '';
 
     #[ORM\Column(name: 'eventTime_Disconnect', type: 'datetime', nullable: true)]
-    private ?DateTime $eventtimeDisconnect;
+    private ?\DateTime $eventtimeDisconnect;
 
     public function getId(): int
     {
@@ -57,12 +56,12 @@ class EventsConnects
         return $this;
     }
 
-    public function getEventtime(): ?DateTime
+    public function getEventtime(): ?\DateTime
     {
         return $this->eventtime;
     }
 
-    public function setEventtime(?DateTime $eventtime): static
+    public function setEventtime(?\DateTime $eventtime): static
     {
         $this->eventtime = $eventtime;
 
@@ -141,12 +140,12 @@ class EventsConnects
         return $this;
     }
 
-    public function getEventtimeDisconnect(): ?DateTime
+    public function getEventtimeDisconnect(): ?\DateTime
     {
         return $this->eventtimeDisconnect;
     }
 
-    public function setEventtimeDisconnect(?DateTime $eventtimeDisconnect): static
+    public function setEventtimeDisconnect(?\DateTime $eventtimeDisconnect): static
     {
         $this->eventtimeDisconnect = $eventtimeDisconnect;
 

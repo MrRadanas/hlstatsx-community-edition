@@ -9,124 +9,105 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsPlayersHistory.
- *
- * @ORM\Table(name="hlstats_Players_History", uniqueConstraints={@ORM\UniqueConstraint(name="eventTime", columns={"eventTime", "playerId", "game"})}, indexes={@ORM\Index(name="playerId", columns={"playerId"})})
- *
- * @ORM\Entity(repositoryClass=PlayersHistoryRepository::class)
  */
+#[ORM\Table(name: 'hlstats_Players_History')]
+#[ORM\Index(name: 'playerId', columns: ['playerId'])]
+#[ORM\UniqueConstraint(name: 'eventTime', columns: ['eventTime', 'playerId', 'game'])]
+#[ORM\Entity(repositoryClass: PlayersHistoryRepository::class)]
 class PlayersHistory
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="playerId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
      */
+    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     private $playerid = '0';
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="eventTime", type="date", nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
      */
+    #[ORM\Column(name: 'eventTime', type: 'date', nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     private $eventtime;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="connection_time", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'connection_time', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $connectionTime = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="kills", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'kills', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $kills = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="deaths", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'deaths', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $deaths = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="suicides", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'suicides', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $suicides = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="skill", type="integer", nullable=false, options={"default": "1000", "unsigned": true})
      */
+    #[ORM\Column(name: 'skill', type: 'integer', nullable: false, options: ['default' => '1000', 'unsigned' => true])]
     private $skill = 1000;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="shots", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'shots', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $shots = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="hits", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'hits', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $hits = '0';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=32, nullable=false)
      */
+    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false)]
     private $game = '';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="headshots", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'headshots', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $headshots = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="teamkills", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'teamkills', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $teamkills = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="kill_streak", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'kill_streak', type: 'integer', nullable: false)]
     private $killStreak = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="death_streak", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'death_streak', type: 'integer', nullable: false)]
     private $deathStreak = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="skill_change", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'skill_change', type: 'integer', nullable: false)]
     private $skillChange = '0';
 
     /**

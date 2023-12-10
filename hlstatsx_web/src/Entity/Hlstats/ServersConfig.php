@@ -9,47 +9,38 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsServersConfig.
- *
- * @ORM\Table(name="hlstats_Servers_Config", indexes={@ORM\Index(name="serverConfigId", columns={"serverConfigId"})})
- *
- * @ORM\Entity(repositoryClass=ServersConfigRepository::class)
  */
+#[ORM\Table(name: 'hlstats_Servers_Config')]
+#[ORM\Index(name: 'serverConfigId', columns: ['serverConfigId'])]
+#[ORM\Entity(repositoryClass: ServersConfigRepository::class)]
 class ServersConfig
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="parameter", type="string", length=50, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
      */
+    #[ORM\Column(name: 'parameter', type: 'string', length: 50, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     private $parameter;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="serverId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
      */
+    #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     private $serverid = '0';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="value", type="string", length=128, nullable=false)
      */
+    #[ORM\Column(name: 'value', type: 'string', length: 128, nullable: false)]
     private $value;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="serverConfigId", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'serverConfigId', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $serverconfigid;
 
     public function getParameter(): string

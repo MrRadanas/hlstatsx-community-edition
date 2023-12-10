@@ -9,71 +9,60 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsTeams.
- *
- * @ORM\Table(name="hlstats_Teams", uniqueConstraints={@ORM\UniqueConstraint(name="gamecode", columns={"game", "code"})})
- *
- * @ORM\Entity(repositoryClass=TeamsRepository::class)
  */
+#[ORM\Table(name: 'hlstats_Teams')]
+#[ORM\UniqueConstraint(name: 'gamecode', columns: ['game', 'code'])]
+#[ORM\Entity(repositoryClass: TeamsRepository::class)]
 class Teams
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="teamId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
+    #[ORM\Column(name: 'teamId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     private $teamid;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=32, nullable=false, options={"default": "valve"})
      */
+    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false, options: ['default' => 'valve'])]
     private $game = 'valve';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="code", type="string", length=64, nullable=false)
      */
+    #[ORM\Column(name: 'code', type: 'string', length: 64, nullable: false)]
     private $code = '';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=64, nullable=false)
      */
+    #[ORM\Column(name: 'name', type: 'string', length: 64, nullable: false)]
     private $name = '';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="hidden", type="string", length=0, nullable=false)
      */
+    #[ORM\Column(name: 'hidden', type: 'string', length: 0, nullable: false)]
     private $hidden = '0';
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="playerlist_bgcolor", type="string", length=7, nullable=true)
      */
+    #[ORM\Column(name: 'playerlist_bgcolor', type: 'string', length: 7, nullable: true)]
     private $playerlistBgcolor;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="playerlist_color", type="string", length=7, nullable=true)
      */
+    #[ORM\Column(name: 'playerlist_color', type: 'string', length: 7, nullable: true)]
     private $playerlistColor;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="playerlist_index", type="boolean", nullable=false)
      */
+    #[ORM\Column(name: 'playerlist_index', type: 'boolean', nullable: false)]
     private $playerlistIndex = '0';
 
     public function getTeamid(): int

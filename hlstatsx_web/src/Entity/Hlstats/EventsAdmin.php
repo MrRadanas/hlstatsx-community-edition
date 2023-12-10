@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\EventsAdminRepository;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,7 +20,7 @@ class EventsAdmin
     private int $id;
 
     #[ORM\Column(name: 'eventTime', type: 'datetime', nullable: true)]
-    private ?DateTime $eventtime;
+    private ?\DateTime $eventtime;
 
     #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
     private int $serverid = 0;
@@ -50,7 +49,7 @@ class EventsAdmin
         return $this;
     }
 
-    public function getEventtime(): ?DateTime
+    public function getEventtime(): ?\DateTime
     {
         return $this->eventtime;
     }

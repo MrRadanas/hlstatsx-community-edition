@@ -7,39 +7,21 @@ namespace App\Entity\Hlstats;
 use App\Repository\Hlstats\OptionsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * HlstatsOptions.
- *
- * @ORM\Table(name="hlstats_Options", indexes={@ORM\Index(name="opttype", columns={"opttype"})})
- *
- * @ORM\Entity(repositoryClass=OptionsRepository::class)
- */
+#[ORM\Table(name: 'hlstats_Options')]
+#[ORM\Index(name: 'opttype', columns: ['opttype'])]
+#[ORM\Entity(repositoryClass: OptionsRepository::class)]
 class Options
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="keyname", type="string", length=32, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $keyname = '';
+    #[ORM\Column(name: 'keyname', type: 'string', length: 32, nullable: false, options: ['default' => ''])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private string $keyname = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="value", type="string", length=128, nullable=false)
-     */
-    private $value = '';
+    #[ORM\Column(name: 'value', type: 'string', length: 128, nullable: false, options: ['default' => ''])]
+    private string $value = '';
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="opttype", type="boolean", nullable=false, options={"default": "1"})
-     */
-    private $opttype = true;
+    #[ORM\Column(name: 'opttype', type: 'smallint', nullable: false, options: ['default' => 1])]
+    private int $opttype = 1;
 
     public function getKeyname(): string
     {
@@ -65,12 +47,12 @@ class Options
         return $this;
     }
 
-    public function isOpttype(): bool
+    public function isOpttype(): int
     {
         return $this->opttype;
     }
 
-    public function setOpttype(bool $opttype): Options
+    public function setOpttype(int $opttype): Options
     {
         $this->opttype = $opttype;
 

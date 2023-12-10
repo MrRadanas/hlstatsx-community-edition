@@ -7,106 +7,65 @@ namespace App\Entity\Hlstats;
 use App\Repository\Hlstats\EventsTeambonusesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * HlstatsEventsTeambonuses.
- *
- * @ORM\Table(name="hlstats_Events_TeamBonuses", indexes={@ORM\Index(name="playerId", columns={"playerId"}), @ORM\Index(name="actionId", columns={"actionId"})})
- *
- * @ORM\Entity(repositoryClass=EventsTeambonusesRepository::class)
- */
+#[ORM\Table(name: 'hlstats_Events_TeamBonuses')]
+#[ORM\Index(name: 'playerId', columns: ['playerId'])]
+#[ORM\Index(name: 'actionId', columns: ['actionId'])]
+#[ORM\Entity(repositoryClass: EventsTeambonusesRepository::class)]
 class EventsTeambonuses
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private int $id;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="eventTime", type="datetime", nullable=true)
-     */
-    private $eventtime;
+    #[ORM\Column(name: 'eventTime', type: 'datetime', nullable: true)]
+    private ?\DateTime $eventtime;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="serverId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $serverid = '0';
+    #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $serverid = 0;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="map", type="string", length=64, nullable=false)
-     */
-    private $map = '';
+    #[ORM\Column(name: 'map', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $map = '';
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="playerId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $playerid = '0';
+    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $playerid = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="actionId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $actionid = '0';
+    #[ORM\Column(name: 'actionId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $actionid = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="bonus", type="integer", nullable=false)
-     */
-    private $bonus = '0';
+    #[ORM\Column(name: 'bonus', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $bonus = 0;
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): EventsTeambonuses
+    public function setId(int $id): static
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getEventtime(): \DateTime
+    public function getEventtime(): ?\DateTime
     {
         return $this->eventtime;
     }
 
-    public function setEventtime(\DateTime $eventtime): EventsTeambonuses
+    public function setEventtime(?\DateTime $eventtime): static
     {
         $this->eventtime = $eventtime;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getServerid()
+    public function getServerid(): int
     {
         return $this->serverid;
     }
 
-    /**
-     * @param int|string $serverid
-     *
-     * @return EventsTeambonuses
-     */
-    public function setServerid($serverid)
+    public function setServerid(int $serverid): static
     {
         $this->serverid = $serverid;
 
@@ -118,67 +77,43 @@ class EventsTeambonuses
         return $this->map;
     }
 
-    public function setMap(string $map): EventsTeambonuses
+    public function setMap(string $map): static
     {
         $this->map = $map;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getPlayerid()
+    public function getPlayerid(): int
     {
         return $this->playerid;
     }
 
-    /**
-     * @param int|string $playerid
-     *
-     * @return EventsTeambonuses
-     */
-    public function setPlayerid($playerid)
+    public function setPlayerid(int $playerid): static
     {
         $this->playerid = $playerid;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getActionid()
+    public function getActionid(): int
     {
         return $this->actionid;
     }
 
-    /**
-     * @param int|string $actionid
-     *
-     * @return EventsTeambonuses
-     */
-    public function setActionid($actionid)
+    public function setActionid(int $actionid): static
     {
         $this->actionid = $actionid;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getBonus()
+    public function getBonus(): int
     {
         return $this->bonus;
     }
 
-    /**
-     * @param int|string $bonus
-     *
-     * @return EventsTeambonuses
-     */
-    public function setBonus($bonus)
+    public function setBonus(int $bonus): static
     {
         $this->bonus = $bonus;
 

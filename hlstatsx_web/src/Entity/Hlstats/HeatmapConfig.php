@@ -6,152 +6,77 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\HeatmapConfigRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
-/**
- * HlstatsHeatmapConfig.
- *
- * @ORM\Table(name="hlstats_Heatmap_Config", uniqueConstraints={@ORM\UniqueConstraint(name="gamemap", columns={"map", "game"})})
- *
- * @ORM\Entity(repositoryClass=HeatmapConfigRepository::class)
- */
+#[ORM\Table(name: 'hlstats_Heatmap_Config')]
+#[ORM\UniqueConstraint(name: 'gamemap', columns: ['map', 'game'])]
+#[ORM\Entity(repositoryClass: HeatmapConfigRepository::class)]
 class HeatmapConfig
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: 'integer', nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private int $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="map", type="string", length=64, nullable=false)
-     */
-    private $map;
+    #[ORM\Column(name: 'map', type: 'string', length: 64, nullable: false)]
+    private string $map;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=32, nullable=false)
-     */
-    private $game;
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code')]
+    private Games $game;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="xoffset", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $xoffset;
+    #[ORM\Column(name: 'xoffset', type: 'float', precision: 10, scale: 0, nullable: false)]
+    private float $xoffset;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="yoffset", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $yoffset;
+    #[ORM\Column(name: 'yoffset', type: 'float', precision: 10, scale: 0, nullable: false)]
+    private float $yoffset;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="flipx", type="boolean", nullable=false)
-     */
-    private $flipx = '0';
+    #[ORM\Column(name: 'flipx', type: 'boolean', nullable: false, options: ['default' => false])]
+    private bool $flipx = false;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="flipy", type="boolean", nullable=false, options={"default": "1"})
-     */
-    private $flipy = true;
+    #[ORM\Column(name: 'flipy', type: 'boolean', nullable: false, options: ['default' => true])]
+    private bool $flipy = true;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="rotate", type="boolean", nullable=false)
-     */
-    private $rotate = '0';
+    #[ORM\Column(name: 'rotate', type: 'boolean', nullable: false, options: ['default' => false])]
+    private bool $rotate = false;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="days", type="boolean", nullable=false, options={"default": "30"})
-     */
-    private $days = '30';
+    #[ORM\Column(name: 'days', type: 'smallint', nullable: false, options: ['default' => 30])]
+    private int $days = 30;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="brush", type="string", length=5, nullable=false, options={"default": "small"})
-     */
-    private $brush = 'small';
+    #[ORM\Column(name: 'brush', type: 'string', length: 5, nullable: false, options: ['default' => 'small'])]
+    private string $brush = 'small';
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="scale", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $scale;
+    #[ORM\Column(name: 'scale', type: 'float', precision: 10, scale: 0, nullable: false)]
+    private float $scale;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="font", type="boolean", nullable=false, options={"default": "10"})
-     */
-    private $font = '10';
+    #[ORM\Column(name: 'font', type: 'smallint', nullable: false, options: ['default' => 10])]
+    private int $font = 10;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="thumbw", type="float", precision=10, scale=0, nullable=false, options={"default": "0.170312"})
-     */
-    private $thumbw = 0.170312;
+    #[ORM\Column(name: 'thumbw', type: 'float', precision: 10, scale: 0, nullable: false, options: ['default' => 0.170312])]
+    private float $thumbw = 0.170312;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="thumbh", type="float", precision=10, scale=0, nullable=false, options={"default": "0.170312"})
-     */
-    private $thumbh = 0.170312;
+    #[ORM\Column(name: 'thumbh', type: 'float', precision: 10, scale: 0, nullable: false, options: ['default' => 0.170312])]
+    private float $thumbh = 0.170312;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="cropx1", type="integer", nullable=false)
-     */
-    private $cropx1 = '0';
+    #[ORM\Column(name: 'cropx1', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $cropx1 = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="cropy1", type="integer", nullable=false)
-     */
-    private $cropy1 = '0';
+    #[ORM\Column(name: 'cropy1', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $cropy1 = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="cropx2", type="integer", nullable=false)
-     */
-    private $cropx2 = '0';
+    #[ORM\Column(name: 'cropx2', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $cropx2 = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="cropy2", type="integer", nullable=false)
-     */
-    private $cropy2 = '0';
+    #[ORM\Column(name: 'cropy2', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $cropy2 = 0;
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): HeatmapConfig
+    public function setId(int $id): static
     {
         $this->id = $id;
 
@@ -163,19 +88,19 @@ class HeatmapConfig
         return $this->map;
     }
 
-    public function setMap(string $map): HeatmapConfig
+    public function setMap(string $map): static
     {
         $this->map = $map;
 
         return $this;
     }
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): HeatmapConfig
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 
@@ -187,7 +112,7 @@ class HeatmapConfig
         return $this->xoffset;
     }
 
-    public function setXoffset(float $xoffset): HeatmapConfig
+    public function setXoffset(float $xoffset): static
     {
         $this->xoffset = $xoffset;
 
@@ -199,27 +124,19 @@ class HeatmapConfig
         return $this->yoffset;
     }
 
-    public function setYoffset(float $yoffset): HeatmapConfig
+    public function setYoffset(float $yoffset): static
     {
         $this->yoffset = $yoffset;
 
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getFlipx()
+    public function getFlipx(): bool
     {
         return $this->flipx;
     }
 
-    /**
-     * @param bool|string $flipx
-     *
-     * @return HeatmapConfig
-     */
-    public function setFlipx($flipx)
+    public function setFlipx(bool $flipx): static
     {
         $this->flipx = $flipx;
 
@@ -231,47 +148,31 @@ class HeatmapConfig
         return $this->flipy;
     }
 
-    public function setFlipy(bool $flipy): HeatmapConfig
+    public function setFlipy(bool $flipy): static
     {
         $this->flipy = $flipy;
 
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getRotate()
+    public function getRotate(): bool
     {
         return $this->rotate;
     }
 
-    /**
-     * @param bool|string $rotate
-     *
-     * @return HeatmapConfig
-     */
-    public function setRotate($rotate)
+    public function setRotate(bool $rotate): static
     {
         $this->rotate = $rotate;
 
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getDays()
+    public function getDays(): int
     {
         return $this->days;
     }
 
-    /**
-     * @param bool|string $days
-     *
-     * @return HeatmapConfig
-     */
-    public function setDays($days)
+    public function setDays(int $days): static
     {
         $this->days = $days;
 
@@ -283,7 +184,7 @@ class HeatmapConfig
         return $this->brush;
     }
 
-    public function setBrush(string $brush): HeatmapConfig
+    public function setBrush(string $brush): static
     {
         $this->brush = $brush;
 
@@ -295,27 +196,19 @@ class HeatmapConfig
         return $this->scale;
     }
 
-    public function setScale(float $scale): HeatmapConfig
+    public function setScale(float $scale): static
     {
         $this->scale = $scale;
 
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getFont()
+    public function getFont(): int
     {
         return $this->font;
     }
 
-    /**
-     * @param bool|string $font
-     *
-     * @return HeatmapConfig
-     */
-    public function setFont($font)
+    public function setFont(int $font): static
     {
         $this->font = $font;
 
@@ -327,7 +220,7 @@ class HeatmapConfig
         return $this->thumbw;
     }
 
-    public function setThumbw(float $thumbw): HeatmapConfig
+    public function setThumbw(float $thumbw): static
     {
         $this->thumbw = $thumbw;
 
@@ -339,87 +232,55 @@ class HeatmapConfig
         return $this->thumbh;
     }
 
-    public function setThumbh(float $thumbh): HeatmapConfig
+    public function setThumbh(float $thumbh): static
     {
         $this->thumbh = $thumbh;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getCropx1()
+    public function getCropx1(): int
     {
         return $this->cropx1;
     }
 
-    /**
-     * @param int|string $cropx1
-     *
-     * @return HeatmapConfig
-     */
-    public function setCropx1($cropx1)
+    public function setCropx1(int $cropx1): static
     {
         $this->cropx1 = $cropx1;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getCropy1()
+    public function getCropy1(): int
     {
         return $this->cropy1;
     }
 
-    /**
-     * @param int|string $cropy1
-     *
-     * @return HeatmapConfig
-     */
-    public function setCropy1($cropy1)
+    public function setCropy1(int $cropy1): static
     {
         $this->cropy1 = $cropy1;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getCropx2()
+    public function getCropx2(): int
     {
         return $this->cropx2;
     }
 
-    /**
-     * @param int|string $cropx2
-     *
-     * @return HeatmapConfig
-     */
-    public function setCropx2($cropx2)
+    public function setCropx2(int $cropx2): static
     {
         $this->cropx2 = $cropx2;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getCropy2()
+    public function getCropy2(): int
     {
         return $this->cropy2;
     }
 
-    /**
-     * @param int|string $cropy2
-     *
-     * @return HeatmapConfig
-     */
-    public function setCropy2($cropy2)
+    public function setCropy2(int $cropy2): static
     {
         $this->cropy2 = $cropy2;
 

@@ -17,6 +17,6 @@ final class ClanTagsPosition extends AbstractEnumType
     final public const END = 'END';
 
     protected static array $choices = [
-        self::EITHER, self::START, self::END
+        self::EITHER, self::START, self::END,
     ];
 }

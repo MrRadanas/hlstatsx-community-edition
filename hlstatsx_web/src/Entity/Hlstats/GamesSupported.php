@@ -6,40 +6,29 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\GamesSupportedRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
-/**
- * HlstatsGamesSupported.
- *
- * @ORM\Table(name="hlstats_Games_Supported")
- *
- * @ORM\Entity(repositoryClass=GamesSupportedRepository::class)
- */
+#[ORM\Table(name: 'hlstats_Games_Supported')]
+#[ORM\Entity(repositoryClass: GamesSupportedRepository::class)]
 class GamesSupported
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="code", type="string", length=32, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $code;
+    //    #[ORM\Column(name: 'code', type: 'string', length: 32, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'code', referencedColumnName: 'code')]
+    private Games $code;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=128, nullable=false)
-     */
-    private $name;
+    #[ORM\Column(name: 'name', type: 'string', length: 128, nullable: false)]
+    private string $name;
 
-    public function getCode(): string
+    public function getCode(): Games
     {
         return $this->code;
     }
 
-    public function setCode(string $code): GamesSupported
+    public function setCode(Games $code): static
     {
         $this->code = $code;
 
@@ -51,7 +40,7 @@ class GamesSupported
         return $this->name;
     }
 
-    public function setName(string $name): GamesSupported
+    public function setName(string $name): static
     {
         $this->name = $name;
 

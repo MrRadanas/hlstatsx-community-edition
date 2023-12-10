@@ -9,288 +9,246 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsServers.
- *
- * @ORM\Table(name="hlstats_Servers", uniqueConstraints={@ORM\UniqueConstraint(name="addressport", columns={"address", "port"})})
- *
- * @ORM\Entity(repositoryClass=ServersRepository::class)
  */
+#[ORM\Table(name: 'hlstats_Servers')]
+#[ORM\UniqueConstraint(name: 'addressport', columns: ['address', 'port'])]
+#[ORM\Entity(repositoryClass: ServersRepository::class)]
 class Servers
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="serverId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
+    #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     private $serverid;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="address", type="string", length=32, nullable=false)
      */
+    #[ORM\Column(name: 'address', type: 'string', length: 32, nullable: false)]
     private $address = '';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="port", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'port', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $port = '0';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
+    #[ORM\Column(name: 'name', type: 'string', length: 255, nullable: false)]
     private $name = '';
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="sortorder", type="boolean", nullable=false)
      */
+    #[ORM\Column(name: 'sortorder', type: 'boolean', nullable: false)]
     private $sortorder = '0';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=32, nullable=false, options={"default": "valve"})
      */
+    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false, options: ['default' => 'valve'])]
     private $game = 'valve';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="publicaddress", type="string", length=128, nullable=false)
      */
+    #[ORM\Column(name: 'publicaddress', type: 'string', length: 128, nullable: false)]
     private $publicaddress = '';
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="statusurl", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'statusurl', type: 'string', length: 255, nullable: true)]
     private $statusurl;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="rcon_password", type="string", length=128, nullable=false)
      */
+    #[ORM\Column(name: 'rcon_password', type: 'string', length: 128, nullable: false)]
     private $rconPassword = '';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="kills", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'kills', type: 'integer', nullable: false)]
     private $kills = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="players", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'players', type: 'integer', nullable: false)]
     private $players = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="rounds", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'rounds', type: 'integer', nullable: false)]
     private $rounds = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="suicides", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'suicides', type: 'integer', nullable: false)]
     private $suicides = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="headshots", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'headshots', type: 'integer', nullable: false)]
     private $headshots = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="bombs_planted", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'bombs_planted', type: 'integer', nullable: false)]
     private $bombsPlanted = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="bombs_defused", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'bombs_defused', type: 'integer', nullable: false)]
     private $bombsDefused = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="ct_wins", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'ct_wins', type: 'integer', nullable: false)]
     private $ctWins = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="ts_wins", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'ts_wins', type: 'integer', nullable: false)]
     private $tsWins = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="act_players", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'act_players', type: 'integer', nullable: false)]
     private $actPlayers = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="max_players", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'max_players', type: 'integer', nullable: false)]
     private $maxPlayers = '0';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="act_map", type="string", length=64, nullable=false)
      */
+    #[ORM\Column(name: 'act_map', type: 'string', length: 64, nullable: false)]
     private $actMap = '';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="map_rounds", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'map_rounds', type: 'integer', nullable: false)]
     private $mapRounds = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="map_ct_wins", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'map_ct_wins', type: 'integer', nullable: false)]
     private $mapCtWins = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="map_ts_wins", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'map_ts_wins', type: 'integer', nullable: false)]
     private $mapTsWins = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="map_started", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'map_started', type: 'integer', nullable: false)]
     private $mapStarted = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="map_changes", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'map_changes', type: 'integer', nullable: false)]
     private $mapChanges = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="ct_shots", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'ct_shots', type: 'integer', nullable: false)]
     private $ctShots = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="ct_hits", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'ct_hits', type: 'integer', nullable: false)]
     private $ctHits = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="ts_shots", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'ts_shots', type: 'integer', nullable: false)]
     private $tsShots = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="ts_hits", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'ts_hits', type: 'integer', nullable: false)]
     private $tsHits = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="map_ct_shots", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'map_ct_shots', type: 'integer', nullable: false)]
     private $mapCtShots = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="map_ct_hits", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'map_ct_hits', type: 'integer', nullable: false)]
     private $mapCtHits = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="map_ts_shots", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'map_ts_shots', type: 'integer', nullable: false)]
     private $mapTsShots = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="map_ts_hits", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'map_ts_hits', type: 'integer', nullable: false)]
     private $mapTsHits = '0';
 
     /**
      * @var float|null
-     *
-     * @ORM\Column(name="lat", type="float", precision=7, scale=4, nullable=true)
      */
+    #[ORM\Column(name: 'lat', type: 'float', precision: 7, scale: 4, nullable: true)]
     private $lat;
 
     /**
      * @var float|null
-     *
-     * @ORM\Column(name="lng", type="float", precision=7, scale=4, nullable=true)
      */
+    #[ORM\Column(name: 'lng', type: 'float', precision: 7, scale: 4, nullable: true)]
     private $lng;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="city", type="string", length=64, nullable=false)
      */
+    #[ORM\Column(name: 'city', type: 'string', length: 64, nullable: false)]
     private $city = '';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=64, nullable=false)
      */
+    #[ORM\Column(name: 'country', type: 'string', length: 64, nullable: false)]
     private $country = '';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="last_event", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'last_event', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $lastEvent = '0';
 
     public function getServerid(): int

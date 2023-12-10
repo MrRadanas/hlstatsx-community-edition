@@ -6,73 +6,43 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\PlayersAwardsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
-/**
- * HlstatsPlayersAwards.
- *
- * @ORM\Table(name="hlstats_Players_Awards")
- *
- * @ORM\Entity(repositoryClass=PlayersAwardsRepository::class)
- */
+#[ORM\Table(name: 'hlstats_Players_Awards')]
+#[ORM\Entity(repositoryClass: PlayersAwardsRepository::class)]
 class PlayersAwards
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=32, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $game;
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'code', referencedColumnName: 'code')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private Games $game;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="awardTime", type="date", nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $awardtime;
+    #[ORM\Column(name: 'awardTime', type: 'date', nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private \DateTime $awardtime;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="awardId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $awardid = '0';
+    #[ORM\Column(name: 'awardId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private int $awardid = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="playerId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $playerid = '0';
+    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private int $playerid = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="count", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $count = '0';
+    #[ORM\Column(name: 'count', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $count = 0;
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): PlayersAwards
+    public function setGame(Games $game): PlayersAwards
     {
         $this->game = $game;
 
@@ -91,60 +61,36 @@ class PlayersAwards
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getAwardid()
+    public function getAwardid(): int
     {
         return $this->awardid;
     }
 
-    /**
-     * @param int|string $awardid
-     *
-     * @return PlayersAwards
-     */
-    public function setAwardid($awardid)
+    public function setAwardid(int $awardid): PlayersAwards
     {
         $this->awardid = $awardid;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getPlayerid()
+    public function getPlayerid(): int
     {
         return $this->playerid;
     }
 
-    /**
-     * @param int|string $playerid
-     *
-     * @return PlayersAwards
-     */
-    public function setPlayerid($playerid)
+    public function setPlayerid(int $playerid): PlayersAwards
     {
         $this->playerid = $playerid;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getCount()
+    public function getCount(): int
     {
         return $this->count;
     }
 
-    /**
-     * @param int|string $count
-     *
-     * @return PlayersAwards
-     */
-    public function setCount($count)
+    public function setCount(int $count): PlayersAwards
     {
         $this->count = $count;
 

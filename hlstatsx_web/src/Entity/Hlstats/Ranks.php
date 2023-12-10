@@ -9,57 +9,49 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsRanks.
- *
- * @ORM\Table(name="hlstats_Ranks", uniqueConstraints={@ORM\UniqueConstraint(name="rankgame", columns={"image", "game"})}, indexes={@ORM\Index(name="game", columns={"game"})})
- *
- * @ORM\Entity(repositoryClass=RanksRepository::class)
  */
+#[ORM\Table(name: 'hlstats_Ranks')]
+#[ORM\Index(name: 'game', columns: ['game'])]
+#[ORM\UniqueConstraint(name: 'rankgame', columns: ['image', 'game'])]
+#[ORM\Entity(repositoryClass: RanksRepository::class)]
 class Ranks
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="rankId", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
+    #[ORM\Column(name: 'rankId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     private $rankid;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=30, nullable=false)
      */
+    #[ORM\Column(name: 'image', type: 'string', length: 30, nullable: false)]
     private $image;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="minKills", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'minKills', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $minkills = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="maxKills", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'maxKills', type: 'integer', nullable: false)]
     private $maxkills = '0';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="rankName", type="string", length=50, nullable=false)
      */
+    #[ORM\Column(name: 'rankName', type: 'string', length: 50, nullable: false)]
     private $rankname;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=32, nullable=false)
      */
+    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false)]
     private $game;
 
     public function getRankid(): int

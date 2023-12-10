@@ -9,43 +9,35 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsUsers.
- *
- * @ORM\Table(name="hlstats_Users")
- *
- * @ORM\Entity(repositoryClass=UsersRepository::class)
  */
+#[ORM\Table(name: 'hlstats_Users')]
+#[ORM\Entity(repositoryClass: UsersRepository::class)]
 class Users
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=16, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
+    #[ORM\Column(name: 'username', type: 'string', length: 16, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     private $username = '';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=32, nullable=false)
      */
+    #[ORM\Column(name: 'password', type: 'string', length: 32, nullable: false)]
     private $password = '';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="acclevel", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'acclevel', type: 'integer', nullable: false)]
     private $acclevel = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="playerId", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false)]
     private $playerid = '0';
 
     public function getUsername(): string

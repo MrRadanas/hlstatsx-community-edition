@@ -9,36 +9,29 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsServersConfigDefault.
- *
- * @ORM\Table(name="hlstats_Servers_Config_Default")
- *
- * @ORM\Entity(repositoryClass=ServersConfigDefaultRepository::class)
  */
+#[ORM\Table(name: 'hlstats_Servers_Config_Default')]
+#[ORM\Entity(repositoryClass: ServersConfigDefaultRepository::class)]
 class ServersConfigDefault
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="parameter", type="string", length=50, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
+    #[ORM\Column(name: 'parameter', type: 'string', length: 50, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     private $parameter;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="value", type="string", length=128, nullable=false)
      */
+    #[ORM\Column(name: 'value', type: 'string', length: 128, nullable: false)]
     private $value;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="description", type="text", length=16777215, nullable=true)
      */
+    #[ORM\Column(name: 'description', type: 'text', length: 16777215, nullable: true)]
     private $description;
 
     public function getParameter(): string

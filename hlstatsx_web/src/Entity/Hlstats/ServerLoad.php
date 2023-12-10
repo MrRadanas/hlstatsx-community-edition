@@ -9,71 +9,61 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsServerLoad.
- *
- * @ORM\Table(name="hlstats_server_load", indexes={@ORM\Index(name="server_id", columns={"server_id"}), @ORM\Index(name="timestamp", columns={"timestamp"})})
- *
- * @ORM\Entity(repositoryClass=ServerLoadRepository::class)
  */
+#[ORM\Table(name: 'hlstats_server_load')]
+#[ORM\Index(name: 'server_id', columns: ['server_id'])]
+#[ORM\Index(name: 'timestamp', columns: ['timestamp'])]
+#[ORM\Entity(repositoryClass: ServerLoadRepository::class)]
 class ServerLoad
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="server_id", type="integer", nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
+    #[ORM\Column(name: 'server_id', type: 'integer', nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     private $serverId = '0';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="timestamp", type="integer", nullable=false)
      */
+    #[ORM\Column(name: 'timestamp', type: 'integer', nullable: false)]
     private $timestamp = '0';
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="act_players", type="boolean", nullable=false)
      */
+    #[ORM\Column(name: 'act_players', type: 'boolean', nullable: false)]
     private $actPlayers = '0';
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="min_players", type="boolean", nullable=false)
      */
+    #[ORM\Column(name: 'min_players', type: 'boolean', nullable: false)]
     private $minPlayers = '0';
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="max_players", type="boolean", nullable=false)
      */
+    #[ORM\Column(name: 'max_players', type: 'boolean', nullable: false)]
     private $maxPlayers = '0';
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="map", type="string", length=64, nullable=true)
      */
+    #[ORM\Column(name: 'map', type: 'string', length: 64, nullable: true)]
     private $map;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="uptime", type="string", length=10, nullable=false)
      */
+    #[ORM\Column(name: 'uptime', type: 'string', length: 10, nullable: false)]
     private $uptime = '0';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="fps", type="string", length=10, nullable=false)
      */
+    #[ORM\Column(name: 'fps', type: 'string', length: 10, nullable: false)]
     private $fps = '0';
 
     /**

@@ -8,147 +8,85 @@ use App\Repository\Hlstats\EventsStatsme2Repository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * HlstatsEventsStatsme2.
- *
- * @ORM\Table(name="hlstats_Events_Statsme2", indexes={@ORM\Index(name="playerId", columns={"playerId"}), @ORM\Index(name="weapon", columns={"weapon"})})
- *
- * @ORM\Entity(repositoryClass=EventsStatsme2Repository::class)
+ * @todo $serverid скорее всего ведет на Servers
  */
+#[ORM\Table(name: 'hlstats_Events_Statsme2')]
+#[ORM\Index(name: 'playerId', columns: ['playerId'])]
+#[ORM\Index(name: 'weapon', columns: ['weapon'])]
+#[ORM\Entity(repositoryClass: EventsStatsme2Repository::class)]
 class EventsStatsme2
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned": true})
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Column(name: 'id', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    private int $id;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="eventTime", type="datetime", nullable=true)
-     */
-    private $eventtime;
+    #[ORM\Column(name: 'eventTime', type: 'datetime', nullable: true)]
+    private ?\DateTime $eventtime;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="serverId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $serverid = '0';
+    #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $serverid = 0;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="map", type="string", length=64, nullable=false)
-     */
-    private $map = '';
+    #[ORM\Column(name: 'map', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $map = '';
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="playerId", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $playerid = '0';
+    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $playerid = 0;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="weapon", type="string", length=64, nullable=false)
-     */
-    private $weapon = '';
+    #[ORM\Column(name: 'weapon', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $weapon = '';
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="head", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $head = '0';
+    #[ORM\Column(name: 'head', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $head = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="chest", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $chest = '0';
+    #[ORM\Column(name: 'chest', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $chest = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="stomach", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $stomach = '0';
+    #[ORM\Column(name: 'stomach', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $stomach = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="leftarm", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $leftarm = '0';
+    #[ORM\Column(name: 'leftarm', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $leftarm = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="rightarm", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $rightarm = '0';
+    #[ORM\Column(name: 'rightarm', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $rightarm = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="leftleg", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $leftleg = '0';
+    #[ORM\Column(name: 'leftleg', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $leftleg = 0;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="rightleg", type="integer", nullable=false, options={"unsigned": true})
-     */
-    private $rightleg = '0';
+    #[ORM\Column(name: 'rightleg', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $rightleg = 0;
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): EventsStatsme2
+    public function setId(int $id): static
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getEventtime(): \DateTime
+    public function getEventtime(): ?\DateTime
     {
         return $this->eventtime;
     }
 
-    public function setEventtime(\DateTime $eventtime): EventsStatsme2
+    public function setEventtime(?\DateTime $eventtime): static
     {
         $this->eventtime = $eventtime;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getServerid()
+    public function getServerid(): int
     {
         return $this->serverid;
     }
 
-    /**
-     * @param int|string $serverid
-     *
-     * @return EventsStatsme2
-     */
-    public function setServerid($serverid)
+    public function setServerid(int $serverid): static
     {
         $this->serverid = $serverid;
 
@@ -160,27 +98,19 @@ class EventsStatsme2
         return $this->map;
     }
 
-    public function setMap(string $map): EventsStatsme2
+    public function setMap(string $map): static
     {
         $this->map = $map;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getPlayerid()
+    public function getPlayerid(): int
     {
         return $this->playerid;
     }
 
-    /**
-     * @param int|string $playerid
-     *
-     * @return EventsStatsme2
-     */
-    public function setPlayerid($playerid)
+    public function setPlayerid(int $playerid): static
     {
         $this->playerid = $playerid;
 
@@ -192,147 +122,91 @@ class EventsStatsme2
         return $this->weapon;
     }
 
-    public function setWeapon(string $weapon): EventsStatsme2
+    public function setWeapon(string $weapon): static
     {
         $this->weapon = $weapon;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getHead()
+    public function getHead(): int
     {
         return $this->head;
     }
 
-    /**
-     * @param int|string $head
-     *
-     * @return EventsStatsme2
-     */
-    public function setHead($head)
+    public function setHead(int $head): static
     {
         $this->head = $head;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getChest()
+    public function getChest(): int
     {
         return $this->chest;
     }
 
-    /**
-     * @param int|string $chest
-     *
-     * @return EventsStatsme2
-     */
-    public function setChest($chest)
+    public function setChest(int $chest): static
     {
         $this->chest = $chest;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getStomach()
+    public function getStomach(): int
     {
         return $this->stomach;
     }
 
-    /**
-     * @param int|string $stomach
-     *
-     * @return EventsStatsme2
-     */
-    public function setStomach($stomach)
+    public function setStomach(int $stomach): static
     {
         $this->stomach = $stomach;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getLeftarm()
+    public function getLeftarm(): int
     {
         return $this->leftarm;
     }
 
-    /**
-     * @param int|string $leftarm
-     *
-     * @return EventsStatsme2
-     */
-    public function setLeftarm($leftarm)
+    public function setLeftarm(int $leftarm): static
     {
         $this->leftarm = $leftarm;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getRightarm()
+    public function getRightarm(): int
     {
         return $this->rightarm;
     }
 
-    /**
-     * @param int|string $rightarm
-     *
-     * @return EventsStatsme2
-     */
-    public function setRightarm($rightarm)
+    public function setRightarm(int $rightarm): static
     {
         $this->rightarm = $rightarm;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getLeftleg()
+    public function getLeftleg(): int
     {
         return $this->leftleg;
     }
 
-    /**
-     * @param int|string $leftleg
-     *
-     * @return EventsStatsme2
-     */
-    public function setLeftleg($leftleg)
+    public function setLeftleg(int $leftleg): static
     {
         $this->leftleg = $leftleg;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getRightleg()
+    public function getRightleg(): int
     {
         return $this->rightleg;
     }
 
-    /**
-     * @param int|string $rightleg
-     *
-     * @return EventsStatsme2
-     */
-    public function setRightleg($rightleg)
+    public function setRightleg(int $rightleg): static
     {
         $this->rightleg = $rightleg;
 

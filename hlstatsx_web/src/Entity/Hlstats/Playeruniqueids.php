@@ -9,47 +9,38 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HlstatsPlayeruniqueids.
- *
- * @ORM\Table(name="hlstats_PlayerUniqueIds", indexes={@ORM\Index(name="playerId", columns={"playerId"})})
- *
- * @ORM\Entity(repositoryClass=PlayeruniqueidsRepository::class)
  */
+#[ORM\Table(name: 'hlstats_PlayerUniqueIds')]
+#[ORM\Index(name: 'playerId', columns: ['playerId'])]
+#[ORM\Entity(repositoryClass: PlayeruniqueidsRepository::class)]
 class Playeruniqueids
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=32, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
      */
+    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     private $game = '';
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="playerId", type="integer", nullable=false, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true])]
     private $playerid = '0';
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="uniqueId", type="string", length=64, nullable=false)
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue(strategy="NONE")
      */
+    #[ORM\Column(name: 'uniqueId', type: 'string', length: 64, nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     private $uniqueid = '';
 
     /**
      * @var int|null
-     *
-     * @ORM\Column(name="merge", type="integer", nullable=true, options={"unsigned": true})
      */
+    #[ORM\Column(name: 'merge', type: 'integer', nullable: true, options: ['unsigned' => true])]
     private $merge;
 
     public function getGame(): string
