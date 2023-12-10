@@ -6,74 +6,30 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\PlayeruniqueidsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
-/**
- * HlstatsPlayeruniqueids.
- */
 #[ORM\Table(name: 'hlstats_PlayerUniqueIds')]
 #[ORM\Index(name: 'playerId', columns: ['playerId'])]
 #[ORM\Entity(repositoryClass: PlayeruniqueidsRepository::class)]
 class Playeruniqueids
 {
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false)]
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'NONE')]
-    private $game = '';
-
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true])]
-    private $playerid = '0';
-
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'uniqueId', type: 'string', length: 64, nullable: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
-    private $uniqueid = '';
+    private string $uniqueid = '';
 
-    /**
-     * @var int|null
-     */
+    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $playerid = 0;
+
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'code', referencedColumnName: 'code', nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private Games $game;
+
     #[ORM\Column(name: 'merge', type: 'integer', nullable: true, options: ['unsigned' => true])]
-    private $merge;
-
-    public function getGame(): string
-    {
-        return $this->game;
-    }
-
-    public function setGame(string $game): Playeruniqueids
-    {
-        $this->game = $game;
-
-        return $this;
-    }
-
-    /**
-     * @return int|string
-     */
-    public function getPlayerid()
-    {
-        return $this->playerid;
-    }
-
-    /**
-     * @param int|string $playerid
-     *
-     * @return Playeruniqueids
-     */
-    public function setPlayerid($playerid)
-    {
-        $this->playerid = $playerid;
-
-        return $this;
-    }
+    private int $merge;
 
     public function getUniqueid(): string
     {
@@ -83,6 +39,30 @@ class Playeruniqueids
     public function setUniqueid(string $uniqueid): Playeruniqueids
     {
         $this->uniqueid = $uniqueid;
+
+        return $this;
+    }
+
+    public function getPlayerid(): int
+    {
+        return $this->playerid;
+    }
+
+    public function setPlayerid(int $playerid): Playeruniqueids
+    {
+        $this->playerid = $playerid;
+
+        return $this;
+    }
+
+    public function getGame(): Games
+    {
+        return $this->game;
+    }
+
+    public function setGame(Games $game): Playeruniqueids
+    {
+        $this->game = $game;
 
         return $this;
     }

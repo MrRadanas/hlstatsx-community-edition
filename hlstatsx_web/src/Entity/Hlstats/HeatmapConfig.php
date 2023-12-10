@@ -23,7 +23,7 @@ class HeatmapConfig
     private string $map;
 
     #[ManyToOne(targetEntity: Games::class)]
-    #[JoinColumn(name: 'game', referencedColumnName: 'code')]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
     private Games $game;
 
     #[ORM\Column(name: 'xoffset', type: 'float', precision: 10, scale: 0, nullable: false)]

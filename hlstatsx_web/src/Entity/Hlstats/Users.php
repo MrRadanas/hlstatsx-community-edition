@@ -7,38 +7,23 @@ namespace App\Entity\Hlstats;
 use App\Repository\Hlstats\UsersRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * HlstatsUsers.
- */
 #[ORM\Table(name: 'hlstats_Users')]
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 class Users
 {
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'username', type: 'string', length: 16, nullable: false)]
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private $username = '';
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private string $username;
 
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'password', type: 'string', length: 32, nullable: false)]
-    private $password = '';
+    private string $password;
 
-    /**
-     * @var int
-     */
     #[ORM\Column(name: 'acclevel', type: 'integer', nullable: false)]
-    private $acclevel = '0';
+    private int $acclevel;
 
-    /**
-     * @var int
-     */
     #[ORM\Column(name: 'playerId', type: 'integer', nullable: false)]
-    private $playerid = '0';
+    private int $playerid;
 
     public function getUsername(): string
     {
@@ -64,40 +49,24 @@ class Users
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getAcclevel()
+    public function getAcclevel(): int
     {
         return $this->acclevel;
     }
 
-    /**
-     * @param int|string $acclevel
-     *
-     * @return Users
-     */
-    public function setAcclevel($acclevel)
+    public function setAcclevel(int $acclevel): Users
     {
         $this->acclevel = $acclevel;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getPlayerid()
+    public function getPlayerid(): int
     {
         return $this->playerid;
     }
 
-    /**
-     * @param int|string $playerid
-     *
-     * @return Users
-     */
-    public function setPlayerid($playerid)
+    public function setPlayerid(int $playerid): Users
     {
         $this->playerid = $playerid;
 

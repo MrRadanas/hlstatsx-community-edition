@@ -6,6 +6,8 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\RanksRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * HlstatsRanks.
@@ -16,50 +18,33 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: RanksRepository::class)]
 class Ranks
 {
-    /**
-     * @var int
-     */
     #[ORM\Column(name: 'rankId', type: 'integer', nullable: false, options: ['unsigned' => true])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private $rankid;
+    private int $rankid;
 
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'image', type: 'string', length: 30, nullable: false)]
-    private $image;
+    private string $image;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'minKills', type: 'integer', nullable: false, options: ['unsigned' => true])]
-    private $minkills = '0';
+    #[ORM\Column(name: 'minKills', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $minkills = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'maxKills', type: 'integer', nullable: false)]
-    private $maxkills = '0';
+    #[ORM\Column(name: 'maxKills', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $maxkills = 0;
 
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'rankName', type: 'string', length: 50, nullable: false)]
-    private $rankname;
+    private string $rankname;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false)]
-    private $game;
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
+    private Games $game;
 
     public function getRankid(): int
     {
         return $this->rankid;
     }
 
-    public function setRankid(int $rankid): Ranks
+    public function setRankid(int $rankid): static
     {
         $this->rankid = $rankid;
 
@@ -71,47 +56,31 @@ class Ranks
         return $this->image;
     }
 
-    public function setImage(string $image): Ranks
+    public function setImage(string $image): static
     {
         $this->image = $image;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getMinkills()
+    public function getMinkills(): int
     {
         return $this->minkills;
     }
 
-    /**
-     * @param int|string $minkills
-     *
-     * @return Ranks
-     */
-    public function setMinkills($minkills)
+    public function setMinkills(int $minkills): static
     {
         $this->minkills = $minkills;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getMaxkills()
+    public function getMaxkills(): int
     {
         return $this->maxkills;
     }
 
-    /**
-     * @param int|string $maxkills
-     *
-     * @return Ranks
-     */
-    public function setMaxkills($maxkills)
+    public function setMaxkills(int $maxkills): static
     {
         $this->maxkills = $maxkills;
 
@@ -123,19 +92,19 @@ class Ranks
         return $this->rankname;
     }
 
-    public function setRankname(string $rankname): Ranks
+    public function setRankname(string $rankname): static
     {
         $this->rankname = $rankname;
 
         return $this;
     }
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): Ranks
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 

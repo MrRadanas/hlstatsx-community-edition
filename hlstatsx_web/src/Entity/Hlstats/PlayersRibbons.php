@@ -6,82 +6,57 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\PlayersRibbonsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
-/**
- * HlstatsPlayersRibbons.
- */
 #[ORM\Table(name: 'hlstats_Players_Ribbons')]
 #[ORM\Entity(repositoryClass: PlayersRibbonsRepository::class)]
 class PlayersRibbons
 {
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
-    private $playerid = '0';
+    private int $playerid = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'ribbonId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\Column(name: 'ribbonId', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
-    private $ribbonid = '0';
+    private int $ribbonid = 0;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false)]
-    private $game;
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
+    private Games $game;
 
-    /**
-     * @return int|string
-     */
-    public function getPlayerid()
+    public function getPlayerid(): int
     {
         return $this->playerid;
     }
 
-    /**
-     * @param int|string $playerid
-     *
-     * @return PlayersRibbons
-     */
-    public function setPlayerid($playerid)
+    public function setPlayerid(int $playerid): PlayersRibbons
     {
         $this->playerid = $playerid;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getRibbonid()
+    public function getRibbonid(): int
     {
         return $this->ribbonid;
     }
 
-    /**
-     * @param int|string $ribbonid
-     *
-     * @return PlayersRibbons
-     */
-    public function setRibbonid($ribbonid)
+    public function setRibbonid(int $ribbonid): PlayersRibbons
     {
         $this->ribbonid = $ribbonid;
 
         return $this;
     }
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): PlayersRibbons
+    public function setGame(Games $game): PlayersRibbons
     {
         $this->game = $game;
 

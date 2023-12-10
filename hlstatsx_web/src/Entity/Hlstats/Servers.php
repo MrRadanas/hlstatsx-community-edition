@@ -6,259 +6,142 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\ServersRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
-/**
- * HlstatsServers.
- */
 #[ORM\Table(name: 'hlstats_Servers')]
 #[ORM\UniqueConstraint(name: 'addressport', columns: ['address', 'port'])]
 #[ORM\Entity(repositoryClass: ServersRepository::class)]
 class Servers
 {
-    /**
-     * @var int
-     */
     #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private $serverid;
+    private int $id;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'address', type: 'string', length: 32, nullable: false)]
-    private $address = '';
+    #[ORM\Column(name: 'address', type: 'string', length: 32, nullable: false, options: ['default' => ''])]
+    private string $address = '';
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'port', type: 'integer', nullable: false, options: ['unsigned' => true])]
-    private $port = '0';
+    #[ORM\Column(name: 'port', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $port = 0;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'name', type: 'string', length: 255, nullable: false)]
-    private $name = '';
+    #[ORM\Column(name: 'name', type: 'string', length: 255, nullable: false, options: ['default' => ''])]
+    private string $name = '';
 
-    /**
-     * @var bool
-     */
-    #[ORM\Column(name: 'sortorder', type: 'boolean', nullable: false)]
-    private $sortorder = '0';
+    #[ORM\Column(name: 'sortorder', type: 'smallint', nullable: false, options: ['default' => 0])]
+    private int $sortorder = 0;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false, options: ['default' => 'valve'])]
-    private $game = 'valve';
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
+    private Games $game;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'publicaddress', type: 'string', length: 128, nullable: false)]
-    private $publicaddress = '';
+    #[ORM\Column(name: 'publicaddress', type: 'string', length: 128, nullable: false, options: ['default' => ''])]
+    private string $publicaddress = '';
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'statusurl', type: 'string', length: 255, nullable: true)]
-    private $statusurl;
+    private ?string $statusurl;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'rcon_password', type: 'string', length: 128, nullable: false)]
-    private $rconPassword = '';
+    #[ORM\Column(name: 'rcon_password', type: 'string', length: 128, nullable: false, options: ['default' => ''])]
+    private string $rconPassword = '';
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'kills', type: 'integer', nullable: false)]
-    private $kills = '0';
+    #[ORM\Column(name: 'kills', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $kills = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'players', type: 'integer', nullable: false)]
-    private $players = '0';
+    #[ORM\Column(name: 'players', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $players = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'rounds', type: 'integer', nullable: false)]
-    private $rounds = '0';
+    #[ORM\Column(name: 'rounds', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $rounds = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'suicides', type: 'integer', nullable: false)]
-    private $suicides = '0';
+    #[ORM\Column(name: 'suicides', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $suicides = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'headshots', type: 'integer', nullable: false)]
-    private $headshots = '0';
+    #[ORM\Column(name: 'headshots', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $headshots = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'bombs_planted', type: 'integer', nullable: false)]
-    private $bombsPlanted = '0';
+    #[ORM\Column(name: 'bombs_planted', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $bombsPlanted = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'bombs_defused', type: 'integer', nullable: false)]
-    private $bombsDefused = '0';
+    #[ORM\Column(name: 'bombs_defused', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $bombsDefused = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'ct_wins', type: 'integer', nullable: false)]
-    private $ctWins = '0';
+    #[ORM\Column(name: 'ct_wins', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $ctWins = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'ts_wins', type: 'integer', nullable: false)]
-    private $tsWins = '0';
+    #[ORM\Column(name: 'ts_wins', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $tsWins = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'act_players', type: 'integer', nullable: false)]
-    private $actPlayers = '0';
+    #[ORM\Column(name: 'act_players', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $actPlayers = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'max_players', type: 'integer', nullable: false)]
-    private $maxPlayers = '0';
+    #[ORM\Column(name: 'max_players', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $maxPlayers = 0;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'act_map', type: 'string', length: 64, nullable: false)]
-    private $actMap = '';
+    #[ORM\Column(name: 'act_map', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $actMap = '';
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'map_rounds', type: 'integer', nullable: false)]
-    private $mapRounds = '0';
+    #[ORM\Column(name: 'map_rounds', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $mapRounds = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'map_ct_wins', type: 'integer', nullable: false)]
-    private $mapCtWins = '0';
+    #[ORM\Column(name: 'map_ct_wins', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $mapCtWins = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'map_ts_wins', type: 'integer', nullable: false)]
-    private $mapTsWins = '0';
+    #[ORM\Column(name: 'map_ts_wins', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $mapTsWins = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'map_started', type: 'integer', nullable: false)]
-    private $mapStarted = '0';
+    #[ORM\Column(name: 'map_started', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $mapStarted = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'map_changes', type: 'integer', nullable: false)]
-    private $mapChanges = '0';
+    #[ORM\Column(name: 'map_changes', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $mapChanges = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'ct_shots', type: 'integer', nullable: false)]
-    private $ctShots = '0';
+    #[ORM\Column(name: 'ct_shots', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $ctShots = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'ct_hits', type: 'integer', nullable: false)]
-    private $ctHits = '0';
+    #[ORM\Column(name: 'ct_hits', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $ctHits = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'ts_shots', type: 'integer', nullable: false)]
-    private $tsShots = '0';
+    #[ORM\Column(name: 'ts_shots', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $tsShots = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'ts_hits', type: 'integer', nullable: false)]
-    private $tsHits = '0';
+    #[ORM\Column(name: 'ts_hits', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $tsHits = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'map_ct_shots', type: 'integer', nullable: false)]
-    private $mapCtShots = '0';
+    #[ORM\Column(name: 'map_ct_shots', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $mapCtShots = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'map_ct_hits', type: 'integer', nullable: false)]
-    private $mapCtHits = '0';
+    #[ORM\Column(name: 'map_ct_hits', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $mapCtHits = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'map_ts_shots', type: 'integer', nullable: false)]
-    private $mapTsShots = '0';
+    #[ORM\Column(name: 'map_ts_shots', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $mapTsShots = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'map_ts_hits', type: 'integer', nullable: false)]
-    private $mapTsHits = '0';
+    #[ORM\Column(name: 'map_ts_hits', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $mapTsHits = 0;
 
-    /**
-     * @var float|null
-     */
     #[ORM\Column(name: 'lat', type: 'float', precision: 7, scale: 4, nullable: true)]
-    private $lat;
+    private ?float $lat;
 
-    /**
-     * @var float|null
-     */
     #[ORM\Column(name: 'lng', type: 'float', precision: 7, scale: 4, nullable: true)]
-    private $lng;
+    private ?float $lng;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'city', type: 'string', length: 64, nullable: false)]
-    private $city = '';
+    #[ORM\Column(name: 'city', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $city = '';
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'country', type: 'string', length: 64, nullable: false)]
-    private $country = '';
+    #[ORM\Column(name: 'country', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $country = '';
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'last_event', type: 'integer', nullable: false, options: ['unsigned' => true])]
-    private $lastEvent = '0';
+    #[ORM\Column(name: 'last_event', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $lastEvent = 0;
 
-    public function getServerid(): int
+    public function getId(): int
     {
-        return $this->serverid;
+        return $this->id;
     }
 
-    public function setServerid(int $serverid): Servers
+    public function setId(int $id): static
     {
-        $this->serverid = $serverid;
+        $this->id = $id;
 
         return $this;
     }
@@ -268,27 +151,19 @@ class Servers
         return $this->address;
     }
 
-    public function setAddress(string $address): Servers
+    public function setAddress(string $address): static
     {
         $this->address = $address;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getPort()
+    public function getPort(): int
     {
         return $this->port;
     }
 
-    /**
-     * @param int|string $port
-     *
-     * @return Servers
-     */
-    public function setPort($port)
+    public function setPort(int $port): static
     {
         $this->port = $port;
 
@@ -300,39 +175,31 @@ class Servers
         return $this->name;
     }
 
-    public function setName(string $name): Servers
+    public function setName(string $name): static
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getSortorder()
+    public function getSortorder(): int
     {
         return $this->sortorder;
     }
 
-    /**
-     * @param bool|string $sortorder
-     *
-     * @return Servers
-     */
-    public function setSortorder($sortorder)
+    public function setSortorder(int $sortorder): static
     {
         $this->sortorder = $sortorder;
 
         return $this;
     }
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): Servers
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 
@@ -344,19 +211,19 @@ class Servers
         return $this->publicaddress;
     }
 
-    public function setPublicaddress(string $publicaddress): Servers
+    public function setPublicaddress(string $publicaddress): static
     {
         $this->publicaddress = $publicaddress;
 
         return $this;
     }
 
-    public function getStatusurl(): string
+    public function getStatusurl(): ?string
     {
         return $this->statusurl;
     }
 
-    public function setStatusurl(string $statusurl): Servers
+    public function setStatusurl(?string $statusurl): static
     {
         $this->statusurl = $statusurl;
 
@@ -368,227 +235,139 @@ class Servers
         return $this->rconPassword;
     }
 
-    public function setRconPassword(string $rconPassword): Servers
+    public function setRconPassword(string $rconPassword): static
     {
         $this->rconPassword = $rconPassword;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getKills()
+    public function getKills(): int
     {
         return $this->kills;
     }
 
-    /**
-     * @param int|string $kills
-     *
-     * @return Servers
-     */
-    public function setKills($kills)
+    public function setKills(int $kills): static
     {
         $this->kills = $kills;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getPlayers()
+    public function getPlayers(): int
     {
         return $this->players;
     }
 
-    /**
-     * @param int|string $players
-     *
-     * @return Servers
-     */
-    public function setPlayers($players)
+    public function setPlayers(int $players): static
     {
         $this->players = $players;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getRounds()
+    public function getRounds(): int
     {
         return $this->rounds;
     }
 
-    /**
-     * @param int|string $rounds
-     *
-     * @return Servers
-     */
-    public function setRounds($rounds)
+    public function setRounds(int $rounds): static
     {
         $this->rounds = $rounds;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getSuicides()
+    public function getSuicides(): int
     {
         return $this->suicides;
     }
 
-    /**
-     * @param int|string $suicides
-     *
-     * @return Servers
-     */
-    public function setSuicides($suicides)
+    public function setSuicides(int $suicides): static
     {
         $this->suicides = $suicides;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getHeadshots()
+    public function getHeadshots(): int
     {
         return $this->headshots;
     }
 
-    /**
-     * @param int|string $headshots
-     *
-     * @return Servers
-     */
-    public function setHeadshots($headshots)
+    public function setHeadshots(int $headshots): static
     {
         $this->headshots = $headshots;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getBombsPlanted()
+    public function getBombsPlanted(): int
     {
         return $this->bombsPlanted;
     }
 
-    /**
-     * @param int|string $bombsPlanted
-     *
-     * @return Servers
-     */
-    public function setBombsPlanted($bombsPlanted)
+    public function setBombsPlanted(int $bombsPlanted): static
     {
         $this->bombsPlanted = $bombsPlanted;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getBombsDefused()
+    public function getBombsDefused(): int
     {
         return $this->bombsDefused;
     }
 
-    /**
-     * @param int|string $bombsDefused
-     *
-     * @return Servers
-     */
-    public function setBombsDefused($bombsDefused)
+    public function setBombsDefused(int $bombsDefused): static
     {
         $this->bombsDefused = $bombsDefused;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getCtWins()
+    public function getCtWins(): int
     {
         return $this->ctWins;
     }
 
-    /**
-     * @param int|string $ctWins
-     *
-     * @return Servers
-     */
-    public function setCtWins($ctWins)
+    public function setCtWins(int $ctWins): static
     {
         $this->ctWins = $ctWins;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getTsWins()
+    public function getTsWins(): int
     {
         return $this->tsWins;
     }
 
-    /**
-     * @param int|string $tsWins
-     *
-     * @return Servers
-     */
-    public function setTsWins($tsWins)
+    public function setTsWins(int $tsWins): static
     {
         $this->tsWins = $tsWins;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getActPlayers()
+    public function getActPlayers(): int
     {
         return $this->actPlayers;
     }
 
-    /**
-     * @param int|string $actPlayers
-     *
-     * @return Servers
-     */
-    public function setActPlayers($actPlayers)
+    public function setActPlayers(int $actPlayers): static
     {
         $this->actPlayers = $actPlayers;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getMaxPlayers()
+    public function getMaxPlayers(): int
     {
         return $this->maxPlayers;
     }
 
-    /**
-     * @param int|string $maxPlayers
-     *
-     * @return Servers
-     */
-    public function setMaxPlayers($maxPlayers)
+    public function setMaxPlayers(int $maxPlayers): static
     {
         $this->maxPlayers = $maxPlayers;
 
@@ -600,291 +379,187 @@ class Servers
         return $this->actMap;
     }
 
-    public function setActMap(string $actMap): Servers
+    public function setActMap(string $actMap): static
     {
         $this->actMap = $actMap;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getMapRounds()
+    public function getMapRounds(): int
     {
         return $this->mapRounds;
     }
 
-    /**
-     * @param int|string $mapRounds
-     *
-     * @return Servers
-     */
-    public function setMapRounds($mapRounds)
+    public function setMapRounds(int $mapRounds): static
     {
         $this->mapRounds = $mapRounds;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getMapCtWins()
+    public function getMapCtWins(): int
     {
         return $this->mapCtWins;
     }
 
-    /**
-     * @param int|string $mapCtWins
-     *
-     * @return Servers
-     */
-    public function setMapCtWins($mapCtWins)
+    public function setMapCtWins(int $mapCtWins): static
     {
         $this->mapCtWins = $mapCtWins;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getMapTsWins()
+    public function getMapTsWins(): int
     {
         return $this->mapTsWins;
     }
 
-    /**
-     * @param int|string $mapTsWins
-     *
-     * @return Servers
-     */
-    public function setMapTsWins($mapTsWins)
+    public function setMapTsWins(int $mapTsWins): static
     {
         $this->mapTsWins = $mapTsWins;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getMapStarted()
+    public function getMapStarted(): int
     {
         return $this->mapStarted;
     }
 
-    /**
-     * @param int|string $mapStarted
-     *
-     * @return Servers
-     */
-    public function setMapStarted($mapStarted)
+    public function setMapStarted(int $mapStarted): static
     {
         $this->mapStarted = $mapStarted;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getMapChanges()
+    public function getMapChanges(): int
     {
         return $this->mapChanges;
     }
 
-    /**
-     * @param int|string $mapChanges
-     *
-     * @return Servers
-     */
-    public function setMapChanges($mapChanges)
+    public function setMapChanges(int $mapChanges): static
     {
         $this->mapChanges = $mapChanges;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getCtShots()
+    public function getCtShots(): int
     {
         return $this->ctShots;
     }
 
-    /**
-     * @param int|string $ctShots
-     *
-     * @return Servers
-     */
-    public function setCtShots($ctShots)
+    public function setCtShots(int $ctShots): static
     {
         $this->ctShots = $ctShots;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getCtHits()
+    public function getCtHits(): int
     {
         return $this->ctHits;
     }
 
-    /**
-     * @param int|string $ctHits
-     *
-     * @return Servers
-     */
-    public function setCtHits($ctHits)
+    public function setCtHits(int $ctHits): static
     {
         $this->ctHits = $ctHits;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getTsShots()
+    public function getTsShots(): int
     {
         return $this->tsShots;
     }
 
-    /**
-     * @param int|string $tsShots
-     *
-     * @return Servers
-     */
-    public function setTsShots($tsShots)
+    public function setTsShots(int $tsShots): static
     {
         $this->tsShots = $tsShots;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getTsHits()
+    public function getTsHits(): int
     {
         return $this->tsHits;
     }
 
-    /**
-     * @param int|string $tsHits
-     *
-     * @return Servers
-     */
-    public function setTsHits($tsHits)
+    public function setTsHits(int $tsHits): static
     {
         $this->tsHits = $tsHits;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getMapCtShots()
+    public function getMapCtShots(): int
     {
         return $this->mapCtShots;
     }
 
-    /**
-     * @param int|string $mapCtShots
-     *
-     * @return Servers
-     */
-    public function setMapCtShots($mapCtShots)
+    public function setMapCtShots(int $mapCtShots): static
     {
         $this->mapCtShots = $mapCtShots;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getMapCtHits()
+    public function getMapCtHits(): int
     {
         return $this->mapCtHits;
     }
 
-    /**
-     * @param int|string $mapCtHits
-     *
-     * @return Servers
-     */
-    public function setMapCtHits($mapCtHits)
+    public function setMapCtHits(int $mapCtHits): static
     {
         $this->mapCtHits = $mapCtHits;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getMapTsShots()
+    public function getMapTsShots(): int
     {
         return $this->mapTsShots;
     }
 
-    /**
-     * @param int|string $mapTsShots
-     *
-     * @return Servers
-     */
-    public function setMapTsShots($mapTsShots)
+    public function setMapTsShots(int $mapTsShots): static
     {
         $this->mapTsShots = $mapTsShots;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getMapTsHits()
+    public function getMapTsHits(): int
     {
         return $this->mapTsHits;
     }
 
-    /**
-     * @param int|string $mapTsHits
-     *
-     * @return Servers
-     */
-    public function setMapTsHits($mapTsHits)
+    public function setMapTsHits(int $mapTsHits): static
     {
         $this->mapTsHits = $mapTsHits;
 
         return $this;
     }
 
-    public function getLat(): float
+    public function getLat(): ?float
     {
         return $this->lat;
     }
 
-    public function setLat(float $lat): Servers
+    public function setLat(?float $lat): static
     {
         $this->lat = $lat;
 
         return $this;
     }
 
-    public function getLng(): float
+    public function getLng(): ?float
     {
         return $this->lng;
     }
 
-    public function setLng(float $lng): Servers
+    public function setLng(?float $lng): static
     {
         $this->lng = $lng;
 
@@ -896,7 +571,7 @@ class Servers
         return $this->city;
     }
 
-    public function setCity(string $city): Servers
+    public function setCity(string $city): static
     {
         $this->city = $city;
 
@@ -908,27 +583,19 @@ class Servers
         return $this->country;
     }
 
-    public function setCountry(string $country): Servers
+    public function setCountry(string $country): static
     {
         $this->country = $country;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getLastEvent()
+    public function getLastEvent(): int
     {
         return $this->lastEvent;
     }
 
-    /**
-     * @param int|string $lastEvent
-     *
-     * @return Servers
-     */
-    public function setLastEvent($lastEvent)
+    public function setLastEvent(int $lastEvent): static
     {
         $this->lastEvent = $lastEvent;
 

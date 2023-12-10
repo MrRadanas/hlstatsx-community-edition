@@ -6,71 +6,46 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\ServersVoicecommRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
-/**
- * HlstatsServersVoicecomm.
- */
 #[ORM\Table(name: 'hlstats_Servers_VoiceComm')]
 #[ORM\UniqueConstraint(name: 'address', columns: ['addr', 'UDPPort', 'queryPort'])]
 #[ORM\Entity(repositoryClass: ServersVoicecommRepository::class)]
 class ServersVoicecomm
 {
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ORM\OneToOne(targetEntity: Servers::class)]
+    #[JoinColumn(name: 'serverId', referencedColumnName: 'serverId', nullable: false)]
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private $serverid;
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    private Servers $serverid;
 
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'name', type: 'string', length: 128, nullable: false)]
-    private $name;
+    private string $name;
 
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'addr', type: 'string', length: 128, nullable: false)]
-    private $addr;
+    private string $addr;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'password', type: 'string', length: 128, nullable: true)]
-    private $password;
+    private ?string $password;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'descr', type: 'string', length: 255, nullable: true)]
-    private $descr;
+    private ?string $descr;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'queryPort', type: 'integer', nullable: false, options: ['default' => '51234', 'unsigned' => true])]
-    private $queryport = 51234;
+    #[ORM\Column(name: 'queryPort', type: 'integer', nullable: false, options: ['default' => 51234, 'unsigned' => true])]
+    private int $queryport = 51234;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'UDPPort', type: 'integer', nullable: false, options: ['default' => '8767', 'unsigned' => true])]
-    private $udpport = 8767;
+    #[ORM\Column(name: 'UDPPort', type: 'integer', nullable: false, options: ['default' => 8767, 'unsigned' => true])]
+    private int $udpport = 8767;
 
-    /**
-     * @var bool
-     */
-    #[ORM\Column(name: 'serverType', type: 'boolean', nullable: false)]
-    private $servertype = '0';
+    #[ORM\Column(name: 'serverType', type: 'smallint', nullable: false, options: ['default' => 8767])]
+    private int $servertype = 0;
 
-    public function getServerid(): int
+    public function getServerid(): Servers
     {
         return $this->serverid;
     }
 
-    public function setServerid(int $serverid): ServersVoicecomm
+    public function setServerid(Servers $serverid): ServersVoicecomm
     {
         $this->serverid = $serverid;
 
@@ -101,24 +76,24 @@ class ServersVoicecomm
         return $this;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): ServersVoicecomm
+    public function setPassword(?string $password): ServersVoicecomm
     {
         $this->password = $password;
 
         return $this;
     }
 
-    public function getDescr(): string
+    public function getDescr(): ?string
     {
         return $this->descr;
     }
 
-    public function setDescr(string $descr): ServersVoicecomm
+    public function setDescr(?string $descr): ServersVoicecomm
     {
         $this->descr = $descr;
 
@@ -149,20 +124,12 @@ class ServersVoicecomm
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getServertype()
+    public function getServertype(): int
     {
         return $this->servertype;
     }
 
-    /**
-     * @param bool|string $servertype
-     *
-     * @return ServersVoicecomm
-     */
-    public function setServertype($servertype)
+    public function setServertype(int $servertype): ServersVoicecomm
     {
         $this->servertype = $servertype;
 

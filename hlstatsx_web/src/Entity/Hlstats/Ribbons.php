@@ -6,65 +6,44 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\RibbonsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
-/**
- * HlstatsRibbons.
- */
 #[ORM\Table(name: 'hlstats_Ribbons')]
 #[ORM\UniqueConstraint(name: 'award', columns: ['awardCode', 'awardCount', 'game', 'special'])]
 #[ORM\Entity(repositoryClass: RibbonsRepository::class)]
 class Ribbons
 {
-    /**
-     * @var int
-     */
     #[ORM\Column(name: 'ribbonId', type: 'integer', nullable: false, options: ['unsigned' => true])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private $ribbonid;
+    private int $ribbonid;
 
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'awardCode', type: 'string', length: 50, nullable: false)]
-    private $awardcode;
+    private string $awardcode;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'awardCount', type: 'integer', nullable: false)]
-    private $awardcount = '0';
+    #[ORM\Column(name: 'awardCount', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $awardcount = 0;
 
-    /**
-     * @var bool
-     */
-    #[ORM\Column(name: 'special', type: 'boolean', nullable: false)]
-    private $special = '0';
+    #[ORM\Column(name: 'special', type: 'smallint', nullable: false, options: ['default' => 0])]
+    private int $special = 0;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false)]
-    private $game;
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
+    private Games $game;
 
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'image', type: 'string', length: 50, nullable: false)]
-    private $image;
+    private string $image;
 
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'ribbonName', type: 'string', length: 50, nullable: false)]
-    private $ribbonname;
+    private string $ribbonname;
 
     public function getRibbonid(): int
     {
         return $this->ribbonid;
     }
 
-    public function setRibbonid(int $ribbonid): Ribbons
+    public function setRibbonid(int $ribbonid): static
     {
         $this->ribbonid = $ribbonid;
 
@@ -76,59 +55,43 @@ class Ribbons
         return $this->awardcode;
     }
 
-    public function setAwardcode(string $awardcode): Ribbons
+    public function setAwardcode(string $awardcode): static
     {
         $this->awardcode = $awardcode;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getAwardcount()
+    public function getAwardcount(): int
     {
         return $this->awardcount;
     }
 
-    /**
-     * @param int|string $awardcount
-     *
-     * @return Ribbons
-     */
-    public function setAwardcount($awardcount)
+    public function setAwardcount(int $awardcount): static
     {
         $this->awardcount = $awardcount;
 
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getSpecial()
+    public function getSpecial(): int
     {
         return $this->special;
     }
 
-    /**
-     * @param bool|string $special
-     *
-     * @return Ribbons
-     */
-    public function setSpecial($special)
+    public function setSpecial(int $special): static
     {
         $this->special = $special;
 
         return $this;
     }
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): Ribbons
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 
@@ -140,7 +103,7 @@ class Ribbons
         return $this->image;
     }
 
-    public function setImage(string $image): Ribbons
+    public function setImage(string $image): static
     {
         $this->image = $image;
 
@@ -152,7 +115,7 @@ class Ribbons
         return $this->ribbonname;
     }
 
-    public function setRibbonname(string $ribbonname): Ribbons
+    public function setRibbonname(string $ribbonname): static
     {
         $this->ribbonname = $ribbonname;
 

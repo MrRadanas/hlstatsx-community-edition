@@ -6,214 +6,135 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\TrendRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
-/**
- * HlstatsTrend.
- */
 #[ORM\Table(name: 'hlstats_Trend')]
 #[ORM\Index(name: 'game', columns: ['game'])]
 #[ORM\Index(name: 'timestamp', columns: ['timestamp'])]
 #[ORM\Entity(repositoryClass: TrendRepository::class)]
 class Trend
 {
-    /**
-     * @var int
-     */
     #[ORM\Column(name: 'timestamp', type: 'integer', nullable: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
-    private $timestamp = '0';
+    private int $timestamp = 0;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false)]
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
-    private $game = '';
+    private Games $game;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'players', type: 'integer', nullable: false)]
-    private $players = '0';
+    #[ORM\Column(name: 'players', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $players = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'kills', type: 'integer', nullable: false)]
-    private $kills = '0';
+    #[ORM\Column(name: 'kills', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $kills = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'headshots', type: 'integer', nullable: false)]
-    private $headshots = '0';
+    #[ORM\Column(name: 'headshots', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $headshots = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'servers', type: 'integer', nullable: false)]
-    private $servers = '0';
+    #[ManyToOne(targetEntity: Servers::class)]
+    #[JoinColumn(name: 'servers', referencedColumnName: 'serverId', nullable: false)]
+    private Servers $servers;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'act_slots', type: 'integer', nullable: false)]
-    private $actSlots = '0';
+    #[ORM\Column(name: 'act_slots', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $actSlots = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'max_slots', type: 'integer', nullable: false)]
-    private $maxSlots = '0';
+    #[ORM\Column(name: 'max_slots', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $maxSlots = 0;
 
-    /**
-     * @return int|string
-     */
-    public function getTimestamp()
+    public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
-    /**
-     * @param int|string $timestamp
-     *
-     * @return Trend
-     */
-    public function setTimestamp($timestamp)
+    public function setTimestamp(int $timestamp): Trend
     {
         $this->timestamp = $timestamp;
 
         return $this;
     }
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): Trend
+    public function setGame(Games $game): Trend
     {
         $this->game = $game;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getPlayers()
+    public function getPlayers(): int
     {
         return $this->players;
     }
 
-    /**
-     * @param int|string $players
-     *
-     * @return Trend
-     */
-    public function setPlayers($players)
+    public function setPlayers(int $players): Trend
     {
         $this->players = $players;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getKills()
+    public function getKills(): int
     {
         return $this->kills;
     }
 
-    /**
-     * @param int|string $kills
-     *
-     * @return Trend
-     */
-    public function setKills($kills)
+    public function setKills(int $kills): Trend
     {
         $this->kills = $kills;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getHeadshots()
+    public function getHeadshots(): int
     {
         return $this->headshots;
     }
 
-    /**
-     * @param int|string $headshots
-     *
-     * @return Trend
-     */
-    public function setHeadshots($headshots)
+    public function setHeadshots(int $headshots): Trend
     {
         $this->headshots = $headshots;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getServers()
+    public function getServers(): Servers
     {
         return $this->servers;
     }
 
-    /**
-     * @param int|string $servers
-     *
-     * @return Trend
-     */
-    public function setServers($servers)
+    public function setServers(Servers $servers): Trend
     {
         $this->servers = $servers;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getActSlots()
+    public function getActSlots(): int
     {
         return $this->actSlots;
     }
 
-    /**
-     * @param int|string $actSlots
-     *
-     * @return Trend
-     */
-    public function setActSlots($actSlots)
+    public function setActSlots(int $actSlots): Trend
     {
         $this->actSlots = $actSlots;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getMaxSlots()
+    public function getMaxSlots(): int
     {
         return $this->maxSlots;
     }
 
-    /**
-     * @param int|string $maxSlots
-     *
-     * @return Trend
-     */
-    public function setMaxSlots($maxSlots)
+    public function setMaxSlots(int $maxSlots): Trend
     {
         $this->maxSlots = $maxSlots;
 

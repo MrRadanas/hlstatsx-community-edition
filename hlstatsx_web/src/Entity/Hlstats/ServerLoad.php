@@ -6,172 +6,107 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\ServerLoadRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
-/**
- * HlstatsServerLoad.
- */
 #[ORM\Table(name: 'hlstats_server_load')]
 #[ORM\Index(name: 'server_id', columns: ['server_id'])]
 #[ORM\Index(name: 'timestamp', columns: ['timestamp'])]
 #[ORM\Entity(repositoryClass: ServerLoadRepository::class)]
 class ServerLoad
 {
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'server_id', type: 'integer', nullable: false)]
+    #[ManyToOne(targetEntity: Servers::class)]
+    #[JoinColumn(name: 'server_id', referencedColumnName: 'serverId', nullable: false)]
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private $serverId = '0';
+    private int $serverId;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'timestamp', type: 'integer', nullable: false)]
-    private $timestamp = '0';
+    #[ORM\Column(name: 'timestamp', type: 'integer', nullable: false, options: ['default' => 0])]
+    private int $timestamp = 0;
 
-    /**
-     * @var bool
-     */
-    #[ORM\Column(name: 'act_players', type: 'boolean', nullable: false)]
-    private $actPlayers = '0';
+    #[ORM\Column(name: 'act_players', type: 'smallint', nullable: false, options: ['default' => 0])]
+    private int $actPlayers = 0;
 
-    /**
-     * @var bool
-     */
-    #[ORM\Column(name: 'min_players', type: 'boolean', nullable: false)]
-    private $minPlayers = '0';
+    #[ORM\Column(name: 'min_players', type: 'smallint', nullable: false, options: ['default' => 0])]
+    private int $minPlayers = 0;
 
-    /**
-     * @var bool
-     */
-    #[ORM\Column(name: 'max_players', type: 'boolean', nullable: false)]
-    private $maxPlayers = '0';
+    #[ORM\Column(name: 'max_players', type: 'smallint', nullable: false, options: ['default' => 0])]
+    private int $maxPlayers = 0;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'map', type: 'string', length: 64, nullable: true)]
-    private $map;
+    private ?string $map;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'uptime', type: 'string', length: 10, nullable: false)]
-    private $uptime = '0';
+    #[ORM\Column(name: 'uptime', type: 'string', length: 10, nullable: false, options: ['default' => '0'])]
+    private string $uptime = '0';
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'fps', type: 'string', length: 10, nullable: false)]
-    private $fps = '0';
+    #[ORM\Column(name: 'fps', type: 'string', length: 10, nullable: false, options: ['default' => '0'])]
+    private string $fps = '0';
 
-    /**
-     * @return int|string
-     */
-    public function getServerId()
+    public function getServerId(): int
     {
         return $this->serverId;
     }
 
-    /**
-     * @param int|string $serverId
-     *
-     * @return ServerLoad
-     */
-    public function setServerId($serverId)
+    public function setServerId(int $serverId): ServerLoad
     {
         $this->serverId = $serverId;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getTimestamp()
+    public function getTimestamp(): int
     {
         return $this->timestamp;
     }
 
-    /**
-     * @param int|string $timestamp
-     *
-     * @return ServerLoad
-     */
-    public function setTimestamp($timestamp)
+    public function setTimestamp(int $timestamp): ServerLoad
     {
         $this->timestamp = $timestamp;
 
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getActPlayers()
+    public function getActPlayers(): int
     {
         return $this->actPlayers;
     }
 
-    /**
-     * @param bool|string $actPlayers
-     *
-     * @return ServerLoad
-     */
-    public function setActPlayers($actPlayers)
+    public function setActPlayers(int $actPlayers): ServerLoad
     {
         $this->actPlayers = $actPlayers;
 
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getMinPlayers()
+    public function getMinPlayers(): int
     {
         return $this->minPlayers;
     }
 
-    /**
-     * @param bool|string $minPlayers
-     *
-     * @return ServerLoad
-     */
-    public function setMinPlayers($minPlayers)
+    public function setMinPlayers(int $minPlayers): ServerLoad
     {
         $this->minPlayers = $minPlayers;
 
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getMaxPlayers()
+    public function getMaxPlayers(): int
     {
         return $this->maxPlayers;
     }
 
-    /**
-     * @param bool|string $maxPlayers
-     *
-     * @return ServerLoad
-     */
-    public function setMaxPlayers($maxPlayers)
+    public function setMaxPlayers(int $maxPlayers): ServerLoad
     {
         $this->maxPlayers = $maxPlayers;
 
         return $this;
     }
 
-    public function getMap(): string
+    public function getMap(): ?string
     {
         return $this->map;
     }
 
-    public function setMap(string $map): ServerLoad
+    public function setMap(?string $map): ServerLoad
     {
         $this->map = $map;
 

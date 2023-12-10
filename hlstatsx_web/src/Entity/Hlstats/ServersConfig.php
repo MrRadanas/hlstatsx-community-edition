@@ -6,69 +6,49 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\ServersConfigRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
-/**
- * HlstatsServersConfig.
- */
 #[ORM\Table(name: 'hlstats_Servers_Config')]
 #[ORM\Index(name: 'serverConfigId', columns: ['serverConfigId'])]
 #[ORM\Entity(repositoryClass: ServersConfigRepository::class)]
 class ServersConfig
 {
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'parameter', type: 'string', length: 50, nullable: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
-    private $parameter;
+    private string $parameter;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'serverId', type: 'integer', nullable: false, options: ['unsigned' => true])]
+    #[ManyToOne(targetEntity: Servers::class)]
+    #[JoinColumn(name: 'serverId', referencedColumnName: 'serverId', nullable: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
-    private $serverid = '0';
+    private Servers $serverid;
 
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'value', type: 'string', length: 128, nullable: false)]
-    private $value;
+    private string $value;
 
-    /**
-     * @var int
-     */
     #[ORM\Column(name: 'serverConfigId', type: 'integer', nullable: false, options: ['unsigned' => true])]
-    private $serverconfigid;
+    private int $serverconfigid;
 
     public function getParameter(): string
     {
         return $this->parameter;
     }
 
-    public function setParameter(string $parameter): ServersConfig
+    public function setParameter(string $parameter): static
     {
         $this->parameter = $parameter;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getServerid()
+    public function getServerid(): Servers
     {
         return $this->serverid;
     }
 
-    /**
-     * @param int|string $serverid
-     *
-     * @return ServersConfig
-     */
-    public function setServerid($serverid)
+    public function setServerid(Servers $serverid): static
     {
         $this->serverid = $serverid;
 
@@ -80,7 +60,7 @@ class ServersConfig
         return $this->value;
     }
 
-    public function setValue(string $value): ServersConfig
+    public function setValue(string $value): static
     {
         $this->value = $value;
 
@@ -92,7 +72,7 @@ class ServersConfig
         return $this->serverconfigid;
     }
 
-    public function setServerconfigid(int $serverconfigid): ServersConfig
+    public function setServerconfigid(int $serverconfigid): static
     {
         $this->serverconfigid = $serverconfigid;
 

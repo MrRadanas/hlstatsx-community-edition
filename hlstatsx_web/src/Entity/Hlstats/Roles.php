@@ -4,85 +4,64 @@ declare(strict_types=1);
 
 namespace App\Entity\Hlstats;
 
+use App\DBAL\Types\BinaryType;
 use App\Repository\Hlstats\RolesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
-/**
- * HlstatsRoles.
- */
 #[ORM\Table(name: 'hlstats_Roles')]
 #[ORM\UniqueConstraint(name: 'gamecode', columns: ['game', 'code'])]
 #[ORM\Entity(repositoryClass: RolesRepository::class)]
 class Roles
 {
-    /**
-     * @var int
-     */
     #[ORM\Column(name: 'roleId', type: 'integer', nullable: false, options: ['unsigned' => true])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private $roleid;
+    private int $roleid;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false, options: ['default' => 'valve'])]
-    private $game = 'valve';
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
+    private Games $game;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'code', type: 'string', length: 64, nullable: false)]
-    private $code = '';
+    #[ORM\Column(name: 'code', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $code = '';
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'name', type: 'string', length: 64, nullable: false)]
-    private $name = '';
+    #[ORM\Column(name: 'name', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $name = '';
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'hidden', type: 'string', length: 0, nullable: false)]
-    private $hidden = '0';
+    #[ORM\Column(type: 'BinaryType', options: ['default' => '0'])]
+    #[DoctrineAssert\EnumType(entity: BinaryType::class)]
+    private string $hidden = '0';
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'picked', type: 'integer', nullable: false, options: ['unsigned' => true])]
-    private $picked = '0';
+    #[ORM\Column(name: 'picked', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $picked = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'kills', type: 'integer', nullable: false, options: ['unsigned' => true])]
-    private $kills = '0';
+    #[ORM\Column(name: 'kills', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $kills = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'deaths', type: 'integer', nullable: false, options: ['unsigned' => true])]
-    private $deaths = '0';
+    #[ORM\Column(name: 'deaths', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $deaths = 0;
 
     public function getRoleid(): int
     {
         return $this->roleid;
     }
 
-    public function setRoleid(int $roleid): Roles
+    public function setRoleid(int $roleid): static
     {
         $this->roleid = $roleid;
 
         return $this;
     }
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): Roles
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 
@@ -94,7 +73,7 @@ class Roles
         return $this->code;
     }
 
-    public function setCode(string $code): Roles
+    public function setCode(string $code): static
     {
         $this->code = $code;
 
@@ -106,7 +85,7 @@ class Roles
         return $this->name;
     }
 
-    public function setName(string $name): Roles
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -118,67 +97,44 @@ class Roles
         return $this->hidden;
     }
 
-    public function setHidden(string $hidden): Roles
+    public function setHidden(string $hidden): static
     {
+        BinaryType::assertValidChoice($hidden);
         $this->hidden = $hidden;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getPicked()
+    public function getPicked(): int
     {
         return $this->picked;
     }
 
-    /**
-     * @param int|string $picked
-     *
-     * @return Roles
-     */
-    public function setPicked($picked)
+    public function setPicked(int $picked): static
     {
         $this->picked = $picked;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getKills()
+    public function getKills(): int
     {
         return $this->kills;
     }
 
-    /**
-     * @param int|string $kills
-     *
-     * @return Roles
-     */
-    public function setKills($kills)
+    public function setKills(int $kills): static
     {
         $this->kills = $kills;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getDeaths()
+    public function getDeaths(): int
     {
         return $this->deaths;
     }
 
-    /**
-     * @param int|string $deaths
-     *
-     * @return Roles
-     */
-    public function setDeaths($deaths)
+    public function setDeaths(int $deaths): static
     {
         $this->deaths = $deaths;
 

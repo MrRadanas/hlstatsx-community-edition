@@ -6,10 +6,9 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\WeaponsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
-/**
- * HlstatsWeapons.
- */
 #[ORM\Table(name: 'hlstats_Weapons')]
 #[ORM\Index(name: 'code', columns: ['code'])]
 #[ORM\Index(name: 'modifier', columns: ['modifier'])]
@@ -25,60 +24,43 @@ class Weapons
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     private $weaponid;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false, options: ['default' => 'valve'])]
-    private $game = 'valve';
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
+    private Games $game;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'code', type: 'string', length: 64, nullable: false)]
-    private $code = '';
+    #[ORM\Column(name: 'code', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $code = '';
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'name', type: 'string', length: 128, nullable: false)]
-    private $name = '';
+    #[ORM\Column(name: 'name', type: 'string', length: 128, nullable: false, options: ['default' => ''])]
+    private string $name = '';
 
-    /**
-     * @var float
-     */
-    #[ORM\Column(name: 'modifier', type: 'float', precision: 10, scale: 2, nullable: false, options: ['default' => '1.00'])]
-    private $modifier = 1.00;
+    #[ORM\Column(name: 'modifier', type: 'float', precision: 10, scale: 2, nullable: false, options: ['default' => 1.00])]
+    private float $modifier = 1.00;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'kills', type: 'integer', nullable: false, options: ['unsigned' => true])]
-    private $kills = '0';
+    #[ORM\Column(name: 'kills', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $kills = 0;
 
-    /**
-     * @var int
-     */
-    #[ORM\Column(name: 'headshots', type: 'integer', nullable: false, options: ['unsigned' => true])]
-    private $headshots = '0';
+    #[ORM\Column(name: 'headshots', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
+    private int $headshots = 0;
 
     public function getWeaponid(): int
     {
         return $this->weaponid;
     }
 
-    public function setWeaponid(int $weaponid): Weapons
+    public function setWeaponid(int $weaponid): static
     {
         $this->weaponid = $weaponid;
 
         return $this;
     }
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): Weapons
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 
@@ -90,7 +72,7 @@ class Weapons
         return $this->code;
     }
 
-    public function setCode(string $code): Weapons
+    public function setCode(string $code): static
     {
         $this->code = $code;
 
@@ -102,7 +84,7 @@ class Weapons
         return $this->name;
     }
 
-    public function setName(string $name): Weapons
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -114,47 +96,31 @@ class Weapons
         return $this->modifier;
     }
 
-    public function setModifier(float $modifier): Weapons
+    public function setModifier(float $modifier): static
     {
         $this->modifier = $modifier;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getKills()
+    public function getKills(): int
     {
         return $this->kills;
     }
 
-    /**
-     * @param int|string $kills
-     *
-     * @return Weapons
-     */
-    public function setKills($kills)
+    public function setKills(int $kills): static
     {
         $this->kills = $kills;
 
         return $this;
     }
 
-    /**
-     * @return int|string
-     */
-    public function getHeadshots()
+    public function getHeadshots(): int
     {
         return $this->headshots;
     }
 
-    /**
-     * @param int|string $headshots
-     *
-     * @return Weapons
-     */
-    public function setHeadshots($headshots)
+    public function setHeadshots(int $headshots): static
     {
         $this->headshots = $headshots;
 

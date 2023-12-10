@@ -7,32 +7,20 @@ namespace App\Entity\Hlstats;
 use App\Repository\Hlstats\ServersConfigDefaultRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * HlstatsServersConfigDefault.
- */
 #[ORM\Table(name: 'hlstats_Servers_Config_Default')]
 #[ORM\Entity(repositoryClass: ServersConfigDefaultRepository::class)]
 class ServersConfigDefault
 {
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'parameter', type: 'string', length: 50, nullable: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private $parameter;
+    private string $parameter;
 
-    /**
-     * @var string
-     */
     #[ORM\Column(name: 'value', type: 'string', length: 128, nullable: false)]
-    private $value;
+    private string $value;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'description', type: 'text', length: 16777215, nullable: true)]
-    private $description;
+    private ?string $description;
 
     public function getParameter(): string
     {
@@ -58,12 +46,12 @@ class ServersConfigDefault
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): ServersConfigDefault
+    public function setDescription(?string $description): ServersConfigDefault
     {
         $this->description = $description;
 

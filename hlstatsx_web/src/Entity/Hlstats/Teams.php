@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Entity\Hlstats;
 
+use App\DBAL\Types\BinaryType;
 use App\Repository\Hlstats\TeamsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 /**
  * HlstatsTeams.
@@ -15,74 +19,52 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: TeamsRepository::class)]
 class Teams
 {
-    /**
-     * @var int
-     */
     #[ORM\Column(name: 'teamId', type: 'integer', nullable: false, options: ['unsigned' => true])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private $teamid;
+    private int $id;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false, options: ['default' => 'valve'])]
-    private $game = 'valve';
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
+    private Games $game;
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'code', type: 'string', length: 64, nullable: false)]
-    private $code = '';
+    #[ORM\Column(name: 'code', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $code = '';
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'name', type: 'string', length: 64, nullable: false)]
-    private $name = '';
+    #[ORM\Column(name: 'name', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
+    private string $name = '';
 
-    /**
-     * @var string
-     */
-    #[ORM\Column(name: 'hidden', type: 'string', length: 0, nullable: false)]
-    private $hidden = '0';
+    #[ORM\Column(name: 'hidden', type: 'BinaryType', nullable: false, options: ['default' => '0'])]
+    #[DoctrineAssert\EnumType(entity: BinaryType::class)]
+    private string $hidden = '0';
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'playerlist_bgcolor', type: 'string', length: 7, nullable: true)]
-    private $playerlistBgcolor;
+    private ?string $playerlistBgcolor;
 
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'playerlist_color', type: 'string', length: 7, nullable: true)]
-    private $playerlistColor;
+    private ?string $playerlistColor;
 
-    /**
-     * @var bool
-     */
-    #[ORM\Column(name: 'playerlist_index', type: 'boolean', nullable: false)]
-    private $playerlistIndex = '0';
+    #[ORM\Column(name: 'playerlist_index', type: 'smallint', nullable: false, options: ['default' => 0])]
+    private int $playerlistIndex = 0;
 
-    public function getTeamid(): int
+    public function getId(): int
     {
-        return $this->teamid;
+        return $this->id;
     }
 
-    public function setTeamid(int $teamid): Teams
+    public function setId(int $id): Teams
     {
-        $this->teamid = $teamid;
+        $this->id = $id;
 
         return $this;
     }
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): Teams
+    public function setGame(Games $game): Teams
     {
         $this->game = $game;
 
@@ -120,49 +102,42 @@ class Teams
 
     public function setHidden(string $hidden): Teams
     {
+        BinaryType::assertValidChoice($hidden);
         $this->hidden = $hidden;
 
         return $this;
     }
 
-    public function getPlayerlistBgcolor(): string
+    public function getPlayerlistBgcolor(): ?string
     {
         return $this->playerlistBgcolor;
     }
 
-    public function setPlayerlistBgcolor(string $playerlistBgcolor): Teams
+    public function setPlayerlistBgcolor(?string $playerlistBgcolor): Teams
     {
         $this->playerlistBgcolor = $playerlistBgcolor;
 
         return $this;
     }
 
-    public function getPlayerlistColor(): string
+    public function getPlayerlistColor(): ?string
     {
         return $this->playerlistColor;
     }
 
-    public function setPlayerlistColor(string $playerlistColor): Teams
+    public function setPlayerlistColor(?string $playerlistColor): Teams
     {
         $this->playerlistColor = $playerlistColor;
 
         return $this;
     }
 
-    /**
-     * @return bool|string
-     */
-    public function getPlayerlistIndex()
+    public function getPlayerlistIndex(): int
     {
         return $this->playerlistIndex;
     }
 
-    /**
-     * @param bool|string $playerlistIndex
-     *
-     * @return Teams
-     */
-    public function setPlayerlistIndex($playerlistIndex)
+    public function setPlayerlistIndex(int $playerlistIndex): Teams
     {
         $this->playerlistIndex = $playerlistIndex;
 

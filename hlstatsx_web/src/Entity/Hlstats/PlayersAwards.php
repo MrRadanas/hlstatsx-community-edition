@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 class PlayersAwards
 {
     #[ManyToOne(targetEntity: Games::class)]
-    #[JoinColumn(name: 'code', referencedColumnName: 'code')]
+    #[JoinColumn(name: 'code', referencedColumnName: 'code', nullable: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
     private Games $game;
