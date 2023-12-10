@@ -19,7 +19,7 @@ class Roles
     #[ORM\Column(name: 'roleId', type: 'integer', nullable: false, options: ['unsigned' => true])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private int $roleid;
+    private int $id;
 
     #[ManyToOne(targetEntity: Games::class)]
     #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
@@ -31,7 +31,7 @@ class Roles
     #[ORM\Column(name: 'name', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
     private string $name = '';
 
-    #[ORM\Column(type: 'BinaryType', options: ['default' => '0'])]
+    #[ORM\Column(name: 'hidden', type: 'BinaryType', nullable: false, options: ['default' => '0'])]
     #[DoctrineAssert\EnumType(entity: BinaryType::class)]
     private string $hidden = '0';
 
@@ -44,14 +44,14 @@ class Roles
     #[ORM\Column(name: 'deaths', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
     private int $deaths = 0;
 
-    public function getRoleid(): int
+    public function getId(): int
     {
-        return $this->roleid;
+        return $this->id;
     }
 
-    public function setRoleid(int $roleid): static
+    public function setId(int $id): static
     {
-        $this->roleid = $roleid;
+        $this->id = $id;
 
         return $this;
     }

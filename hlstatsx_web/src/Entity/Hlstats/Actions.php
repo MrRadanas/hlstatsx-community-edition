@@ -7,6 +7,8 @@ namespace App\Entity\Hlstats;
 use App\DBAL\Types\BinaryType;
 use App\Repository\Hlstats\ActionsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 #[ORM\Table(name: 'hlstats_Actions')]
@@ -20,8 +22,9 @@ class Actions
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     private int $id;
 
-    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false, options: ['default' => 'valve'])]
-    private string $game = 'valve';
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
+    private Games $game;
 
     #[ORM\Column(name: 'code', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
     private string $code = '';
@@ -38,19 +41,19 @@ class Actions
     #[ORM\Column(name: 'description', type: 'string', length: 128, nullable: true)]
     private string $description;
 
-    #[ORM\Column(type: 'BinaryType')]
+    #[ORM\Column(name: 'for_playeractions', type: 'BinaryType', nullable: false, options: ['default' => '0'])]
     #[DoctrineAssert\EnumType(entity: BinaryType::class)]
     private string $forPlayeractions = '0';
 
-    #[ORM\Column(type: 'BinaryType')]
+    #[ORM\Column(name: 'for_playerplayeractions', type: 'BinaryType', nullable: false, options: ['default' => '0'])]
     #[DoctrineAssert\EnumType(entity: BinaryType::class)]
     private string $forPlayerplayeractions = '0';
 
-    #[ORM\Column(type: 'BinaryType')]
+    #[ORM\Column(name: 'for_teamactions', type: 'BinaryType', nullable: false, options: ['default' => '0'])]
     #[DoctrineAssert\EnumType(entity: BinaryType::class)]
     private string $forTeamactions = '0';
 
-    #[ORM\Column(type: 'BinaryType')]
+    #[ORM\Column(name: 'for_worldactions', type: 'BinaryType', nullable: false, options: ['default' => '0'])]
     #[DoctrineAssert\EnumType(entity: BinaryType::class)]
     private string $forWorldactions = '0';
     #[ORM\Column(name: 'count', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
@@ -68,12 +71,12 @@ class Actions
         return $this;
     }
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): static
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 

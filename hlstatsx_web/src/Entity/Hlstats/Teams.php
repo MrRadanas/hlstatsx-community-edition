@@ -52,7 +52,7 @@ class Teams
         return $this->id;
     }
 
-    public function setId(int $id): Teams
+    public function setId(int $id): static
     {
         $this->id = $id;
 
@@ -64,7 +64,7 @@ class Teams
         return $this->game;
     }
 
-    public function setGame(Games $game): Teams
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 
@@ -76,7 +76,7 @@ class Teams
         return $this->code;
     }
 
-    public function setCode(string $code): Teams
+    public function setCode(string $code): static
     {
         $this->code = $code;
 
@@ -88,7 +88,7 @@ class Teams
         return $this->name;
     }
 
-    public function setName(string $name): Teams
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -100,7 +100,7 @@ class Teams
         return $this->hidden;
     }
 
-    public function setHidden(string $hidden): Teams
+    public function setHidden(string $hidden): static
     {
         BinaryType::assertValidChoice($hidden);
         $this->hidden = $hidden;
@@ -113,7 +113,7 @@ class Teams
         return $this->playerlistBgcolor;
     }
 
-    public function setPlayerlistBgcolor(?string $playerlistBgcolor): Teams
+    public function setPlayerlistBgcolor(?string $playerlistBgcolor): static
     {
         $this->playerlistBgcolor = $playerlistBgcolor;
 
@@ -125,7 +125,7 @@ class Teams
         return $this->playerlistColor;
     }
 
-    public function setPlayerlistColor(?string $playerlistColor): Teams
+    public function setPlayerlistColor(?string $playerlistColor): static
     {
         $this->playerlistColor = $playerlistColor;
 
@@ -137,7 +137,7 @@ class Teams
         return $this->playerlistIndex;
     }
 
-    public function setPlayerlistIndex(int $playerlistIndex): Teams
+    public function setPlayerlistIndex(int $playerlistIndex): static
     {
         $this->playerlistIndex = $playerlistIndex;
 

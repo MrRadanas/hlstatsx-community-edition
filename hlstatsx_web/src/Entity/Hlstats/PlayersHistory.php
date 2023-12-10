@@ -67,7 +67,7 @@ class PlayersHistory
         return $this->playerid;
     }
 
-    public function setPlayerid(int $playerid): PlayersHistory
+    public function setPlayerid(int $playerid): static
     {
         $this->playerid = $playerid;
 
@@ -79,7 +79,7 @@ class PlayersHistory
         return $this->eventtime;
     }
 
-    public function setEventtime(?\DateTime $eventtime): PlayersHistory
+    public function setEventtime(?\DateTime $eventtime): static
     {
         $this->eventtime = $eventtime;
 
@@ -91,7 +91,7 @@ class PlayersHistory
         return $this->connectionTime;
     }
 
-    public function setConnectionTime(int $connectionTime): PlayersHistory
+    public function setConnectionTime(int $connectionTime): static
     {
         $this->connectionTime = $connectionTime;
 
@@ -103,7 +103,7 @@ class PlayersHistory
         return $this->kills;
     }
 
-    public function setKills(int $kills): PlayersHistory
+    public function setKills(int $kills): static
     {
         $this->kills = $kills;
 
@@ -115,7 +115,7 @@ class PlayersHistory
         return $this->deaths;
     }
 
-    public function setDeaths(int $deaths): PlayersHistory
+    public function setDeaths(int $deaths): static
     {
         $this->deaths = $deaths;
 
@@ -127,7 +127,7 @@ class PlayersHistory
         return $this->suicides;
     }
 
-    public function setSuicides(int $suicides): PlayersHistory
+    public function setSuicides(int $suicides): static
     {
         $this->suicides = $suicides;
 
@@ -139,7 +139,7 @@ class PlayersHistory
         return $this->skill;
     }
 
-    public function setSkill(int $skill): PlayersHistory
+    public function setSkill(int $skill): static
     {
         $this->skill = $skill;
 
@@ -151,7 +151,7 @@ class PlayersHistory
         return $this->shots;
     }
 
-    public function setShots(int $shots): PlayersHistory
+    public function setShots(int $shots): static
     {
         $this->shots = $shots;
 
@@ -163,7 +163,7 @@ class PlayersHistory
         return $this->hits;
     }
 
-    public function setHits(int $hits): PlayersHistory
+    public function setHits(int $hits): static
     {
         $this->hits = $hits;
 
@@ -175,7 +175,7 @@ class PlayersHistory
         return $this->game;
     }
 
-    public function setGame(string $game): PlayersHistory
+    public function setGame(string $game): static
     {
         $this->game = $game;
 
@@ -187,7 +187,7 @@ class PlayersHistory
         return $this->headshots;
     }
 
-    public function setHeadshots(int $headshots): PlayersHistory
+    public function setHeadshots(int $headshots): static
     {
         $this->headshots = $headshots;
 
@@ -199,7 +199,7 @@ class PlayersHistory
         return $this->teamkills;
     }
 
-    public function setTeamkills(int $teamkills): PlayersHistory
+    public function setTeamkills(int $teamkills): static
     {
         $this->teamkills = $teamkills;
 
@@ -211,7 +211,7 @@ class PlayersHistory
         return $this->killStreak;
     }
 
-    public function setKillStreak(int $killStreak): PlayersHistory
+    public function setKillStreak(int $killStreak): static
     {
         $this->killStreak = $killStreak;
 
@@ -223,7 +223,7 @@ class PlayersHistory
         return $this->deathStreak;
     }
 
-    public function setDeathStreak(int $deathStreak): PlayersHistory
+    public function setDeathStreak(int $deathStreak): static
     {
         $this->deathStreak = $deathStreak;
 
@@ -235,7 +235,7 @@ class PlayersHistory
         return $this->skillChange;
     }
 
-    public function setSkillChange(int $skillChange): PlayersHistory
+    public function setSkillChange(int $skillChange): static
     {
         $this->skillChange = $skillChange;
 

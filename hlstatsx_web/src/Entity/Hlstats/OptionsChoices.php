@@ -36,7 +36,7 @@ class OptionsChoices
         return $this->keyname;
     }
 
-    public function setKeyname(string $keyname): OptionsChoices
+    public function setKeyname(string $keyname): static
     {
         $this->keyname = $keyname;
 
@@ -48,7 +48,7 @@ class OptionsChoices
         return $this->value;
     }
 
-    public function setValue(string $value): OptionsChoices
+    public function setValue(string $value): static
     {
         $this->value = $value;
 
@@ -60,7 +60,7 @@ class OptionsChoices
         return $this->text;
     }
 
-    public function setText(string $text): OptionsChoices
+    public function setText(string $text): static
     {
         $this->text = $text;
 
@@ -72,7 +72,7 @@ class OptionsChoices
         return $this->isdefault;
     }
 
-    public function setIsdefault(bool $isdefault): OptionsChoices
+    public function setIsdefault(bool $isdefault): static
     {
         $this->isdefault = $isdefault;
 

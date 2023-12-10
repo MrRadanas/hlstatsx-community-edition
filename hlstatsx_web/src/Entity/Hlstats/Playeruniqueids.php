@@ -36,7 +36,7 @@ class Playeruniqueids
         return $this->uniqueid;
     }
 
-    public function setUniqueid(string $uniqueid): Playeruniqueids
+    public function setUniqueid(string $uniqueid): static
     {
         $this->uniqueid = $uniqueid;
 
@@ -48,7 +48,7 @@ class Playeruniqueids
         return $this->playerid;
     }
 
-    public function setPlayerid(int $playerid): Playeruniqueids
+    public function setPlayerid(int $playerid): static
     {
         $this->playerid = $playerid;
 
@@ -60,7 +60,7 @@ class Playeruniqueids
         return $this->game;
     }
 
-    public function setGame(Games $game): Playeruniqueids
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 
@@ -72,7 +72,7 @@ class Playeruniqueids
         return $this->merge;
     }
 
-    public function setMerge(int $merge): Playeruniqueids
+    public function setMerge(int $merge): static
     {
         $this->merge = $merge;
 

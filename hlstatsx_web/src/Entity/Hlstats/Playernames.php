@@ -54,7 +54,7 @@ class Playernames
         return $this->name;
     }
 
-    public function setName(string $name): Playernames
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -66,7 +66,7 @@ class Playernames
         return $this->playerid;
     }
 
-    public function setPlayerid(int $playerid): Playernames
+    public function setPlayerid(int $playerid): static
     {
         $this->playerid = $playerid;
 
@@ -78,7 +78,7 @@ class Playernames
         return $this->lastuse;
     }
 
-    public function setLastuse(?\DateTime $lastuse): Playernames
+    public function setLastuse(?\DateTime $lastuse): static
     {
         $this->lastuse = $lastuse;
 
@@ -90,7 +90,7 @@ class Playernames
         return $this->connectionTime;
     }
 
-    public function setConnectionTime(int $connectionTime): Playernames
+    public function setConnectionTime(int $connectionTime): static
     {
         $this->connectionTime = $connectionTime;
 
@@ -102,7 +102,7 @@ class Playernames
         return $this->numuses;
     }
 
-    public function setNumuses(int $numuses): Playernames
+    public function setNumuses(int $numuses): static
     {
         $this->numuses = $numuses;
 
@@ -114,7 +114,7 @@ class Playernames
         return $this->kills;
     }
 
-    public function setKills(int $kills): Playernames
+    public function setKills(int $kills): static
     {
         $this->kills = $kills;
 
@@ -126,7 +126,7 @@ class Playernames
         return $this->deaths;
     }
 
-    public function setDeaths(int $deaths): Playernames
+    public function setDeaths(int $deaths): static
     {
         $this->deaths = $deaths;
 
@@ -138,7 +138,7 @@ class Playernames
         return $this->suicides;
     }
 
-    public function setSuicides(int $suicides): Playernames
+    public function setSuicides(int $suicides): static
     {
         $this->suicides = $suicides;
 
@@ -150,7 +150,7 @@ class Playernames
         return $this->headshots;
     }
 
-    public function setHeadshots(int $headshots): Playernames
+    public function setHeadshots(int $headshots): static
     {
         $this->headshots = $headshots;
 
@@ -162,7 +162,7 @@ class Playernames
         return $this->shots;
     }
 
-    public function setShots(int $shots): Playernames
+    public function setShots(int $shots): static
     {
         $this->shots = $shots;
 
@@ -174,7 +174,7 @@ class Playernames
         return $this->hits;
     }
 
-    public function setHits(int $hits): Playernames
+    public function setHits(int $hits): static
     {
         $this->hits = $hits;
 

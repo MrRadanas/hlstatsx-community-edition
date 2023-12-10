@@ -19,7 +19,7 @@ class MapsCounts
     private int $rowid;
 
     #[ManyToOne(targetEntity: Games::class)]
-    #[JoinColumn(name: 'code', referencedColumnName: 'code', nullable: false)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
     private Games $game;

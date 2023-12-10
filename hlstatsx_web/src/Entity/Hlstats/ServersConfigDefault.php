@@ -27,7 +27,7 @@ class ServersConfigDefault
         return $this->parameter;
     }
 
-    public function setParameter(string $parameter): ServersConfigDefault
+    public function setParameter(string $parameter): static
     {
         $this->parameter = $parameter;
 
@@ -39,7 +39,7 @@ class ServersConfigDefault
         return $this->value;
     }
 
-    public function setValue(string $value): ServersConfigDefault
+    public function setValue(string $value): static
     {
         $this->value = $value;
 
@@ -51,7 +51,7 @@ class ServersConfigDefault
         return $this->description;
     }
 
-    public function setDescription(?string $description): ServersConfigDefault
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 

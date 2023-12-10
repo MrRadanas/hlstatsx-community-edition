@@ -50,7 +50,7 @@ class Trend
         return $this->timestamp;
     }
 
-    public function setTimestamp(int $timestamp): Trend
+    public function setTimestamp(int $timestamp): static
     {
         $this->timestamp = $timestamp;
 
@@ -62,7 +62,7 @@ class Trend
         return $this->game;
     }
 
-    public function setGame(Games $game): Trend
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 
@@ -74,7 +74,7 @@ class Trend
         return $this->players;
     }
 
-    public function setPlayers(int $players): Trend
+    public function setPlayers(int $players): static
     {
         $this->players = $players;
 
@@ -86,7 +86,7 @@ class Trend
         return $this->kills;
     }
 
-    public function setKills(int $kills): Trend
+    public function setKills(int $kills): static
     {
         $this->kills = $kills;
 
@@ -98,7 +98,7 @@ class Trend
         return $this->headshots;
     }
 
-    public function setHeadshots(int $headshots): Trend
+    public function setHeadshots(int $headshots): static
     {
         $this->headshots = $headshots;
 
@@ -110,7 +110,7 @@ class Trend
         return $this->servers;
     }
 
-    public function setServers(Servers $servers): Trend
+    public function setServers(Servers $servers): static
     {
         $this->servers = $servers;
 
@@ -122,7 +122,7 @@ class Trend
         return $this->actSlots;
     }
 
-    public function setActSlots(int $actSlots): Trend
+    public function setActSlots(int $actSlots): static
     {
         $this->actSlots = $actSlots;
 
@@ -134,7 +134,7 @@ class Trend
         return $this->maxSlots;
     }
 
-    public function setMaxSlots(int $maxSlots): Trend
+    public function setMaxSlots(int $maxSlots): static
     {
         $this->maxSlots = $maxSlots;
 

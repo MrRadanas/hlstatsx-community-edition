@@ -46,7 +46,7 @@ class ServerLoad
         return $this->serverId;
     }
 
-    public function setServerId(int $serverId): ServerLoad
+    public function setServerId(int $serverId): static
     {
         $this->serverId = $serverId;
 
@@ -58,7 +58,7 @@ class ServerLoad
         return $this->timestamp;
     }
 
-    public function setTimestamp(int $timestamp): ServerLoad
+    public function setTimestamp(int $timestamp): static
     {
         $this->timestamp = $timestamp;
 
@@ -70,7 +70,7 @@ class ServerLoad
         return $this->actPlayers;
     }
 
-    public function setActPlayers(int $actPlayers): ServerLoad
+    public function setActPlayers(int $actPlayers): static
     {
         $this->actPlayers = $actPlayers;
 
@@ -82,7 +82,7 @@ class ServerLoad
         return $this->minPlayers;
     }
 
-    public function setMinPlayers(int $minPlayers): ServerLoad
+    public function setMinPlayers(int $minPlayers): static
     {
         $this->minPlayers = $minPlayers;
 
@@ -94,7 +94,7 @@ class ServerLoad
         return $this->maxPlayers;
     }
 
-    public function setMaxPlayers(int $maxPlayers): ServerLoad
+    public function setMaxPlayers(int $maxPlayers): static
     {
         $this->maxPlayers = $maxPlayers;
 
@@ -106,7 +106,7 @@ class ServerLoad
         return $this->map;
     }
 
-    public function setMap(?string $map): ServerLoad
+    public function setMap(?string $map): static
     {
         $this->map = $map;
 
@@ -118,7 +118,7 @@ class ServerLoad
         return $this->uptime;
     }
 
-    public function setUptime(string $uptime): ServerLoad
+    public function setUptime(string $uptime): static
     {
         $this->uptime = $uptime;
 
@@ -130,7 +130,7 @@ class ServerLoad
         return $this->fps;
     }
 
-    public function setFps(string $fps): ServerLoad
+    public function setFps(string $fps): static
     {
         $this->fps = $fps;
 

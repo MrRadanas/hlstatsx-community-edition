@@ -45,7 +45,7 @@ class ServersVoicecomm
         return $this->serverid;
     }
 
-    public function setServerid(Servers $serverid): ServersVoicecomm
+    public function setServerid(Servers $serverid): static
     {
         $this->serverid = $serverid;
 
@@ -57,7 +57,7 @@ class ServersVoicecomm
         return $this->name;
     }
 
-    public function setName(string $name): ServersVoicecomm
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -69,7 +69,7 @@ class ServersVoicecomm
         return $this->addr;
     }
 
-    public function setAddr(string $addr): ServersVoicecomm
+    public function setAddr(string $addr): static
     {
         $this->addr = $addr;
 
@@ -81,7 +81,7 @@ class ServersVoicecomm
         return $this->password;
     }
 
-    public function setPassword(?string $password): ServersVoicecomm
+    public function setPassword(?string $password): static
     {
         $this->password = $password;
 
@@ -93,7 +93,7 @@ class ServersVoicecomm
         return $this->descr;
     }
 
-    public function setDescr(?string $descr): ServersVoicecomm
+    public function setDescr(?string $descr): static
     {
         $this->descr = $descr;
 
@@ -105,7 +105,7 @@ class ServersVoicecomm
         return $this->queryport;
     }
 
-    public function setQueryport(int $queryport): ServersVoicecomm
+    public function setQueryport(int $queryport): static
     {
         $this->queryport = $queryport;
 
@@ -117,7 +117,7 @@ class ServersVoicecomm
         return $this->udpport;
     }
 
-    public function setUdpport(int $udpport): ServersVoicecomm
+    public function setUdpport(int $udpport): static
     {
         $this->udpport = $udpport;
 
@@ -129,7 +129,7 @@ class ServersVoicecomm
         return $this->servertype;
     }
 
-    public function setServertype(int $servertype): ServersVoicecomm
+    public function setServertype(int $servertype): static
     {
         $this->servertype = $servertype;
 

@@ -13,15 +13,15 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 #[ORM\Entity(repositoryClass: GamesRepository::class)]
 class Games
 {
-    #[ORM\Column(name: 'code', type: 'string', length: 32, nullable: false, options: ['default' => ''])]
+    #[ORM\Column(name: 'code', type: 'string', length: 32, nullable: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
-    private string $code = '';
+    private string $code;
 
     #[ORM\Column(name: 'name', type: 'string', length: 128, nullable: false, options: ['default' => ''])]
     private string $name = '';
 
-    #[ORM\Column(type: 'BinaryType')]
+    #[ORM\Column(name: 'hidden', type: 'BinaryType', nullable: false, options: ['default' => '0'])]
     #[DoctrineAssert\EnumType(entity: BinaryType::class)]
     private string $hidden = '0';
 

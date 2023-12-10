@@ -17,7 +17,7 @@ class Ribbons
     #[ORM\Column(name: 'ribbonId', type: 'integer', nullable: false, options: ['unsigned' => true])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private int $ribbonid;
+    private int $id;
 
     #[ORM\Column(name: 'awardCode', type: 'string', length: 50, nullable: false)]
     private string $awardcode;
@@ -38,14 +38,14 @@ class Ribbons
     #[ORM\Column(name: 'ribbonName', type: 'string', length: 50, nullable: false)]
     private string $ribbonname;
 
-    public function getRibbonid(): int
+    public function getId(): int
     {
-        return $this->ribbonid;
+        return $this->id;
     }
 
-    public function setRibbonid(int $ribbonid): static
+    public function setId(int $id): static
     {
-        $this->ribbonid = $ribbonid;
+        $this->id = $id;
 
         return $this;
     }

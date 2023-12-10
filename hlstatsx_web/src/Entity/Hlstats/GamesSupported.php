@@ -13,11 +13,10 @@ use Doctrine\ORM\Mapping\ManyToOne;
 #[ORM\Entity(repositoryClass: GamesSupportedRepository::class)]
 class GamesSupported
 {
-    //    #[ORM\Column(name: 'code', type: 'string', length: 32, nullable: false)]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
     #[ManyToOne(targetEntity: Games::class)]
-    #[JoinColumn(name: 'code', referencedColumnName: 'code')]
+    #[JoinColumn(name: 'code', referencedColumnName: 'code', nullable: false)]
     private Games $code;
 
     #[ORM\Column(name: 'name', type: 'string', length: 128, nullable: false)]

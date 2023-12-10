@@ -6,6 +6,8 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\AwardsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 #[ORM\Table(name: 'hlstats_Awards')]
 #[ORM\UniqueConstraint(name: 'code', columns: ['game', 'awardType', 'code'])]
@@ -15,13 +17,14 @@ class Awards
     #[ORM\Column(name: 'awardId', type: 'integer', nullable: false, options: ['unsigned' => true])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private int $awardid;
+    private int $id;
 
     #[ORM\Column(name: 'awardType', type: 'string', length: 1, nullable: false, options: ['default' => 'W', 'fixed' => true])]
     private string $awardtype = 'W';
 
-    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false, options: ['default' => 'valve'])]
-    private string $game = 'valve';
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
+    private Games $game;
 
     #[ORM\Column(name: 'code', type: 'string', length: 128, nullable: false, options: ['default' => ''])]
     private string $code = '';
@@ -44,14 +47,14 @@ class Awards
     #[ORM\Column(name: 'g_winner_count', type: 'integer', nullable: true, options: ['unsigned' => true])]
     private ?int $gWinnerCount;
 
-    public function getAwardid(): int
+    public function getId(): int
     {
-        return $this->awardid;
+        return $this->id;
     }
 
-    public function setAwardid(int $awardid): static
+    public function setId(int $id): static
     {
-        $this->awardid = $awardid;
+        $this->id = $id;
 
         return $this;
     }
@@ -68,12 +71,12 @@ class Awards
         return $this;
     }
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): static
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 

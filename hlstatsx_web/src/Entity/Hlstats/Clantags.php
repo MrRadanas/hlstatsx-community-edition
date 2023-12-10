@@ -22,7 +22,7 @@ class Clantags
     #[ORM\Column(name: 'pattern', type: 'string', length: 64, nullable: false)]
     private string $pattern;
 
-    #[ORM\Column(type: 'BinaryType')]
+    #[ORM\Column(name: 'position', type: 'ClanTagsPosition', nullable: false, options: ['default' => 'EITHER'])]
     #[DoctrineAssert\EnumType(entity: ClanTagsPosition::class)]
     private string $position = 'EITHER';
 

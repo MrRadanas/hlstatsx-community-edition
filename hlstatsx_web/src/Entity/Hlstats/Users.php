@@ -30,7 +30,7 @@ class Users
         return $this->username;
     }
 
-    public function setUsername(string $username): Users
+    public function setUsername(string $username): static
     {
         $this->username = $username;
 
@@ -42,7 +42,7 @@ class Users
         return $this->password;
     }
 
-    public function setPassword(string $password): Users
+    public function setPassword(string $password): static
     {
         $this->password = $password;
 
@@ -54,7 +54,7 @@ class Users
         return $this->acclevel;
     }
 
-    public function setAcclevel(int $acclevel): Users
+    public function setAcclevel(int $acclevel): static
     {
         $this->acclevel = $acclevel;
 
@@ -66,7 +66,7 @@ class Users
         return $this->playerid;
     }
 
-    public function setPlayerid(int $playerid): Users
+    public function setPlayerid(int $playerid): static
     {
         $this->playerid = $playerid;
 

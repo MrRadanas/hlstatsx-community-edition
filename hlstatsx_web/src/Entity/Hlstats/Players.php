@@ -6,6 +6,8 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\PlayersRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 #[ORM\Table(name: 'hlstats_Players')]
 #[ORM\Index(name: 'playerclan', columns: ['clan', 'playerId'])]
@@ -19,7 +21,7 @@ class Players
     #[ORM\Column(name: 'playerId', type: 'integer', nullable: false, options: ['unsigned' => true])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private int $playerid;
+    private int $id;
 
     #[ORM\Column(name: 'last_event', type: 'integer', nullable: false, options: ['default' => 0])]
     private int $lastEvent = 0;
@@ -90,8 +92,9 @@ class Players
     #[ORM\Column(name: 'mmrank', type: 'smallint', nullable: true)]
     private ?int $mmrank;
 
-    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false)]
-    private string $game;
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
+    private Games $game;
 
     #[ORM\Column(name: 'hideranking', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
     private int $hideranking = 0;
@@ -120,14 +123,14 @@ class Players
     #[ORM\Column(name: 'createdate', type: 'integer', nullable: false, options: ['default' => 0])]
     private int $createdate = 0;
 
-    public function getPlayerid(): int
+    public function getId(): int
     {
-        return $this->playerid;
+        return $this->id;
     }
 
-    public function setPlayerid(int $playerid): Players
+    public function setId(int $id): static
     {
-        $this->playerid = $playerid;
+        $this->id = $id;
 
         return $this;
     }
@@ -137,7 +140,7 @@ class Players
         return $this->lastEvent;
     }
 
-    public function setLastEvent(int $lastEvent): Players
+    public function setLastEvent(int $lastEvent): static
     {
         $this->lastEvent = $lastEvent;
 
@@ -149,7 +152,7 @@ class Players
         return $this->connectionTime;
     }
 
-    public function setConnectionTime(int $connectionTime): Players
+    public function setConnectionTime(int $connectionTime): static
     {
         $this->connectionTime = $connectionTime;
 
@@ -161,7 +164,7 @@ class Players
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): Players
+    public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
 
@@ -173,7 +176,7 @@ class Players
         return $this->lastaddress;
     }
 
-    public function setLastaddress(string $lastaddress): Players
+    public function setLastaddress(string $lastaddress): static
     {
         $this->lastaddress = $lastaddress;
 
@@ -185,7 +188,7 @@ class Players
         return $this->city;
     }
 
-    public function setCity(string $city): Players
+    public function setCity(string $city): static
     {
         $this->city = $city;
 
@@ -197,7 +200,7 @@ class Players
         return $this->state;
     }
 
-    public function setState(string $state): Players
+    public function setState(string $state): static
     {
         $this->state = $state;
 
@@ -209,7 +212,7 @@ class Players
         return $this->country;
     }
 
-    public function setCountry(string $country): Players
+    public function setCountry(string $country): static
     {
         $this->country = $country;
 
@@ -221,7 +224,7 @@ class Players
         return $this->flag;
     }
 
-    public function setFlag(string $flag): Players
+    public function setFlag(string $flag): static
     {
         $this->flag = $flag;
 
@@ -233,7 +236,7 @@ class Players
         return $this->lat;
     }
 
-    public function setLat(?float $lat): Players
+    public function setLat(?float $lat): static
     {
         $this->lat = $lat;
 
@@ -245,7 +248,7 @@ class Players
         return $this->lng;
     }
 
-    public function setLng(?float $lng): Players
+    public function setLng(?float $lng): static
     {
         $this->lng = $lng;
 
@@ -257,7 +260,7 @@ class Players
         return $this->clan;
     }
 
-    public function setClan(int $clan): Players
+    public function setClan(int $clan): static
     {
         $this->clan = $clan;
 
@@ -269,7 +272,7 @@ class Players
         return $this->kills;
     }
 
-    public function setKills(int $kills): Players
+    public function setKills(int $kills): static
     {
         $this->kills = $kills;
 
@@ -281,7 +284,7 @@ class Players
         return $this->deaths;
     }
 
-    public function setDeaths(int $deaths): Players
+    public function setDeaths(int $deaths): static
     {
         $this->deaths = $deaths;
 
@@ -293,7 +296,7 @@ class Players
         return $this->suicides;
     }
 
-    public function setSuicides(int $suicides): Players
+    public function setSuicides(int $suicides): static
     {
         $this->suicides = $suicides;
 
@@ -305,7 +308,7 @@ class Players
         return $this->skill;
     }
 
-    public function setSkill(int $skill): Players
+    public function setSkill(int $skill): static
     {
         $this->skill = $skill;
 
@@ -317,7 +320,7 @@ class Players
         return $this->shots;
     }
 
-    public function setShots(int $shots): Players
+    public function setShots(int $shots): static
     {
         $this->shots = $shots;
 
@@ -329,7 +332,7 @@ class Players
         return $this->hits;
     }
 
-    public function setHits(int $hits): Players
+    public function setHits(int $hits): static
     {
         $this->hits = $hits;
 
@@ -341,7 +344,7 @@ class Players
         return $this->teamkills;
     }
 
-    public function setTeamkills(int $teamkills): Players
+    public function setTeamkills(int $teamkills): static
     {
         $this->teamkills = $teamkills;
 
@@ -353,7 +356,7 @@ class Players
         return $this->fullname;
     }
 
-    public function setFullname(?string $fullname): Players
+    public function setFullname(?string $fullname): static
     {
         $this->fullname = $fullname;
 
@@ -365,7 +368,7 @@ class Players
         return $this->email;
     }
 
-    public function setEmail(?string $email): Players
+    public function setEmail(?string $email): static
     {
         $this->email = $email;
 
@@ -377,7 +380,7 @@ class Players
         return $this->homepage;
     }
 
-    public function setHomepage(?string $homepage): Players
+    public function setHomepage(?string $homepage): static
     {
         $this->homepage = $homepage;
 
@@ -389,7 +392,7 @@ class Players
         return $this->icq;
     }
 
-    public function setIcq(?int $icq): Players
+    public function setIcq(?int $icq): static
     {
         $this->icq = $icq;
 
@@ -401,19 +404,19 @@ class Players
         return $this->mmrank;
     }
 
-    public function setMmrank(?int $mmrank): Players
+    public function setMmrank(?int $mmrank): static
     {
         $this->mmrank = $mmrank;
 
         return $this;
     }
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): Players
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 
@@ -425,7 +428,7 @@ class Players
         return $this->hideranking;
     }
 
-    public function setHideranking(int $hideranking): Players
+    public function setHideranking(int $hideranking): static
     {
         $this->hideranking = $hideranking;
 
@@ -437,7 +440,7 @@ class Players
         return $this->headshots;
     }
 
-    public function setHeadshots(int $headshots): Players
+    public function setHeadshots(int $headshots): static
     {
         $this->headshots = $headshots;
 
@@ -449,7 +452,7 @@ class Players
         return $this->lastSkillChange;
     }
 
-    public function setLastSkillChange(int $lastSkillChange): Players
+    public function setLastSkillChange(int $lastSkillChange): static
     {
         $this->lastSkillChange = $lastSkillChange;
 
@@ -461,7 +464,7 @@ class Players
         return $this->displayevents;
     }
 
-    public function setDisplayevents(int $displayevents): Players
+    public function setDisplayevents(int $displayevents): static
     {
         $this->displayevents = $displayevents;
 
@@ -473,7 +476,7 @@ class Players
         return $this->killStreak;
     }
 
-    public function setKillStreak(int $killStreak): Players
+    public function setKillStreak(int $killStreak): static
     {
         $this->killStreak = $killStreak;
 
@@ -485,7 +488,7 @@ class Players
         return $this->deathStreak;
     }
 
-    public function setDeathStreak(int $deathStreak): Players
+    public function setDeathStreak(int $deathStreak): static
     {
         $this->deathStreak = $deathStreak;
 
@@ -497,7 +500,7 @@ class Players
         return $this->blockavatar;
     }
 
-    public function setBlockavatar(int $blockavatar): Players
+    public function setBlockavatar(int $blockavatar): static
     {
         $this->blockavatar = $blockavatar;
 
@@ -509,7 +512,7 @@ class Players
         return $this->activity;
     }
 
-    public function setActivity(int $activity): Players
+    public function setActivity(int $activity): static
     {
         $this->activity = $activity;
 
@@ -521,7 +524,7 @@ class Players
         return $this->createdate;
     }
 
-    public function setCreatedate(int $createdate): Players
+    public function setCreatedate(int $createdate): static
     {
         $this->createdate = $createdate;
 

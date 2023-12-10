@@ -22,7 +22,7 @@ class Weapons
     #[ORM\Column(name: 'weaponId', type: 'integer', nullable: false, options: ['unsigned' => true])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    private $weaponid;
+    private int $id;
 
     #[ManyToOne(targetEntity: Games::class)]
     #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
@@ -43,14 +43,14 @@ class Weapons
     #[ORM\Column(name: 'headshots', type: 'integer', nullable: false, options: ['unsigned' => true, 'default' => 0])]
     private int $headshots = 0;
 
-    public function getWeaponid(): int
+    public function getId(): int
     {
-        return $this->weaponid;
+        return $this->id;
     }
 
-    public function setWeaponid(int $weaponid): static
+    public function setId(int $id): static
     {
-        $this->weaponid = $weaponid;
+        $this->id = $id;
 
         return $this;
     }

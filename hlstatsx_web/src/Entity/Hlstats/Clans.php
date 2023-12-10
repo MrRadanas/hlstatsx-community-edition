@@ -6,6 +6,8 @@ namespace App\Entity\Hlstats;
 
 use App\Repository\Hlstats\ClansRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * @todo разобраться с clan_tag
@@ -30,8 +32,9 @@ class Clans
     #[ORM\Column(name: 'homepage', type: 'string', length: 64, nullable: false, options: ['default' => ''])]
     private string $homepage = '';
 
-    #[ORM\Column(name: 'game', type: 'string', length: 32, nullable: false, options: ['default' => ''])]
-    private string $game = '';
+    #[ManyToOne(targetEntity: Games::class)]
+    #[JoinColumn(name: 'game', referencedColumnName: 'code', nullable: false)]
+    private Games $game;
 
     #[ORM\Column(name: 'hidden', type: 'boolean', nullable: false, options: ['default' => false])]
     private bool $hidden = false;
@@ -87,12 +90,12 @@ class Clans
         return $this;
     }
 
-    public function getGame(): string
+    public function getGame(): Games
     {
         return $this->game;
     }
 
-    public function setGame(string $game): static
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 

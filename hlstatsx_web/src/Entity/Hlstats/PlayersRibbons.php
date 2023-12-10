@@ -32,7 +32,7 @@ class PlayersRibbons
         return $this->playerid;
     }
 
-    public function setPlayerid(int $playerid): PlayersRibbons
+    public function setPlayerid(int $playerid): static
     {
         $this->playerid = $playerid;
 
@@ -44,7 +44,7 @@ class PlayersRibbons
         return $this->ribbonid;
     }
 
-    public function setRibbonid(int $ribbonid): PlayersRibbons
+    public function setRibbonid(int $ribbonid): static
     {
         $this->ribbonid = $ribbonid;
 
@@ -56,7 +56,7 @@ class PlayersRibbons
         return $this->game;
     }
 
-    public function setGame(Games $game): PlayersRibbons
+    public function setGame(Games $game): static
     {
         $this->game = $game;
 
