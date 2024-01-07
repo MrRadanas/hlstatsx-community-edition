@@ -1,0 +1,17 @@
+services:
+  hlstats_scripts:
+    container_name: hlstats_scripts
+    build: .
+    environment:
+      TZ: Europa/Moscow
+    volumes:
+      - ./:/scripts
+    ports:
+      - "27500:27500"
+    networks:
+      - hlstatsx
+
+networks:
+  hlstatsx:
+    name: hlstatsx
+    external: true
