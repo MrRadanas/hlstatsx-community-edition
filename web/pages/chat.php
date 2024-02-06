@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,23 +36,23 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
 // Global Server Chat History
-	$showserver = 0;
-	if (isset($_GET['server_id'])) {
-		$showserver = valid_request(strval($_GET['server_id']), true);
-	}
+$showserver = 0;
+if (isset($_GET['server_id'])) {
+    $showserver = valid_request(strval($_GET['server_id']), true);
+}
 
-	if ($showserver == 0) {
-		$whereclause = "hlstats_Servers.game='$game'";
-	} else {
-		$whereclause = "hlstats_Servers.game='$game' AND hlstats_Events_Chat.serverId=$showserver";
-	}
+if (0 == $showserver) {
+    $whereclause = "hlstats_Servers.game='$game'";
+} else {
+    $whereclause = "hlstats_Servers.game='$game' AND hlstats_Events_Chat.serverId=$showserver";
+}
 
-	$db->query("
+$db->query("
 		SELECT
 			hlstats_Games.name
 		FROM
@@ -61,40 +61,36 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Games.code = '$game'
 	");
 
-	if ($db->num_rows() < 1) {
-        error("No such game '$game'.");
-	}
+if ($db->num_rows() < 1) {
+    error("No such game '$game'.");
+}
 
-	list($gamename) = $db->fetch_row();
+[$gamename] = $db->fetch_row();
 
-	$db->free_result();
+$db->free_result();
 
-	pageHeader
-	(
-		array ($gamename, 'Server Chat Statistics'),
-		array ($gamename=>"%s?game=$game", 'Server Chat Statistics'=>'')
-	);
+pageHeader(
+    [$gamename, 'Server Chat Statistics'],
+    [$gamename => "%s?game=$game", 'Server Chat Statistics' => '']
+);
 
-	flush();
+flush();
 
-	$servername = "(All Servers)";
-	
-	if ($showserver != 0)
-	{
-		$result=$db->fetch_array
-		(
-			$db->query
-			("
+$servername = '(All Servers)';
+
+if (0 != $showserver) {
+    $result = $db->fetch_array(
+        $db->query('
 				SELECT
 					hlstats_Servers.name
 				FROM
 					hlstats_Servers
 				WHERE
-					hlstats_Servers.serverId = ".$db->escape($showserver)."
-			")
-		);
-		$servername = "(" . $result['name'] . ")";
-	}
+					hlstats_Servers.serverId = '.$db->escape($showserver).'
+			')
+    );
+    $servername = '('.$result['name'].')';
+}
 ?>
 
 <div class="block">
@@ -108,30 +104,29 @@ For support and installation notes visit http://www.hlxcommunity.com
 				<strong>&#8226;</strong> Show Chat from
 				<?php
 /*
-					$result = $db->query
-					("
-						SELECT
-							DISTINCT hlstats_Events_Chat.serverId,
-							hlstats_Servers.name
-						FROM
-							hlstats_Events_Chat
-						INNER JOIN
-							hlstats_Servers
-						ON
-							hlstats_Events_Chat.serverId = hlstats_Servers.serverId
-							AND hlstats_Servers.game='$game'
-						ORDER BY
-							hlstats_Servers.sortorder,
-							hlstats_Servers.name,
-							hlstats_Events_Chat.serverId ASC
-						LIMIT
-							0,
-							50
-					");
+                    $result = $db->query
+                    ("
+                        SELECT
+                            DISTINCT hlstats_Events_Chat.serverId,
+                            hlstats_Servers.name
+                        FROM
+                            hlstats_Events_Chat
+                        INNER JOIN
+                            hlstats_Servers
+                        ON
+                            hlstats_Events_Chat.serverId = hlstats_Servers.serverId
+                            AND hlstats_Servers.game='$game'
+                        ORDER BY
+                            hlstats_Servers.sortorder,
+                            hlstats_Servers.name,
+                            hlstats_Events_Chat.serverId ASC
+                        LIMIT
+                            0,
+                            50
+                    ");
 */
 
-					$result = $db->query
-					("
+                    $result = $db->query("
 						SELECT
 							hlstats_Servers.serverId,
 							hlstats_Servers.name
@@ -148,21 +143,21 @@ For support and installation notes visit http://www.hlxcommunity.com
 							50
 					");
 
-					echo '<select name="server_id"><option value="0">All Servers</option>';
-					$dates = array ();
-					$serverids = array();
-					while ($rowdata = $db->fetch_array())
-					{
-						$serverids[] = $rowdata['serverId'];
-						$dates[] = $rowdata; 
-						if ($showserver == $rowdata['serverId'])
-							echo '<option value="'.$rowdata['serverId'].'" selected>'.$rowdata['name'].'</option>';
-						else
-							echo '<option value="'.$rowdata['serverId'].'">'.$rowdata['name'].'</option>';
-					}
-					echo '</select>';
-					$filter=isset($_REQUEST['filter'])?$_REQUEST['filter']:"";
-				?>
+echo '<select name="server_id"><option value="0">All Servers</option>';
+$dates     = [];
+$serverids = [];
+while ($rowdata = $db->fetch_array()) {
+    $serverids[] = $rowdata['serverId'];
+    $dates[]     = $rowdata;
+    if ($showserver == $rowdata['serverId']) {
+        echo '<option value="'.$rowdata['serverId'].'" selected>'.$rowdata['name'].'</option>';
+    } else {
+        echo '<option value="'.$rowdata['serverId'].'">'.$rowdata['name'].'</option>';
+    }
+}
+echo '</select>';
+$filter = $_REQUEST['filter'] ?? '';
+?>
 				Filter: <input type="text" name="filter" value="<?php echo htmlentities($filter); ?>" /> 
 				<input type="submit" value="View" class="smallsubmit" />
 			</form>
@@ -171,101 +166,85 @@ For support and installation notes visit http://www.hlxcommunity.com
 	</div>
 	<div style="clear:both;padding-top:20px;"></div>
 		<?php
-			if ($showserver == 0)
-			{
-				$table = new Table(
-					array
-					(
-						new TableColumn
-						(
-							'eventTime',
-							'Date',
-							'width=16'
-						),
-						new TableColumn
-						(
-							'lastName',
-							'Player',
-							'width=17&sort=no&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
-						),
-						new TableColumn
-						(
-							'message',
-							'Message',
-							'width=34&sort=no&embedlink=yes'
-						),
-						new TableColumn
-						(
-							'serverName',
-							'Server',
-							'width=23&sort=no'
-						),
-						new TableColumn
-						(
-							'map',
-							'Map',
-							'width=10&sort=no'
-						)
-					),
-					'playerId',
-					'eventTime',
-					'lastName',
-					false,
-					50,
-					"page",
-					"sort",
-					"sortorder"
-				);
-			}
-			else
-			{
-				$table = new Table(
-					array
-					(
-						new TableColumn
-						(
-							'eventTime',
-							'Date',
-							'width=16'
-						),
-						new TableColumn
-						(
-							'lastName',
-							'Player',
-							'width=24&sort=no&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
-						),
-						new TableColumn
-						(
-							'message',
-							'Message',
-							'width=44&sort=no&embedlink=yes'
-						),
-						new TableColumn
-						(
-							'map',
-							'Map',
-							'width=16&sort=no'
-						)
-					),
-					'playerId',
-					'eventTime',
-					'lastName',
-					false,
-					50,
-					"page",
-					"sort",
-					"sortorder"
-				);
-			}
-			$whereclause2='';
-			if(!empty($filter))
-			{
-				$whereclause2="AND MATCH (hlstats_Events_Chat.message) AGAINST ('" . $db->escape($filter) . "' in BOOLEAN MODE)";
-			}
-			$surl = $g_options['scripturl'];
+            if (0 == $showserver) {
+                $table = new Table(
+                    [
+                        new TableColumn(
+                            'eventTime',
+                            'Date',
+                            'width=16'
+                        ),
+                        new TableColumn(
+                            'lastName',
+                            'Player',
+                            'width=17&sort=no&flag=1&link='.urlencode('mode=playerinfo&amp;player=%k')
+                        ),
+                        new TableColumn(
+                            'message',
+                            'Message',
+                            'width=34&sort=no&embedlink=yes'
+                        ),
+                        new TableColumn(
+                            'serverName',
+                            'Server',
+                            'width=23&sort=no'
+                        ),
+                        new TableColumn(
+                            'map',
+                            'Map',
+                            'width=10&sort=no'
+                        ),
+                    ],
+                    'playerId',
+                    'eventTime',
+                    'lastName',
+                    false,
+                    50,
+                    'page',
+                    'sort',
+                    'sortorder'
+                );
+            } else {
+                $table = new Table(
+                    [
+                        new TableColumn(
+                            'eventTime',
+                            'Date',
+                            'width=16'
+                        ),
+                        new TableColumn(
+                            'lastName',
+                            'Player',
+                            'width=24&sort=no&flag=1&link='.urlencode('mode=playerinfo&amp;player=%k')
+                        ),
+                        new TableColumn(
+                            'message',
+                            'Message',
+                            'width=44&sort=no&embedlink=yes'
+                        ),
+                        new TableColumn(
+                            'map',
+                            'Map',
+                            'width=16&sort=no'
+                        ),
+                    ],
+                    'playerId',
+                    'eventTime',
+                    'lastName',
+                    false,
+                    50,
+                    'page',
+                    'sort',
+                    'sortorder'
+                );
+            }
+$whereclause2 = '';
+if (!empty($filter)) {
+    $whereclause2 = "AND MATCH (hlstats_Events_Chat.message) AGAINST ('".$db->escape($filter)."' in BOOLEAN MODE)";
+}
+$surl = $g_options['scripturl'];
 
-			$result = $db->query
-			("
+$result = $db->query("
 				SELECT SQL_NO_CACHE 
 					hlstats_Events_Chat.eventTime,
 					unhex(replace(hex(hlstats_Players.lastName), 'E280AE', '')) as lastName,
@@ -293,17 +272,16 @@ For support and installation notes visit http://www.hlxcommunity.com
 					$table->numperpage;
 			", true, false);
 /*
-    			$whereclause = "hlstats_Events_Chat.serverId ";
+                $whereclause = "hlstats_Events_Chat.serverId ";
 
-			if($showserver == 0) {
-				$whereclause .= "in (".implode($serverids,',').")";
-			} else {
-				$whereclause .= "= $showserver";
-			}
+            if($showserver == 0) {
+                $whereclause .= "in (".implode($serverids,',').")";
+            } else {
+                $whereclause .= "= $showserver";
+            }
 */
 
-			$db->query
-			("
+$db->query("
 				SELECT
 		 			count(*)
 				FROM
@@ -319,18 +297,18 @@ For support and installation notes visit http://www.hlxcommunity.com
 				WHERE
 					$whereclause $whereclause2
 			");
-			if ($db->num_rows() < 1) $numitems = 0;
-			else 
-			{
-				list($numitems) = $db->fetch_row();
-			}
-			$db->free_result();	
+if ($db->num_rows() < 1) {
+    $numitems = 0;
+} else {
+    [$numitems] = $db->fetch_row();
+}
+$db->free_result();
 
-			$table->draw($result, $numitems, 95);
-		?><br /><br />
+$table->draw($result, $numitems, 95);
+?><br /><br />
 	<div class="subblock">
 		<div style="float:right;">
-			Go to: <a href="<?php echo $g_options["scripturl"] . "?game=$game"; ?>"><?php echo $gamename; ?></a>
+			Go to: <a href="<?php echo $g_options['scripturl']."?game=$game"; ?>"><?php echo $gamename; ?></a>
 		</div>
 	</div>
 </div>

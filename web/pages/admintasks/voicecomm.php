@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,35 +36,36 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
+
+if ($auth->userdata['acclevel'] < 80) {
+    exit('Access denied!');
+}
+
+$edlist            = new EditList('serverId', 'hlstats_Servers_VoiceComm', '', false);
+$edlist->columns[] = new EditListColumn('name', 'Server Name', 45, true, 'text', '', 64);
+$edlist->columns[] = new EditListColumn('addr', 'Server IP or Hostname', 20, true, 'text', '', 64);
+$edlist->columns[] = new EditListColumn('password', 'Password', 20, false, 'text', '', 64);
+$edlist->columns[] = new EditListColumn('UDPPort', 'UDP Port (TS only)', 6, false, 'text', '8767', 64);
+$edlist->columns[] = new EditListColumn('queryPort', 'Query Port (TS)/Connect Port (Vent)', 6, true, 'text', '51234', 64);
+$edlist->columns[] = new EditListColumn('descr', 'Notes', 40, false, 'text', '', 64);
+$edlist->columns[] = new EditListColumn('serverType', 'Server Type', 20, true, 'select', '0/Teamspeak;1/Ventrilo');
+
+if ($_POST) {
+    if ($edlist->update()) {
+        message('success', 'Operation successful.');
+    } else {
+        message('warning', $edlist->error());
     }
+}
 
-	if ($auth->userdata['acclevel'] < 80) {
-        die ('Access denied!');
-	}
-
-	$edlist = new EditList('serverId', 'hlstats_Servers_VoiceComm', '', false);
-	$edlist->columns[] = new EditListColumn('name', 'Server Name', 45, true, 'text', '', 64);
-	$edlist->columns[] = new EditListColumn('addr', 'Server IP or Hostname', 20, true, 'text', '', 64);
-	$edlist->columns[] = new EditListColumn('password', 'Password', 20, false, 'text', '', 64);
-	$edlist->columns[] = new EditListColumn('UDPPort', 'UDP Port (TS only)', 6, false, 'text', '8767', 64);
-	$edlist->columns[] = new EditListColumn('queryPort', 'Query Port (TS)/Connect Port (Vent)', 6, true, 'text', '51234', 64);
-	$edlist->columns[] = new EditListColumn('descr', 'Notes', 40, false, 'text', '', 64);
-	$edlist->columns[] = new EditListColumn('serverType', 'Server Type', 20, true, 'select', '0/Teamspeak;1/Ventrilo');
-	
-	if ($_POST) {
-		if ($edlist->update())
-			message('success', 'Operation successful.');
-		else
-			message('warning', $edlist->error());
-	}
-	
 ?>
 
 <?php
-	
-	$result = $db->query("
+
+    $result = $db->query('
 		SELECT
 			serverId,
 			name,
@@ -79,9 +80,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 		ORDER BY
 			serverType,
 			name
-	");
-	
-	$edlist->draw($result);
+	');
+
+$edlist->draw($result);
 ?>
 
 <table width="75%" border="0" cellspacing="0" cellpadding="0">

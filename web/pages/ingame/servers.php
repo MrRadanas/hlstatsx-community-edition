@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,14 +36,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	$server_id = 1;
-	if (isset($_GET['server_id']) && is_numeric($_GET['server_id'])) {
-		$server_id = valid_request($_GET['server_id'], true);
-	}
+$server_id = 1;
+if (isset($_GET['server_id']) && is_numeric($_GET['server_id'])) {
+    $server_id = valid_request($_GET['server_id'], true);
+}
 ?>
 	<table class="data-table">
 		<tr class="data-table-head">
@@ -55,7 +55,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		</tr>
         
 <?php
-	$query= "
+    $query = "
             SELECT
                 serverId,
                 name,
@@ -78,49 +78,49 @@ For support and installation notes visit http://www.hlxcommunity.com
             ORDER BY
                 sortorder, name, serverId
 	";
-	$db->query($query);
-	$this_server = array();
-	$servers = array();
-	while ($rowdata = $db->fetch_array()) {
-		$servers[] = $rowdata;
-		if ($rowdata['serverId'] == $server_id)
-			$this_server = $rowdata;
-	}
-          
-	$i=0;
-	for ($i=0; $i<count($servers); $i++)
-	{
-		$rowdata = $servers[$i]; 
-		$server_id = $rowdata['serverId'];
-		$c = ($i % 2) + 1;
-		$addr = $rowdata["addr"];
-		$kills     = $rowdata['kills'];
-		$headshots = $rowdata['headshots'];
-		$player_string = $rowdata['act_players']."/".$rowdata['max_players'];
-		$map_ct_wins = $rowdata['map_ct_wins'];
-		$map_ts_wins = $rowdata['map_ts_wins'];
-?>
+$db->query($query);
+$this_server = [];
+$servers     = [];
+while ($rowdata = $db->fetch_array()) {
+    $servers[] = $rowdata;
+    if ($rowdata['serverId'] == $server_id) {
+        $this_server = $rowdata;
+    }
+}
+
+$i = 0;
+for ($i = 0; $i < count($servers); ++$i) {
+    $rowdata       = $servers[$i];
+    $server_id     = $rowdata['serverId'];
+    $c             = ($i % 2) + 1;
+    $addr          = $rowdata['addr'];
+    $kills         = $rowdata['kills'];
+    $headshots     = $rowdata['headshots'];
+    $player_string = $rowdata['act_players'].'/'.$rowdata['max_players'];
+    $map_ct_wins   = $rowdata['map_ct_wins'];
+    $map_ts_wins   = $rowdata['map_ts_wins'];
+    ?>
 
 		<tr class="bg<?php echo $c; ?>">
 			<td class="fSmall"><?php
-				echo '<strong>'.$rowdata['name'].'</strong>';
-			?></td>
+                    echo '<strong>'.$rowdata['name'].'</strong>';
+    ?></td>
 			<td class="fSmall"><?php
-				echo $addr;
-			?></td>
+        echo $addr;
+    ?></td>
 			<td style="text-align:center;" class="fSmall"><?php
-				echo $rowdata['act_map'];
-			?></td>
+        echo $rowdata['act_map'];
+    ?></td>
 			<td style="text-align:center;" class="fSmall"><?php
-				$stamp = time()-$rowdata['map_started'];
-				$hours = sprintf('%02d', floor($stamp / 3600));
-				$min   = sprintf('%02d', floor(($stamp % 3600) / 60));
-				$sec   = sprintf('%02d', floor($stamp % 60)); 
-				echo "$hours:$min:$sec";
-			?></td>
+        $stamp = time() - $rowdata['map_started'];
+    $hours     = sprintf('%02d', floor($stamp / 3600));
+    $min       = sprintf('%02d', floor(($stamp % 3600) / 60));
+    $sec       = sprintf('%02d', floor($stamp % 60));
+    echo "$hours:$min:$sec";
+    ?></td>
 			<td style="text-align:center;" class="fSmall"><?php
-				echo $player_string;
-			?></td>
+        echo $player_string;
+    ?></td>
 		</tr>
 <?php } ?>
 	</table>

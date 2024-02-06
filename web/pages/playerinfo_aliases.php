@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,90 +36,77 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	flush();
-	$tblAliases = new Table
-	(
-		array
-		(
-			new TableColumn
-			(
-				'name',
-				'Name',
-				'width=21'
-			),
-			new TableColumn
-			(
-				'connection_time',
-				'Time',
-				'width=8&align=right&type=timestamp'
-			),
-			new TableColumn
-			(
-				'lastuse',
-				'Last Use',
-				'width=15'
-			),
-			new TableColumn
-			(
-				'kills',
-				'Kills',
-				'width=7&align=right'
-			),
-			new TableColumn
-			(
-				'deaths',
-				'Deaths',
-				'width=7&align=right'
-			),
-			new TableColumn
-			(
-				'kpd',
-				'K:D',
-				'width=11&align=right'
-			),
-			new TableColumn
-			(
-				'headshots',
-				'Headshots',
-				'width=8&align=right'
-			),
-			new TableColumn
-			(
-				'hpk',
-				'HS:K',
-				'width=6&align=right'
-			),
-			new TableColumn
-			(
-				'suicides',
-				'Suicides',
-				'width=6&align=right'
-			),
-			new TableColumn
-			(
-				'acc',
-				'Accuracy',
-				'width=6&align=right&append=' . urlencode('%')
-			)
-		),
-		'name',
-		'lastuse',
-		'name',
-		true,
-		20,
-		'aliases_page',
-		'aliases_sort',
-		'aliases_sortorder',
-		'tabteams',
-		'desc',
-		true
-	);
-	$result = $db->query
-	("
+flush();
+$tblAliases = new Table(
+    [
+        new TableColumn(
+            'name',
+            'Name',
+            'width=21'
+        ),
+        new TableColumn(
+            'connection_time',
+            'Time',
+            'width=8&align=right&type=timestamp'
+        ),
+        new TableColumn(
+            'lastuse',
+            'Last Use',
+            'width=15'
+        ),
+        new TableColumn(
+            'kills',
+            'Kills',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'deaths',
+            'Deaths',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'kpd',
+            'K:D',
+            'width=11&align=right'
+        ),
+        new TableColumn(
+            'headshots',
+            'Headshots',
+            'width=8&align=right'
+        ),
+        new TableColumn(
+            'hpk',
+            'HS:K',
+            'width=6&align=right'
+        ),
+        new TableColumn(
+            'suicides',
+            'Suicides',
+            'width=6&align=right'
+        ),
+        new TableColumn(
+            'acc',
+            'Accuracy',
+            'width=6&align=right&append='.urlencode('%')
+        ),
+    ],
+    'name',
+    'lastuse',
+    'name',
+    true,
+    20,
+    'aliases_page',
+    'aliases_sort',
+    'aliases_sortorder',
+    'tabteams',
+    'desc',
+    true
+);
+$result = $db->query("
 		SELECT
 			hlstats_PlayerNames.name,
 			hlstats_PlayerNames.connection_time,
@@ -142,8 +129,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$tblAliases->startitem,
 			$tblAliases->numperpage
 	");
-	$resultCount = $db->query
-	("
+$resultCount = $db->query("
 		SELECT
 			COUNT(*)
 		FROM
@@ -151,21 +137,19 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			hlstats_PlayerNames.playerId = $player
 	");
-	list($numitems) = $db->fetch_row($resultCount);
-	if ($numitems > 1)
-	{
-?>
+[$numitems] = $db->fetch_row($resultCount);
+if ($numitems > 1) {
+    ?>
 
 <div style="clear:both;padding-top:24px;"></div>
 <?php
-		printSectionTitle('Aliases');
-		if ($numitems > 0)
-		{
-			$tblAliases->draw($result, $numitems, 95);
-		}
-?>
+            printSectionTitle('Aliases');
+    if ($numitems > 0) {
+        $tblAliases->draw($result, $numitems, 95);
+    }
+    ?>
 <br /><br />
 
 <?php
-	}
+}
 ?>

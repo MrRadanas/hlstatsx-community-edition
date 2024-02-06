@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,14 +36,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-	if (!defined('IN_HLSTATS')) {
-		die('Do not access this file directly.');
-	}
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-    // Player Chat History
-	$player = valid_request(intval($_GET['player']), true) or error('No player ID specified.');
+// Player Chat History
+$player = valid_request(intval($_GET['player']), true) or error('No player ID specified.');
 
-	$db->query("
+$db->query("
 		SELECT
 			unhex(replace(hex(hlstats_Players.lastName), 'E280AE', '')) as lastName,
 			hlstats_Players.game
@@ -53,25 +53,24 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Players.playerId = $player
 	");
 
-	if ($db->num_rows() != 1) {
-		error("No such player '$player'.");
-	}
+if (1 != $db->num_rows()) {
+    error("No such player '$player'.");
+}
 
-	$playerdata = $db->fetch_array();
+$playerdata = $db->fetch_array();
 
-	$pl_name = $playerdata['lastName'];
+$pl_name = $playerdata['lastName'];
 
-	if (strlen($pl_name) > 10) {
-		$pl_shortname = substr($pl_name, 0, 8) . '...';
-	} else {
-		$pl_shortname = $pl_name;
-	}
+if (strlen($pl_name) > 10) {
+    $pl_shortname = substr($pl_name, 0, 8).'...';
+} else {
+    $pl_shortname = $pl_name;
+}
 
-	$pl_name = htmlspecialchars($pl_name, ENT_COMPAT);
-	$pl_shortname = htmlspecialchars($pl_shortname, ENT_COMPAT);
-	$game = $playerdata['game'];
-	$db->query
-	("
+$pl_name      = htmlspecialchars($pl_name, ENT_COMPAT);
+$pl_shortname = htmlspecialchars($pl_shortname, ENT_COMPAT);
+$game         = $playerdata['game'];
+$db->query("
 		SELECT
 			hlstats_Games.name
 		FROM
@@ -80,77 +79,66 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Games.code = '$game'
 	");
 
-	if ($db->num_rows() != 1) {
-		$gamename = ucfirst($game);
-	} else {
-		list($gamename) = $db->fetch_row();
-	}
+if (1 != $db->num_rows()) {
+    $gamename = ucfirst($game);
+} else {
+    [$gamename] = $db->fetch_row();
+}
 
-	pageHeader
-	(
-		array ($gamename, 'Chat History', $pl_name),
-		array
-		(
-			$gamename=>$g_options['scripturl'] . "?game=$game",
-			'Player Rankings'=>$g_options['scripturl'] . "?mode=players&game=$game",
-			'Player Details'=>$g_options['scripturl'] . "?mode=playerinfo&player=$player",
-			'Chat History'=>''
-		),
-		$playername = ""
-	);
+pageHeader(
+    [$gamename, 'Chat History', $pl_name],
+    [
+        $gamename         => $g_options['scripturl']."?game=$game",
+        'Player Rankings' => $g_options['scripturl']."?mode=players&game=$game",
+        'Player Details'  => $g_options['scripturl']."?mode=playerinfo&player=$player",
+        'Chat History'    => '',
+    ]
+);
 
-	flush();
+flush();
 
-	$table = new Table
-	(
-		array
-		(
-			new TableColumn
-			(
-				'eventTime',
-				'Date',
-				'width=16'
-			),
+$table = new Table(
+    [
+        new TableColumn(
+            'eventTime',
+            'Date',
+            'width=16'
+        ),
 
-			new TableColumn
-			(
-				'message',
-				'Message',
-				'width=44&sort=no&append=.&embedlink=yes'
-			),
-			new TableColumn
-			(
-				'serverName',
-				'Server',
-				'width=24'
-			),
-			new TableColumn
-			(
-				'map',
-				'Map',
-				'width=16'
-			)
-		),
-		'eventTime',
-		'eventTime',
-		'serverName',
-		false,
-		50,
-		'page',
-		'sort',
-		'sortorder'
-	);
-	$surl = $g_options['scripturl'];
-	
-	$whereclause="hlstats_Events_Chat.playerId = $player ";
-	$filter=isset($_REQUEST['filter'])?$_REQUEST['filter']:"";
-	if(!empty($filter))
-	{
-				$whereclause.="AND MATCH (hlstats_Events_Chat.message) AGAINST ('" . $db->escape($filter) . "' in BOOLEAN MODE)";
-	}
-	
-	$result = $db->query
-	("
+        new TableColumn(
+            'message',
+            'Message',
+            'width=44&sort=no&append=.&embedlink=yes'
+        ),
+        new TableColumn(
+            'serverName',
+            'Server',
+            'width=24'
+        ),
+        new TableColumn(
+            'map',
+            'Map',
+            'width=16'
+        ),
+    ],
+    'eventTime',
+    'eventTime',
+    'serverName',
+    false,
+    50,
+    'page',
+    'sort',
+    'sortorder'
+);
+$surl = $g_options['scripturl'];
+
+$whereclause = "hlstats_Events_Chat.playerId = $player ";
+$filter      = $_REQUEST['filter'] ?? '';
+if (!empty($filter)) {
+    $whereclause .= "AND MATCH (hlstats_Events_Chat.message) AGAINST ('".$db->escape($filter)."' in BOOLEAN MODE)";
+}
+
+$result = $db->query("
 		SELECT
 			hlstats_Events_Chat.eventTime,
 			IF(hlstats_Events_Chat.message_mode=2, CONCAT('(Team) ', hlstats_Events_Chat.message), IF(hlstats_Events_Chat.message_mode=3, CONCAT('(Squad) ', hlstats_Events_Chat.message), hlstats_Events_Chat.message)) AS message,
@@ -171,9 +159,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$table->startitem,
 			$table->numperpage
 	");
-	
-	$resultCount = $db->query
-	("
+
+$resultCount = $db->query("
 		SELECT
 			COUNT(*)
 		FROM
@@ -185,13 +172,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			$whereclause
 	");
-			
-	list($numitems) = $db->fetch_row($resultCount);
-	
+
+[$numitems] = $db->fetch_row($resultCount);
+
 ?>
 <div class="block">
 <?php
-	printSectionTitle('Player Chat History (Last '.$g_options['DeleteDays'].' Days)');
+    printSectionTitle('Player Chat History (Last '.$g_options['DeleteDays'].' Days)');
 ?>
 	<div class="subblock">
 		<div style="float:left;">
@@ -208,14 +195,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 	</div>
 	<div style="clear: both; padding-top: 20px;"></div>
 <?php
-	if ($numitems > 0)
-	{
-		$table->draw($result, $numitems, 95);
-	}
+    if ($numitems > 0) {
+        $table->draw($result, $numitems, 95);
+    }
 ?><br /><br />
 	<div class="subblock">
 		<div style="float:right;">
-			Go to: <a href="<?php echo $g_options['scripturl'] . "?mode=playerinfo&amp;player=$player"; ?>"><?php echo $pl_name; ?>'s Statistics</a>
+			Go to: <a href="<?php echo $g_options['scripturl']."?mode=playerinfo&amp;player=$player"; ?>"><?php echo $pl_name; ?>'s Statistics</a>
 		</div>
 	</div>
 </div>

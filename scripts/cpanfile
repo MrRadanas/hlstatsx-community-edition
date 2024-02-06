@@ -1,0 +1,3 @@
+requires 'MaxMind::DB::Reader';
+requires 'GeoIP2::Database::Reader';
+requires 'Syntax::Keyword::Try';

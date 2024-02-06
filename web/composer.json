@@ -1,0 +1,22 @@
+{
+    "name": "hlstats/web",
+    "description": "HLstatsX Community Edition",
+    "type": "project",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": ">=7.4",
+        "ext-sockets": "*",
+        "ext-mysqli": "*",
+        "ext-gd": "*",
+      "ext-curl": "*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.49",
+        "phpstan/phpstan": "^1.10",
+        "rector/rector": "^1.0"
+    }
+}

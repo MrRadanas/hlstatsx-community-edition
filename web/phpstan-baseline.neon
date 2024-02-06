@@ -1,0 +1,6876 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Constant DB_ADDR not found\\.$#"
+			count: 1
+			path: autocomplete.php
+
+		-
+			message: "#^Constant DB_NAME not found\\.$#"
+			count: 1
+			path: autocomplete.php
+
+		-
+			message: "#^Constant DB_PASS not found\\.$#"
+			count: 1
+			path: autocomplete.php
+
+		-
+			message: "#^Constant DB_PCONNECT not found\\.$#"
+			count: 1
+			path: autocomplete.php
+
+		-
+			message: "#^Constant DB_TYPE not found\\.$#"
+			count: 1
+			path: autocomplete.php
+
+		-
+			message: "#^Constant DB_USER not found\\.$#"
+			count: 1
+			path: autocomplete.php
+
+		-
+			message: "#^Constant INCLUDE_PATH not found\\.$#"
+			count: 2
+			path: autocomplete.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 4
+			path: autocomplete.php
+
+		-
+			message: "#^Constant DB_CHARSET not found\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Constant DB_COLLATE not found\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Function mysqli_pconnect not found\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Function mysqli_result not found\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:__construct\\(\\) has parameter \\$db_addr with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:__construct\\(\\) has parameter \\$db_name with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:__construct\\(\\) has parameter \\$db_pass with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:__construct\\(\\) has parameter \\$db_user with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:__construct\\(\\) has parameter \\$use_pconnect with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:__construct\\(\\) with return type void returns mixed but should not return anything\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:calc_rows\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:data_seek\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:data_seek\\(\\) has parameter \\$query_id with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:data_seek\\(\\) has parameter \\$row_number with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:error\\(\\) has parameter \\$exit with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:error\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:escape\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:escape\\(\\) has parameter \\$string with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:fetch_array\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:fetch_array\\(\\) has parameter \\$query_id with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:fetch_row\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:fetch_row\\(\\) has parameter \\$query_id with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:fetch_row_set\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:fetch_row_set\\(\\) has parameter \\$query_id with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:free_result\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:free_result\\(\\) has parameter \\$query_id with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:insert_id\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:num_rows\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:num_rows\\(\\) has parameter \\$query_id with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:query\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:query\\(\\) has parameter \\$calcrows with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:query\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:query\\(\\) has parameter \\$showerror with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:result\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:result\\(\\) has parameter \\$field with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:result\\(\\) has parameter \\$query_id with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Method DB_mysql\\:\\:result\\(\\) has parameter \\$row with no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Offset 'file' does not exist on array\\{function\\: string, line\\?\\: int, file\\?\\: string, class\\?\\: class\\-string, type\\?\\: '\\-\\>'\\|'\\:\\:', args\\?\\: array, object\\?\\: object\\}\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Offset 'line' does not exist on array\\{function\\: string, line\\?\\: int, file\\?\\: string, class\\?\\: class\\-string, type\\?\\: '\\-\\>'\\|'\\:\\:', args\\?\\: array, object\\?\\: object\\}\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Parameter \\#1 \\$result of function mysqli_fetch_assoc expects mysqli_result, bool\\|mysqli_result given\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Property DB_mysql\\:\\:\\$db_addr has no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Property DB_mysql\\:\\:\\$db_name has no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Property DB_mysql\\:\\:\\$db_pass has no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Property DB_mysql\\:\\:\\$db_user has no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Property DB_mysql\\:\\:\\$last_calc_rows has no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Property DB_mysql\\:\\:\\$last_insert_id has no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Property DB_mysql\\:\\:\\$last_query has no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Property DB_mysql\\:\\:\\$last_result has no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Property DB_mysql\\:\\:\\$link has no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Property DB_mysql\\:\\:\\$profile has no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Property DB_mysql\\:\\:\\$querycount has no type specified\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Result of function mysqli_free_result \\(void\\) is used\\.$#"
+			count: 1
+			path: includes/class_db.php
+
+		-
+			message: "#^Access to an undefined property Table\\:\\:\\$sort_default_order\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Access to an undefined property TableColumn\\:\\:\\$fname\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 5
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:__construct\\(\\) has parameter \\$ajax with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:__construct\\(\\) has parameter \\$columns with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:__construct\\(\\) has parameter \\$keycol with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:__construct\\(\\) has parameter \\$numperpage with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:__construct\\(\\) has parameter \\$showranking with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:__construct\\(\\) has parameter \\$sort_default with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:__construct\\(\\) has parameter \\$sort_default2 with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:__construct\\(\\) has parameter \\$sort_default_order with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:__construct\\(\\) has parameter \\$sorthash with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:__construct\\(\\) has parameter \\$var_page with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:__construct\\(\\) has parameter \\$var_sort with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:__construct\\(\\) has parameter \\$var_sortorder with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:_echoPageNumber\\(\\) has parameter \\$label with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:_echoPageNumber\\(\\) has parameter \\$number with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:_echoPageNumber\\(\\) has parameter \\$postfix with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:_echoPageNumber\\(\\) has parameter \\$prefix with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:draw\\(\\) has parameter \\$align with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:draw\\(\\) has parameter \\$numitems with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:draw\\(\\) has parameter \\$result with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:draw\\(\\) has parameter \\$width with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:start\\(\\) has parameter \\$align with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:start\\(\\) has parameter \\$numitems with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method Table\\:\\:start\\(\\) has parameter \\$width with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method TableColumn\\:\\:__construct\\(\\) has parameter \\$attrs with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method TableColumn\\:\\:__construct\\(\\) has parameter \\$fname with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method TableColumn\\:\\:__construct\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Method TableColumn\\:\\:__construct\\(\\) has parameter \\$title with no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Parameter \\#1 \\$number of function number_format expects float, float\\|int\\<1000, max\\>\\|string given\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Part \\$col\\-\\>icon \\(0\\|0\\.0\\|''\\|'0'\\|array\\{\\}\\|false\\|null\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Part \\$link \\(array\\<int, string\\>\\|string\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$ajax has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$columnlist has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$columns has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$keycol has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$maxpagenumbers has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$numperpage has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$page has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$showranking has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$sort has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$sort2 has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$sorthash has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$sortorder has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$startitem has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$var_page has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$var_sort has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property Table\\:\\:\\$var_sortorder has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$align has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$append has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$embedlink has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$flag has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$heatmap has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$icon has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$link has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$mmrank has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$name has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$skill_change has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$sort has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$title has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$type has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Property TableColumn\\:\\:\\$width has no type specified\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Ternary operator condition is always true\\.$#"
+			count: 1
+			path: includes/class_table.php
+
+		-
+			message: "#^Cannot access offset 'scheme' on array\\{scheme\\?\\: string, host\\?\\: string, port\\?\\: int\\<0, 65535\\>, user\\?\\: string, pass\\?\\: string, path\\?\\: string, query\\?\\: string, fragment\\?\\: string\\}\\|false\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Cannot access offset 0 on array\\{0\\: int, 1\\: int, 2\\: int, 3\\: string, mime\\: string, channels\\?\\: int, bits\\?\\: int\\}\\|false\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Cannot access offset 1 on array\\{0\\: int, 1\\: int, 2\\: int, 3\\: string, mime\\: string, channels\\?\\: int, bits\\?\\: int\\}\\|false\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Cannot access offset 3 on array\\{0\\: int, 1\\: int, 2\\: int, 3\\: string, mime\\: string, channels\\?\\: int, bits\\?\\: int\\}\\|false\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Constant DB_NAME not found\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 5
+			path: includes/functions.php
+
+		-
+			message: "#^Constant INCLUDE_PATH not found\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 2
+			path: includes/functions.php
+
+		-
+			message: "#^Function error\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function file_get_contents\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function file_get_contents\\(\\) has parameter \\$filename with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function file_get_contents\\(\\) has parameter \\$incpath with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function file_get_contents\\(\\) has parameter \\$resource_context with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getJSText\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getJSText\\(\\) has parameter \\$js with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getLink\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getLink\\(\\) has parameter \\$url with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getRealGame\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getRealGame\\(\\) has parameter \\$game with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSelect\\(\\) has invalid return type the\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSelect\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSelect\\(\\) has parameter \\$values with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSelect\\(\\) should return the but returns string\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSortArrow\\(\\) has parameter \\$ajax with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSortArrow\\(\\) has parameter \\$longname with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSortArrow\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSortArrow\\(\\) has parameter \\$sort with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSortArrow\\(\\) has parameter \\$sortorder with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getStyleText\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getStyleText\\(\\) has parameter \\$style with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function get_player_rank\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function get_player_rank\\(\\) has parameter \\$playerdata with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function hex2rgb\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function hex2rgb\\(\\) has parameter \\$hexVal with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function makeQueryString\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function makeQueryString\\(\\) has parameter \\$key with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function makeQueryString\\(\\) has parameter \\$notkeys with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function makeQueryString\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function mystripslashes\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function mystripslashes\\(\\) has parameter \\$text with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function pageFooter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function pageHeader\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function pageHeader\\(\\) has parameter \\$location with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function pageHeader\\(\\) has parameter \\$title with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function printSectionTitle\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function printSectionTitle\\(\\) has parameter \\$title with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function timestamp_to_str\\(\\) has parameter \\$seconds with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Negated boolean expression is always false\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Offset 'host' does not exist on array\\{scheme\\: 'http'\\|'https', host\\?\\: string, port\\?\\: int\\<0, 65535\\>, user\\?\\: string, pass\\?\\: string, path\\: string, query\\: string, fragment\\: string\\}\\.$#"
+			count: 2
+			path: includes/functions.php
+
+		-
+			message: "#^Parameter \\#1 \\$number of function round expects float, float\\|int\\<min, \\-1\\>\\|int\\<1, max\\>\\|string given\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function htmlspecialchars expects string, string\\|null given\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Right side of && is always false\\.$#"
+			count: 2
+			path: includes/functions.php
+
+		-
+			message: "#^Variable \\$options might not be defined\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function drawItems\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function drawItems\\(\\) has parameter \\$bounds with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function drawItems\\(\\) has parameter \\$color with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function drawItems\\(\\) has parameter \\$data_array with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function drawItems\\(\\) has parameter \\$dot with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function drawItems\\(\\) has parameter \\$image with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function drawItems\\(\\) has parameter \\$make_grid with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function drawItems\\(\\) has parameter \\$max_index with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function drawItems\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function drawItems\\(\\) has parameter \\$write_legend with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function drawItems\\(\\) has parameter \\$write_timestamp with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function image_dashed_line\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function image_dashed_line\\(\\) has parameter \\$image with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function image_dashed_line\\(\\) has parameter \\$style with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function image_dashed_line\\(\\) has parameter \\$x1 with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function image_dashed_line\\(\\) has parameter \\$x2 with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function image_dashed_line\\(\\) has parameter \\$y1 with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Function image_dashed_line\\(\\) has parameter \\$y2 with no type specified\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Parameter \\#3 \\$y of function imagesetpixel expects int, float\\|int given\\.$#"
+			count: 6
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Parameter \\#3 \\$y of function imagesetpixel expects int, string given\\.$#"
+			count: 4
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Parameter \\#3 \\$y1 of function imageline expects int, int\\|string given\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Parameter \\#4 \\$y of function imagestring expects int, float\\|int given\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Parameter \\#5 \\$y2 of function imageline expects int, string given\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Parameter \\#6 \\$col of function imagestringup expects int, int\\|false given\\.$#"
+			count: 2
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Variable \\$steps might not be defined\\.$#"
+			count: 1
+			path: includes/functions_graph.php
+
+		-
+			message: "#^Constant GOOGLE_MAPS_API_KEY not found\\.$#"
+			count: 1
+			path: includes/google_maps.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 5
+			path: includes/google_maps.php
+
+		-
+			message: "#^Function printMap\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/google_maps.php
+
+		-
+			message: "#^Function printMap\\(\\) has parameter \\$type with no type specified\\.$#"
+			count: 1
+			path: includes/google_maps.php
+
+		-
+			message: "#^Function printMapCenter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/google_maps.php
+
+		-
+			message: "#^Function printMapCenter\\(\\) has parameter \\$country with no type specified\\.$#"
+			count: 1
+			path: includes/google_maps.php
+
+		-
+			message: "#^Function printMapType\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/google_maps.php
+
+		-
+			message: "#^Function printMapType\\(\\) has parameter \\$maptype with no type specified\\.$#"
+			count: 1
+			path: includes/google_maps.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function urldecode expects string, array\\<int, string\\>\\|string\\|null given\\.$#"
+			count: 3
+			path: includes/google_maps.php
+
+		-
+			message: "#^Variable \\$replace_pattern might not be defined\\.$#"
+			count: 1
+			path: includes/google_maps.php
+
+		-
+			message: "#^Variable \\$search_pattern might not be defined\\.$#"
+			count: 1
+			path: includes/google_maps.php
+
+		-
+			message: "#^Constant DB_ADDR not found\\.$#"
+			count: 1
+			path: ingame.php
+
+		-
+			message: "#^Constant DB_NAME not found\\.$#"
+			count: 1
+			path: ingame.php
+
+		-
+			message: "#^Constant DB_PASS not found\\.$#"
+			count: 1
+			path: ingame.php
+
+		-
+			message: "#^Constant DB_PCONNECT not found\\.$#"
+			count: 1
+			path: ingame.php
+
+		-
+			message: "#^Constant DB_TYPE not found\\.$#"
+			count: 1
+			path: ingame.php
+
+		-
+			message: "#^Constant DB_USER not found\\.$#"
+			count: 1
+			path: ingame.php
+
+		-
+			message: "#^Constant INCLUDE_PATH not found\\.$#"
+			count: 3
+			path: ingame.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 3
+			path: ingame.php
+
+		-
+			message: "#^File ends with a trailing whitespace\\. This may cause problems when running the code in the web browser\\. Remove the closing \\?\\> mark or remove the whitespace\\.$#"
+			count: 1
+			path: ingame.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 20
+			path: pages/actioninfo.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 5
+			path: pages/actioninfo.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 4
+			path: pages/actioninfo.php
+
+		-
+			message: "#^Variable \\$gamename might not be defined\\.$#"
+			count: 2
+			path: pages/actioninfo.php
+
+		-
+			message: "#^Variable \\$result might not be defined\\.$#"
+			count: 1
+			path: pages/actioninfo.php
+
+		-
+			message: "#^Variable \\$resultCount might not be defined\\.$#"
+			count: 1
+			path: pages/actioninfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: pages/actions.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/actions.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 7
+			path: pages/actions.php
+
+		-
+			message: "#^Access to an undefined property AdminTask\\:\\:\\$group\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Access to an undefined property PropertyPage_Property\\:\\:\\$datasource\\.$#"
+			count: 2
+			path: pages/admin.php
+
+		-
+			message: "#^Binary operation \"\\.\" between non\\-falsy\\-string and array\\<int, string\\>\\|string\\|null results in an error\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Binary operation \"\\.\\=\" between 0\\|0\\.0\\|array\\{\\}\\|string\\|false\\|null and non\\-falsy\\-string results in an error\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 15
+			path: pages/admin.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 4
+			path: pages/admin.php
+
+		-
+			message: "#^Function message\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Function message\\(\\) has parameter \\$icon with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Function message\\(\\) has parameter \\$msg with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Left side of \\|\\| is always false\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method AdminTask\\:\\:__construct\\(\\) has parameter \\$acclevel with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method AdminTask\\:\\:__construct\\(\\) has parameter \\$description with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method AdminTask\\:\\:__construct\\(\\) has parameter \\$group with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method AdminTask\\:\\:__construct\\(\\) has parameter \\$title with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method AdminTask\\:\\:__construct\\(\\) has parameter \\$type with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method Auth\\:\\:checkPass\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:__construct\\(\\) has parameter \\$DetailsLink with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:__construct\\(\\) has parameter \\$deleteCallback with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:__construct\\(\\) has parameter \\$drawDetailsLink with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:__construct\\(\\) has parameter \\$icon with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:__construct\\(\\) has parameter \\$keycol with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:__construct\\(\\) has parameter \\$showid with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:__construct\\(\\) has parameter \\$table with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:draw\\(\\) has parameter \\$draw_new with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:draw\\(\\) has parameter \\$result with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:drawfields\\(\\) has parameter \\$new with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:drawfields\\(\\) has parameter \\$rowdata with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:drawfields\\(\\) has parameter \\$stripslashes with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:error\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:setHelp\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:setHelp\\(\\) has parameter \\$div with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:setHelp\\(\\) has parameter \\$key with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:setHelp\\(\\) has parameter \\$texts with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditList\\:\\:update\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditListColumn\\:\\:__construct\\(\\) has parameter \\$datasource with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditListColumn\\:\\:__construct\\(\\) has parameter \\$maxlength with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditListColumn\\:\\:__construct\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditListColumn\\:\\:__construct\\(\\) has parameter \\$required with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditListColumn\\:\\:__construct\\(\\) has parameter \\$title with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditListColumn\\:\\:__construct\\(\\) has parameter \\$type with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method EditListColumn\\:\\:__construct\\(\\) has parameter \\$width with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method PropertyPage\\:\\:__construct\\(\\) has parameter \\$groups with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method PropertyPage\\:\\:__construct\\(\\) has parameter \\$keycol with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method PropertyPage\\:\\:__construct\\(\\) has parameter \\$keyval with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method PropertyPage\\:\\:__construct\\(\\) has parameter \\$table with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method PropertyPage\\:\\:draw\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method PropertyPage_Group\\:\\:__construct\\(\\) has parameter \\$properties with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method PropertyPage_Group\\:\\:__construct\\(\\) has parameter \\$title with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method PropertyPage_Group\\:\\:draw\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method PropertyPage_Property\\:\\:__construct\\(\\) has parameter \\$datasource with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method PropertyPage_Property\\:\\:__construct\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method PropertyPage_Property\\:\\:__construct\\(\\) has parameter \\$title with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method PropertyPage_Property\\:\\:__construct\\(\\) has parameter \\$type with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Method PropertyPage_Property\\:\\:draw\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Parameter \\#2 \\$numeric of function valid_request expects bool, int given\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property AdminTask\\:\\:\\$acclevel has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property AdminTask\\:\\:\\$description has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property AdminTask\\:\\:\\$title has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property AdminTask\\:\\:\\$type has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property Auth\\:\\:\\$error has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property Auth\\:\\:\\$ok has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property Auth\\:\\:\\$password has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property Auth\\:\\:\\$savepass has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property Auth\\:\\:\\$session has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property Auth\\:\\:\\$sessionStart has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property Auth\\:\\:\\$userdata has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property Auth\\:\\:\\$username has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditList\\:\\:\\$DetailsLink has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditList\\:\\:\\$columns has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditList\\:\\:\\$deleteCallback has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditList\\:\\:\\$drawDetailsLink has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditList\\:\\:\\$errors has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditList\\:\\:\\$helpDIV has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditList\\:\\:\\$helpKey has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditList\\:\\:\\$helpTexts has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditList\\:\\:\\$icon has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditList\\:\\:\\$keycol has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditList\\:\\:\\$newerror has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditList\\:\\:\\$showid has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditList\\:\\:\\$table has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditListColumn\\:\\:\\$datasource has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditListColumn\\:\\:\\$maxlength has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditListColumn\\:\\:\\$name has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditListColumn\\:\\:\\$required has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditListColumn\\:\\:\\$title has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditListColumn\\:\\:\\$type has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property EditListColumn\\:\\:\\$width has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property PropertyPage\\:\\:\\$keycol has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property PropertyPage\\:\\:\\$keyval has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property PropertyPage\\:\\:\\$propertygroups has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property PropertyPage\\:\\:\\$table has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property PropertyPage_Group\\:\\:\\$properties has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property PropertyPage_Group\\:\\:\\$title has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property PropertyPage_Property\\:\\:\\$name has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property PropertyPage_Property\\:\\:\\$title has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Property PropertyPage_Property\\:\\:\\$type has no type specified\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Right side of \\|\\| is always false\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: pages/admin.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 4
+			path: pages/admin.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 10
+			path: pages/admin.php
+
+		-
+			message: "#^Variable \\$qcols might not be defined\\.$#"
+			count: 2
+			path: pages/admin.php
+
+		-
+			message: "#^Variable \\$qvals might not be defined\\.$#"
+			count: 2
+			path: pages/admin.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/adminauth.php
+
+		-
+			message: "#^Variable \\$this might not be defined\\.$#"
+			count: 4
+			path: pages/adminauth.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/actions.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/actions.php
+
+		-
+			message: "#^Variable \\$gamecode might not be defined\\.$#"
+			count: 3
+			path: pages/admintasks/actions.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/adminusers.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/adminusers.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/awards_plyractions.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/awards_plyractions.php
+
+		-
+			message: "#^Variable \\$gamecode might not be defined\\.$#"
+			count: 3
+			path: pages/admintasks/awards_plyractions.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/awards_plyrplyractions.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/awards_plyrplyractions.php
+
+		-
+			message: "#^Variable \\$gamecode might not be defined\\.$#"
+			count: 3
+			path: pages/admintasks/awards_plyrplyractions.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/awards_plyrplyractions_victim.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/awards_plyrplyractions_victim.php
+
+		-
+			message: "#^Variable \\$gamecode might not be defined\\.$#"
+			count: 3
+			path: pages/admintasks/awards_plyrplyractions_victim.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/awards_weapons.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/awards_weapons.php
+
+		-
+			message: "#^Variable \\$gamecode might not be defined\\.$#"
+			count: 3
+			path: pages/admintasks/awards_weapons.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/clantags.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/clantags.php
+
+		-
+			message: "#^Function delete_game\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admintasks/games.php
+
+		-
+			message: "#^Function delete_game\\(\\) has parameter \\$game with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/games.php
+
+		-
+			message: "#^Function removeGameSettings\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admintasks/games.php
+
+		-
+			message: "#^Function removeGameSettings\\(\\) has parameter \\$game with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/games.php
+
+		-
+			message: "#^Function removeGameSettings\\(\\) has parameter \\$table with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/games.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/games.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/games.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/hostgroups.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/hostgroups.php
+
+		-
+			message: "#^Function clean_data\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admintasks/newserver.php
+
+		-
+			message: "#^Function clean_data\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/newserver.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/newserver.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 25
+			path: pages/admintasks/newserver.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/newserver.php
+
+		-
+			message: "#^Variable \\$selGame might not be defined\\.$#"
+			count: 3
+			path: pages/admintasks/newserver.php
+
+		-
+			message: "#^Cannot call method close\\(\\) on Directory\\|false\\.$#"
+			count: 1
+			path: pages/admintasks/options.php
+
+		-
+			message: "#^Cannot call method read\\(\\) on Directory\\|false\\.$#"
+			count: 1
+			path: pages/admintasks/options.php
+
+		-
+			message: "#^Method Option\\:\\:__construct\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/options.php
+
+		-
+			message: "#^Method Option\\:\\:__construct\\(\\) has parameter \\$title with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/options.php
+
+		-
+			message: "#^Method Option\\:\\:__construct\\(\\) has parameter \\$type with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/options.php
+
+		-
+			message: "#^Method OptionGroup\\:\\:__construct\\(\\) has parameter \\$title with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/options.php
+
+		-
+			message: "#^Property Option\\:\\:\\$name has no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/options.php
+
+		-
+			message: "#^Property Option\\:\\:\\$title has no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/options.php
+
+		-
+			message: "#^Property Option\\:\\:\\$type has no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/options.php
+
+		-
+			message: "#^Property OptionGroup\\:\\:\\$options has no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/options.php
+
+		-
+			message: "#^Property OptionGroup\\:\\:\\$title has no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/options.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/options.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: pages/admintasks/options.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/ranks.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/ranks.php
+
+		-
+			message: "#^Variable \\$gamecode might not be defined\\.$#"
+			count: 2
+			path: pages/admintasks/ranks.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/ribbons.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/ribbons.php
+
+		-
+			message: "#^Variable \\$gamecode might not be defined\\.$#"
+			count: 3
+			path: pages/admintasks/ribbons.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/ribbons_trigger.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/ribbons_trigger.php
+
+		-
+			message: "#^Variable \\$gamecode might not be defined\\.$#"
+			count: 4
+			path: pages/admintasks/ribbons_trigger.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/roles.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/roles.php
+
+		-
+			message: "#^Variable \\$gamecode might not be defined\\.$#"
+			count: 2
+			path: pages/admintasks/roles.php
+
+		-
+			message: "#^Function delete_server\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admintasks/servers.php
+
+		-
+			message: "#^Function delete_server\\(\\) has parameter \\$server with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/servers.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/servers.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/servers.php
+
+		-
+			message: "#^Variable \\$gamecode might not be defined\\.$#"
+			count: 2
+			path: pages/admintasks/servers.php
+
+		-
+			message: "#^Function setdefaults\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admintasks/serversettings.php
+
+		-
+			message: "#^Function setdefaults\\(\\) has parameter \\$key with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/serversettings.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 3
+			path: pages/admintasks/serversettings.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/serversettings.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 11
+			path: pages/admintasks/serversettings.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/serversettings.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/teams.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/teams.php
+
+		-
+			message: "#^Variable \\$gamecode might not be defined\\.$#"
+			count: 2
+			path: pages/admintasks/teams.php
+
+		-
+			message: "#^Constant DB_CHARSET not found\\.$#"
+			count: 1
+			path: pages/admintasks/tools_adminevents.php
+
+		-
+			message: "#^Constant DB_COLLATE not found\\.$#"
+			count: 1
+			path: pages/admintasks/tools_adminevents.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/admintasks/tools_adminevents.php
+
+		-
+			message: "#^Function insertEvents\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_adminevents.php
+
+		-
+			message: "#^Function insertEvents\\(\\) has parameter \\$select with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_adminevents.php
+
+		-
+			message: "#^Function insertEvents\\(\\) has parameter \\$table with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_adminevents.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_adminevents.php
+
+		-
+			message: "#^Variable \\$code might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_adminevents.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: pages/admintasks/tools_adminevents.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 3
+			path: pages/admintasks/tools_adminevents.php
+
+		-
+			message: "#^Variable \\$sort might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_adminevents.php
+
+		-
+			message: "#^Variable \\$sortorder might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_adminevents.php
+
+		-
+			message: "#^Variable \\$task might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_adminevents.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 2
+			path: pages/admintasks/tools_editdetails.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/admintasks/tools_editdetails.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_editdetails.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_editdetails.php
+
+		-
+			message: "#^Variable \\$selTask might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_editdetails.php
+
+		-
+			message: "#^Variable \\$task might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_editdetails.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 3
+			path: pages/admintasks/tools_editdetails_clan.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, float\\|int\\|string given\\.$#"
+			count: 1
+			path: pages/admintasks/tools_editdetails_clan.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_editdetails_clan.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 5
+			path: pages/admintasks/tools_editdetails_clan.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 3
+			path: pages/admintasks/tools_editdetails_clan.php
+
+		-
+			message: "#^Variable \\$mapselect might not be defined\\.$#"
+			count: 2
+			path: pages/admintasks/tools_editdetails_clan.php
+
+		-
+			message: "#^Variable \\$selTask might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_editdetails_clan.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 3
+			path: pages/admintasks/tools_editdetails_player.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, float\\|int\\|string given\\.$#"
+			count: 1
+			path: pages/admintasks/tools_editdetails_player.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_editdetails_player.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 7
+			path: pages/admintasks/tools_editdetails_player.php
+
+		-
+			message: "#^Variable \\$flagselect might not be defined\\.$#"
+			count: 2
+			path: pages/admintasks/tools_editdetails_player.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 3
+			path: pages/admintasks/tools_editdetails_player.php
+
+		-
+			message: "#^Variable \\$selTask might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_editdetails_player.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 3
+			path: pages/admintasks/tools_ipstats.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_ipstats.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: pages/admintasks/tools_ipstats.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 2
+			path: pages/admintasks/tools_ipstats.php
+
+		-
+			message: "#^Variable \\$hostgroup might not be defined\\.$#"
+			count: 4
+			path: pages/admintasks/tools_ipstats.php
+
+		-
+			message: "#^Variable \\$selTask might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_ipstats.php
+
+		-
+			message: "#^Variable \\$task might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_ipstats.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/admintasks/tools_optimize.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_optimize.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 4
+			path: pages/admintasks/tools_optimize.php
+
+		-
+			message: "#^Variable \\$task might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_optimize.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 2
+			path: pages/admintasks/tools_perlcontrol.php
+
+		-
+			message: "#^File ends with a trailing whitespace\\. This may cause problems when running the code in the web browser\\. Remove the closing \\?\\> mark or remove the whitespace\\.$#"
+			count: 1
+			path: pages/admintasks/tools_perlcontrol.php
+
+		-
+			message: "#^Parameter \\#1 \\$read_fds of function socket_select expects array\\<resource\\>\\|null, array\\<int, resource\\|false\\> given\\.$#"
+			count: 1
+			path: pages/admintasks/tools_perlcontrol.php
+
+		-
+			message: "#^Parameter \\#1 \\$socket of function socket_close expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: pages/admintasks/tools_perlcontrol.php
+
+		-
+			message: "#^Parameter \\#1 \\$socket of function socket_recvfrom expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: pages/admintasks/tools_perlcontrol.php
+
+		-
+			message: "#^Parameter \\#1 \\$socket of function socket_sendto expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: pages/admintasks/tools_perlcontrol.php
+
+		-
+			message: "#^Parameter \\#2 \\$write_fds of function socket_select is passed by reference, so it expects variables only\\.$#"
+			count: 1
+			path: pages/admintasks/tools_perlcontrol.php
+
+		-
+			message: "#^Parameter \\#3 \\$except_fds of function socket_select is passed by reference, so it expects variables only\\.$#"
+			count: 1
+			path: pages/admintasks/tools_perlcontrol.php
+
+		-
+			message: "#^Parameter \\#4 \\$tv_sec of function socket_select expects int\\|null, int\\|string given\\.$#"
+			count: 1
+			path: pages/admintasks/tools_perlcontrol.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_perlcontrol.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 5
+			path: pages/admintasks/tools_perlcontrol.php
+
+		-
+			message: "#^Variable \\$task might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_perlcontrol.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/admintasks/tools_reset.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_reset.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 40
+			path: pages/admintasks/tools_reset.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_reset.php
+
+		-
+			message: "#^Variable \\$task might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_reset.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/admintasks/tools_reset_2.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_reset_2.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 7
+			path: pages/admintasks/tools_reset_2.php
+
+		-
+			message: "#^Variable \\$task might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_reset_2.php
+
+		-
+			message: "#^Constant DB_CHARSET not found\\.$#"
+			count: 1
+			path: pages/admintasks/tools_resetdbcollations.php
+
+		-
+			message: "#^Constant DB_COLLATE not found\\.$#"
+			count: 1
+			path: pages/admintasks/tools_resetdbcollations.php
+
+		-
+			message: "#^Constant DB_NAME not found\\.$#"
+			count: 3
+			path: pages/admintasks/tools_resetdbcollations.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/admintasks/tools_resetdbcollations.php
+
+		-
+			message: "#^File ends with a trailing whitespace\\. This may cause problems when running the code in the web browser\\. Remove the closing \\?\\> mark or remove the whitespace\\.$#"
+			count: 1
+			path: pages/admintasks/tools_resetdbcollations.php
+
+		-
+			message: "#^Right side of && is always true\\.$#"
+			count: 2
+			path: pages/admintasks/tools_resetdbcollations.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between null and string will always evaluate to false\\.$#"
+			count: 4
+			path: pages/admintasks/tools_resetdbcollations.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_resetdbcollations.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 15
+			path: pages/admintasks/tools_resetdbcollations.php
+
+		-
+			message: "#^Variable \\$task might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_resetdbcollations.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 7
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function check_writable\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function copyFile\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function copyFile\\(\\) has parameter \\$dest with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function copyFile\\(\\) has parameter \\$source with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function copySettings\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function copySettings\\(\\) has parameter \\$game1 with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function copySettings\\(\\) has parameter \\$game2 with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function copySettings\\(\\) has parameter \\$table with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function getTableFields\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function getTableFields\\(\\) has parameter \\$auto_increment with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function getTableFields\\(\\) has parameter \\$table with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function mkdir_recursive\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function mkdir_recursive\\(\\) has parameter \\$pathname with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function scanCopyFiles\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function scanCopyFiles\\(\\) has parameter \\$dest with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Function scanCopyFiles\\(\\) has parameter \\$source with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 5
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Variable \\$task might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_settings_copy.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/admintasks/tools_synchronize.php
+
+		-
+			message: "#^File ends with a trailing whitespace\\. This may cause problems when running the code in the web browser\\. Remove the closing \\?\\> mark or remove the whitespace\\.$#"
+			count: 1
+			path: pages/admintasks/tools_synchronize.php
+
+		-
+			message: "#^Function hide_cheaters\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_synchronize.php
+
+		-
+			message: "#^Function hide_cheaters\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: pages/admintasks/tools_synchronize.php
+
+		-
+			message: "#^Parameter \\#1 \\$read_fds of function socket_select expects array\\<resource\\>\\|null, array\\<int, resource\\|false\\> given\\.$#"
+			count: 1
+			path: pages/admintasks/tools_synchronize.php
+
+		-
+			message: "#^Parameter \\#1 \\$socket of function socket_close expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: pages/admintasks/tools_synchronize.php
+
+		-
+			message: "#^Parameter \\#1 \\$socket of function socket_recvfrom expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: pages/admintasks/tools_synchronize.php
+
+		-
+			message: "#^Parameter \\#1 \\$socket of function socket_sendto expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: pages/admintasks/tools_synchronize.php
+
+		-
+			message: "#^Parameter \\#2 \\$write_fds of function socket_select is passed by reference, so it expects variables only\\.$#"
+			count: 1
+			path: pages/admintasks/tools_synchronize.php
+
+		-
+			message: "#^Parameter \\#3 \\$except_fds of function socket_select is passed by reference, so it expects variables only\\.$#"
+			count: 1
+			path: pages/admintasks/tools_synchronize.php
+
+		-
+			message: "#^Parameter \\#4 \\$tv_sec of function socket_select expects int\\|null, int\\|string given\\.$#"
+			count: 1
+			path: pages/admintasks/tools_synchronize.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_synchronize.php
+
+		-
+			message: "#^Variable \\$task might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/tools_synchronize.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/voicecomm.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/voicecomm.php
+
+		-
+			message: "#^Variable \\$auth might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/weapons.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/weapons.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/admintasks/weapons.php
+
+		-
+			message: "#^Variable \\$gamecode might not be defined\\.$#"
+			count: 2
+			path: pages/admintasks/weapons.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/awards.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 6
+			path: pages/awards.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 4
+			path: pages/awards.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/awards.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 4
+			path: pages/awards.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/awards_daily.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 7
+			path: pages/awards_daily.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 2
+			path: pages/awards_daily.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 4
+			path: pages/awards_daily.php
+
+		-
+			message: "#^Variable \\$realgame might not be defined\\.$#"
+			count: 1
+			path: pages/awards_daily.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/awards_global.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: pages/awards_global.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 2
+			path: pages/awards_global.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 3
+			path: pages/awards_global.php
+
+		-
+			message: "#^Variable \\$realgame might not be defined\\.$#"
+			count: 1
+			path: pages/awards_global.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 4
+			path: pages/awards_ranks.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/awards_ranks.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 3
+			path: pages/awards_ranks.php
+
+		-
+			message: "#^Variable \\$ranks might not be defined\\.$#"
+			count: 2
+			path: pages/awards_ranks.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 5
+			path: pages/awards_ribbons.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: pages/awards_ribbons.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/awards_ribbons.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 4
+			path: pages/awards_ribbons.php
+
+		-
+			message: "#^Variable \\$realgame might not be defined\\.$#"
+			count: 2
+			path: pages/awards_ribbons.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/bans.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 7
+			path: pages/bans.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 3
+			path: pages/bans.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 7
+			path: pages/bans.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 15
+			path: pages/chat.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 4
+			path: pages/chat.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 8
+			path: pages/chat.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/chathistory.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 10
+			path: pages/chathistory.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 7
+			path: pages/chathistory.php
+
+		-
+			message: "#^Constant GOOGLE_MAPS_API_KEY not found\\.$#"
+			count: 1
+			path: pages/claninfo.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/claninfo.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 7
+			path: pages/claninfo.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/claninfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 9
+			path: pages/claninfo.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 7
+			path: pages/claninfo.php
+
+		-
+			message: "#^Variable \\$clan might not be defined\\.$#"
+			count: 3
+			path: pages/claninfo_actions.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 4
+			path: pages/claninfo_actions.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 2
+			path: pages/claninfo_actions.php
+
+		-
+			message: "#^Constant INCLUDE_PATH not found\\.$#"
+			count: 1
+			path: pages/claninfo_general.php
+
+		-
+			message: "#^Variable \\$clan might not be defined\\.$#"
+			count: 5
+			path: pages/claninfo_general.php
+
+		-
+			message: "#^Variable \\$clandata might not be defined\\.$#"
+			count: 22
+			path: pages/claninfo_general.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 9
+			path: pages/claninfo_general.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/claninfo_general.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 5
+			path: pages/claninfo_general.php
+
+		-
+			message: "#^Variable \\$totalclanplayers might not be defined\\.$#"
+			count: 1
+			path: pages/claninfo_general.php
+
+		-
+			message: "#^Variable \\$clan might not be defined\\.$#"
+			count: 2
+			path: pages/claninfo_mapperformance.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 5
+			path: pages/claninfo_mapperformance.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 1
+			path: pages/claninfo_mapperformance.php
+
+		-
+			message: "#^Variable \\$realheadshots might not be defined\\.$#"
+			count: 1
+			path: pages/claninfo_mapperformance.php
+
+		-
+			message: "#^Variable \\$realkills might not be defined\\.$#"
+			count: 1
+			path: pages/claninfo_mapperformance.php
+
+		-
+			message: "#^Constant DB_CHARSET not found\\.$#"
+			count: 2
+			path: pages/claninfo_teams.php
+
+		-
+			message: "#^Constant DB_COLLATE not found\\.$#"
+			count: 2
+			path: pages/claninfo_teams.php
+
+		-
+			message: "#^Variable \\$clan might not be defined\\.$#"
+			count: 6
+			path: pages/claninfo_teams.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 17
+			path: pages/claninfo_teams.php
+
+		-
+			message: "#^Variable \\$fname might not be defined\\.$#"
+			count: 1
+			path: pages/claninfo_teams.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 7
+			path: pages/claninfo_teams.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 3
+			path: pages/claninfo_weapons.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function ucfirst expects string, int\\|string given\\.$#"
+			count: 1
+			path: pages/claninfo_weapons.php
+
+		-
+			message: "#^Variable \\$clan might not be defined\\.$#"
+			count: 3
+			path: pages/claninfo_weapons.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 13
+			path: pages/claninfo_weapons.php
+
+		-
+			message: "#^Variable \\$fname might not be defined\\.$#"
+			count: 4
+			path: pages/claninfo_weapons.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 12
+			path: pages/claninfo_weapons.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 6
+			path: pages/claninfo_weapons.php
+
+		-
+			message: "#^Variable \\$realheadshots might not be defined\\.$#"
+			count: 1
+			path: pages/claninfo_weapons.php
+
+		-
+			message: "#^Variable \\$realkills might not be defined\\.$#"
+			count: 1
+			path: pages/claninfo_weapons.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/clans.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 9
+			path: pages/clans.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 3
+			path: pages/clans.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 8
+			path: pages/clans.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 3
+			path: pages/contents.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 2
+			path: pages/contents.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 22
+			path: pages/contents.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 12
+			path: pages/contents.php
+
+		-
+			message: "#^Variable \\$player_string might not be defined\\.$#"
+			count: 1
+			path: pages/contents.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/countryclans.php
+
+		-
+			message: "#^Parameter \\#2 \\$numeric of function valid_request expects bool, int given\\.$#"
+			count: 1
+			path: pages/countryclans.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 9
+			path: pages/countryclans.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 5
+			path: pages/countryclans.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 8
+			path: pages/countryclans.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 3
+			path: pages/countryclansinfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 10
+			path: pages/countryclansinfo.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 8
+			path: pages/countryclansinfo.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 7
+			path: pages/countryclansinfo.php
+
+		-
+			message: "#^Variable \\$playerdata might not be defined\\.$#"
+			count: 2
+			path: pages/countryclansinfo.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 2
+			path: pages/dailyawardinfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 9
+			path: pages/dailyawardinfo.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 3
+			path: pages/dailyawardinfo.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 6
+			path: pages/dailyawardinfo.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/footer.php
+
+		-
+			message: "#^Constant INCLUDE_PATH not found\\.$#"
+			count: 1
+			path: pages/footer.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 4
+			path: pages/footer.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 4
+			path: pages/game.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 2
+			path: pages/game.php
+
+		-
+			message: "#^Expression \"\\$g_options\\['scripturl'\\]\" on a separate line does not do anything\\.$#"
+			count: 1
+			path: pages/game.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 24
+			path: pages/game.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 25
+			path: pages/game.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 18
+			path: pages/game.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: pages/gameslist.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/gameslist.php
+
+		-
+			message: "#^Cannot call method close\\(\\) on Directory\\|false\\.$#"
+			count: 1
+			path: pages/header.php
+
+		-
+			message: "#^Cannot call method read\\(\\) on Directory\\|false\\.$#"
+			count: 1
+			path: pages/header.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 2
+			path: pages/header.php
+
+		-
+			message: "#^Constant INCLUDE_PATH not found\\.$#"
+			count: 4
+			path: pages/header.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 2
+			path: pages/header.php
+
+		-
+			message: "#^File ends with a trailing whitespace\\. This may cause problems when running the code in the web browser\\. Remove the closing \\?\\> mark or remove the whitespace\\.$#"
+			count: 1
+			path: pages/header.php
+
+		-
+			message: "#^Part \\$url \\(non\\-empty\\-array\\<int, string\\>\\|non\\-falsy\\-string\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: pages/header.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: pages/header.php
+
+		-
+			message: "#^Variable \\$extratabs might not be defined\\.$#"
+			count: 3
+			path: pages/header.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 41
+			path: pages/header.php
+
+		-
+			message: "#^Variable \\$location might not be defined\\.$#"
+			count: 1
+			path: pages/header.php
+
+		-
+			message: "#^Variable \\$styles might not be defined\\.$#"
+			count: 2
+			path: pages/header.php
+
+		-
+			message: "#^Variable \\$title might not be defined\\.$#"
+			count: 1
+			path: pages/header.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 6
+			path: pages/help.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 4
+			path: pages/help.php
+
+		-
+			message: "#^Negated boolean expression is always true\\.$#"
+			count: 1
+			path: pages/ingame/accuracy.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/ingame/accuracy.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 14
+			path: pages/ingame/accuracy.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 2
+			path: pages/ingame/accuracy.php
+
+		-
+			message: "#^Variable \\$action_id might not be defined\\.$#"
+			count: 1
+			path: pages/ingame/actioninfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 13
+			path: pages/ingame/actioninfo.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 6
+			path: pages/ingame/actioninfo.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/ingame/actions.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: pages/ingame/actions.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 5
+			path: pages/ingame/actions.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 7
+			path: pages/ingame/bans.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 4
+			path: pages/ingame/bans.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/ingame/claninfo.php
+
+		-
+			message: "#^Regex pattern is invalid\\: Empty regular expression in pattern\\:  $#"
+			count: 2
+			path: pages/ingame/claninfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 10
+			path: pages/ingame/claninfo.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/ingame/clans.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 7
+			path: pages/ingame/clans.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 4
+			path: pages/ingame/clans.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/ingame/footer.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/ingame/footer.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/ingame/header.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/ingame/header.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, float\\|int\\|string given\\.$#"
+			count: 1
+			path: pages/ingame/help.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: pages/ingame/help.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/ingame/help.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 1
+			path: pages/ingame/help.php
+
+		-
+			message: "#^Constant DB_CHARSET not found\\.$#"
+			count: 1
+			path: pages/ingame/kills.php
+
+		-
+			message: "#^Constant DB_COLLATE not found\\.$#"
+			count: 1
+			path: pages/ingame/kills.php
+
+		-
+			message: "#^File ends with a trailing whitespace\\. This may cause problems when running the code in the web browser\\. Remove the closing \\?\\> mark or remove the whitespace\\.$#"
+			count: 1
+			path: pages/ingame/kills.php
+
+		-
+			message: "#^Negated boolean expression is always true\\.$#"
+			count: 1
+			path: pages/ingame/kills.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/ingame/kills.php
+
+		-
+			message: "#^Parameter \\#2 \\$numeric of function valid_request expects bool, int given\\.$#"
+			count: 1
+			path: pages/ingame/kills.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 19
+			path: pages/ingame/kills.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 2
+			path: pages/ingame/kills.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, float\\|int\\|string given\\.$#"
+			count: 1
+			path: pages/ingame/load.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 4
+			path: pages/ingame/load.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 2
+			path: pages/ingame/load.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 2
+			path: pages/ingame/load.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 6
+			path: pages/ingame/mapinfo.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 3
+			path: pages/ingame/mapinfo.php
+
+		-
+			message: "#^Negated boolean expression is always true\\.$#"
+			count: 1
+			path: pages/ingame/maps.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/ingame/maps.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 17
+			path: pages/ingame/maps.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 2
+			path: pages/ingame/maps.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, float\\|int\\|string given\\.$#"
+			count: 3
+			path: pages/ingame/motd.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: pages/ingame/motd.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 6
+			path: pages/ingame/motd.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 5
+			path: pages/ingame/motd.php
+
+		-
+			message: "#^Variable \\$server_id might not be defined\\.$#"
+			count: 1
+			path: pages/ingame/motd.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 7
+			path: pages/ingame/players.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 3
+			path: pages/ingame/players.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 4
+			path: pages/ingame/players.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, float\\|int\\|string given\\.$#"
+			count: 1
+			path: pages/ingame/servers.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: pages/ingame/servers.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 1
+			path: pages/ingame/servers.php
+
+		-
+			message: "#^Negated boolean expression is always true\\.$#"
+			count: 1
+			path: pages/ingame/statsme.php
+
+		-
+			message: "#^Parameter \\#1 \\$number of function number_format expects float, float\\|int\\|string given\\.$#"
+			count: 1
+			path: pages/ingame/statsme.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/ingame/statsme.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 23
+			path: pages/ingame/statsme.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 4
+			path: pages/ingame/statsme.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/ingame/status.php
+
+		-
+			message: "#^File ends with a trailing whitespace\\. This may cause problems when running the code in the web browser\\. Remove the closing \\?\\> mark or remove the whitespace\\.$#"
+			count: 1
+			path: pages/ingame/status.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, float\\|int\\|string given\\.$#"
+			count: 1
+			path: pages/ingame/status.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 6
+			path: pages/ingame/status.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 2
+			path: pages/ingame/status.php
+
+		-
+			message: "#^Negated boolean expression is always true\\.$#"
+			count: 1
+			path: pages/ingame/targets.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/ingame/targets.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 14
+			path: pages/ingame/targets.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 2
+			path: pages/ingame/targets.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: pages/ingame/weaponinfo.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 3
+			path: pages/ingame/weaponinfo.php
+
+		-
+			message: "#^Negated boolean expression is always true\\.$#"
+			count: 1
+			path: pages/ingame/weapons.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/ingame/weapons.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 17
+			path: pages/ingame/weapons.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 2
+			path: pages/ingame/weapons.php
+
+		-
+			message: "#^Call to function unset\\(\\) contains undefined variable \\$team_colors\\.$#"
+			count: 1
+			path: pages/livestats.php
+
+		-
+			message: "#^Function printserverstats\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/livestats.php
+
+		-
+			message: "#^Function printserverstats\\(\\) has parameter \\$server_id with no type specified\\.$#"
+			count: 1
+			path: pages/livestats.php
+
+		-
+			message: "#^Parameter \\#1 \\$number of function number_format expects float, string given\\.$#"
+			count: 1
+			path: pages/livestats.php
+
+		-
+			message: "#^Variable \\$thisplayer in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 2
+			path: pages/livestats.php
+
+		-
+			message: "#^Cannot access offset 0 on array\\|false\\.$#"
+			count: 1
+			path: pages/mapinfo.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/mapinfo.php
+
+		-
+			message: "#^Parameter \\#1 \\$url of function get_headers expects string, array\\<int, string\\>\\|string given\\.$#"
+			count: 1
+			path: pages/mapinfo.php
+
+		-
+			message: "#^Part \\$map_dlurl \\(array\\<int, string\\>\\|string\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: pages/mapinfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 6
+			path: pages/mapinfo.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 7
+			path: pages/mapinfo.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 10
+			path: pages/mapinfo.php
+
+		-
+			message: "#^Variable \\$gamename might not be defined\\.$#"
+			count: 2
+			path: pages/mapinfo.php
+
+		-
+			message: "#^Variable \\$realgame might not be defined\\.$#"
+			count: 1
+			path: pages/mapinfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: pages/maps.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/maps.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 7
+			path: pages/maps.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 13
+			path: pages/playerawards.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 5
+			path: pages/playerawards.php
+
+		-
+			message: "#^Constant DB_CHARSET not found\\.$#"
+			count: 1
+			path: pages/playerhistory.php
+
+		-
+			message: "#^Constant DB_COLLATE not found\\.$#"
+			count: 1
+			path: pages/playerhistory.php
+
+		-
+			message: "#^Function insertEvents\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/playerhistory.php
+
+		-
+			message: "#^Function insertEvents\\(\\) has parameter \\$select with no type specified\\.$#"
+			count: 1
+			path: pages/playerhistory.php
+
+		-
+			message: "#^Function insertEvents\\(\\) has parameter \\$table with no type specified\\.$#"
+			count: 1
+			path: pages/playerhistory.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/playerhistory.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 11
+			path: pages/playerhistory.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 7
+			path: pages/playerhistory.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/playerinfo.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 10
+			path: pages/playerinfo.php
+
+		-
+			message: "#^Negated boolean expression is always true\\.$#"
+			count: 1
+			path: pages/playerinfo.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/playerinfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 19
+			path: pages/playerinfo.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 8
+			path: pages/playerinfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 3
+			path: pages/playerinfo_aliases.php
+
+		-
+			message: "#^Variable \\$player might not be defined\\.$#"
+			count: 2
+			path: pages/playerinfo_aliases.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 9
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^File ends with a trailing whitespace\\. This may cause problems when running the code in the web browser\\. Remove the closing \\?\\> mark or remove the whitespace\\.$#"
+			count: 1
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Parameter \\#1 \\$number of function number_format expects float, float\\|int\\|string given\\.$#"
+			count: 1
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 37
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 18
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 15
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$pl_urlname might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$player might not be defined\\.$#"
+			count: 28
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$playerdata might not be defined\\.$#"
+			count: 33
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$realdeaths might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$realgame might not be defined\\.$#"
+			count: 3
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$realheadshots might not be defined\\.$#"
+			count: 2
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$realkills might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$realteamkills might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$siteurlneo might not be defined\\.$#"
+			count: 3
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$statusmsg might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Variable \\$xml might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_general.php
+
+		-
+			message: "#^Constant DB_CHARSET not found\\.$#"
+			count: 1
+			path: pages/playerinfo_killstats.php
+
+		-
+			message: "#^Constant DB_COLLATE not found\\.$#"
+			count: 1
+			path: pages/playerinfo_killstats.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 9
+			path: pages/playerinfo_killstats.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_killstats.php
+
+		-
+			message: "#^Variable \\$killLimit might not be defined\\.$#"
+			count: 4
+			path: pages/playerinfo_killstats.php
+
+		-
+			message: "#^Variable \\$player might not be defined\\.$#"
+			count: 2
+			path: pages/playerinfo_killstats.php
+
+		-
+			message: "#^Variable \\$realdeaths might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_killstats.php
+
+		-
+			message: "#^Variable \\$realkills might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_killstats.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: pages/playerinfo_mapperformance.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_mapperformance.php
+
+		-
+			message: "#^Variable \\$player might not be defined\\.$#"
+			count: 13
+			path: pages/playerinfo_mapperformance.php
+
+		-
+			message: "#^Variable \\$realdeaths might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_mapperformance.php
+
+		-
+			message: "#^Variable \\$realheadshots might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_mapperformance.php
+
+		-
+			message: "#^Variable \\$realkills might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_mapperformance.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 4
+			path: pages/playerinfo_playeractions.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 2
+			path: pages/playerinfo_playeractions.php
+
+		-
+			message: "#^Variable \\$player might not be defined\\.$#"
+			count: 3
+			path: pages/playerinfo_playeractions.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: pages/playerinfo_servers.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_servers.php
+
+		-
+			message: "#^Variable \\$player might not be defined\\.$#"
+			count: 13
+			path: pages/playerinfo_servers.php
+
+		-
+			message: "#^Variable \\$realdeaths might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_servers.php
+
+		-
+			message: "#^Variable \\$realheadshots might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_servers.php
+
+		-
+			message: "#^Variable \\$realkills might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_servers.php
+
+		-
+			message: "#^Constant DB_CHARSET not found\\.$#"
+			count: 2
+			path: pages/playerinfo_teams.php
+
+		-
+			message: "#^Constant DB_COLLATE not found\\.$#"
+			count: 2
+			path: pages/playerinfo_teams.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 17
+			path: pages/playerinfo_teams.php
+
+		-
+			message: "#^Variable \\$fname might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_teams.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 4
+			path: pages/playerinfo_teams.php
+
+		-
+			message: "#^Variable \\$player might not be defined\\.$#"
+			count: 6
+			path: pages/playerinfo_teams.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 3
+			path: pages/playerinfo_weapons.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function ucfirst expects string, int\\|string given\\.$#"
+			count: 1
+			path: pages/playerinfo_weapons.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 12
+			path: pages/playerinfo_weapons.php
+
+		-
+			message: "#^Variable \\$dinoday_models might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_weapons.php
+
+		-
+			message: "#^Variable \\$fname might not be defined\\.$#"
+			count: 4
+			path: pages/playerinfo_weapons.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 12
+			path: pages/playerinfo_weapons.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 6
+			path: pages/playerinfo_weapons.php
+
+		-
+			message: "#^Variable \\$player might not be defined\\.$#"
+			count: 3
+			path: pages/playerinfo_weapons.php
+
+		-
+			message: "#^Variable \\$realheadshots might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_weapons.php
+
+		-
+			message: "#^Variable \\$realkills might not be defined\\.$#"
+			count: 1
+			path: pages/playerinfo_weapons.php
+
+		-
+			message: "#^Constant INCLUDE_PATH not found\\.$#"
+			count: 3
+			path: pages/players.php
+
+		-
+			message: "#^Parameter \\#4 \\$mon of function mktime expects int, string given\\.$#"
+			count: 3
+			path: pages/players.php
+
+		-
+			message: "#^Parameter \\#5 \\$day of function mktime expects int, string given\\.$#"
+			count: 3
+			path: pages/players.php
+
+		-
+			message: "#^Parameter \\#6 \\$year of function mktime expects int, string given\\.$#"
+			count: 3
+			path: pages/players.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 12
+			path: pages/players.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 7
+			path: pages/players.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 9
+			path: pages/players.php
+
+		-
+			message: "#^Variable \\$maxEvent might not be defined\\.$#"
+			count: 1
+			path: pages/players.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
+			count: 1
+			path: pages/playersessions.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 11
+			path: pages/playersessions.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 6
+			path: pages/playersessions.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 14
+			path: pages/profile.php
+
+		-
+			message: "#^Variable \\$action might not be defined\\.$#"
+			count: 1
+			path: pages/rankinfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 12
+			path: pages/rankinfo.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 3
+			path: pages/rankinfo.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 6
+			path: pages/rankinfo.php
+
+		-
+			message: "#^Variable \\$gamename might not be defined\\.$#"
+			count: 2
+			path: pages/rankinfo.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/ribboninfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 9
+			path: pages/ribboninfo.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 3
+			path: pages/ribboninfo.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 8
+			path: pages/ribboninfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 10
+			path: pages/roles.php
+
+		-
+			message: "#^Variable \\$fname might not be defined\\.$#"
+			count: 1
+			path: pages/roles.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/roles.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 8
+			path: pages/roles.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 10
+			path: pages/rolesinfo.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 4
+			path: pages/rolesinfo.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 8
+			path: pages/rolesinfo.php
+
+		-
+			message: "#^Variable \\$gamename might not be defined\\.$#"
+			count: 2
+			path: pages/rolesinfo.php
+
+		-
+			message: "#^Method Search\\:\\:__construct\\(\\) has parameter \\$game with no type specified\\.$#"
+			count: 1
+			path: pages/search-class.php
+
+		-
+			message: "#^Method Search\\:\\:__construct\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: pages/search-class.php
+
+		-
+			message: "#^Method Search\\:\\:__construct\\(\\) has parameter \\$type with no type specified\\.$#"
+			count: 1
+			path: pages/search-class.php
+
+		-
+			message: "#^Method Search\\:\\:drawForm\\(\\) has parameter \\$getvars with no type specified\\.$#"
+			count: 1
+			path: pages/search-class.php
+
+		-
+			message: "#^Method Search\\:\\:drawForm\\(\\) has parameter \\$searchtypes with no type specified\\.$#"
+			count: 1
+			path: pages/search-class.php
+
+		-
+			message: "#^Method Search\\:\\:drawResults\\(\\) has parameter \\$link_clan with no type specified\\.$#"
+			count: 1
+			path: pages/search-class.php
+
+		-
+			message: "#^Method Search\\:\\:drawResults\\(\\) has parameter \\$link_player with no type specified\\.$#"
+			count: 1
+			path: pages/search-class.php
+
+		-
+			message: "#^Property Search\\:\\:\\$game has no type specified\\.$#"
+			count: 1
+			path: pages/search-class.php
+
+		-
+			message: "#^Property Search\\:\\:\\$query has no type specified\\.$#"
+			count: 1
+			path: pages/search-class.php
+
+		-
+			message: "#^Property Search\\:\\:\\$type has no type specified\\.$#"
+			count: 1
+			path: pages/search-class.php
+
+		-
+			message: "#^Property Search\\:\\:\\$uniqueid_string has no type specified\\.$#"
+			count: 1
+			path: pages/search-class.php
+
+		-
+			message: "#^Property Search\\:\\:\\$uniqueid_string_plural has no type specified\\.$#"
+			count: 1
+			path: pages/search-class.php
+
+		-
+			message: "#^Variable \\$numitems might not be defined\\.$#"
+			count: 1
+			path: pages/search-class.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/search.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/servers.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, float\\|int\\|string given\\.$#"
+			count: 1
+			path: pages/servers.php
+
+		-
+			message: "#^Parameter \\#2 \\$exit of function error expects bool, int given\\.$#"
+			count: 1
+			path: pages/servers.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: pages/servers.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 8
+			path: pages/servers.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 2
+			path: pages/servers.php
+
+		-
+			message: "#^Constant FOPEN not found\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Constant HTML not found\\.$#"
+			count: 2
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 5
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 3
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Function show\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Function show\\(\\) has parameter \\$array with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Function show\\(\\) has parameter \\$tpl with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Parameter \\#2 \\$exit of function error expects bool, int given\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Parameter \\#2 \\$length of function fread expects int\\<0, max\\>, int\\<0, max\\>\\|false given\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Result of function error \\(void\\) is used\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$cAmount might not be defined\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$chan might not be defined\\.$#"
+			count: 2
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$channelstats might not be defined\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$color might not be defined\\.$#"
+			count: 2
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 2
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$info might not be defined\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$max might not be defined\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$name might not be defined\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$os might not be defined\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$subusers might not be defined\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$uptime might not be defined\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$user might not be defined\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Variable \\$userstats might not be defined\\.$#"
+			count: 2
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_closeConnection\\(\\) has parameter \\$socket with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_compareChannel\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_compareChannel\\(\\) has parameter \\$a with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_compareChannel\\(\\) has parameter \\$b with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_comparePlayer\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_comparePlayer\\(\\) has parameter \\$a with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_comparePlayer\\(\\) has parameter \\$b with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_formatTime\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_formatTime\\(\\) has parameter \\$totaltime with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getChannelList\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getChannelList\\(\\) has parameter \\$socket with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getCodecName\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getCodecName\\(\\) has parameter \\$codec with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getLimitedChannelList\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getLimitedChannelList\\(\\) has parameter \\$limitChannel with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getLimitedChannelList\\(\\) has parameter \\$socket with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getLimitedPlayerList\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getLimitedPlayerList\\(\\) has parameter \\$channelList with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getLimitedPlayerList\\(\\) has parameter \\$socket with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getPlayerList\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getPlayerList\\(\\) has parameter \\$socket with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getServerInfo\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_getServerInfo\\(\\) has parameter \\$socket with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_openConnection\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_openConnection\\(\\) has parameter \\$host with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_openConnection\\(\\) has parameter \\$port with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_openConnection\\(\\) has parameter \\$socket with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_openConnection\\(\\) has parameter \\$timeout with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_orderAlpha\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_orderAlpha\\(\\) has parameter \\$str1 with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_orderAlpha\\(\\) has parameter \\$str2 with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_orderAlphaGetString\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_orderAlphaGetString\\(\\) has parameter \\$string with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_selectServer\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_selectServer\\(\\) has parameter \\$port with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_selectServer\\(\\) has parameter \\$socket with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_setChannelDisplayName\\(\\) has parameter \\$channelInfo with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_setPlayerDisplayImage\\(\\) has parameter \\$playerInfo with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_setPlayerDisplayName\\(\\) has parameter \\$playerInfo with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_stripEOL\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_stripEOL\\(\\) has parameter \\$evalString with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_stripPartFromString\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_stripPartFromString\\(\\) has parameter \\$evalString with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_stripQuotes\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:_stripQuotes\\(\\) has parameter \\$evalString with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:displayTeamspeak\\(\\) has parameter \\$serverAddress with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:displayTeamspeak\\(\\) has parameter \\$serverQueryPort with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:displayTeamspeak\\(\\) has parameter \\$serverUDPPort with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:displayTeamspeakEx\\(\\) has parameter \\$settings with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:getDefaultSettings\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:queryTeamspeakServer\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:queryTeamspeakServer\\(\\) has parameter \\$serverAddress with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:queryTeamspeakServer\\(\\) has parameter \\$serverQueryPort with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:queryTeamspeakServer\\(\\) has parameter \\$serverUDPPort with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:queryTeamspeakServerEx\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:queryTeamspeakServerEx\\(\\) has parameter \\$settings with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Method teamspeakDisplayClass\\:\\:sortServerInfo\\(\\) has parameter \\$serverInfo with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_class.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 59
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function channelInfo\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function channelInfo\\(\\) has parameter \\$cID with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function channelInfo\\(\\) has parameter \\$ip with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function channelInfo\\(\\) has parameter \\$port with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function channelInfo\\(\\) has parameter \\$tPort with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function convertCharset\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function convertCharset\\(\\) has parameter \\$text with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function defaultInfo\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function defaultInfo\\(\\) has parameter \\$ip with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function defaultInfo\\(\\) has parameter \\$port with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function defaultInfo\\(\\) has parameter \\$tPort with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getChannelName\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getChannelName\\(\\) has parameter \\$cid with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getChannelName\\(\\) has parameter \\$ip with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getChannelName\\(\\) has parameter \\$port with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getChannelName\\(\\) has parameter \\$tPort with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getChannels\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getChannels\\(\\) has parameter \\$ip with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getChannels\\(\\) has parameter \\$port with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getChannels\\(\\) has parameter \\$tPort with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getCodec\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getCodec\\(\\) has parameter \\$codec with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getTSChannelUsers\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getTSChannelUsers\\(\\) has parameter \\$ip with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getTSChannelUsers\\(\\) has parameter \\$port with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getTSChannelUsers\\(\\) has parameter \\$tPort with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getTSVersion\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getTSVersion\\(\\) has parameter \\$ip with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getTSVersion\\(\\) has parameter \\$port with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function getTSVersion\\(\\) has parameter \\$tPort with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function indexOf\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function indexOf\\(\\) has parameter \\$str with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function indexOf\\(\\) has parameter \\$strChar with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function removeChar\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function removeChar\\(\\) has parameter \\$str with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function setCPriv\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function setCPriv\\(\\) has parameter \\$str with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function setCPrivText\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function setCPrivText\\(\\) has parameter \\$str with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function setPPriv\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function setPPriv\\(\\) has parameter \\$str with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function setPPrivText\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function setPPrivText\\(\\) has parameter \\$str with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function setUserStatus\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function setUserStatus\\(\\) has parameter \\$img with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function time_convert\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function time_convert\\(\\) has parameter \\$time with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function usedID\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function usedID\\(\\) has parameter \\$cid with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Function usedID\\(\\) has parameter \\$usedArray with no type specified\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function strlen expects string, string\\|false given\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Undefined variable\\: \\$minutesm$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Variable \\$codec might not be defined\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Variable \\$data might not be defined\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Variable \\$max might not be defined\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Variable \\$name might not be defined\\.$#"
+			count: 2
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Variable \\$topic might not be defined\\.$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 1
+			path: pages/updater.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 6
+			path: pages/updater.php
+
+		-
+			message: "#^Variable \\$gamename might not be defined\\.$#"
+			count: 1
+			path: pages/updater.php
+
+		-
+			message: "#^Access to an undefined property CVentriloStatus\\:\\:\\$m_cmdpass\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Constant HTML not found\\.$#"
+			count: 2
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 2
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 3
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Function VentriloDisplayEX1\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Function VentriloDisplayEX1\\(\\) has parameter \\$bgidx with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Function VentriloDisplayEX1\\(\\) has parameter \\$cid with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Function VentriloDisplayEX1\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Function VentriloDisplayEX1\\(\\) has parameter \\$stat with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Function show\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Function show\\(\\) has parameter \\$array with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Function show\\(\\) has parameter \\$tpl with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Function time_convert\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Function time_convert\\(\\) has parameter \\$time with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function strlen expects string, bool given\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Parameter \\#2 \\$exit of function error expects bool, int given\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Parameter \\#2 \\$length of function fread expects int\\<0, max\\>, int\\<0, max\\>\\|false given\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Parameter \\#3 \\$subject of function str_replace expects array\\|string, string\\|false given\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Undefined variable\\: \\$disp_out$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Variable \\$cAmount might not be defined\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Variable \\$chan might not be defined\\.$#"
+			count: 2
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Variable \\$channelstats might not be defined\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Variable \\$img might not be defined\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Variable \\$info might not be defined\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Variable \\$max might not be defined\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Variable \\$name might not be defined\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Variable \\$os might not be defined\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Variable \\$subchan might not be defined\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Variable \\$uptime might not be defined\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Variable \\$user might not be defined\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Variable \\$userstats might not be defined\\.$#"
+			count: 1
+			path: pages/ventrilo.php
+
+		-
+			message: "#^Access to an undefined property CVentriloStatus\\:\\:\\$m_auth\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Cannot access offset 'x' on array\\|false\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Cannot access offset 1 on array\\|false\\.$#"
+			count: 2
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Cannot access offset int\\<1, max\\> on array\\|false\\.$#"
+			count: 7
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Cannot assign offset int\\<1, max\\> to array\\|false\\.$#"
+			count: 2
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function StrDecode\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function StrDecode\\(\\) has parameter \\$src with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function StrKey\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function StrKey\\(\\) has parameter \\$key with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function StrKey\\(\\) has parameter \\$res with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function StrKey\\(\\) has parameter \\$src with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function StrSplit\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function StrSplit\\(\\) has parameter \\$d1 with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function StrSplit\\(\\) has parameter \\$d2 with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function StrSplit\\(\\) has parameter \\$sep with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function StrSplit\\(\\) has parameter \\$src with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function bindec2\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function bindec2\\(\\) has parameter \\$binstr with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function decbin2\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function decbin2\\(\\) has parameter \\$val with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function getCRCref\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function getDataEncodeRef\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function getHeadEncodeRef\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function smallCast\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function smallCast\\(\\) has parameter \\$bits with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Function smallCast\\(\\) has parameter \\$val with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method CVentriloChannel\\:\\:Parse\\(\\) has parameter \\$str with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method CVentriloClient\\:\\:Parse\\(\\) has parameter \\$str with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method CVentriloStatus\\:\\:ChannelFind\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method CVentriloStatus\\:\\:ChannelFind\\(\\) has parameter \\$cid with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method CVentriloStatus\\:\\:ChannelPathName\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method CVentriloStatus\\:\\:ChannelPathName\\(\\) has parameter \\$idx with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method CVentriloStatus\\:\\:Parse\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method CVentriloStatus\\:\\:Parse\\(\\) has parameter \\$str with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method CVentriloStatus\\:\\:Request\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method Vent\\:\\:getCRC\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method Vent\\:\\:getCRC\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method Vent\\:\\:getClock\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method Vent\\:\\:getPackets\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method Vent\\:\\:getResponse\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method Vent\\:\\:getTimeout\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method Vent\\:\\:makeRequest\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method Vent\\:\\:makeRequest\\(\\) has parameter \\$cmd with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method Vent\\:\\:makeRequest\\(\\) has parameter \\$ip with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method Vent\\:\\:makeRequest\\(\\) has parameter \\$pass with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method Vent\\:\\:makeRequest\\(\\) has parameter \\$port with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method Vent\\:\\:setTimeout\\(\\) has parameter \\$microsecs with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method VentRequestPacket\\:\\:__construct\\(\\) has parameter \\$cmd with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method VentRequestPacket\\:\\:__construct\\(\\) has parameter \\$id with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method VentRequestPacket\\:\\:__construct\\(\\) has parameter \\$pass with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method VentRequestPacket\\:\\:createKeys\\(\\) has parameter \\$a1 with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method VentRequestPacket\\:\\:createKeys\\(\\) has parameter \\$a2 with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method VentRequestPacket\\:\\:createKeys\\(\\) has parameter \\$is_head with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method VentRequestPacket\\:\\:createKeys\\(\\) has parameter \\$key with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method VentResponsePacket\\:\\:__construct\\(\\) has parameter \\$packet with no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method VentResponsePacket\\:\\:__construct\\(\\) with return type void returns null but should not return anything\\.$#"
+			count: 3
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method VentResponsePacket\\:\\:decodeData\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Method VentResponsePacket\\:\\:decodeHeader\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, array\\|false given\\.$#"
+			count: 5
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloChannel\\:\\:\\$m_auth has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloChannel\\:\\:\\$m_cid has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloChannel\\:\\:\\$m_comm has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloChannel\\:\\:\\$m_name has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloChannel\\:\\:\\$m_pid has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloChannel\\:\\:\\$m_prot has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloClient\\:\\:\\$m_admin has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloClient\\:\\:\\$m_cid has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloClient\\:\\:\\$m_comm has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloClient\\:\\:\\$m_name has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloClient\\:\\:\\$m_phan has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloClient\\:\\:\\$m_ping has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloClient\\:\\:\\$m_sec has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloClient\\:\\:\\$m_uid has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_channelcount has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_channelfields has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_channellist has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_clientcount has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_clientfields has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_clientlist has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_cmdcode has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_cmdhost has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_cmdport has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_comment has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_error has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_maxclients has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_name has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_phonetic has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_platform has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_uptime has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_version has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_voicecodec_code has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_voicecodec_desc has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_voiceformat_code has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property CVentriloStatus\\:\\:\\$m_voiceformat_desc has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property Vent\\:\\:\\$clock has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property Vent\\:\\:\\$packets has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property Vent\\:\\:\\$response has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property Vent\\:\\:\\$timeout has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$cmd has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$crc has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$data has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$datakey has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$head_items has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$header has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$headkey has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$len has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$packet has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$pck has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$rawdata has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$totlen has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$totpck has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Property VentPacket\\:\\:\\$zero has no type specified\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Variable \\$res might not be defined\\.$#"
+			count: 1
+			path: pages/ventrilostatus.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 2
+			path: pages/voicecomm_serverlist.php
+
+		-
+			message: "#^Constant PAGE_PATH not found\\.$#"
+			count: 2
+			path: pages/voicecomm_serverlist.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 2
+			path: pages/voicecomm_serverlist.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 2
+			path: pages/voicecomm_serverlist.php
+
+		-
+			message: "#^Variable \\$teamspeakDisplay might not be defined\\.$#"
+			count: 2
+			path: pages/voicecomm_serverlist.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 10
+			path: pages/weaponinfo.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 4
+			path: pages/weaponinfo.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 8
+			path: pages/weaponinfo.php
+
+		-
+			message: "#^Variable \\$gamename might not be defined\\.$#"
+			count: 2
+			path: pages/weaponinfo.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 10
+			path: pages/weapons.php
+
+		-
+			message: "#^Variable \\$fname might not be defined\\.$#"
+			count: 1
+			path: pages/weapons.php
+
+		-
+			message: "#^Variable \\$g_options might not be defined\\.$#"
+			count: 1
+			path: pages/weapons.php
+
+		-
+			message: "#^Variable \\$game might not be defined\\.$#"
+			count: 8
+			path: pages/weapons.php
+
+		-
+			message: "#^Constant DB_ADDR not found\\.$#"
+			count: 1
+			path: show_graph.php
+
+		-
+			message: "#^Constant DB_NAME not found\\.$#"
+			count: 1
+			path: show_graph.php
+
+		-
+			message: "#^Constant DB_PASS not found\\.$#"
+			count: 1
+			path: show_graph.php
+
+		-
+			message: "#^Constant DB_PCONNECT not found\\.$#"
+			count: 1
+			path: show_graph.php
+
+		-
+			message: "#^Constant DB_TYPE not found\\.$#"
+			count: 1
+			path: show_graph.php
+
+		-
+			message: "#^Constant DB_USER not found\\.$#"
+			count: 1
+			path: show_graph.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 5
+			path: show_graph.php
+
+		-
+			message: "#^Constant IMAGE_UPDATE_INTERVAL not found\\.$#"
+			count: 2
+			path: show_graph.php
+
+		-
+			message: "#^Constant INCLUDE_PATH not found\\.$#"
+			count: 3
+			path: show_graph.php
+
+		-
+			message: "#^If condition is always true\\.$#"
+			count: 2
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#1 \\$dst_im of function imagecopy expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagealphablending expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imageantialias expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagecolorallocate expects resource, resource\\|false given\\.$#"
+			count: 14
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagedestroy expects resource, resource\\|false given\\.$#"
+			count: 3
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagefilledrectangle expects resource, resource\\|false given\\.$#"
+			count: 6
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagepng expects resource, resource\\|false given\\.$#"
+			count: 4
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagerectangle expects resource, resource\\|false given\\.$#"
+			count: 3
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagestring expects resource, resource\\|false given\\.$#"
+			count: 3
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagetruecolortopalette expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, float\\|int\\|string given\\.$#"
+			count: 6
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#2 \\$ditherflag of function imagetruecolortopalette expects bool, int given\\.$#"
+			count: 1
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#2 \\$timestamp of function date expects int, int\\|false given\\.$#"
+			count: 2
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#6 \\$col of function imagefilledrectangle expects int, int\\|false given\\.$#"
+			count: 6
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#6 \\$col of function imagerectangle expects int, int\\|false given\\.$#"
+			count: 3
+			path: show_graph.php
+
+		-
+			message: "#^Parameter \\#6 \\$col of function imagestring expects int, int\\|false given\\.$#"
+			count: 3
+			path: show_graph.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 19
+			path: show_graph.php
+
+		-
+			message: "#^Constant DB_ADDR not found\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Constant DB_NAME not found\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Constant DB_PASS not found\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Constant DB_PCONNECT not found\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Constant DB_TYPE not found\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Constant DB_USER not found\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 8
+			path: sig.php
+
+		-
+			message: "#^Constant IMAGE_UPDATE_INTERVAL not found\\.$#"
+			count: 2
+			path: sig.php
+
+		-
+			message: "#^Constant INCLUDE_PATH not found\\.$#"
+			count: 2
+			path: sig.php
+
+		-
+			message: "#^Function f_num\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Function f_num\\(\\) has parameter \\$number with no type specified\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Function imagecopymerge_alpha\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Function imagecopymerge_alpha\\(\\) has parameter \\$dst_im with no type specified\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Function imagecopymerge_alpha\\(\\) has parameter \\$dst_x with no type specified\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Function imagecopymerge_alpha\\(\\) has parameter \\$dst_y with no type specified\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Function imagecopymerge_alpha\\(\\) has parameter \\$pct with no type specified\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Function imagecopymerge_alpha\\(\\) has parameter \\$src_h with no type specified\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Function imagecopymerge_alpha\\(\\) has parameter \\$src_im with no type specified\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Function imagecopymerge_alpha\\(\\) has parameter \\$src_w with no type specified\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Function imagecopymerge_alpha\\(\\) has parameter \\$src_x with no type specified\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Function imagecopymerge_alpha\\(\\) has parameter \\$src_y with no type specified\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#1 \\$dst_im of function imagecopy expects resource, resource\\|false given\\.$#"
+			count: 5
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagealphablending expects resource, resource\\|false given\\.$#"
+			count: 2
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagecolorallocate expects resource, resource\\|false given\\.$#"
+			count: 11
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagedestroy expects resource, resource\\|false given\\.$#"
+			count: 2
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagepng expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagerectangle expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagesavealpha expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagestring expects resource, resource\\|false given\\.$#"
+			count: 10
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#1 \\$im of function imagettftext expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#1 \\$number of function number_format expects float, float\\|int\\|string given\\.$#"
+			count: 2
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, float\\|int\\|string given\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#2 \\$dst_im of function imagecopymerge expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#2 \\$timestamp of function date expects int, int\\|false given\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#6 \\$col of function imagerectangle expects int, int\\|false given\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#6 \\$col of function imagestring expects int, int\\|false given\\.$#"
+			count: 10
+			path: sig.php
+
+		-
+			message: "#^Parameter \\#6 \\$col of function imagettftext expects int, int\\|false given\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 4
+			path: sig.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 14
+			path: sig.php
+
+		-
+			message: "#^Variable \\$player might not be defined\\.$#"
+			count: 2
+			path: sig.php
+
+		-
+			message: "#^Variable \\$realgame might not be defined\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Variable \\$trend_image_name might not be defined\\.$#"
+			count: 1
+			path: sig.php
+
+		-
+			message: "#^Constant DB_ADDR not found\\.$#"
+			count: 1
+			path: status.php
+
+		-
+			message: "#^Constant DB_NAME not found\\.$#"
+			count: 1
+			path: status.php
+
+		-
+			message: "#^Constant DB_PASS not found\\.$#"
+			count: 1
+			path: status.php
+
+		-
+			message: "#^Constant DB_PCONNECT not found\\.$#"
+			count: 1
+			path: status.php
+
+		-
+			message: "#^Constant DB_TYPE not found\\.$#"
+			count: 1
+			path: status.php
+
+		-
+			message: "#^Constant DB_USER not found\\.$#"
+			count: 1
+			path: status.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 6
+			path: status.php
+
+		-
+			message: "#^Constant INCLUDE_PATH not found\\.$#"
+			count: 2
+			path: status.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function valid_request expects string, float\\|int\\|string given\\.$#"
+			count: 13
+			path: status.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 10
+			path: status.php
+
+		-
+			message: "#^Variable \\$map_teama_wins might not be defined\\.$#"
+			count: 2
+			path: status.php
+
+		-
+			message: "#^Variable \\$map_teamb_wins might not be defined\\.$#"
+			count: 1
+			path: status.php
+
+		-
+			message: "#^Variable \\$thisplayer in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: status.php
+
+		-
+			message: "#^Call to method AddPoint\\(\\) on an unknown class pData\\.$#"
+			count: 3
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method AddSerie\\(\\) on an unknown class pData\\.$#"
+			count: 2
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method GetData\\(\\) on an unknown class pData\\.$#"
+			count: 7
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method GetDataDescription\\(\\) on an unknown class pData\\.$#"
+			count: 8
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method RemoveSerie\\(\\) on an unknown class pData\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method Render\\(\\) on an unknown class pChart\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method SetAbsciseLabelSerie\\(\\) on an unknown class pData\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method SetSerieName\\(\\) on an unknown class pData\\.$#"
+			count: 2
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method SetYAxisName\\(\\) on an unknown class pData\\.$#"
+			count: 2
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method SetYAxisUnit\\(\\) on an unknown class pData\\.$#"
+			count: 2
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method clearScale\\(\\) on an unknown class pChart\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method clearShadow\\(\\) on an unknown class pChart\\.$#"
+			count: 2
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method drawBackground\\(\\) on an unknown class pChart\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method drawCubicCurve\\(\\) on an unknown class pChart\\.$#"
+			count: 2
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method drawFilledCubicCurve\\(\\) on an unknown class pChart\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method drawGraphAreaGradient\\(\\) on an unknown class pChart\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method drawGrid\\(\\) on an unknown class pChart\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method drawHorizontalLegend\\(\\) on an unknown class pChart\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method drawPlotGraph\\(\\) on an unknown class pChart\\.$#"
+			count: 2
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method drawRightScale\\(\\) on an unknown class pChart\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method drawScale\\(\\) on an unknown class pChart\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method drawTextBox\\(\\) on an unknown class pChart\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method setColorPalette\\(\\) on an unknown class pChart\\.$#"
+			count: 3
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method setFontProperties\\(\\) on an unknown class pChart\\.$#"
+			count: 3
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method setGraphArea\\(\\) on an unknown class pChart\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Call to method setShadowProperties\\(\\) on an unknown class pChart\\.$#"
+			count: 2
+			path: trend_graph.php
+
+		-
+			message: "#^Constant ALIGN_LEFT not found\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Constant DB_ADDR not found\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Constant DB_NAME not found\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Constant DB_PASS not found\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Constant DB_PCONNECT not found\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Constant DB_TYPE not found\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Constant DB_USER not found\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Constant IMAGE_PATH not found\\.$#"
+			count: 5
+			path: trend_graph.php
+
+		-
+			message: "#^Constant INCLUDE_PATH not found\\.$#"
+			count: 4
+			path: trend_graph.php
+
+		-
+			message: "#^Constant SCALE_NORMAL not found\\.$#"
+			count: 2
+			path: trend_graph.php
+
+		-
+			message: "#^Instantiated class pChart not found\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Instantiated class pData not found\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 3
+			path: trend_graph.php
+
+		-
+			message: "#^Variable \\$player might not be defined\\.$#"
+			count: 1
+			path: trend_graph.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: updater_1/11.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 5
+			path: updater_1/12.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 9
+			path: updater_1/13.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 3
+			path: updater_1/14.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 7
+			path: updater_1/15.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 21
+			path: updater_1/16.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: updater_1/17.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 6
+			path: updater_1/18.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: updater_1/19.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: updater_1/20.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 6
+			path: updater_1/21.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 7
+			path: updater_1/22.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 9
+			path: updater_1/23.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 5
+			path: updater_1/24.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 9
+			path: updater_1/25.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 6
+			path: updater_1/26.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 19
+			path: updater_1/27.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: updater_1/28.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 13
+			path: updater_1/29.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: updater_1/30.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 14
+			path: updater_1/31.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 5
+			path: updater_1/32.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 12
+			path: updater_1/33.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 7
+			path: updater_1/34.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 18
+			path: updater_1/35.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 11
+			path: updater_1/36.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: updater_1/37.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: updater_1/38.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 38
+			path: updater_1/39.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 13
+			path: updater_1/40.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 6
+			path: updater_1/41.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 23
+			path: updater_1/42.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 6
+			path: updater_1/43.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 11
+			path: updater_1/44.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 6
+			path: updater_1/45.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 10
+			path: updater_1/46.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 7
+			path: updater_1/47.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 10
+			path: updater_1/48.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 6
+			path: updater_1/49.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 10
+			path: updater_1/50.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: updater_1/51.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 6
+			path: updater_1/52.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: updater_1/53.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 7
+			path: updater_1/54.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: updater_1/55.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: updater_1/56.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: updater_1/57.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: updater_1/58.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 13
+			path: updater_1/59.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 17
+			path: updater_1/60.php
+
+		-
+			message: "#^Comparison operation \"\\>\" between int\\<2, max\\> and 1 is always true\\.$#"
+			count: 1
+			path: updater_1/61.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 21
+			path: updater_1/61.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 8
+			path: updater_1/62.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 5
+			path: updater_1/63.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: updater_1/64.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 38
+			path: updater_1/65.php
+
+		-
+			message: "#^Comparison operation \"\\>\" between 1 and 0 is always true\\.$#"
+			count: 1
+			path: updater_1/66.php
+
+		-
+			message: "#^Comparison operation \"\\>\" between 13 and 0 is always true\\.$#"
+			count: 1
+			path: updater_1/66.php
+
+		-
+			message: "#^Comparison operation \"\\>\" between 4 and 0 is always true\\.$#"
+			count: 1
+			path: updater_1/66.php
+
+		-
+			message: "#^If condition is always true\\.$#"
+			count: 1
+			path: updater_1/66.php
+
+		-
+			message: "#^Left side of && is always true\\.$#"
+			count: 1
+			path: updater_1/66.php
+
+		-
+			message: "#^Result of && is always true\\.$#"
+			count: 3
+			path: updater_1/66.php
+
+		-
+			message: "#^Ternary operator condition is always true\\.$#"
+			count: 2
+			path: updater_1/66.php
+
+		-
+			message: "#^Variable \\$actions in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: updater_1/66.php
+
+		-
+			message: "#^Variable \\$awards in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: updater_1/66.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 56
+			path: updater_1/66.php
+
+		-
+			message: "#^Variable \\$weapons in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: updater_1/66.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 13
+			path: updater_1/67.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 31
+			path: updater_1/68.php
+
+		-
+			message: "#^Comparison operation \"\\>\" between 8 and 0 is always true\\.$#"
+			count: 1
+			path: updater_1/69.php
+
+		-
+			message: "#^Result of && is always true\\.$#"
+			count: 1
+			path: updater_1/69.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 52
+			path: updater_1/69.php
+
+		-
+			message: "#^Variable \\$serverstring might not be defined\\.$#"
+			count: 1
+			path: updater_1/69.php
+
+		-
+			message: "#^Variable \\$weapons in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: updater_1/69.php
+
+		-
+			message: "#^Comparison operation \"\\>\" between 8 and 0 is always true\\.$#"
+			count: 1
+			path: updater_1/70.php
+
+		-
+			message: "#^Result of && is always true\\.$#"
+			count: 1
+			path: updater_1/70.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 52
+			path: updater_1/70.php
+
+		-
+			message: "#^Variable \\$serverstring might not be defined\\.$#"
+			count: 1
+			path: updater_1/70.php
+
+		-
+			message: "#^Variable \\$weapons in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: updater_1/70.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 13
+			path: updater_1/71.php
+
+		-
+			message: "#^Comparison operation \"\\>\" between 1 and 0 is always true\\.$#"
+			count: 1
+			path: updater_1/72.php
+
+		-
+			message: "#^Left side of && is always true\\.$#"
+			count: 1
+			path: updater_1/72.php
+
+		-
+			message: "#^Result of && is always true\\.$#"
+			count: 1
+			path: updater_1/72.php
+
+		-
+			message: "#^Ternary operator condition is always true\\.$#"
+			count: 2
+			path: updater_1/72.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 60
+			path: updater_1/72.php
+
+		-
+			message: "#^Variable \\$serverstring might not be defined\\.$#"
+			count: 1
+			path: updater_1/72.php
+
+		-
+			message: "#^Variable \\$weapons in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: updater_1/72.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: updater_1/73.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 20
+			path: updater_1/74.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 10
+			path: updater_1/75.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 13
+			path: updater_1/76.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 3
+			path: updater_1/77.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 2
+			path: updater_1/78.php
+
+		-
+			message: "#^Variable \\$db might not be defined\\.$#"
+			count: 37
+			path: updater_1/update161-162.php

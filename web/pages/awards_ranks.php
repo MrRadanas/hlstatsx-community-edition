@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,11 +36,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	$result = $db->query("
+$result = $db->query("
 		SELECT
 			rankName,
 			minKills,
@@ -61,14 +61,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 			rankName,
 			minKills
 	");
-	
-	while ($r = $db->fetch_array())
-	{
-		$ranks[$r['rankId']] = $r['obj_count'];
-	}
 
-	// select the available ranks
-	$result = $db->query("
+while ($r = $db->fetch_array()) {
+    $ranks[$r['rankId']] = $r['obj_count'];
+}
+
+// select the available ranks
+$result = $db->query("
 		SELECT
 			rankName,
 			minKills,
@@ -89,60 +88,52 @@ For support and installation notes visit http://www.hlxcommunity.com
 	<div class="subblock">
 		<table class="data-table">
 <?php
-	// draw the rank info table (5 columns)
-	$i = 0;
+    // draw the rank info table (5 columns)
+    $i = 0;
 
-	$cols = $g_options['awardrankscols'];
-	if ($cols < 1 || $cols > 10) $cols = 5;
-	{
-		$colwidth = round(100 / $cols);
-	}
+$cols = $g_options['awardrankscols'];
+if ($cols < 1 || $cols > 10) {
+    $cols = 5;
+}
 
-	while ($r = $db->fetch_array())
-	{
-		if ($i == $cols)
-		{
-			echo "</tr>";
-			$i = 0;
-		}
-		if ($i == 0)
-		{
-			echo "<tr class='bg1'>";
-		}
-   
-		$image = getImage('/ranks/'.$r['image'].'_small');
-		$link = '<a href="hlstats.php?mode=rankinfo&amp;rank='.$r['rankId']."&amp;game=$game\">";
-		if ($image)
-		{
-			$imagestring = '<img src="'.$image['url'].'" alt="'.$r['image'].'" />';
-		}
-		else
-		{
-			$imagestring = 'Player List';
-		}
-		$achvd = '';
-		if ($ranks[$r['rankId']] > 0)
-		{
-			$imagestring = "$link$imagestring</a>";
-			$achvd = 'Achieved by '.$ranks[$r['rankId']].' Players';
-		}    
-   
-		echo "<td style=\"text-align:center;vertical-align:top;width:$colwidth%;\">"
-			.'<strong>'.$r['rankName'].'</strong><br />'
-			.'<span class="fSmall">('.$r['minKills'].'-'.$r['maxKills'].'&nbsp;kills)'.'<br />'
-			."$achvd<br /></span>"
-			.$imagestring.'
+$colwidth = round(100 / $cols);
+
+while ($r = $db->fetch_array()) {
+    if ($i == $cols) {
+        echo '</tr>';
+        $i = 0;
+    }
+    if (0 == $i) {
+        echo "<tr class='bg1'>";
+    }
+
+    $image = getImage('/ranks/'.$r['image'].'_small');
+    $link  = '<a href="hlstats.php?mode=rankinfo&amp;rank='.$r['rankId']."&amp;game=$game\">";
+    if ($image) {
+        $imagestring = '<img src="'.$image['url'].'" alt="'.$r['image'].'" />';
+    } else {
+        $imagestring = 'Player List';
+    }
+    $achvd = '';
+    if ($ranks[$r['rankId']] > 0) {
+        $imagestring = "$link$imagestring</a>";
+        $achvd       = 'Achieved by '.$ranks[$r['rankId']].' Players';
+    }
+
+    echo "<td style=\"text-align:center;vertical-align:top;width:$colwidth%;\">"
+        .'<strong>'.$r['rankName'].'</strong><br />'
+        .'<span class="fSmall">('.$r['minKills'].'-'.$r['maxKills'].'&nbsp;kills)<br />'
+        ."$achvd<br /></span>"
+        .$imagestring.'
 			</td>';
-		$i++;
-	}
-	if ($i != 0)
-	{
-		for ($i = $i; $i < $cols; $i++)
-		{
-			echo '<td class="bg1">&nbsp;</td>';
-		}
-		echo '</tr>';
-	}
+    ++$i;
+}
+if (0 != $i) {
+    for ($i = $i; $i < $cols; ++$i) {
+        echo '<td class="bg1">&nbsp;</td>';
+    }
+    echo '</tr>';
+}
 ?>
 		</table>
 	</div>

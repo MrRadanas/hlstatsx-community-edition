@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,44 +36,44 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	flush();
-	
-	$tblPlayerActions = new Table(
-		array(
-			new TableColumn(
-				'description',
-				'Action',
-				'width=45&link=' . urlencode("mode=actioninfo&amp;action=%k&amp;game=$game")
-			),
-			new TableColumn(
-				'obj_count',
-				'Achieved',
-				'width=25&align=right&append=+times'
-			),
-			new TableColumn(
-				'obj_bonus',
-				'Points Bonus',
-				'width=25&align=right'
-			)
-		),
-		'code',
-		'obj_count',
-		'description',
-		true,
-		9999,
-		'obj_page',
-		'obj_sort',
-		'obj_sortorder',
-		'tabteams',
-		'desc',
-		true
-	);
+flush();
 
-	$result = $db->query("
+$tblPlayerActions = new Table(
+    [
+        new TableColumn(
+            'description',
+            'Action',
+            'width=45&link='.urlencode("mode=actioninfo&amp;action=%k&amp;game=$game")
+        ),
+        new TableColumn(
+            'obj_count',
+            'Achieved',
+            'width=25&align=right&append=+times'
+        ),
+        new TableColumn(
+            'obj_bonus',
+            'Points Bonus',
+            'width=25&align=right'
+        ),
+    ],
+    'code',
+    'obj_count',
+    'description',
+    true,
+    9999,
+    'obj_page',
+    'obj_sort',
+    'obj_sortorder',
+    'tabteams',
+    'desc',
+    true
+);
+
+$result = $db->query("
 		(SELECT
 			code,
 			hlstats_Actions.description,
@@ -117,50 +117,49 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$tblPlayerActions->sort $tblPlayerActions->sortorder,
 			$tblPlayerActions->sort2 $tblPlayerActions->sortorder
 	");
-	
-	$numitems = $db->num_rows($result);
-	
-	if ($numitems > 0)
-	{
-		printSectionTitle('Player Actions *');
-		$tblPlayerActions->draw($result, $numitems, 95);
-?>
+
+$numitems = $db->num_rows($result);
+
+if ($numitems > 0) {
+    printSectionTitle('Player Actions *');
+    $tblPlayerActions->draw($result, $numitems, 95);
+    ?>
 		<br /><br />
 <?php
-	}
-	
-	$tblPlayerPlayerActionsV = new Table(
-		array(
-			new TableColumn(
-				'description',
-				'Action',
-				'width=45&link=' . urlencode("mode=actioninfo&amp;action=%k&amp;game=$game#victims")
-			),
-			new TableColumn(
-				'obj_count',
-				'Times Victimized',
-				'width=25&align=right&append=+times'
-			),
-			new TableColumn(
-				'obj_bonus',
-				'Points Bonus',
-				'width=25&align=right'
-			)
-		),
-		'code',
-		'obj_count',
-		'description',
-		true,
-		9999,
-		'ppa_page',
-		'ppa_sort',
-		'ppa_sortorder',
-		'tabteams',
-		'desc',
-		true
-	);
+}
 
-	$result = $db->query("
+$tblPlayerPlayerActionsV = new Table(
+    [
+        new TableColumn(
+            'description',
+            'Action',
+            'width=45&link='.urlencode("mode=actioninfo&amp;action=%k&amp;game=$game#victims")
+        ),
+        new TableColumn(
+            'obj_count',
+            'Times Victimized',
+            'width=25&align=right&append=+times'
+        ),
+        new TableColumn(
+            'obj_bonus',
+            'Points Bonus',
+            'width=25&align=right'
+        ),
+    ],
+    'code',
+    'obj_count',
+    'description',
+    true,
+    9999,
+    'ppa_page',
+    'ppa_sort',
+    'ppa_sortorder',
+    'tabteams',
+    'desc',
+    true
+);
+
+$result = $db->query("
 		SELECT
 			code,
 			hlstats_Actions.description,
@@ -180,15 +179,14 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$tblPlayerPlayerActionsV->sort $tblPlayerPlayerActionsV->sortorder,
 			$tblPlayerPlayerActionsV->sort2 $tblPlayerPlayerActionsV->sortorder
 	");
-	
-	$numitems = $db->num_rows($result);
-	
-	if ($numitems > 0)
-	{
-		printSectionTitle('Victims of Player-Player Actions *');
-		$tblPlayerPlayerActionsV->draw($result, $numitems, 95);
-?>
+
+$numitems = $db->num_rows($result);
+
+if ($numitems > 0) {
+    printSectionTitle('Victims of Player-Player Actions *');
+    $tblPlayerPlayerActionsV->draw($result, $numitems, 95);
+    ?>
 	<br /><br />
 <?php
-	}
+}
 ?>

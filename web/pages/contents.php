@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,13 +36,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
-	
-	// Contents
-	
-	$resultGames = $db->query("
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
+
+// Contents
+
+$resultGames = $db->query("
 		SELECT
 			code,
 			name
@@ -53,25 +53,25 @@ For support and installation notes visit http://www.hlxcommunity.com
 		ORDER BY
 			realgame, name ASC
 	");
-	
-	$num_games = $db->num_rows($resultGames);
-	$redirect_to_game = 0;  
-	$game = (!empty($_GET['game'])) ? valid_request($_GET['game'], false) : null;
 
-	if ($num_games == 1 || !empty($game)) {
-		$redirect_to_game++;
-		if ($num_games == 1) {
-			list($game) = $db->fetch_row($resultGames);
-		}
-		
-		include(PAGE_PATH . '/game.php');
-	} else {
-		unset($_SESSION['game']);
-		
-		pageHeader(array('Contents'), array('Contents' => ''));
-		include(PAGE_PATH . '/voicecomm_serverlist.php');
-		printSectionTitle('Games');
-	?>
+$num_games        = $db->num_rows($resultGames);
+$redirect_to_game = 0;
+$game             = (!empty($_GET['game'])) ? valid_request($_GET['game'], false) : null;
+
+if (1 == $num_games || !empty($game)) {
+    ++$redirect_to_game;
+    if (1 == $num_games) {
+        [$game] = $db->fetch_row($resultGames);
+    }
+
+    include PAGE_PATH.'/game.php';
+} else {
+    unset($_SESSION['game']);
+
+    pageHeader(['Contents'], ['Contents' => '']);
+    include PAGE_PATH.'/voicecomm_serverlist.php';
+    printSectionTitle('Games');
+    ?>
 
 		<div class="subblock">
 		
@@ -85,11 +85,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 				</tr>
 				
 <?php
-        $nonhiddengamestring = "(";
-		while ($gamedata = $db->fetch_row($resultGames))
-		{
-			$nonhiddengamestring .= "'$gamedata[0]',";
-			$result = $db->query("
+        $nonhiddengamestring = '(';
+    while ($gamedata = $db->fetch_row($resultGames)) {
+        $nonhiddengamestring .= "'$gamedata[0]',";
+        $result = $db->query("
 				SELECT
 					playerId,
 					lastName,
@@ -100,21 +99,18 @@ For support and installation notes visit http://www.hlxcommunity.com
 					game='$gamedata[0]'
 					AND hideranking=0
 				ORDER BY
-					".$g_options['rankingtype']." DESC,
+					".$g_options['rankingtype'].' DESC,
 					(kills/IF(deaths=0,1,deaths)) DESC
 				LIMIT 1
-			");
-		
-			if ($db->num_rows($result) == 1)
-			{
-				$topplayer = $db->fetch_row($result);
-			}
-			else
-			{
-				$topplayer = false;
-			}
-					
-			$result = $db->query("
+			');
+
+        if (1 == $db->num_rows($result)) {
+            $topplayer = $db->fetch_row($result);
+        } else {
+            $topplayer = false;
+        }
+
+        $result = $db->query("
 				SELECT
 					hlstats_Clans.clanId,
 					hlstats_Clans.name,
@@ -134,23 +130,20 @@ For support and installation notes visit http://www.hlxcommunity.com
 				GROUP BY
 					hlstats_Clans.clanId
 				HAVING
-					".$g_options['rankingtype']." IS NOT NULL
+					".$g_options['rankingtype'].' IS NOT NULL
 					AND numplayers >= 3
 				ORDER BY
-					".$g_options['rankingtype']." DESC
+					'.$g_options['rankingtype'].' DESC
 				LIMIT 1
-			");
+			');
 
-			if ($db->num_rows($result) == 1)
-			{
-				$topclan = $db->fetch_row($result);
-			}
-			else
-			{
-				$topclan = false;
-			}
+        if (1 == $db->num_rows($result)) {
+            $topclan = $db->fetch_row($result);
+        } else {
+            $topclan = false;
+        }
 
-			$result= $db->query("
+        $result = $db->query("
 				SELECT
 					SUM(act_players) AS `act_players`,                                
 					SUM(max_players) AS `max_players`
@@ -159,97 +152,90 @@ For support and installation notes visit http://www.hlxcommunity.com
 				WHERE
 					hlstats_Servers.game='$gamedata[0]'
 			");
-							
-			$numplayers = $db->fetch_array($result);
-			if ($numplayers['act_players'] == 0 and $numplayers['max_players'] == 0)
-				$numplayers = false;
-			else
-				$player_string = $numplayers['act_players'].'/'.$numplayers['max_players'];
-?>				
+
+        $numplayers = $db->fetch_array($result);
+        if (0 == $numplayers['act_players'] and 0 == $numplayers['max_players']) {
+            $numplayers = false;
+        } else {
+            $player_string = $numplayers['act_players'].'/'.$numplayers['max_players'];
+        }
+        ?>				
 				<tr class="game-table-row">
 					<td class="game-table-cell" style="height:30px">
-						<div style="float:left;line-height:30px;" class="fHeading">&nbsp;<a href="<?php echo $g_options['scripturl'] . "?game=$gamedata[0]"; ?>"><img src="<?php
-			$image = getImage("/games/$gamedata[0]/game");
-			if ($image)
-				echo $image['url'];
-			else
-				echo IMAGE_PATH . '/game.gif';
-               ?>"  style="margin-left: 3px; margin-right: 4px;" alt="Game" /></a><a href="<?php echo $g_options['scripturl'] . "?game=$gamedata[0]"; ?>"><?php echo $gamedata[1]; ?></a>
+						<div style="float:left;line-height:30px;" class="fHeading">&nbsp;<a href="<?php echo $g_options['scripturl']."?game=$gamedata[0]"; ?>"><img src="<?php
+                    $image = getImage("/games/$gamedata[0]/game");
+        if ($image) {
+            echo $image['url'];
+        } else {
+            echo IMAGE_PATH.'/game.gif';
+        }
+        ?>"  style="margin-left: 3px; margin-right: 4px;" alt="Game" /></a><a href="<?php echo $g_options['scripturl']."?game=$gamedata[0]"; ?>"><?php echo $gamedata[1]; ?></a>
 						</div>
 						<div style="float:right;">
-							<div style="margin-left: 3px; margin-right: 4px; vertical-align:top; text-align:center;"><a href="<?php echo $g_options['scripturl'] . "?mode=clans&amp;game=$gamedata[0]"; ?>"><img src="<?php echo IMAGE_PATH; ?>/clan.gif" alt="Clan Rankings" /></a></div>
-							<div style="vertical-align:bottom; text-align:left;">&nbsp;<a href="<?php echo $g_options['scripturl'] . "?mode=clans&amp;game=$gamedata[0]"; ?>" class="fSmall">Clans</a>&nbsp;&nbsp;</div>
+							<div style="margin-left: 3px; margin-right: 4px; vertical-align:top; text-align:center;"><a href="<?php echo $g_options['scripturl']."?mode=clans&amp;game=$gamedata[0]"; ?>"><img src="<?php echo IMAGE_PATH; ?>/clan.gif" alt="Clan Rankings" /></a></div>
+							<div style="vertical-align:bottom; text-align:left;">&nbsp;<a href="<?php echo $g_options['scripturl']."?mode=clans&amp;game=$gamedata[0]"; ?>" class="fSmall">Clans</a>&nbsp;&nbsp;</div>
 						</div>
 							
 						<div style="float:right;">
-							<div style="margin-left: 3px; margin-right: 4px; vertical-align:top; text-align:center;"><a href="<?php echo $g_options['scripturl'] . "?mode=players&amp;game=$gamedata[0]"; ?>"><img src="<?php echo IMAGE_PATH; ?>/player.gif" alt="Player Rankings" /></a></div>
-							<div style="vertical-align:bottom; text-align:left;">&nbsp;<a href="<?php echo $g_options['scripturl'] . "?mode=players&amp;game=$gamedata[0]"; ?>" class="fSmall">Players</a>&nbsp;&nbsp;</div>
+							<div style="margin-left: 3px; margin-right: 4px; vertical-align:top; text-align:center;"><a href="<?php echo $g_options['scripturl']."?mode=players&amp;game=$gamedata[0]"; ?>"><img src="<?php echo IMAGE_PATH; ?>/player.gif" alt="Player Rankings" /></a></div>
+							<div style="vertical-align:bottom; text-align:left;">&nbsp;<a href="<?php echo $g_options['scripturl']."?mode=players&amp;game=$gamedata[0]"; ?>" class="fSmall">Players</a>&nbsp;&nbsp;</div>
 						</div>
 					</td>
-					<td class="game-table-cell" style="text-align:center;"><?php 
-			if ($numplayers)
-			{
-				echo $player_string;
-			}
-			else
-			{
-				echo '-';
-			}
-					?>
+					<td class="game-table-cell" style="text-align:center;"><?php
+            if ($numplayers) {
+                echo $player_string;
+            } else {
+                echo '-';
+            }
+        ?>
 					</td>
 					<td class="game-table-cell" style="text-align:center;"><?php
-			if ($topplayer)
-			{
-				echo '<a href="' . $g_options['scripturl'] . '?mode=playerinfo&amp;player='
-					. $topplayer[0] . '">'.htmlspecialchars($topplayer[1], ENT_COMPAT).'</a>';
-			}
-			else
-			{
-				echo '-';
-			}
-					?></td>
+            if ($topplayer) {
+                echo '<a href="'.$g_options['scripturl'].'?mode=playerinfo&amp;player='
+                    .$topplayer[0].'">'.htmlspecialchars($topplayer[1], ENT_COMPAT).'</a>';
+            } else {
+                echo '-';
+            }
+        ?></td>
 					<td class="game-table-cell" style="text-align:center;"><?php
-			if ($topclan)
-			{
-				echo '<a href="' . $g_options['scripturl'] . '?mode=claninfo&amp;clan='
-					. $topclan[0] . '">'.htmlspecialchars($topclan[1], ENT_COMPAT).'</a>';
-			}
-			else
-			{
-				echo '-';
-			}
-					?></td>
+            if ($topclan) {
+                echo '<a href="'.$g_options['scripturl'].'?mode=claninfo&amp;clan='
+                    .$topclan[0].'">'.htmlspecialchars($topclan[1], ENT_COMPAT).'</a>';
+            } else {
+                echo '-';
+            }
+        ?></td>
 				</tr>
 <?php
-		}
-?>	
+    }
+    ?>	
 				</table>
 		
 		</div><br /><br />
 		<br />
 		
 <?php
-		printSectionTitle('General Statistics');
-		
-		$nonhiddengamestring = preg_replace('/,$/', ')', $nonhiddengamestring);
-		
-		$result = $db->query("SELECT COUNT(playerId) FROM hlstats_Players WHERE game IN $nonhiddengamestring");
-		list($num_players) = $db->fetch_row($result);
-		$num_players = number_format($num_players);
+            printSectionTitle('General Statistics');
 
-		$result = $db->query("SELECT COUNT(clanId) FROM hlstats_Clans WHERE game IN $nonhiddengamestring");
-		list($num_clans) = $db->fetch_row($result);
-		$num_clans = number_format($num_clans);
+    $nonhiddengamestring = preg_replace('/,$/', ')', $nonhiddengamestring);
 
-		$result = $db->query("SELECT COUNT(serverId) FROM hlstats_Servers WHERE game IN $nonhiddengamestring");
-		list($num_servers) = $db->fetch_row($result);
-		$num_servers = number_format($num_servers);
-		
-		$result = $db->query("SELECT SUM(kills) FROM hlstats_Servers WHERE game IN $nonhiddengamestring");
-		list($num_kills) = $db->fetch_row($result);
-		$num_kills = number_format($num_kills);
+    $result        = $db->query("SELECT COUNT(playerId) FROM hlstats_Players WHERE game IN $nonhiddengamestring");
+    [$num_players] = $db->fetch_row($result);
+    $num_players   = number_format($num_players);
 
-		$result = $db->query("
+    $result      = $db->query("SELECT COUNT(clanId) FROM hlstats_Clans WHERE game IN $nonhiddengamestring");
+    [$num_clans] = $db->fetch_row($result);
+    $num_clans   = number_format($num_clans);
+
+    $result        = $db->query("SELECT COUNT(serverId) FROM hlstats_Servers WHERE game IN $nonhiddengamestring");
+    [$num_servers] = $db->fetch_row($result);
+    $num_servers   = number_format($num_servers);
+
+    $result      = $db->query("SELECT SUM(kills) FROM hlstats_Servers WHERE game IN $nonhiddengamestring");
+    [$num_kills] = $db->fetch_row($result);
+    $num_kills   = number_format($num_kills);
+
+    $result = $db->query('
 			SELECT 
 				eventTime
 			FROM
@@ -257,26 +243,25 @@ For support and installation notes visit http://www.hlxcommunity.com
 			ORDER BY
 				id DESC
 			LIMIT 1
-		");
-		list($lastevent) = $db->fetch_row($result);
-?>
+		');
+    [$lastevent] = $db->fetch_row($result);
+    ?>
 
 		<div class="subblock">
 		
 			<ul>
 				<li><?php
-					echo "<strong>$num_players</strong> players and <strong>$num_clans</strong> clans "
-						. "ranked in <strong>$num_games</strong> games on <strong>$num_servers</strong>"
-						. " servers with <strong>$num_kills</strong> kills."; ?></li>
+                        echo "<strong>$num_players</strong> players and <strong>$num_clans</strong> clans "
+                            ."ranked in <strong>$num_games</strong> games on <strong>$num_servers</strong>"
+                            ." servers with <strong>$num_kills</strong> kills."; ?></li>
 <?php
-		if ($lastevent)
-		{
-			echo "\t\t\t\t<li>Last Kill <strong> " . date('g:i:s A, D. M. d, Y', strtotime($lastevent)) . "</strong></li>";
-		}
-?>
+            if ($lastevent) {
+                echo "\t\t\t\t<li>Last Kill <strong> ".date('g:i:s A, D. M. d, Y', strtotime($lastevent)).'</strong></li>';
+            }
+    ?>
 				<li>All statistics are generated in real-time. Event history data expires after <strong><?php echo $g_options['DeleteDays']; ?></strong> days.</li>
 			</ul>
 		</div>
 <?php
-	}
+}
 ?>

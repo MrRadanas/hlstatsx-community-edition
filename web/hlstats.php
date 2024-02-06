@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -37,71 +37,68 @@ For support and installation notes visit http://www.hlxcommunity.com
 */
 
 define('IN_HLSTATS', true);
-require('config.php');
-$historical_cache=0;
-if(defined('HISTORICAL_CACHE'))
-{
-	$historical_cache=constant('HISTORICAL_CACHE');
+require 'config.php';
+$historical_cache = 0;
+if (defined('HISTORICAL_CACHE')) {
+    $historical_cache = constant('HISTORICAL_CACHE');
 }
 
-if($historical_cache==1)
-{
-	$rawmd5=md5(http_build_query($_REQUEST));
-	$dir1=substr($rawmd5,0,1);
-	$dir2=substr($rawmd5,1,1);
-	$cachetarget=sprintf("cache/%s/%s/%s", $dir1, $dir2, $rawmd5);
+if (1 == $historical_cache) {
+    $rawmd5      = md5(http_build_query($_REQUEST));
+    $dir1        = substr($rawmd5, 0, 1);
+    $dir2        = substr($rawmd5, 1, 1);
+    $cachetarget = sprintf('cache/%s/%s/%s', $dir1, $dir2, $rawmd5);
 
-	@mkdir("cache/$dir1");
-	@mkdir("cache/$dir1/$dir2");
+    @mkdir("cache/$dir1");
+    @mkdir("cache/$dir1/$dir2");
 
-	if(file_exists($cachetarget))
-	{
-		file_put_contents("cache/cachehit",$cachetarget . "\n", FILE_APPEND);
-		echo file_get_contents($cachetarget);
-		die;
-	}
+    if (file_exists($cachetarget)) {
+        file_put_contents('cache/cachehit', $cachetarget."\n", FILE_APPEND);
+        echo file_get_contents($cachetarget);
+        exit;
+    }
 }
 
 session_start();
 
-if (!empty($_GET['logout']) && $_GET['logout'] == '1') {
-	unset($_SESSION['loggedin']);
-	header("Location: http://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
-	die;
+if (!empty($_GET['logout']) && '1' == $_GET['logout']) {
+    unset($_SESSION['loggedin']);
+    header('Location: http://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']);
+    exit;
 }
 
 // Several stuff added by Malte Bayer
 global $scripttime, $siteurlneo;
 $scripttime = microtime(true);
-$siteurlneo='http://'.$_SERVER['HTTP_HOST'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],strrchr($_SERVER['PHP_SELF'],'/'))+1);
-$siteurlneo=str_replace('\\','/',$siteurlneo);
+$siteurlneo = 'http://'.$_SERVER['HTTP_HOST'].substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], strrchr($_SERVER['PHP_SELF'], '/')) + 1);
+$siteurlneo = str_replace('\\', '/', $siteurlneo);
 
 // Several Stuff end
 
 foreach ($_SERVER as $key => $entry) {
-	if ($key !== 'HTTP_COOKIE') {
-		$search_pattern  = array('/<script>/', '/<\/script>/', '/[^A-Za-z0-9.\-\/=:;_?#&~]/');
-		$replace_pattern = array('', '', '');
-		$entry = preg_replace($search_pattern, $replace_pattern, $entry);
-  
-		if ($key == "PHP_SELF") {
-			if ((strrchr($entry, '/') !== '/hlstats.php') &&
-				(strrchr($entry, '/') !== '/ingame.php') &&
-				(strrchr($entry, '/') !== '/show_graph.php') &&
-				(strrchr($entry, '/') !== '/sig.php') &&
-				(strrchr($entry, '/') !== '/sig2.php') &&
-				(strrchr($entry, '/') !== '/index.php') &&
-				(strrchr($entry, '/') !== '/status.php') &&
-				(strrchr($entry, '/') !== '/top10.php') &&
-				(strrchr($entry, '/') !== '/config.php') &&
-				(strrchr($entry, '/') !== '/') &&
-				($entry !== '')) {
-				header("Location: http://$siteurlneo/hlstats.php");    
-				exit;
-			}    
-		}
-		$_SERVER[$key] = $entry;
-	}
+    if ('HTTP_COOKIE' !== $key) {
+        $search_pattern  = ['/<script>/', '/<\/script>/', '/[^A-Za-z0-9.\-\/=:;_?#&~]/'];
+        $replace_pattern = ['', '', ''];
+        $entry           = preg_replace($search_pattern, $replace_pattern, $entry);
+
+        if ('PHP_SELF' == $key) {
+            if (('/hlstats.php' !== strrchr($entry, '/'))
+                && ('/ingame.php' !== strrchr($entry, '/'))
+                && ('/show_graph.php' !== strrchr($entry, '/'))
+                && ('/sig.php' !== strrchr($entry, '/'))
+                && ('/sig2.php' !== strrchr($entry, '/'))
+                && ('/index.php' !== strrchr($entry, '/'))
+                && ('/status.php' !== strrchr($entry, '/'))
+                && ('/top10.php' !== strrchr($entry, '/'))
+                && ('/config.php' !== strrchr($entry, '/'))
+                && ('/' !== strrchr($entry, '/'))
+                && ('' !== $entry)) {
+                header("Location: http://$siteurlneo/hlstats.php");
+                exit;
+            }
+        }
+        $_SERVER[$key] = $entry;
+    }
 }
 
 @header('Content-Type: text/html; charset=utf-8');
@@ -109,127 +106,113 @@ foreach ($_SERVER as $key => $entry) {
 // do not report NOTICE warnings
 @error_reporting(E_ALL ^ E_NOTICE);
 
-////
-//// Initialisation
-////
+// //
+// // Initialisation
+// //
 
 define('PAGE', 'HLSTATS');
 
-///
-/// Classes
-///
+// /
+// / Classes
+// /
 
 // Load required files
-require(INCLUDE_PATH . '/class_db.php');
-require(INCLUDE_PATH . '/class_table.php');
-require(INCLUDE_PATH . '/functions.php');
+require INCLUDE_PATH.'/class_db.php';
+require INCLUDE_PATH.'/class_table.php';
+require INCLUDE_PATH.'/functions.php';
 
-$db_classname = 'DB_' . DB_TYPE;
-if ( class_exists($db_classname) )
-{
-	$db = new $db_classname(DB_ADDR, DB_USER, DB_PASS, DB_NAME, DB_PCONNECT);
-}
-else
-{
-	error('Database class does not exist.  Please check your config.php file for DB_TYPE');
+$db_classname = 'DB_'.DB_TYPE;
+if (class_exists($db_classname)) {
+    $db = new $db_classname(DB_ADDR, DB_USER, DB_PASS, DB_NAME, DB_PCONNECT);
+} else {
+    error('Database class does not exist.  Please check your config.php file for DB_TYPE');
 }
 
 $g_options = getOptions();
 
 if (!isset($g_options['scripturl'])) {
-	$g_options['scripturl'] = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : getenv('PHP_SELF');
+    $g_options['scripturl'] = $_SERVER['PHP_SELF'] ?? getenv('PHP_SELF');
 }
 
-////
-//// Main
-////
+// //
+// // Main
+// //
 
-$game = valid_request(isset($_GET['game']) ? $_GET['game'] : '', false);
+$game = valid_request($_GET['game'] ?? '', false);
 
 $realgame = $_SESSION['realgame'] ?? null;
 
-if (!$game)
-{
-	$game = isset($_SESSION['game'])?$_SESSION['game']:'';
-}
-else
-{
-	$_SESSION['game'] = $game;
+if (!$game) {
+    $game = $_SESSION['game'] ?? '';
+} else {
+    $_SESSION['game'] = $game;
 }
 
-if (!$realgame && $game)
-{
-	$realgame = getRealGame($game);
-	$_SESSION['realgame'] = $realgame;
+if (!$realgame && $game) {
+    $realgame             = getRealGame($game);
+    $_SESSION['realgame'] = $realgame;
 }
 
-$mode = isset($_GET['mode']) ? $_GET['mode'] : '';
+$mode = $_GET['mode'] ?? '';
 
-$valid_modes = array(
-	'players',
-	'clans',
-	'weapons',
-	'roles',
-	'rolesinfo',
-	'maps',
-	'actions',
-	'claninfo',
-	'playerinfo',
-	'weaponinfo',
-	'mapinfo',
-	'actioninfo',
-	'playerhistory',
-	'playersessions',
-	'playerawards',
-	'search',
-	'admin',
-	'help',
-	'bans',
-	'servers',
-	'chathistory',
-	'ranks',
-	'rankinfo',
-	'ribbons',
-	'ribboninfo',
-	'chat',
-	'globalawards',
-	'awards',
-	'dailyawardinfo',
-	'countryclans',
-	'countryclansinfo',
-	'teamspeak',
-	'ventrilo',
-	'updater',
-	'profile'
-);
-   
-if (file_exists('./updater') && $mode != 'updater')
-{
-	pageHeader(array('Update Notice'), array('Update Notice' => ''));
-	echo "<div class=\"warning\">\n" . 
-	"<span class=\"warning-heading\"><img src=\"".IMAGE_PATH."/warning.gif\" alt=\"Warning\"> Warning:</span><br />\n" .
-	"<span class=\"warning-text\">The updater folder was detected in your web directory.<br />
+$valid_modes = [
+    'players',
+    'clans',
+    'weapons',
+    'roles',
+    'rolesinfo',
+    'maps',
+    'actions',
+    'claninfo',
+    'playerinfo',
+    'weaponinfo',
+    'mapinfo',
+    'actioninfo',
+    'playerhistory',
+    'playersessions',
+    'playerawards',
+    'search',
+    'admin',
+    'help',
+    'bans',
+    'servers',
+    'chathistory',
+    'ranks',
+    'rankinfo',
+    'ribbons',
+    'ribboninfo',
+    'chat',
+    'globalawards',
+    'awards',
+    'dailyawardinfo',
+    'countryclans',
+    'countryclansinfo',
+    'teamspeak',
+    'ventrilo',
+    'updater',
+    'profile',
+];
+
+if (file_exists('./updater') && 'updater' != $mode) {
+    pageHeader(['Update Notice'], ['Update Notice' => '']);
+    echo "<div class=\"warning\">\n".
+    '<span class="warning-heading"><img src="'.IMAGE_PATH."/warning.gif\" alt=\"Warning\"> Warning:</span><br />\n".
+    "<span class=\"warning-text\">The updater folder was detected in your web directory.<br />
 	To perform a Database Update, please go to <strong><a href=\"{$g_options['scripturl']}?mode=updater\">HLX:CE Database Updater</a></strong> to perform the database update.<br /><br />
 	<strong>If you have already performed the database update, <strong>you must delete the \"updater\" folder from your web folder.</span>\n</div>";
-	pageFooter();
-	die();
-}
-   
-if ( !in_array($mode, $valid_modes) )
-{
-	$mode = 'contents';
+    pageFooter();
+    exit;
 }
 
-if ( file_exists(PAGE_PATH . "/$mode.php") )
-{
-	@include(PAGE_PATH . "/$mode.php");
-	pageFooter();
-}
-else
-{
-	header('HTTP/1.1 404 File Not Found', false, 404);
-	error('Unable to find ' . PAGE_PATH . "/$mode.php");
-	pageFooter();
+if (!in_array($mode, $valid_modes)) {
+    $mode = 'contents';
 }
 
-?>
+if (file_exists(PAGE_PATH."/$mode.php")) {
+    @include PAGE_PATH."/$mode.php";
+    pageFooter();
+} else {
+    header('HTTP/1.1 404 File Not Found', false, 404);
+    error('Unable to find '.PAGE_PATH."/$mode.php");
+    pageFooter();
+}

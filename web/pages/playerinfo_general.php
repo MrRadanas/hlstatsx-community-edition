@@ -59,7 +59,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 								WHERE
 									hlstats_PlayerUniqueIds.playerId = '$player'
 							");
-							list($uqid, $coid) = $db->fetch_row();
+							[$uqid, $coid] = $db->fetch_row();
 						
 							$status = 'Unknown';
 							$avatar_full = IMAGE_PATH."/unknown.jpg";
@@ -119,7 +119,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				<tr class="bg2">
 					<td>
 						<?php 
-							$prefix = ((!preg_match('/^BOT/i',$uqid)) && $g_options['Mode'] == 'Normal') ? 'STEAM_0:' : '';
+							$prefix = ((!preg_match('/^BOT/i', $uqid)) && $g_options['Mode'] == 'Normal') ? 'STEAM_0:' : '';
 							echo "Steam: <a href=\"http://steamcommunity.com/profiles/$coid\" target=\"_blank\">$prefix" . "$uqid</a>";
 						?>
 					</td>
@@ -217,7 +217,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 								LIMIT
 									1
 							");
-							list($lastevent) = $db->fetch_row();
+							[$lastevent] = $db->fetch_row();
 							if ($lastevent)
 								echo $lastevent;
 							else
@@ -245,7 +245,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 								WHERE 
 									hlstats_Events_Latency.playerId = '$player'
 							");
-							list($av_ping, $av_latency) = $db->fetch_row();
+							[$av_ping, $av_latency] = $db->fetch_row();
 							if ($av_ping)
 								echo $av_ping." ms (Latency: $av_latency ms)";
 							else
@@ -279,7 +279,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 								LIMIT
 									1
 							");
-							list($favServerId, $favServerName) = $db->fetch_row();
+							[$favServerId, $favServerName] = $db->fetch_row();
 							echo "<a href='hlstats.php?game=$game&amp;mode=servers&amp;server_id=$favServerId'> $favServerName </a>";
 						?>
 					</td>
@@ -304,7 +304,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 								LIMIT
 									1
 							");
-							list($favMap) = $db->fetch_row();
+							[$favMap] = $db->fetch_row();
 							echo "<a href=\"hlstats.php?game=$game&amp;mode=mapinfo&amp;map=$favMap\"> $favMap </a>";
 						?>
 					</td>
@@ -451,7 +451,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 										OR hlstats_Events_Frags.victimId = '$player'
 									)
 							");
-							list($realkpd) = $db->fetch_row();
+							[$realkpd] = $db->fetch_row();
 							echo $playerdata['kpd'];
 							echo " ($realkpd*)";
 						?>
@@ -470,7 +470,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 								WHERE
 									hlstats_Events_Frags.killerId = '$player'
 							");
-							list($realhpk) = $db->fetch_row();
+							[$realhpk] = $db->fetch_row();
 							echo $playerdata['hpk'];
 							echo " ($realhpk*)";
 						?>
@@ -492,7 +492,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 								WHERE
 									hlstats_Events_Statsme.playerId='$player'
 							");
-							list($playerdata['accuracy'], $sm_shots, $sm_hits, $sm_kills) = $db->fetch_row();
+							[$playerdata['accuracy'], $sm_shots, $sm_hits, $sm_kills] = $db->fetch_row();
 							if ($sm_kills > 0)
 							{
 								echo sprintf('%.2f', ($sm_shots / $sm_kills));
@@ -556,7 +556,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 								WHERE
 									hlstats_Players.playerId = '$player'
 							");
-							list($kill_streak) = $db->fetch_row();
+							[$kill_streak] = $db->fetch_row();
 							echo number_format($kill_streak);
 						?>
 					</td>
@@ -574,7 +574,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 								WHERE
 									hlstats_Players.playerId = '$player'
 							");
-							list($death_streak) = $db->fetch_row();
+							[$death_streak] = $db->fetch_row();
 							echo number_format($death_streak);
 						?>
 					</td>
@@ -609,7 +609,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					WHERE
 						hlstats_Players_Awards.playerId = $player
 				");
-				list($numawards) = $db->fetch_row($resultCount);
+				[$numawards] = $db->fetch_row($resultCount);
 				echo "<a href=\"" . $g_options['scripturl'] . "?mode=playerawards&amp;player=$player\">Awards&nbsp;($numawards)</a>&nbsp;|&nbsp;";
 				if ($g_options["nav_globalchat"] == 1)
 				{
@@ -658,8 +658,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 							echo "<img src=\"$imglink\" title=\"Copy &amp; Paste the whole URL below in your forum signature\" alt=\"forum sig image\"/>";
 							$script_path = (isset($_SERVER['SSL']) || (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on")) ? 'https://' : 'http://';
 							$script_path .= $_SERVER['HTTP_HOST'];
-							$script_path .= str_replace('\\','/',dirname($_SERVER['PHP_SELF']));
-							$script_path = preg_replace('/\/$/','',$script_path);
+							$script_path .= str_replace('\\', '/', dirname($_SERVER['PHP_SELF']));
+							$script_path = preg_replace('/\/$/', '', $script_path);
 						?>
 						<br /><br />
 						<script type="text/javascript">
@@ -871,7 +871,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	");
 	$ribbonList = '';
 	$lastImage = '';
-	$awards_done = array ();
+	$awards_done =  [];
 	while ($result = $db->fetch_array($res))
 	{
 		$ribbonCode=$result['ribbonCode'];
@@ -894,7 +894,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$awards_done[$ribbonCode]=$ribbonCode;
 		}
 	}
-	$awards = array ();
+	$awards =  [];
 	$res = $db->query
 	("
 		SELECT

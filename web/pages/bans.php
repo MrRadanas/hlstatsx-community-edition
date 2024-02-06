@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,13 +36,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
 // Player Rankings
-	$db->query
-	("
+$db->query("
 		SELECT
 			hlstats_Games.name
 		FROM
@@ -51,100 +50,87 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Games.code = '$game'
 	");
 
-    if ($db->num_rows() < 1) {
-        error("No such game '$game'.");
-	}
+if ($db->num_rows() < 1) {
+    error("No such game '$game'.");
+}
 
-    list($gamename) = $db->fetch_row();
+[$gamename] = $db->fetch_row();
 
-    $db->free_result();
+$db->free_result();
 
-	if (isset($_GET['minkills'])) {
-		$minkills = valid_request(intval($_GET['minkills']),true);
-	} else {
-		$minkills = 0;
-	}
+if (isset($_GET['minkills'])) {
+    $minkills = valid_request(intval($_GET['minkills']), true);
+} else {
+    $minkills = 0;
+}
 
-	pageHeader
-	(
-		array ($gamename, 'Cheaters &amp; Banned Players'),
-		array ($gamename=>"%s?game=$game", 'Cheaters &amp; Banned Players'=>'')
-	);
+pageHeader(
+    [$gamename, 'Cheaters &amp; Banned Players'],
+    [$gamename => "%s?game=$game", 'Cheaters &amp; Banned Players' => '']
+);
 
-	$table = new Table
-	(
-		array(
-			new TableColumn
-			(
-				'lastName',
-				'Player',
-				'width=26&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
-			),
-			new TableColumn
-			(
-				'ban_date',
-				'Ban Date',
-				'width=15&align=right'
-			),
-			new TableColumn
-			(
-				'skill',
-				'Points',
-				'width=6&align=right'
-			),
-			new TableColumn
-			(
-				'activity',
-				'Activity',
-				'width=10&sort=no&type=bargraph'
-			),
-			new TableColumn
-			(
-				'kills',
-				'Kills',
-				'width=5&align=right'
-			),
-			new TableColumn
-			(
-				'deaths',
-				'Deaths',
-				'width=5&align=right'
-			),
-			new TableColumn
-			(
-				'headshots',
-				'Headshots',
-				'width=7&align=right'
-			),
-			new TableColumn
-			(
-				'kpd',
-				'K:D',
-				'width=10&align=right'
-			),
-			new TableColumn
-			(
-				'hpk',
-				'HS:K',
-				'width=5&align=right'
-			),
-			new TableColumn
-			(
-				'acc',
-				'Accuracy',
-				'width=6&align=right&append=' . urlencode('%')
-			)
-		),
-		'playerId',
-		'last_event',
-		'skill',
-		true
-	);
+$table = new Table(
+    [
+        new TableColumn(
+            'lastName',
+            'Player',
+            'width=26&flag=1&link='.urlencode('mode=playerinfo&amp;player=%k')
+        ),
+        new TableColumn(
+            'ban_date',
+            'Ban Date',
+            'width=15&align=right'
+        ),
+        new TableColumn(
+            'skill',
+            'Points',
+            'width=6&align=right'
+        ),
+        new TableColumn(
+            'activity',
+            'Activity',
+            'width=10&sort=no&type=bargraph'
+        ),
+        new TableColumn(
+            'kills',
+            'Kills',
+            'width=5&align=right'
+        ),
+        new TableColumn(
+            'deaths',
+            'Deaths',
+            'width=5&align=right'
+        ),
+        new TableColumn(
+            'headshots',
+            'Headshots',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'kpd',
+            'K:D',
+            'width=10&align=right'
+        ),
+        new TableColumn(
+            'hpk',
+            'HS:K',
+            'width=5&align=right'
+        ),
+        new TableColumn(
+            'acc',
+            'Accuracy',
+            'width=6&align=right&append='.urlencode('%')
+        ),
+    ],
+    'playerId',
+    'last_event',
+    'skill',
+    true
+);
 
-	$day_interval = 28;
+$day_interval = 28;
 
-	$resultCount = $db->query
-	("
+$resultCount = $db->query("
 		SELECT
 			COUNT(*)
 		FROM
@@ -155,10 +141,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 			AND hlstats_Players.kills >= $minkills
 	");
 
-	list($numitems) = $db->fetch_row($resultCount);
+[$numitems] = $db->fetch_row($resultCount);
 
-	$result = $db->query
-	("
+$result = $db->query("
 		SELECT
 			hlstats_Players.playerId,
 			FROM_UNIXTIME(last_event,'%Y.%m.%d %T') as ban_date,
@@ -208,22 +193,20 @@ For support and installation notes visit http://www.hlxcommunity.com
 			<div style="float:left;">
 				<form method="get" action="<?php echo $g_options['scripturl']; ?>">
 					<?php
-						foreach ($_GET as $k=>$v)
-						{
-							$v = valid_request($v, false);
-							if ($k != "minkills")
-							{
-								echo "<input type=\"hidden\" name=\"" . htmlspecialchars($k) . "\" value=\"" . htmlspecialchars($v) . "\" />\n";
-							}
-						}
-					?>
+                        foreach ($_GET as $k => $v) {
+                            $v = valid_request($v, false);
+                            if ('minkills' != $k) {
+                                echo '<input type="hidden" name="'.htmlspecialchars($k).'" value="'.htmlspecialchars($v)."\" />\n";
+                            }
+                        }
+?>
 					<strong>&#8226;</strong> Show only players with
 					<input type="text" name="minkills" size="4" maxlength="2" value="<?php echo $minkills; ?>" class="textbox" /> or more kills from a total <strong><?php echo number_format($numitems); ?></strong> banned players
 					<input type="submit" value="Apply" class="smallsubmit" />
 				</form>
 			</div>
 			<div style="float:right;">
-				Go to: <a href="<?php echo $g_options["scripturl"] . "?game=$game"; ?>"><?php echo $gamename; ?></a>
+				Go to: <a href="<?php echo $g_options['scripturl']."?game=$game"; ?>"><?php echo $gamename; ?></a>
 			</div>
 	</div>
 </div>

@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,17 +36,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-	if (!defined('IN_HLSTATS')) {
-		die('Do not access this file directly.');
-	}
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	// Action Details
+// Action Details
 
-	// Addon created by Rufus (rufus@nonstuff.de)
-	
-	$action = valid_request($_GET['action'], true) or error('No action ID specified.');
-	
-	$db->query("
+// Addon created by Rufus (rufus@nonstuff.de)
+
+$action = valid_request($_GET['action'], true) or error('No action ID specified.');
+
+$db->query("
 		SELECT
 			description
 		FROM
@@ -55,48 +55,48 @@ For support and installation notes visit http://www.hlxcommunity.com
 			id='$action_id'
 			AND game='$game'
 	");
-	
-	if ($db->num_rows() != 1) {
-		$act_name = ucfirst($action);
-	} else {
-		$actiondata = $db->fetch_array();
-		$db->free_result();
-		$act_name = $actiondata['description'];
-	}
-	
-	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
-	if ($db->num_rows() != 1) {
-		error('Invalid or no game specified.');
-	} else {
-		list($gamename) = $db->fetch_row();
-	}
 
-	$table = new Table(
-		array(
-			new TableColumn(
-				'playerName',
-				'Player',
-				'width=45&align=left&flag=1&link=' . urlencode("mode=statsme&amp;player=%k") 
-			),
-			new TableColumn(
-				'obj_count',
-				'Achieved',
-				'width=25&align=right'
-			),
-			new TableColumn(
-				'obj_bonus',
-				'Skill Bonus Total',
-				'width=25&align=right&sort=no'
-			)
-		),
-		'playerId',
-		'obj_count',
-		'playerName',
-		true,
-		50
-	);
-	
-	$result = $db->query("
+if (1 != $db->num_rows()) {
+    $act_name = ucfirst($action);
+} else {
+    $actiondata = $db->fetch_array();
+    $db->free_result();
+    $act_name = $actiondata['description'];
+}
+
+$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
+if (1 != $db->num_rows()) {
+    error('Invalid or no game specified.');
+} else {
+    [$gamename] = $db->fetch_row();
+}
+
+$table = new Table(
+    [
+        new TableColumn(
+            'playerName',
+            'Player',
+            'width=45&align=left&flag=1&link='.urlencode('mode=statsme&amp;player=%k')
+        ),
+        new TableColumn(
+            'obj_count',
+            'Achieved',
+            'width=25&align=right'
+        ),
+        new TableColumn(
+            'obj_bonus',
+            'Skill Bonus Total',
+            'width=25&align=right&sort=no'
+        ),
+    ],
+    'playerId',
+    'obj_count',
+    'playerName',
+    true,
+    50
+);
+
+$result = $db->query("
 		SELECT
 			hlstats_Events_PlayerActions.playerId,
 			hlstats_Players.lastName AS playerName,
@@ -118,8 +118,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$table->sort2 $table->sortorder
 		LIMIT $table->startitem,$table->numperpage
 	");
-	
-	$resultCount = $db->query("
+
+$resultCount = $db->query("
 		SELECT
 			COUNT(DISTINCT hlstats_Events_PlayerActions.playerId),
 			COUNT(hlstats_Events_PlayerActions.Id)
@@ -131,10 +131,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Players.playerId = hlstats_Events_PlayerActions.playerId AND
 			hlstats_Events_PlayerActions.actionId = hlstats_Actions.id
 	");
-	
-	list($numitems, $totalact) = $db->fetch_row($resultCount);
-  
-  if ($totalact == 0)  {
+
+[$numitems, $totalact] = $db->fetch_row($resultCount);
+
+if (0 == $totalact) {
     $result = $db->query("
         SELECT
             hlstats_Events_TeamBonuses.playerId,
@@ -157,7 +157,7 @@ For support and installation notes visit http://www.hlxcommunity.com
             $table->sort2 $table->sortorder
         LIMIT $table->startitem,$table->numperpage
     ");
-    
+
     $resultCount = $db->query("
         SELECT
             COUNT(DISTINCT hlstats_Events_TeamBonuses.playerId),
@@ -170,11 +170,10 @@ For support and installation notes visit http://www.hlxcommunity.com
             hlstats_Players.playerId = hlstats_Events_TeamBonuses.playerId AND
             hlstats_Events_TeamBonuses.actionId = hlstats_Actions.id
     ");
-    list($numitems, $totalact) = $db->fetch_row($resultCount);
-    
-  }    
-    
+    [$numitems, $totalact] = $db->fetch_row($resultCount);
+}
+
 ?>
 <?php
-	$table->draw($result, $numitems, 100, 'center');
+$table->draw($result, $numitems, 100, 'center');
 ?>

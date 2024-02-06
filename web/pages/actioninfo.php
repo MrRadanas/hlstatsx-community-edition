@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -35,21 +35,21 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 For support and installation notes visit http://www.hlxcommunity.com
 */
-	
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
 
-	// Action Details
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	// Addon created by Rufus (rufus@nonstuff.de)
-	
-	$action = valid_request($_GET['action'], false) or error('No action ID specified.');
+// Action Details
 
-	$action_escaped=$db->escape($action);
-	$game_escaped=$db->escape($game);
-	
-	$db->query("
+// Addon created by Rufus (rufus@nonstuff.de)
+
+$action = valid_request($_GET['action'], false) or error('No action ID specified.');
+
+$action_escaped = $db->escape($action);
+$game_escaped   = $db->escape($game);
+
+$db->query("
 		SELECT
 			for_PlayerActions,for_PlayerPlayerActions, description
 		FROM
@@ -58,65 +58,60 @@ For support and installation notes visit http://www.hlxcommunity.com
 			code='{$action_escaped}'
 			AND game='{$game_escaped}'
 	");
-	
-	if ($db->num_rows() != 1)
-	{
-		$act_name = ucfirst($action);
-		$actiondata['for_PlayerActions']=1; // dummy these out, this should never happen?
-		$actiondata['for_PlayerPlayerActions']=0;
-	}
-	else
-	{
-		$actiondata = $db->fetch_array();
-		$db->free_result();
-		$act_name = $actiondata['description'];
-	}
-	
-	$db->query("SELECT name FROM hlstats_Games WHERE code='{$game_escaped}'");
-	if ($db->num_rows() != 1)
-		error('Invalid or no game specified.');
-	else
-		list($gamename) = $db->fetch_row();
-		
-	pageHeader(
-		array($gamename, 'Action Details', $act_name),
-		array(
-			$gamename=>$g_options['scripturl'] . "?game=$game",
-			'Action Statistics'=>$g_options['scripturl'] . "?mode=actions&game=$game",
-			'Action Details'=>''
-		),
-		$act_name
-	);
-    
 
-	$table = new Table(
-		array(
-			new TableColumn(
-				'playerName',
-				'Player',
-				'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k') 
-			),
-			new TableColumn(
-				'obj_count',
-				'Achieved',
-				'width=25&align=right'
-			),
-			new TableColumn(
-				'obj_bonus',
-				'Skill Bonus Total',
-				'width=25&align=right&sort=no'
-			)
-		),
-		'playerId',
-		'obj_count',
-		'playerName',
-		true,
-		40
-	);
+if (1 != $db->num_rows()) {
+    $act_name                              = ucfirst($action);
+    $actiondata['for_PlayerActions']       = 1; // dummy these out, this should never happen?
+    $actiondata['for_PlayerPlayerActions'] = 0;
+} else {
+    $actiondata = $db->fetch_array();
+    $db->free_result();
+    $act_name = $actiondata['description'];
+}
 
-	if ($actiondata['for_PlayerActions']==1)
-	{	
-		$result = $db->query("
+$db->query("SELECT name FROM hlstats_Games WHERE code='{$game_escaped}'");
+if (1 != $db->num_rows()) {
+    error('Invalid or no game specified.');
+} else {
+    [$gamename] = $db->fetch_row();
+}
+
+pageHeader(
+    [$gamename, 'Action Details', $act_name],
+    [
+        $gamename           => $g_options['scripturl']."?game=$game",
+        'Action Statistics' => $g_options['scripturl']."?mode=actions&game=$game",
+        'Action Details'    => '',
+    ]
+);
+
+$table = new Table(
+    [
+        new TableColumn(
+            'playerName',
+            'Player',
+            'width=45&align=left&flag=1&link='.urlencode('mode=playerinfo&amp;player=%k')
+        ),
+        new TableColumn(
+            'obj_count',
+            'Achieved',
+            'width=25&align=right'
+        ),
+        new TableColumn(
+            'obj_bonus',
+            'Skill Bonus Total',
+            'width=25&align=right&sort=no'
+        ),
+    ],
+    'playerId',
+    'obj_count',
+    'playerName',
+    true,
+    40
+);
+
+if (1 == $actiondata['for_PlayerActions']) {
+    $result = $db->query("
 			SELECT
 				hlstats_Events_PlayerActions.playerId,
 				hlstats_Players.lastName AS playerName,
@@ -138,8 +133,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 				$table->sort2 $table->sortorder
 			LIMIT $table->startitem,$table->numperpage
 		");
-		
-		$resultCount = $db->query("
+
+    $resultCount = $db->query("
 			SELECT
 				COUNT(DISTINCT hlstats_Events_PlayerActions.playerId),
 				COUNT(hlstats_Events_PlayerActions.Id)
@@ -152,10 +147,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 				hlstats_Events_PlayerActions.actionId = hlstats_Actions.id AND
 				hlstats_Players.hideranking = '0'
 		");
-	}
-	if($actiondata['for_PlayerPlayerActions']==1)
-	{
-		$result = $db->query("
+}
+if (1 == $actiondata['for_PlayerPlayerActions']) {
+    $result = $db->query("
 			SELECT
 				hlstats_Events_PlayerPlayerActions.playerId,
 				hlstats_Players.lastName AS playerName,
@@ -177,8 +171,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 				$table->sort2 $table->sortorder
 			LIMIT $table->startitem,$table->numperpage
 		");
-	
-		$resultCount = $db->query("
+
+    $resultCount = $db->query("
 			SELECT
 				COUNT(DISTINCT hlstats_Events_PlayerPlayerActions.playerId),
 				COUNT(hlstats_Events_PlayerPlayerActions.Id)
@@ -191,13 +185,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 				hlstats_Events_PlayerPlayerActions.actionId = hlstats_Actions.id AND
 				hlstats_Players.hideranking = '0'
 		");
-	}	
-		
-	list($numitems, $totalact) = $db->fetch_row($resultCount);
-  
-	if ($totalact == 0)
-	{
-		$result = $db->query("
+}
+
+[$numitems, $totalact] = $db->fetch_row($resultCount);
+
+if (0 == $totalact) {
+    $result = $db->query("
 			SELECT
 				hlstats_Events_TeamBonuses.playerId,
 				hlstats_Players.lastName AS playerName,
@@ -219,8 +212,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 				$table->sort2 $table->sortorder
 			LIMIT $table->startitem,$table->numperpage
 		");
-    
-		$resultCount = $db->query("
+
+    $resultCount = $db->query("
 			SELECT
 				COUNT(DISTINCT hlstats_Events_TeamBonuses.playerId),
 				COUNT(hlstats_Events_TeamBonuses.Id)
@@ -233,8 +226,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 				hlstats_Events_TeamBonuses.actionId = hlstats_Actions.id AND
 				hlstats_Players.hideranking = '0'
 		");
-		list($numitems, $totalact) = $db->fetch_row($resultCount);    
-	}
+    [$numitems, $totalact] = $db->fetch_row($resultCount);
+}
 ?>
 <div class="block">
 	<?php printSectionTitle('Action Details'); ?>
@@ -244,43 +237,42 @@ For support and installation notes visit http://www.hlxcommunity.com
 			<strong><?php echo $act_name; ?></strong> from a total of <strong><?php echo number_format(intval($totalact)); ?></strong> achievements (Last <?php echo $g_options['DeleteDays']; ?> Days)
 		</div>
 		<div style="float:right;">
-			Back to <a href="<?php echo $g_options['scripturl'] . "?mode=actions&amp;game=$game"; ?>">Action Statistics</a>
+			Back to <a href="<?php echo $g_options['scripturl']."?mode=actions&amp;game=$game"; ?>">Action Statistics</a>
 		</div>
 	</div>
 	<div style="clear:both;padding:2px;"></div>
 </div>
 <?php
-	$table->draw($result, $numitems, 95, 'center');
+    $table->draw($result, $numitems, 95, 'center');
 
-	if ($actiondata['for_PlayerPlayerActions'] == 1)
-	{
-		$table = new Table(
-		array(
-			new TableColumn(
-				'playerName',
-				'Player',
-				'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k') 
-			),
-			new TableColumn(
-				'obj_count',
-				'Times Victimized',
-				'width=25&align=right'
-			),
-			new TableColumn(
-				'obj_bonus',
-				'Skill Bonus Total',
-				'width=25&align=right&sort=no'
-			)
-		),
-		'victimId',
-		'obj_count',
-		'playerName',
-		true,
-		40,
-		'vpage'
-		);
-	
-		$result = $db->query("
+if (1 == $actiondata['for_PlayerPlayerActions']) {
+    $table = new Table(
+        [
+        new TableColumn(
+            'playerName',
+            'Player',
+            'width=45&align=left&flag=1&link='.urlencode('mode=playerinfo&amp;player=%k')
+        ),
+        new TableColumn(
+            'obj_count',
+            'Times Victimized',
+            'width=25&align=right'
+        ),
+        new TableColumn(
+            'obj_bonus',
+            'Skill Bonus Total',
+            'width=25&align=right&sort=no'
+        ),
+        ],
+        'victimId',
+        'obj_count',
+        'playerName',
+        true,
+        40,
+        'vpage'
+    );
+
+    $result = $db->query("
 			SELECT
 				hlstats_Events_PlayerPlayerActions.victimId,
 				hlstats_Players.lastName AS playerName,
@@ -302,8 +294,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 				$table->sort2 $table->sortorder
 			LIMIT $table->startitem,$table->numperpage
 		");
-	
-		$resultCount = $db->query("
+
+    $resultCount = $db->query("
 			SELECT
 				COUNT(DISTINCT hlstats_Events_PlayerPlayerActions.victimId),
 				COUNT(hlstats_Events_PlayerPlayerActions.Id)
@@ -316,11 +308,11 @@ For support and installation notes visit http://www.hlxcommunity.com
 				hlstats_Events_PlayerPlayerActions.actionId = hlstats_Actions.id AND
 				hlstats_Players.hideranking = '0'
 		");
-	
-		list($numitems, $totalact) = $db->fetch_row($resultCount);
-?>
+
+    [$numitems, $totalact] = $db->fetch_row($resultCount);
+    ?>
 <div class="block">
-	<a name="victims"><?php printSectionTitle("Action Victim Details"); ?></a>
+	<a name="victims"><?php printSectionTitle('Action Victim Details'); ?></a>
 	<div class="subblock">
 		<div style="float:left;">
 			<strong>Victims of <?php echo $act_name; ?></strong> (Last <?php echo $g_options['DeleteDays']; ?> Days)
@@ -328,8 +320,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 	</div>
 	<div style="clear:both;padding:2px;"></div>
 </div>
-<?php		
-		$table->draw($result, $numitems, 95, 'center');
-	}
+<?php
+            $table->draw($result, $numitems, 95, 'center');
+}
 ?>
 </div>

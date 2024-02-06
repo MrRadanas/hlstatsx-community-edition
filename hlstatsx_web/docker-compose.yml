@@ -1,0 +1,31 @@
+services:
+  hlstats_web_symfony:
+    build: .
+    volumes:
+      - ./:/var/www/hlstats_web
+
+#  hlstats_postgres:
+#    image: postgres:15.2-alpine3.17
+#    environment:
+#      POSTGRES_USER: root
+#      POSTGRES_PASSWORD: example
+#    restart: "no"
+#    volumes:
+#      - pg_data:/var/lib/postgresql/data:rw
+#    command: -p 5432
+#    logging:
+#      driver: local
+
+  hlstats_mysql:
+    image: mysql:8
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - hlstats_mysql:/var/lib/mysql:rw
+
+volumes:
+#  hlstats_postgres:
+  hlstats_mysql:

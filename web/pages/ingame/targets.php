@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,22 +36,22 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-	if (!defined('IN_HLSTATS')) {
-		die('Do not access this file directly.');
-	}
-	// Player Details
-	
-	$player = valid_request(intval($_GET['player']), true);
-	$uniqueid  = valid_request(strval($_GET['uniqueid']), false);
-	$game = valid_request(strval($_GET['game']), false);
-	
-	if (!$player && $uniqueid) {
-		if (!$game) {
-			header('Location: ' . $g_options['scripturl'] . "&mode=search&st=uniqueid&q=$uniqueid");
-			exit;
-		}
-		
-		$db->query("
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
+// Player Details
+
+$player   = valid_request(intval($_GET['player']), true);
+$uniqueid = valid_request(strval($_GET['uniqueid']), false);
+$game     = valid_request(strval($_GET['game']), false);
+
+if (!$player && $uniqueid) {
+    if (!$game) {
+        header('Location: '.$g_options['scripturl']."&mode=search&st=uniqueid&q=$uniqueid");
+        exit;
+    }
+
+    $db->query("
 			SELECT
 				playerId
 			FROM
@@ -60,21 +60,21 @@ For support and installation notes visit http://www.hlxcommunity.com
 				uniqueId='$uniqueid'
 				AND game='$game'
 		");
-		
-		if ($db->num_rows() > 1) {
-			header('Location: ' . $g_options['scripturl'] . "&mode=search&st=uniqueid&q=$uniqueid&game=$game");
-			exit;
-		} elseif ($db->num_rows() < 1) {
-			error("No players found matching uniqueId '$uniqueid'");
-		} else {
-			list($player) = $db->fetch_row();
-			$player = intval($player);
-		}
-	} elseif (!$player && !$uniqueid) {
-		error('No player ID specified.');
-	}
-	
-	$db->query("
+
+    if ($db->num_rows() > 1) {
+        header('Location: '.$g_options['scripturl']."&mode=search&st=uniqueid&q=$uniqueid&game=$game");
+        exit;
+    } elseif ($db->num_rows() < 1) {
+        error("No players found matching uniqueId '$uniqueid'");
+    } else {
+        [$player] = $db->fetch_row();
+        $player   = intval($player);
+    }
+} elseif (!$player && !$uniqueid) {
+    error('No player ID specified.');
+}
+
+$db->query("
 		SELECT
 			hlstats_Players.playerId,
 			hlstats_Players.lastName,
@@ -85,107 +85,107 @@ For support and installation notes visit http://www.hlxcommunity.com
 			playerId='$player'
 	");
 
-	if ($db->num_rows() != 1) {
-		error("No such player '$player'.");
-	}
+if (1 != $db->num_rows()) {
+    error("No such player '$player'.");
+}
 
-	$playerdata = $db->fetch_array();
-	$db->free_result();
-	
-	$pl_name = $playerdata['lastName'];
-	if (strlen($pl_name) > 10) {
-		$pl_shortname = substr($pl_name, 0, 8) . '...';
-	} else {
-		$pl_shortname = $pl_name;
-	}
+$playerdata = $db->fetch_array();
+$db->free_result();
 
-	$pl_name = htmlspecialchars($pl_name, ENT_COMPAT);
-	$pl_shortname = htmlspecialchars($pl_shortname, ENT_COMPAT);
-	$pl_urlname = urlencode($playerdata['lastName']);
+$pl_name = $playerdata['lastName'];
+if (strlen($pl_name) > 10) {
+    $pl_shortname = substr($pl_name, 0, 8).'...';
+} else {
+    $pl_shortname = $pl_name;
+}
 
-	$game = $playerdata['game'];
-	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
-	if ($db->num_rows() != 1) {
-		$gamename = ucfirst($game);
-	} else {
-		list($gamename) = $db->fetch_row();
-	}
+$pl_name      = htmlspecialchars($pl_name, ENT_COMPAT);
+$pl_shortname = htmlspecialchars($pl_shortname, ENT_COMPAT);
+$pl_urlname   = urlencode($playerdata['lastName']);
 
-	$tblWeaponstats2 = new Table(
-		array(
-			new TableColumn(
-				'smweapon',
-				'Weapon',
-				'width=10&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&weapon=%k&game=$game")
-			),
-			new TableColumn(
-				'smhits',
-				'Hits',
-				'width=8&align=right'
-			),
-			new TableColumn(
-				'smhead',
-				'Head',
-				'width=8&align=right'
-			),
-			new TableColumn(
-				'smchest',
-				'Chest',
-				'width=8&align=right'
-			),
-			new TableColumn(
-				'smstomach',
-				'Stomach',
-				'width=8&align=right'
-			),
-			new TableColumn(
-				'smleftarm',
-				'L. Arm',
-				'width=8&align=right'
-			),
-			new TableColumn(
-				'smrightarm',
-				'R. Arm',
-				'width=7&align=right'
-			),
-			new TableColumn(
-				'smleftleg',
-				'L. Leg',
-				'width=7&align=right'
-			),
-			new TableColumn(
-				'smrightleg',
-				'R. Leg',
-				'width=7&align=right'
-			),
-			new TableColumn(
-				'smleft',
-				'Left',
-				'width=8&align=right&append=' . urlencode('%')
-			),
-			new TableColumn(
-				'smmiddle',
-				'Middle',
-				'width=8&align=right&append=' . urlencode('%')
-			),
-			new TableColumn(
-				'smright',
-				'Right',
-				'width=8&align=right&append=' . urlencode('%')
-			)
-		),
-		'smweapon',
-		'smhits',
-		'smweapon',
-		true,
-		9999,
-		'weap_page',
-		'weap_sort',
-		'weap_sortorder',
-		'weaponstats2'
-	);
+$game = $playerdata['game'];
+$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
+if (1 != $db->num_rows()) {
+    $gamename = ucfirst($game);
+} else {
+    [$gamename] = $db->fetch_row();
+}
 
-	$result = $db->query("
+$tblWeaponstats2 = new Table(
+    [
+        new TableColumn(
+            'smweapon',
+            'Weapon',
+            'width=10&type=weaponimg&align=center&link='.urlencode("mode=weaponinfo&weapon=%k&game=$game")
+        ),
+        new TableColumn(
+            'smhits',
+            'Hits',
+            'width=8&align=right'
+        ),
+        new TableColumn(
+            'smhead',
+            'Head',
+            'width=8&align=right'
+        ),
+        new TableColumn(
+            'smchest',
+            'Chest',
+            'width=8&align=right'
+        ),
+        new TableColumn(
+            'smstomach',
+            'Stomach',
+            'width=8&align=right'
+        ),
+        new TableColumn(
+            'smleftarm',
+            'L. Arm',
+            'width=8&align=right'
+        ),
+        new TableColumn(
+            'smrightarm',
+            'R. Arm',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'smleftleg',
+            'L. Leg',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'smrightleg',
+            'R. Leg',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'smleft',
+            'Left',
+            'width=8&align=right&append='.urlencode('%')
+        ),
+        new TableColumn(
+            'smmiddle',
+            'Middle',
+            'width=8&align=right&append='.urlencode('%')
+        ),
+        new TableColumn(
+            'smright',
+            'Right',
+            'width=8&align=right&append='.urlencode('%')
+        ),
+    ],
+    'smweapon',
+    'smhits',
+    'smweapon',
+    true,
+    9999,
+    'weap_page',
+    'weap_sort',
+    'weap_sortorder',
+    'weaponstats2'
+);
+
+$result = $db->query("
 		SELECT
 			hlstats_Events_Statsme2.weapon AS smweapon,
 			SUM(hlstats_Events_Statsme2.head) AS smhead,
@@ -214,10 +214,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 		ORDER BY
 			$tblWeaponstats2->sort $tblWeaponstats2->sortorder,
 			$tblWeaponstats2->sort2 $tblWeaponstats2->sortorder
-	");	
+	");
 
-if ($db->num_rows($result) != 0)
-{
-		$tblWeaponstats2->draw($result, $db->num_rows($result), 100);
-}        
-	?>
+if (0 != $db->num_rows($result)) {
+    $tblWeaponstats2->draw($result, $db->num_rows($result), 100);
+}

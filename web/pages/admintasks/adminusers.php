@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,27 +36,27 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
+
+if ($auth->userdata['acclevel'] < 100) {
+    exit('Access denied!');
+}
+
+$edlist            = new EditList('username', 'hlstats_Users', 'user', false);
+$edlist->columns[] = new EditListColumn('username', 'Username', 15, true, 'text', '', 16);
+$edlist->columns[] = new EditListColumn('password', 'Password', 15, true, 'password', '', 16);
+$edlist->columns[] = new EditListColumn('acclevel', 'Access Level', 25, true, 'select', '0/No Access;80/Restricted;100/Administrator');
+
+if ($_POST) {
+    if ($edlist->update()) {
+        message('success', 'Operation successful.');
+    } else {
+        message('warning', $edlist->error());
     }
+}
 
-	if ($auth->userdata["acclevel"] < 100) {
-        die ("Access denied!");
-	}
-
-	$edlist = new EditList("username", "hlstats_Users", "user", false);
-	$edlist->columns[] = new EditListColumn("username", "Username", 15, true, "text", "", 16);
-	$edlist->columns[] = new EditListColumn("password", "Password", 15, true, "password", "", 16);
-	$edlist->columns[] = new EditListColumn("acclevel", "Access Level", 25, true, "select", "0/No Access;80/Restricted;100/Administrator");
-
-	if ($_POST)
-	{
-		if ($edlist->update())
-			message("success", "Operation successful.");
-		else
-			message("warning", $edlist->error());
-	}
-	
 ?>
 
 Usernames and passwords can be set up for access to this HLstats Admin area. For most sites you will only want one admin user - yourself. Some sites may however need to give administration access to several people.<p>
@@ -69,8 +69,8 @@ Usernames and passwords can be set up for access to this HLstats Admin area. For
 &#149; <i>Administrator</i> users have full, unrestricted access.<p>
 
 <?php
-	
-	$result = $db->query("
+
+    $result = $db->query("
 		SELECT
 			username,
 			IF(password='','','(encrypted)') AS password,
@@ -80,8 +80,8 @@ Usernames and passwords can be set up for access to this HLstats Admin area. For
 		ORDER BY
 			username
 	");
-	
-	$edlist->draw($result);
+
+$edlist->draw($result);
 ?>
 
 <table width="75%" border=0 cellspacing=0 cellpadding=0>

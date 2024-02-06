@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,59 +36,59 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	if ($auth->userdata["acclevel"] < 80) {
-        die ("Access denied!");
-	}
+if ($auth->userdata['acclevel'] < 80) {
+    exit('Access denied!');
+}
 ?>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo IMAGE_PATH; ?>/downarrow.gif" width=9 height=6 class="imageformat"><b>&nbsp;<?php echo $task->title; ?></b> (Last <?php echo $g_options["DeleteDays"]; ?> Days)<p>
+&nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo IMAGE_PATH; ?>/downarrow.gif" width=9 height=6 class="imageformat"><b>&nbsp;<?php echo $task->title; ?></b> (Last <?php echo $g_options['DeleteDays']; ?> Days)<p>
 
 <?php
-	$table = new Table(
-		array(
-			new TableColumn(
-				"eventTime",
-				"Date",
-				"width=20"
-			),
-			new TableColumn(
-				"eventType",
-				"Type",
-				"width=10&align=center"
-			),
-			new TableColumn(
-				"eventDesc",
-				"Description",
-				"width=40&sort=no&append=.&embedlink=yes"
-			),
-			new TableColumn(
-				"serverName",
-				"Server",
-				"width=20"
-			),
-			new TableColumn(
-				"map",
-				"Map",
-				"width=10"
-			)
-		),
-		"eventTime",
-		"eventTime",
-		"eventType",
-		false,
-		50,
-		"page",
-		"sort",
-		"sortorder"
-	);
-	
-	$db->query("DROP TABLE IF EXISTS hlstats_AdminEventHistory");
+    $table = new Table(
+        [
+                    new TableColumn(
+                        'eventTime',
+                        'Date',
+                        'width=20'
+                    ),
+                    new TableColumn(
+                        'eventType',
+                        'Type',
+                        'width=10&align=center'
+                    ),
+                    new TableColumn(
+                        'eventDesc',
+                        'Description',
+                        'width=40&sort=no&append=.&embedlink=yes'
+                    ),
+                    new TableColumn(
+                        'serverName',
+                        'Server',
+                        'width=20'
+                    ),
+                    new TableColumn(
+                        'map',
+                        'Map',
+                        'width=10'
+                    ),
+                ],
+        'eventTime',
+        'eventTime',
+        'eventType',
+        false,
+        50,
+        'page',
+        'sort',
+        'sortorder'
+    );
 
-	$sql_create_temp_table = "
+$db->query('DROP TABLE IF EXISTS hlstats_AdminEventHistory');
+
+$sql_create_temp_table = '
 		CREATE TEMPORARY TABLE hlstats_AdminEventHistory
 		(
 			eventType VARCHAR(64) NOT NULL,
@@ -96,17 +96,17 @@ For support and installation notes visit http://www.hlxcommunity.com
 			eventDesc VARCHAR(255) NOT NULL,
 			serverName VARCHAR(255) NOT NULL,
 			map VARCHAR(64) NOT NULL
-		) DEFAULT CHARSET=" . DB_CHARSET . " DEFAULT COLLATE=" . DB_COLLATE . ";
-	";
+		) DEFAULT CHARSET='.DB_CHARSET.' DEFAULT COLLATE='.DB_COLLATE.';
+	';
 
-	$db->query($sql_create_temp_table);
+$db->query($sql_create_temp_table);
 
-	function insertEvents ($table, $select)
-	{
-		global $db;
-		
-		$select = str_replace("<table>", "hlstats_Events_$table", $select);
-		$db->query("
+function insertEvents($table, $select)
+{
+    global $db;
+
+    $select = str_replace('<table>', "hlstats_Events_$table", $select);
+    $db->query("
 			INSERT INTO
 				hlstats_AdminEventHistory
 				(
@@ -118,9 +118,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 				)
 			$select
 		");
-	}
-	
-	insertEvents("Rcon", "
+}
+
+insertEvents('Rcon', "
 		SELECT
 			CONCAT(<table>.type, ' Rcon'),
 			<table>.eventTime,
@@ -132,8 +132,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 		LEFT JOIN hlstats_Servers ON
 			hlstats_Servers.serverId = <table>.serverId
 	");
-	
-	insertEvents("Admin", "
+
+insertEvents('Admin', "
 		SELECT
 			<table>.type,
 			<table>.eventTime,
@@ -149,15 +149,15 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Servers.serverId = <table>.serverId
 	");
 
-	$where = "";
-    $select_type = "";
+$where       = '';
+$select_type = '';
 
-	if (isset($_GET['type']) && $_GET['type'] != '') {
-		$select_type = $_GET['type'];
-		$where = "WHERE eventType='" . $db->escape($_GET['type']) . "'";
-	}
-	
-	$result = $db->query("
+if (isset($_GET['type']) && '' != $_GET['type']) {
+    $select_type = $_GET['type'];
+    $where       = "WHERE eventType='".$db->escape($_GET['type'])."'";
+}
+
+$result = $db->query("
 		SELECT
 			eventTime,
 			eventType,
@@ -173,43 +173,43 @@ For support and installation notes visit http://www.hlxcommunity.com
 		LIMIT
 			$table->startitem,$table->numperpage
 	");
-	
-	$resultCount = $db->query("
+
+$resultCount = $db->query("
 		SELECT
 			COUNT(*)
 		FROM
 			hlstats_AdminEventHistory
 		$where
 	");
-	
-	list($numitems) = $db->fetch_row($resultCount);
+
+[$numitems] = $db->fetch_row($resultCount);
 ?>
-<form method="get" action="<?php echo $g_options["scripturl"]; ?>">
+<form method="get" action="<?php echo $g_options['scripturl']; ?>">
 <input type="hidden" name="mode" value="admin" />
 <input type="hidden" name="task" value="<?php echo $code; ?>" />
 <input type="hidden" name="sort" value="<?php echo $sort; ?>" />
 <input type="hidden" name="sortorder" value="<?php echo $sortorder; ?>" />
 
 <b style="padding-left:35px;">&#149;</b> Show only events of type: <?php
-	$resultTypes = $db->query("
+    $resultTypes = $db->query('
 		SELECT
 			DISTINCT eventType
 		FROM
 			hlstats_AdminEventHistory
 		ORDER BY
 			eventType ASC
-	");
-	
-	$types[""] = "(All)";
-	
-	while (list($k) = $db->fetch_row($resultTypes)) {
-		$types[$k] = $k;
-	}
-	
-	echo getSelect("type", $types, $select_type);
+	');
+
+$types[''] = '(All)';
+
+while ([$k] = $db->fetch_row($resultTypes)) {
+    $types[$k] = $k;
+}
+
+echo getSelect('type', $types, $select_type);
 ?>
 <input type="submit" value="Filter" class="smallsubmit" /><br /><br />
 </form>
 <?php
-	$table->draw($result, $numitems, 95, "center");
+    $table->draw($result, $numitems, 95, 'center');
 ?>

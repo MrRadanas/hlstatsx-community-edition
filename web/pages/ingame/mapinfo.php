@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,52 +36,52 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-	if (!defined('IN_HLSTATS')) {
-		die('Do not access this file directly.');
-	}
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	// Map Details
+// Map Details
 
-	$map = valid_request($_GET['map'], false) or error('No map specified.');
-	
-	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
-	if ($db->num_rows() != 1) {
-		error('Invalid or no game specified.');
-	} else {
-		list($gamename) = $db->fetch_row();
-	}
+$map = valid_request($_GET['map'], false) or error('No map specified.');
 
-	$table = new Table(
-		array(
-			new TableColumn(
-				'killerName',
-				'Player',
-				'width=60&align=left&flag=1&link=' . urlencode('mode=statsme&amp;player=%k') 
-			),
-			new TableColumn(
-				'frags',
-				'Kills on $map',
-				'width=15&align=right'
-			),
-			new TableColumn(
-				'headshots',
-				'Headshots',
-				'width=15&align=right'
-			),
-			new TableColumn(
-				'hpk',
-				'Hpk',
-				'width=5&align=right'
-			),
-		),
-		'killerId', // keycol
-		'frags', // sort_default
-		'killerName', // sort_default2
-		true, // showranking
-		50 // numperpage
-	);
-	
-	$result = $db->query("
+$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
+if (1 != $db->num_rows()) {
+    error('Invalid or no game specified.');
+} else {
+    [$gamename] = $db->fetch_row();
+}
+
+$table = new Table(
+    [
+        new TableColumn(
+            'killerName',
+            'Player',
+            'width=60&align=left&flag=1&link='.urlencode('mode=statsme&amp;player=%k')
+        ),
+        new TableColumn(
+            'frags',
+            'Kills on $map',
+            'width=15&align=right'
+        ),
+        new TableColumn(
+            'headshots',
+            'Headshots',
+            'width=15&align=right'
+        ),
+        new TableColumn(
+            'hpk',
+            'Hpk',
+            'width=5&align=right'
+        ),
+    ],
+    'killerId', // keycol
+    'frags', // sort_default
+    'killerName', // sort_default2
+    true, // showranking
+    50 // numperpage
+);
+
+$result = $db->query("
 		SELECT
 			hlstats_Events_Frags.killerId,
 			hlstats_Players.lastName AS killerName,
@@ -104,8 +104,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$table->sort2 $table->sortorder
 		LIMIT $table->startitem,$table->numperpage
 	");
-	
-	$resultCount = $db->query("
+
+$resultCount = $db->query("
 		SELECT
 			COUNT(DISTINCT hlstats_Events_Frags.killerId),
 			SUM(hlstats_Events_Frags.map='$map')
@@ -117,11 +117,11 @@ For support and installation notes visit http://www.hlxcommunity.com
 			AND hlstats_Events_Frags.map='$map'
 			AND hlstats_Servers.game='$game'
 	");
-	
-	list($numitems, $totalkills) = $db->fetch_row($resultCount);
+
+[$numitems, $totalkills] = $db->fetch_row($resultCount);
 ?>
 
 
 <?php
-	$table->draw($result, $numitems, 100, 'center');
+    $table->draw($result, $numitems, 100, 'center');
 ?>

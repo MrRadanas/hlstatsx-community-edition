@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,108 +36,108 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-    if ($auth->userdata['acclevel'] < 80) {
-        die ('Access denied!');
-    }
+if ($auth->userdata['acclevel'] < 80) {
+    exit('Access denied!');
+}
 ?>
 
 &nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo IMAGE_PATH; ?>/downarrow.gif" width=9 height=6 class="imageformat"><b>&nbsp;<?php echo $task->title; ?></b><p>
 
 <?php
 
-	if (isset($_POST['confirm'])){
-		$convert_to = DB_COLLATE;
-		$character_set = DB_CHARSET;
+    if (isset($_POST['confirm'])) {
+        $convert_to    = DB_COLLATE;
+        $character_set = DB_CHARSET;
 
-		if ($_POST['printonly'] > 0) {
-			echo '<strong>Run these statements against your MySql database</strong><br><br>';
-			echo "ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET $character_set COLLATE $convert_to;<br>";
+        if ($_POST['printonly'] > 0) {
+            echo '<strong>Run these statements against your MySql database</strong><br><br>';
+            echo 'ALTER DATABASE `'.DB_NAME."` DEFAULT CHARACTER SET $character_set COLLATE $convert_to;<br>";
 
-			$rs_tables = $db->query('SHOW TABLES') or die("DB:> Cannot SHOW TABLES");
+            $rs_tables = $db->query('SHOW TABLES') or exit('DB:> Cannot SHOW TABLES');
 
-			while ($row_tables = $db->fetch_row($rs_tables))
-			{
-				$table = $db->escape($row_tables[0]);
+            while ($row_tables = $db->fetch_row($rs_tables)) {
+                $table = $db->escape($row_tables[0]);
 
-				echo "ALTER TABLE `$table` CONVERT TO CHARACTER SET $character_set COLLATE $convert_to;<br>";
+                echo "ALTER TABLE `$table` CONVERT TO CHARACTER SET $character_set COLLATE $convert_to;<br>";
 
-				$rs = $db->query("SHOW FULL FIELDS FROM `$table` WHERE collation is not null AND collation <> '{$convert_to}'") or die ("DB:> Cannot SHOW FULL FIELDS");
+                $rs = $db->query("SHOW FULL FIELDS FROM `$table` WHERE collation is not null AND collation <> '{$convert_to}'") or exit('DB:> Cannot SHOW FULL FIELDS');
 
-				while ($row = mysqli_fetch_assoc($rs))
-				{
-					if ($row['Collation'] == '')
-						continue;
-					if ( strtolower($row['Null']) == 'yes' )
-						$nullable = ' NULL ';
-					else
-						$nullable = ' NOT NULL';
-					if ( $row['Default'] === NULL && $nullable = ' NOT NULL ')
-						$default = " DEFAULT ''";
-					else if ( $row['Default'] === NULL )
-						$default = ' DEFAULT NULL';
-					else if ($row['Default']!='')
-						$default = " DEFAULT '".$db->escape($row['Default'])."'";
-					else
-						$default = '';
-					
-					$field = $db->escape($row['Field']);
-					echo "ALTER TABLE `$table` CHANGE `$field` `$field` $row[Type] CHARACTER SET $character_set COLLATE $convert_to $nullable $default;<br>";
-				}
-			}
-		} else {
-			echo "Converting database, table, and row collations to {$character_set}:<ul>\n";
-			set_time_limit(0);
-			echo '<li>Changing '.DB_NAME.' default character set and collation... ';
-			$db->query("ALTER DATABASE `".DB_NAME."` DEFAULT CHARACTER SET $character_set COLLATE $convert_to;") or die("DB:> Cannot ALTER DATABASE");
-			echo 'OK';
-			$rs_tables = $db->query('SHOW TABLES') or die("DB:> Cannot SHOW TABLES");
-			while ($row_tables = $db->fetch_row($rs_tables))
-			{
-				$table = $db->escape($row_tables[0]);
+                while ($row = mysqli_fetch_assoc($rs)) {
+                    if ('' == $row['Collation']) {
+                        continue;
+                    }
+                    if ('yes' == strtolower($row['Null'])) {
+                        $nullable = ' NULL ';
+                    } else {
+                        $nullable = ' NOT NULL';
+                    }
+                    if (null === $row['Default'] && $nullable = ' NOT NULL ') {
+                        $default = " DEFAULT ''";
+                    } elseif (null === $row['Default']) {
+                        $default = ' DEFAULT NULL';
+                    } elseif ('' != $row['Default']) {
+                        $default = " DEFAULT '".$db->escape($row['Default'])."'";
+                    } else {
+                        $default = '';
+                    }
 
-				echo "<li>Converting Table: $table ... ";
+                    $field = $db->escape($row['Field']);
+                    echo "ALTER TABLE `$table` CHANGE `$field` `$field` $row[Type] CHARACTER SET $character_set COLLATE $convert_to $nullable $default;<br>";
+                }
+            }
+        } else {
+            echo "Converting database, table, and row collations to {$character_set}:<ul>\n";
+            set_time_limit(0);
+            echo '<li>Changing '.DB_NAME.' default character set and collation... ';
+            $db->query('ALTER DATABASE `'.DB_NAME."` DEFAULT CHARACTER SET $character_set COLLATE $convert_to;") or exit('DB:> Cannot ALTER DATABASE');
+            echo 'OK';
+            $rs_tables = $db->query('SHOW TABLES') or exit('DB:> Cannot SHOW TABLES');
+            while ($row_tables = $db->fetch_row($rs_tables)) {
+                $table = $db->escape($row_tables[0]);
 
-				$db->query("ALTER TABLE `$table` CONVERT TO CHARACTER SET $character_set COLLATE $convert_to;");
+                echo "<li>Converting Table: $table ... ";
 
-				echo 'OK';
+                $db->query("ALTER TABLE `$table` CONVERT TO CHARACTER SET $character_set COLLATE $convert_to;");
 
-				$rs = $db->query("SHOW FULL FIELDS FROM `$table` WHERE collation is not null AND collation <> '{$convert_to}'") or die("DB:> Cannot SHOW FULL FIELDS");
+                echo 'OK';
 
-				while ($row=mysqli_fetch_assoc($rs))
-				{
-					if ($row['Collation'] == '')
-						continue;
-					if ( strtolower($row['Null']) == 'yes' )
-						$nullable = ' NULL ';
-					else
-						$nullable = ' NOT NULL';
-					if ( $row['Default'] === NULL && $nullable = ' NOT NULL ')
-						$default = " DEFAULT ''";
-					else if ( $row['Default'] === NULL )
-						$default = ' DEFAULT NULL';
-					else if ($row['Default']!='')
-						$default = " DEFAULT '".$db->escape($row['Default'])."'";
-					else
-						$default = '';
-					
-					$field = $db->escape($row['Field']);
-					echo "<li>Converting Table: $table   Column: $field ... ";
-					$db->query("ALTER TABLE `$table` CHANGE `$field` `$field` $row[Type] CHARACTER SET $character_set COLLATE $convert_to $nullable $default;");
-					echo 'OK';
-				}
-			}
-			echo '</ul>';
-			
-			echo 'Done.<p>';
-		}
-		
+                $rs = $db->query("SHOW FULL FIELDS FROM `$table` WHERE collation is not null AND collation <> '{$convert_to}'") or exit('DB:> Cannot SHOW FULL FIELDS');
+
+                while ($row = mysqli_fetch_assoc($rs)) {
+                    if ('' == $row['Collation']) {
+                        continue;
+                    }
+                    if ('yes' == strtolower($row['Null'])) {
+                        $nullable = ' NULL ';
+                    } else {
+                        $nullable = ' NOT NULL';
+                    }
+                    if (null === $row['Default'] && $nullable = ' NOT NULL ') {
+                        $default = " DEFAULT ''";
+                    } elseif (null === $row['Default']) {
+                        $default = ' DEFAULT NULL';
+                    } elseif ('' != $row['Default']) {
+                        $default = " DEFAULT '".$db->escape($row['Default'])."'";
+                    } else {
+                        $default = '';
+                    }
+
+                    $field = $db->escape($row['Field']);
+                    echo "<li>Converting Table: $table   Column: $field ... ";
+                    $db->query("ALTER TABLE `$table` CHANGE `$field` `$field` $row[Type] CHARACTER SET $character_set COLLATE $convert_to $nullable $default;");
+                    echo 'OK';
+                }
+            }
+            echo '</ul>';
+
+            echo 'Done.<p>';
+        }
     } else {
-        
-?>        
+        ?>        
 
 <form method="POST">
 <table width="60%" align="center" border=0 cellspacing=0 cellpadding=0 class="border">

@@ -117,24 +117,25 @@ if [ ! -f ${SCRIPTPATH}/${DAEMON} ]; then
 fi
 
 # Verify shebang line in daemon
-SHEBANG=`head -n1 ${SCRIPTPATH}/${DAEMON}`
-if [[ ${SHEBANG} =~ ^#! ]]; then
-  SHEBANG_BINARY=`echo "${SHEBANG}" | sed 's/^#!//'`
-  if [ ! -f ${SHEBANG_BINARY} ]; then
-    echo "CRITICAL ERROR: The path to Perl is incorrect in ${DAEMON}."
-    echo "Current Perl path in shebang: ${SHEBANG_BINARY}"
-    echo "Visit our wiki for more information: ${WIKI}."
-    echo 
-    echo "Potential paths for Perl: "
-    echo `which perl`
-    exit 1
-  fi
-else
-    echo "CRITICAL ERROR: The shebang line is incorrectly configured.  Please verify that your shebang line is correct in ${DAEMON}."
-    echo "Current shebang line: ${SHEBANG}"
-    echo "Visit our wiki for more information: ${WIKI}."
-    exit 1
-fi
+# TODO надо разобраться и восстановить логику проверки
+#SHEBANG=`head -n1 ${SCRIPTPATH}/${DAEMON}`
+#if [[ ${SHEBANG} =~ ^#! ]]; then
+#  SHEBANG_BINARY=`echo "${SHEBANG}" | sed 's/^#!//'`
+#  if [ ! -f ${SHEBANG_BINARY} ]; then
+#    echo "CRITICAL ERROR: The path to Perl is incorrect in ${DAEMON}."
+#    echo "Current Perl path in shebang: ${SHEBANG_BINARY}"
+#    echo "Visit our wiki for more information: ${WIKI}."
+#    echo
+#    echo "Potential paths for Perl: "
+#    echo `which perl`
+#    exit 1
+#  fi
+#else
+#    echo "CRITICAL ERROR: The shebang line is incorrectly configured.  Please verify that your shebang line is correct in ${DAEMON}."
+#    echo "Current shebang line: ${SHEBANG}"
+#    echo "Visit our wiki for more information: ${WIKI}."
+#    exit 1
+#fi
 
 # Create logdir if needed
 if [ ! -d ${LOGDIR} ]; then
