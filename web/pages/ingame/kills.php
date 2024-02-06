@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,23 +36,23 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-	if (!defined('IN_HLSTATS')) {
-		die('Do not access this file directly.');
-	}
-	
-	// Player Details
-	
-	$player = valid_request(intval($_GET['player']), true);
-	$uniqueid = valid_request(strval($_GET['uniqueid']), false);
-	$game = valid_request(strval($_GET['game']), false);
-	
-	if (!$player && $uniqueid) {
-		if (!$game) {
-			header('Location: ' . $g_options['scripturl'] . "&mode=search&st=uniqueid&q=$uniqueid");
-			exit;
-		}
-		
-		$db->query("
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
+
+// Player Details
+
+$player   = valid_request(intval($_GET['player']), true);
+$uniqueid = valid_request(strval($_GET['uniqueid']), false);
+$game     = valid_request(strval($_GET['game']), false);
+
+if (!$player && $uniqueid) {
+    if (!$game) {
+        header('Location: '.$g_options['scripturl']."&mode=search&st=uniqueid&q=$uniqueid");
+        exit;
+    }
+
+    $db->query("
 			SELECT
 				playerId
 			FROM
@@ -61,21 +61,21 @@ For support and installation notes visit http://www.hlxcommunity.com
 				uniqueId='$uniqueid'
 				AND game='$game'
 		");
-		
-		if ($db->num_rows() > 1) {
-			header('Location: ' . $g_options['scripturl'] . "&mode=search&st=uniqueid&q=$uniqueid&game=$game");
-			exit;
-		} elseif ($db->num_rows() < 1) {
-			error("No players found matching uniqueId '$uniqueid'");
-		} else {
-			[$player] = $db->fetch_row();
-			$player = intval($player);
-		}
-	} elseif (!$player && !$uniqueid) {
-		error('No player ID specified.');
-	}
-	
-	$db->query("
+
+    if ($db->num_rows() > 1) {
+        header('Location: '.$g_options['scripturl']."&mode=search&st=uniqueid&q=$uniqueid&game=$game");
+        exit;
+    } elseif ($db->num_rows() < 1) {
+        error("No players found matching uniqueId '$uniqueid'");
+    } else {
+        [$player] = $db->fetch_row();
+        $player   = intval($player);
+    }
+} elseif (!$player && !$uniqueid) {
+    error('No player ID specified.');
+}
+
+$db->query("
 		SELECT
 			hlstats_Players.playerId,
 			hlstats_Players.lastName,
@@ -107,109 +107,109 @@ For support and installation notes visit http://www.hlxcommunity.com
 			playerId='$player'
 	");
 
-	if ($db->num_rows() != 1) {
-		error("No such player '$player'.");
-	}
+if (1 != $db->num_rows()) {
+    error("No such player '$player'.");
+}
 
-	$playerdata = $db->fetch_array();
-	$db->free_result();
-	
-	$pl_name = $playerdata['lastName'];
-	if (strlen($pl_name) > 10) {
-		$pl_shortname = substr($pl_name, 0, 8) . '...';
-	} else {
-		$pl_shortname = $pl_name;
-	}
+$playerdata = $db->fetch_array();
+$db->free_result();
 
-	$pl_name = htmlspecialchars($pl_name, ENT_COMPAT);
-	$pl_shortname = htmlspecialchars($pl_shortname, ENT_COMPAT);
-	$pl_urlname = urlencode($playerdata['lastName']);
+$pl_name = $playerdata['lastName'];
+if (strlen($pl_name) > 10) {
+    $pl_shortname = substr($pl_name, 0, 8).'...';
+} else {
+    $pl_shortname = $pl_name;
+}
 
-	$game = $playerdata['game'];
-	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
-	if ($db->num_rows() != 1)
-		$gamename = ucfirst($game);
-	else
-		[$gamename] = $db->fetch_row();
+$pl_name      = htmlspecialchars($pl_name, ENT_COMPAT);
+$pl_shortname = htmlspecialchars($pl_shortname, ENT_COMPAT);
+$pl_urlname   = urlencode($playerdata['lastName']);
 
-	$tblPlayerKillStats = new Table(
-	    [
-			new TableColumn(
-			    'name',
-			    'Victim',
-			    'width=32&flag=1&link=' . urlencode('mode=statsme&player=%k')
-			),
-			new TableColumn(
-			    'kills',
-			    'Kills',
-			    'width=8&align=right'
-			),
-			new TableColumn(
-			    'deaths',
-			    'Deaths',
-			    'width=8&align=right'
-			),
-			new TableColumn(
-			    'kpd',
-			    'Kpd',
-			    'width=12&align=right'
-			),
-			new TableColumn(
-			    'headshots',
-			    'Headshots',
-			    'width=8&align=right'
-			),
-			new TableColumn(
-			    'hpercent',
-			    'Perc. Headshots',
-			    'width=17&sort=no&type=bargraph'
-			),
-			new TableColumn(
-			    'hpercent',
-			    '%',
-			    'width=5&sort=no&align=right&append=' . urlencode('%')
-			),
-			new TableColumn(
-			    'hpk',
-			    'Hpk',
-			    'width=5&align=right'
-			),
-			
-		],
-	    'victimId',
-	    'kills',
-	    'deaths',
-	    true,
-	    9999,
-	    'playerkills_page',
-	    'playerkills_sort',
-	    'playerkills_sortorder',
-	    'playerkills'
-	);
+$game = $playerdata['game'];
+$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
+if (1 != $db->num_rows()) {
+    $gamename = ucfirst($game);
+} else {
+    [$gamename] = $db->fetch_row();
+}
 
-	 if(!isset($_GET['killLimit'])) {
-		 $killLimit = 5;
-	 } else {
-		 $killLimit = valid_request($_GET['killLimit'], 1);
-	 }
+$tblPlayerKillStats = new Table(
+    [
+        new TableColumn(
+            'name',
+            'Victim',
+            'width=32&flag=1&link='.urlencode('mode=statsme&player=%k')
+        ),
+        new TableColumn(
+            'kills',
+            'Kills',
+            'width=8&align=right'
+        ),
+        new TableColumn(
+            'deaths',
+            'Deaths',
+            'width=8&align=right'
+        ),
+        new TableColumn(
+            'kpd',
+            'Kpd',
+            'width=12&align=right'
+        ),
+        new TableColumn(
+            'headshots',
+            'Headshots',
+            'width=8&align=right'
+        ),
+        new TableColumn(
+            'hpercent',
+            'Perc. Headshots',
+            'width=17&sort=no&type=bargraph'
+        ),
+        new TableColumn(
+            'hpercent',
+            '%',
+            'width=5&sort=no&align=right&append='.urlencode('%')
+        ),
+        new TableColumn(
+            'hpk',
+            'Hpk',
+            'width=5&align=right'
+        ),
+    ],
+    'victimId',
+    'kills',
+    'deaths',
+    true,
+    9999,
+    'playerkills_page',
+    'playerkills_sort',
+    'playerkills_sortorder',
+    'playerkills'
+);
 
-	//there might be a better way to do this, but I could not figure one out.
+if (!isset($_GET['killLimit'])) {
+    $killLimit = 5;
+} else {
+    $killLimit = valid_request($_GET['killLimit'], 1);
+}
 
-	$db->query("DROP TABLE IF EXISTS hlstats_Frags_Kills");
+// there might be a better way to do this, but I could not figure one out.
 
-	$sql_create_temp_table = "
+$db->query('DROP TABLE IF EXISTS hlstats_Frags_Kills');
+
+$sql_create_temp_table = '
 		CREATE TEMPORARY TABLE hlstats_Frags_Kills
 		(
 			playerId INT(10),
 			kills INT(10),
 			deaths INT(10),
 			headshot INT(10)
-		) DEFAULT CHARSET=" . DB_CHARSET . " DEFAULT COLLATE=" . DB_COLLATE . ";
-	";
+		) DEFAULT CHARSET='.DB_CHARSET.' DEFAULT COLLATE='.DB_COLLATE.';
+	';
 
-	$db->query($sql_create_temp_table);
+$db->query($sql_create_temp_table);
 
-	$db->query("
+$db->query("
 		INSERT INTO
 			hlstats_Frags_Kills
 			(
@@ -231,7 +231,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				hlstats_Events_Frags.id
 	");
 
-	$db->query("
+$db->query("
 		INSERT INTO
 			hlstats_Frags_Kills
 			(
@@ -248,8 +248,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 			WHERE
 				hlstats_Servers.game='$game' AND victimId = $player
 	");
-		
-	$result = $db->query("
+
+$result = $db->query("
 			SELECT
 				SUM(hlstats_Frags_Kills.headshot) as headshots
 			FROM
@@ -260,12 +260,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 				COUNT(hlstats_Frags_Kills.kills) >= $killLimit
 	");
 
-	$realheadshots = 0;
-	while ($rowdata = $db->fetch_array($result))  {
-		$realheadshots += $rowdata['headshots'];
-	}	
+$realheadshots = 0;
+while ($rowdata = $db->fetch_array($result)) {
+    $realheadshots += $rowdata['headshots'];
+}
 
-	$result = $db->query("
+$result = $db->query("
 			SELECT
 				hlstats_Players.lastName AS name,
 				hlstats_Players.flag AS flag,
@@ -293,11 +293,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 			LIMIT 0,15 
 	");
 
-	$numitems = $db->num_rows($result);
-		
-	if ($numitems > 0)
-	{
-		$tblPlayerKillStats->draw($result, $numitems, 100);
-	}
+$numitems = $db->num_rows($result);
+
+if ($numitems > 0) {
+    $tblPlayerKillStats->draw($result, $numitems, 100);
+}
 ?>
 

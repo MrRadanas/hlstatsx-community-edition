@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,14 +36,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-    // Player History
-	$player = valid_request(intval($_GET['player']), true) or error('No player ID specified.');
+// Player History
+$player = valid_request(intval($_GET['player']), true) or error('No player ID specified.');
 
-	$db->query("
+$db->query("
 		SELECT
 			hlstats_Players.lastName,
 			hlstats_Players.game
@@ -53,24 +53,24 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Players.playerId = $player
 	");
 
-	if ($db->num_rows() != 1) {
-		error("No such player '$player'.");
-	}
+if (1 != $db->num_rows()) {
+    error("No such player '$player'.");
+}
 
-	$playerdata = $db->fetch_array();
-	$pl_name = $playerdata['lastName'];
+$playerdata = $db->fetch_array();
+$pl_name    = $playerdata['lastName'];
 
-    if (strlen($pl_name) > 10) {
-		$pl_shortname = substr($pl_name, 0, 8) . '...';
-	} else {
-		$pl_shortname = $pl_name;
-	}
+if (strlen($pl_name) > 10) {
+    $pl_shortname = substr($pl_name, 0, 8).'...';
+} else {
+    $pl_shortname = $pl_name;
+}
 
-	$pl_name = htmlspecialchars($pl_name, ENT_COMPAT);
-	$pl_shortname = htmlspecialchars($pl_shortname, ENT_COMPAT);
-	$game = $playerdata['game'];
+$pl_name      = htmlspecialchars($pl_name, ENT_COMPAT);
+$pl_shortname = htmlspecialchars($pl_shortname, ENT_COMPAT);
+$game         = $playerdata['game'];
 
-    $db->query("
+$db->query("
 		SELECT
 			hlstats_Games.name
 		FROM
@@ -79,73 +79,65 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Games.code = '$game'
 	");
 
-	if ($db->num_rows() != 1) {
-		$gamename = ucfirst($game);
-	} else {
-		[$gamename] = $db->fetch_row();
-	}
+if (1 != $db->num_rows()) {
+    $gamename = ucfirst($game);
+} else {
+    [$gamename] = $db->fetch_row();
+}
 
-	pageHeader
-	(
-	    [$gamename, 'Event History', $pl_name],
-	    [
-			$gamename=>$g_options['scripturl'] . "?game=$game",
-			'Player Rankings'=>$g_options['scripturl'] . "?mode=players&game=$game",
-			'Player Details'=>$g_options['scripturl'] . "?mode=playerinfo&player=$player",
-			'Event History'=>'',
-		],
-	    $playername = ""
-	);
-	flush();
-	$table = new Table
-	(
-	    [
-			new TableColumn
-			(
-			    'eventTime',
-			    'Date',
-			    'width=20'
-			),
-			new TableColumn
-			(
-			    'eventType',
-			    'Type',
-			    'width=10&align=center'
-			),
-			new TableColumn
-			(
-			    'eventDesc',
-			    'Description',
-			    'width=40&sort=no&append=.&embedlink=yes'
-			),
-			new TableColumn
-			(
-			    'serverName',
-			    'Server',
-			    'width=20'
-			),
-			new TableColumn
-			(
-			    'map',
-			    'Map',
-			    'width=10'
-			),
-		],
-	    'eventTime',
-	    'eventTime',
-	    'eventType',
-	    false,
-	    50,
-	    'page',
-	    'sort',
-	    'sortorder'
-	);
-	$surl = $g_options['scripturl'];
+pageHeader(
+    [$gamename, 'Event History', $pl_name],
+    [
+        $gamename         => $g_options['scripturl']."?game=$game",
+        'Player Rankings' => $g_options['scripturl']."?mode=players&game=$game",
+        'Player Details'  => $g_options['scripturl']."?mode=playerinfo&player=$player",
+        'Event History'   => '',
+    ]
+);
+flush();
+$table = new Table(
+    [
+        new TableColumn(
+            'eventTime',
+            'Date',
+            'width=20'
+        ),
+        new TableColumn(
+            'eventType',
+            'Type',
+            'width=10&align=center'
+        ),
+        new TableColumn(
+            'eventDesc',
+            'Description',
+            'width=40&sort=no&append=.&embedlink=yes'
+        ),
+        new TableColumn(
+            'serverName',
+            'Server',
+            'width=20'
+        ),
+        new TableColumn(
+            'map',
+            'Map',
+            'width=10'
+        ),
+    ],
+    'eventTime',
+    'eventTime',
+    'eventType',
+    false,
+    50,
+    'page',
+    'sort',
+    'sortorder'
+);
+$surl = $g_options['scripturl'];
 // This would be better done with a UNION query, I think, but MySQL doesn't
 // support them yet. (NOTE you need MySQL 3.23 for temporary table support.)
-	$db->query("DROP TABLE IF EXISTS hlstats_EventHistory");
+$db->query('DROP TABLE IF EXISTS hlstats_EventHistory');
 
-	$sql_create_temp_table = "
+$sql_create_temp_table = '
 		CREATE TEMPORARY TABLE hlstats_EventHistory
 		(
 			eventType VARCHAR(32) NOT NULL,
@@ -153,17 +145,16 @@ For support and installation notes visit http://www.hlxcommunity.com
 			eventDesc VARCHAR(255) NOT NULL,
 			serverName VARCHAR(255) NOT NULL,
 			map VARCHAR(64) NOT NULL
-		) DEFAULT CHARSET=" . DB_CHARSET . " DEFAULT COLLATE=" . DB_COLLATE . ";
-	";
+		) DEFAULT CHARSET='.DB_CHARSET.' DEFAULT COLLATE='.DB_COLLATE.';
+	';
 
-	$db->query($sql_create_temp_table);
+$db->query($sql_create_temp_table);
 
-	function insertEvents ($table, $select)
-	{
-		global $db;
-		$select = str_replace("<table>", "hlstats_Events_$table", $select);
-		$db->query
-		("
+function insertEvents($table, $select)
+{
+    global $db;
+    $select = str_replace('<table>', "hlstats_Events_$table", $select);
+    $db->query("
 			INSERT INTO
 				hlstats_EventHistory
 				(
@@ -175,9 +166,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 				)
 			$select
 		");
-	}
-	insertEvents
-	('TeamBonuses', "
+}
+insertEvents('TeamBonuses', "
 		SELECT
 			'Team Bonus',
 			<table>.eventTime,
@@ -199,16 +189,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 		AND
 			hlstats_Actions.game = '$game'
 	");
-	if ($g_options["Mode"] == "LAN")
-	{
-		$uqIdStr = "IP Address:";
-	}
-	else
-	{
-		$uqIdStr = "Unique ID:";
-	}
-	insertEvents
-	('Connects', "
+if ('LAN' == $g_options['Mode']) {
+    $uqIdStr = 'IP Address:';
+} else {
+    $uqIdStr = 'Unique ID:';
+}
+insertEvents('Connects', "
 		SELECT
 			'Connect',
 			<table>.eventTime,
@@ -224,8 +210,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			<table>.playerId = $player
 	");
-	insertEvents
-	('Disconnects', "
+insertEvents('Disconnects', "
 		SELECT
 			'Disconnect',
 			<table>.eventTime,
@@ -241,8 +226,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			<table>.playerId = $player
 	");
-	insertEvents
-	('Entries', "
+insertEvents('Entries', "
 		SELECT
 			'Entry',
 			<table>.eventTime,
@@ -258,8 +242,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			<table>.playerId = $player
 	");
-	insertEvents
-	('Frags', "
+insertEvents('Frags', "
 		SELECT
 			'Kill',
 			<table>.eventTime,
@@ -280,8 +263,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			<table>.killerId = $player
 			AND <table>.headshot = 0
 	");
-	insertEvents
-	('Frags', "
+insertEvents('Frags', "
 		SELECT
 			'Kill',
 			<table>.eventTime,
@@ -302,8 +284,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			<table>.killerId = $player
 			AND <table>.headshot = 1
 	");
-	insertEvents
-	('Frags', "
+insertEvents('Frags', "
 		SELECT
 			'Death',
 			<table>.eventTime,
@@ -323,8 +304,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			<table>.victimId = $player
 	");
-	insertEvents
-	('Teamkills', "
+insertEvents('Teamkills', "
 		SELECT
 			'Team Kill',
 			<table>.eventTime,
@@ -344,8 +324,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			<table>.killerId = $player
 	");
-	insertEvents
-	('Teamkills', "
+insertEvents('Teamkills', "
 		SELECT
 			'Friendly Fire',
 			<table>.eventTime,
@@ -365,8 +344,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			<table>.victimId = $player
 	");
-	insertEvents
-	('ChangeRole', "
+insertEvents('ChangeRole', "
 		SELECT
 			'Role',
 			<table>.eventTime,
@@ -382,8 +360,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			<table>.playerId = $player
 	");
-	insertEvents
-	('ChangeName', "
+insertEvents('ChangeName', "
 		SELECT
 			'Name',
 			<table>.eventTime,
@@ -399,8 +376,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			<table>.playerId = $player
 	");
-	insertEvents
-	('PlayerActions', "
+insertEvents('PlayerActions', "
 		SELECT
 			'Action',
 			<table>.eventTime,
@@ -422,8 +398,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		AND
 			hlstats_Actions.game = '$game'
 	");
-	insertEvents
-	('PlayerPlayerActions', "
+insertEvents('PlayerPlayerActions', "
 		SELECT
 			'Action',
 			<table>.eventTime,
@@ -447,8 +422,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		AND
 			hlstats_Actions.game = '$game'
 	");
-	insertEvents
-	('PlayerPlayerActions', "
+insertEvents('PlayerPlayerActions', "
 		SELECT
 			'Action',
 			<table>.eventTime,
@@ -474,8 +448,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		AND
 			hlstats_Actions.game = '$game'
 	");
-	insertEvents
-	('Suicides', "
+insertEvents('Suicides', "
 		SELECT
 			'Suicide',
 			<table>.eventTime,
@@ -491,8 +464,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			<table>.playerId = $player
 	");
-	insertEvents
-	('ChangeTeam', "
+insertEvents('ChangeTeam', "
 		SELECT
 			'Team',
 			<table>.eventTime,
@@ -514,8 +486,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		AND
 			hlstats_Teams.game = '$game'
 	");
-	$result = $db->query
-	("
+$result = $db->query("
 		SELECT
 			hlstats_EventHistory.eventTime,
 			hlstats_EventHistory.eventType,
@@ -531,27 +502,25 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$table->startitem,
 			$table->numperpage
 	");
-	$resultCount = $db->query
-	("
+$resultCount = $db->query('
 		SELECT
 			COUNT(*)
 		FROM
 			hlstats_EventHistory
-	");
-	[$numitems] = $db->fetch_row($resultCount);
+	');
+[$numitems] = $db->fetch_row($resultCount);
 ?>
 
 <div class="block">
 <?php
-	printSectionTitle('Player Event History (Last '.$g_options['DeleteDays'].' Days)');
-	if ($numitems > 0)
-	{
-		$table->draw($result, $numitems, 95);
-	}
+    printSectionTitle('Player Event History (Last '.$g_options['DeleteDays'].' Days)');
+if ($numitems > 0) {
+    $table->draw($result, $numitems, 95);
+}
 ?><br /><br />
 	<div class="subblock">
 		<div style="float:right;">
-			Go to: <a href="<?php echo $g_options['scripturl'] . "?mode=playerinfo&amp;player=$player"; ?>"><?php echo $pl_name; ?>'s Statistics</a>
+			Go to: <a href="<?php echo $g_options['scripturl']."?mode=playerinfo&amp;player=$player"; ?>"><?php echo $pl_name; ?>'s Statistics</a>
 		</div>
 	</div>
 </div>

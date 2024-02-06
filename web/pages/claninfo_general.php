@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,9 +36,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
 printSectionTitle('Clan Information');
 ?>
@@ -58,111 +58,105 @@ printSectionTitle('Clan Information');
 			<tr class="bg2">
 				<td>Home Page:</td>
 				<td colspan="2"><?php
-					if ($url = getLink($clandata['homepage']))
-					{
-						echo $url;
-					}
-					else
-					{
-						echo '(Not specified.)';
-					}
-				?></td>
+                    if ($url = getLink($clandata['homepage'])) {
+                        echo $url;
+                    } else {
+                        echo '(Not specified.)';
+                    }
+?></td>
 			</tr>
 
 			<tr class="bg1">
 				<td style="width:45%;">Activity:</td>
 				<td style="width:40%;">
 				<meter min="0" max="100" low="25" high="50" optimum="75" value="<?php
-					echo $clandata['activity'] ?>"></meter>
+    echo $clandata['activity']; ?>"></meter>
 				</td>
 				<td style="width:15%"><?php
-					echo sprintf('%0.2f', $clandata['activity']).'%';
-				?></td>
+    echo sprintf('%0.2f', $clandata['activity']).'%';
+?></td>
 			</tr>
 
 			<tr class="bg2">
 				<td>Members:</td>
 				<td colspan="2"><?php
-					echo $clandata['nummembers'].
-					" active members ($totalclanplayers total)"; 
-				?></td>
+    echo $clandata['nummembers'].
+    " active members ($totalclanplayers total)";
+?></td>
 			</tr>
 
 			<tr class="bg1">
 				<td>Avg. Member Points:</td>
 				<td colspan="2"><strong><?php
-					echo number_format($clandata['avgskill']);
-				?></strong></td>
+    echo number_format($clandata['avgskill']);
+?></strong></td>
 			</tr>
 
 			<tr class="bg2">
 				<td>Total Kills:</td>
 				<td colspan="2"><?php
-					echo number_format($clandata['kills']);
-				?></td>
+    echo number_format($clandata['kills']);
+?></td>
 			</tr>
 				
 			<tr class="bg1">
 				<td>Total Deaths:</td>
 				<td colspan="2"><?php
-					echo number_format($clandata['deaths']);
-				?></td>
+    echo number_format($clandata['deaths']);
+?></td>
 			</tr>
             
 			<tr class="bg2">
 				<td>Avg. Kills:</td>
 				<td colspan="2"><?php
-					echo number_format($clandata['kills'] / ($clandata['nummembers']));
-				?></td>
+    echo number_format($clandata['kills'] / $clandata['nummembers']);
+?></td>
 			</tr>
 				
 			<tr class="bg1">
 				<td>Kills per Death:</td>
 				<td colspan="2"><?php
-					if ($clandata['deaths'] != 0)
-					{
-						echo sprintf('<strong>%0.2f</strong>', $clandata['kills'] / $clandata['deaths']);
-					}
-					else
-					{
-						echo '-';
-					}
-				?></td>
+    if (0 != $clandata['deaths']) {
+        echo sprintf('<strong>%0.2f</strong>', $clandata['kills'] / $clandata['deaths']);
+    } else {
+        echo '-';
+    }
+?></td>
 			</tr>
         
 			<tr class="bg2">
 		    	<td style="width:45%;">Kills per Minute:</td>
 				<td colspan="2" style="width:55%;"><?php
-					if ($clandata['connection_time'] > 0) {
-						echo sprintf("%.2f", ($clandata['kills'] / ($clandata['connection_time'] / 60)));
-					} else {
-						echo '-'; 
-					}
-				?></td>
+    if ($clandata['connection_time'] > 0) {
+        echo sprintf('%.2f', $clandata['kills'] / ($clandata['connection_time'] / 60));
+    } else {
+        echo '-';
+    }
+?></td>
 			</tr>
 
 			<tr class="bg1">
 				<td>Total Connection Time:</td>
 				<td colspan="2"><?php
-					echo timestamp_to_str($clandata['connection_time']);
-				?></td>
+    echo timestamp_to_str($clandata['connection_time']);
+?></td>
 			</tr>
 
 			<tr class="bg2">
 				<td>Avg. Connection Time:</td>
 				<td colspan="2"><?php
-					if ($clandata['connection_time'] > 0) {
-						echo timestamp_to_str($clandata['connection_time'] / ($clandata['nummembers']));
-					} else {
-						echo '-'; 
-					}
-				?></td>
+    if ($clandata['connection_time'] > 0) {
+        echo timestamp_to_str($clandata['connection_time'] / $clandata['nummembers']);
+    } else {
+        echo '-';
+    }
+?></td>
             </tr>
 
 			<tr class="bg1">
 				<td>Favorite Server:*</td>
 				<td colspan="2"><?php
-					$db->query("
+    $db->query("
 						SELECT
 							hlstats_Events_Entries.serverId,
 							hlstats_Servers.name,
@@ -185,17 +179,17 @@ printSectionTitle('Clan Information');
 							cnt DESC
 						LIMIT 1  	
 					");
-				    		
-					[$favServerId, $favServerName] = $db->fetch_row();
 
-					echo "<a href='hlstats.php?game=$game&amp;mode=servers&amp;server_id=$favServerId'> $favServerName </a>";
-    			?></td>
+[$favServerId, $favServerName] = $db->fetch_row();
+
+echo "<a href='hlstats.php?game=$game&amp;mode=servers&amp;server_id=$favServerId'> $favServerName </a>";
+?></td>
 		    </tr>
 
             <tr class="bg2">
 		    	<td>Favorite Map:*</td>
     			<td colspan="2"><?php
-					$db->query("
+    $db->query("
 						SELECT
 							hlstats_Events_Entries.map,
 							COUNT(map) AS cnt
@@ -214,16 +208,16 @@ printSectionTitle('Clan Information');
 						LIMIT 1  	
 					");
 
-				    [$favMap] = $db->fetch_row();
+[$favMap] = $db->fetch_row();
 
-					echo "<a href='hlstats.php?game=$game&amp;mode=mapinfo&amp;map=$favMap'> $favMap </a>";
-				?></td>
+echo "<a href='hlstats.php?game=$game&amp;mode=mapinfo&amp;map=$favMap'> $favMap </a>";
+?></td>
 			</tr>
 
             <tr class="bg1">
                 <td>Favorite Weapon:*</td>
                 <td colspan="2"><?php
-					$result = $db->query("
+    $result = $db->query("
 						SELECT
 							hlstats_Events_Frags.weapon,
 							hlstats_Weapons.name,
@@ -250,31 +244,31 @@ printSectionTitle('Clan Information');
 						LIMIT 1
                     ");
 
-					$weap_name = "";
-					$fav_weapon = "";
+$weap_name  = '';
+$fav_weapon = '';
 
-					while ($rowdata = $db->fetch_row($result))
-					{ 
-						$fav_weapon = $rowdata[0];
-						$weap_name = htmlspecialchars($rowdata[1]);
-					}
+while ($rowdata = $db->fetch_row($result)) {
+    $fav_weapon = $rowdata[0];
+    $weap_name  = htmlspecialchars($rowdata[1]);
+}
 
-					if ($fav_weapon == '')
-						$fav_weapon = 'Unknown';
-					$image = getImage("/games/$game/weapons/$fav_weapon");
-                    // check if image exists
-					$weaponlink = "<a href=\"hlstats.php?mode=weaponinfo&amp;weapon=$fav_weapon&amp;game=$game\">";
+if ('' == $fav_weapon) {
+    $fav_weapon = 'Unknown';
+}
+$image = getImage("/games/$game/weapons/$fav_weapon");
+// check if image exists
+$weaponlink = "<a href=\"hlstats.php?mode=weaponinfo&amp;weapon=$fav_weapon&amp;game=$game\">";
 
-                    if ($image) {
-						$cellbody = "$weaponlink<img src=\"" . $image['url'] . "\" alt=\"$weap_name\" title=\"$weap_name\" />";
-                    } else {
-						$cellbody = "$weaponlink<strong> $weaponlink$weap_name</strong>";
-                    }
+if ($image) {
+    $cellbody = "$weaponlink<img src=\"".$image['url']."\" alt=\"$weap_name\" title=\"$weap_name\" />";
+} else {
+    $cellbody = "$weaponlink<strong> $weaponlink$weap_name</strong>";
+}
 
-					$cellbody .= "</a>";
+$cellbody .= '</a>';
 
-                    echo $cellbody;
-               ?></td>
+echo $cellbody;
+?></td>
             </tr>
 		</table>
 	</div>
@@ -293,75 +287,75 @@ printSectionTitle('Clan Information');
 </div><br />
 
 <?php
-	flush();
-	
-	$tblMembers = new Table(
-	    [
-			new TableColumn(
-			    'lastName',
-			    'Name',
-			    'width=28&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
-			),
-                        new TableColumn(
-                            'mmrank',
-                            'Rank',
-                            'width=4&type=elorank'
-                        ),
-			new TableColumn(
-			    'skill',
-			    'Points',
-			    'width=6&align=right'
-			),
-			new TableColumn(
-			    'activity',
-			    'Activity',
-			    'width=10&sort=no&type=bargraph'
-			),
-			new TableColumn(
-			    'connection_time',
-			    'Time',
-			    'width=13&align=right&type=timestamp'
-			),
-			new TableColumn(
-			    'kills',
-			    'Kills',
-			    'width=6&align=right'
-			),
-			new TableColumn(
-			    'percent',
-			    'Clan Kills',
-			    'width=10&sort=no&type=bargraph'
-			),
-			new TableColumn(
-			    'percent',
-			    '%',
-			    'width=6&sort=no&align=right&append=' . urlencode('%')
-			),
-			new TableColumn(
-			    'deaths',
-			    'Deaths',
-			    'width=6&align=right'
-			),
-			new TableColumn(
-			    'kpd',
-			    'Kpd',
-			    'width=6&align=right'
-			),
-		],
-	    'playerId',
-	    'skill',
-	    'kpd',
-	    true,
-	    20,
-	    'members_page',
-	    'members_sort',
-	    'members_sortorder',
-	    'members',
-	    'desc',
-	    true
-	);
+    flush();
 
-	$result = $db->query("
+$tblMembers = new Table(
+    [
+        new TableColumn(
+            'lastName',
+            'Name',
+            'width=28&flag=1&link='.urlencode('mode=playerinfo&amp;player=%k')
+        ),
+                    new TableColumn(
+                        'mmrank',
+                        'Rank',
+                        'width=4&type=elorank'
+                    ),
+        new TableColumn(
+            'skill',
+            'Points',
+            'width=6&align=right'
+        ),
+        new TableColumn(
+            'activity',
+            'Activity',
+            'width=10&sort=no&type=bargraph'
+        ),
+        new TableColumn(
+            'connection_time',
+            'Time',
+            'width=13&align=right&type=timestamp'
+        ),
+        new TableColumn(
+            'kills',
+            'Kills',
+            'width=6&align=right'
+        ),
+        new TableColumn(
+            'percent',
+            'Clan Kills',
+            'width=10&sort=no&type=bargraph'
+        ),
+        new TableColumn(
+            'percent',
+            '%',
+            'width=6&sort=no&align=right&append='.urlencode('%')
+        ),
+        new TableColumn(
+            'deaths',
+            'Deaths',
+            'width=6&align=right'
+        ),
+        new TableColumn(
+            'kpd',
+            'Kpd',
+            'width=6&align=right'
+        ),
+    ],
+    'playerId',
+    'skill',
+    'kpd',
+    true,
+    20,
+    'members_page',
+    'members_sort',
+    'members_sortorder',
+    'members',
+    'desc',
+    true
+);
+
+$result = $db->query('
 		SELECT
 			hlstats_Players.playerId,
 			hlstats_Players.lastName,
@@ -373,7 +367,7 @@ printSectionTitle('Clan Information');
 			hlstats_Players.kills,
 			hlstats_Players.deaths,
 			ROUND(hlstats_Players.kills / IF(hlstats_Players.deaths = 0, 1, hlstats_Players.deaths), 2) AS kpd,
-			ROUND(hlstats_Players.kills / IF(" . $clandata['kills'] . " = 0, 1, ". $clandata['kills'] .") * 100, 2) AS percent,
+			ROUND(hlstats_Players.kills / IF('.$clandata['kills'].' = 0, 1, '.$clandata['kills'].") * 100, 2) AS percent,
 			activity
 		FROM
 			hlstats_Players
@@ -388,8 +382,8 @@ printSectionTitle('Clan Information');
 			hlstats_Players.skill DESC
 		LIMIT $tblMembers->startitem,$tblMembers->numperpage
 	");
-	
-	$resultCount = $db->query("
+
+$resultCount = $db->query("
 		SELECT
 			COUNT(*)
 		FROM
@@ -398,19 +392,19 @@ printSectionTitle('Clan Information');
 			hlstats_Players.clan=$clan
 			AND hlstats_Players.hideranking = 0
 	");
-	
-	[$numitems] = $db->fetch_row($resultCount);
+
+[$numitems] = $db->fetch_row($resultCount);
 ?>
 
 <div style="clear:both;padding-top:20px;"></div>
-<?php 
-	printSectionTitle('Members');
-	$tblMembers->draw($result, $numitems, 95);
+<?php
+    printSectionTitle('Members');
+$tblMembers->draw($result, $numitems, 95);
 ?>
 <br /><br />
 <?php
-	if ( $g_options['show_google_map'] == 1 ) {
-		include(INCLUDE_PATH . '/google_maps.php');
-		printMap('clan');
-	}
+    if (1 == $g_options['show_google_map']) {
+        include INCLUDE_PATH.'/google_maps.php';
+        printMap('clan');
+    }
 ?>

@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,90 +36,80 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-	if (!defined('IN_HLSTATS')) {
-		die('Do not access this file directly.');
-	}
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	// Clan Rankings
-	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
-	if ($db->num_rows() < 1) {
-		error("No such game '$game'.");
-	}
-	
-	[$gamename] = $db->fetch_row();
-	$db->free_result();
-	
-	if (isset($_GET['minmembers'])) {
-		$minmembers = valid_request(intval($_GET['minmembers']), true);
-	} else {
-		$minmembers = 3;
-	}
-	
-	$table = new Table
-	(
-	    [
-			new TableColumn
-			(
-			    'name',
-			    'Clan',
-			    'width=25&icon=clan&link=' . urlencode('mode=claninfo&amp;clan=%k')
-			),
-			new TableColumn
-			(
-			    'tag',
-			    'Tag',
-			    'width=15&align=center'
-			),
-			new TableColumn
-			(
-			    'skill',
-			    'Avg. Points',
-			    'width=8&align=right&skill_change=1'
-			),
-			new TableColumn
-			(
-			    'nummembers',
-			    'Members',
-			    'width=5&align=right'
-			),
-			new TableColumn
-			(
-			    'activity',
-			    'Activity',
-			    'width=8&type=bargraph'
-			),
-			new TableColumn
-			(
-			    'connection_time',
-			    'Connection Time',
-			    'width=13&align=right&type=timestamp'
-			),
-			new TableColumn
-			(
-			    'kills',
-			    'Kills',
-			    'width=7&align=right'
-			),
-			new TableColumn
-			(
-			    'deaths',
-			    'Deaths',
-			    'width=7&align=right'
-			),
-			new TableColumn
-			(
-			    'kpd',
-			    'K:D',
-			    'width=7&align=right'
-			),
-		],
-	    'clanId',
-	    'skill',
-	    'kpd',
-	    true
-	);
+// Clan Rankings
+$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
+if ($db->num_rows() < 1) {
+    error("No such game '$game'.");
+}
 
-	$result = $db->query("
+[$gamename] = $db->fetch_row();
+$db->free_result();
+
+if (isset($_GET['minmembers'])) {
+    $minmembers = valid_request(intval($_GET['minmembers']), true);
+} else {
+    $minmembers = 3;
+}
+
+$table = new Table(
+    [
+        new TableColumn(
+            'name',
+            'Clan',
+            'width=25&icon=clan&link='.urlencode('mode=claninfo&amp;clan=%k')
+        ),
+        new TableColumn(
+            'tag',
+            'Tag',
+            'width=15&align=center'
+        ),
+        new TableColumn(
+            'skill',
+            'Avg. Points',
+            'width=8&align=right&skill_change=1'
+        ),
+        new TableColumn(
+            'nummembers',
+            'Members',
+            'width=5&align=right'
+        ),
+        new TableColumn(
+            'activity',
+            'Activity',
+            'width=8&type=bargraph'
+        ),
+        new TableColumn(
+            'connection_time',
+            'Connection Time',
+            'width=13&align=right&type=timestamp'
+        ),
+        new TableColumn(
+            'kills',
+            'Kills',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'deaths',
+            'Deaths',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'kpd',
+            'K:D',
+            'width=7&align=right'
+        ),
+    ],
+    'clanId',
+    'skill',
+    'kpd',
+    true
+);
+
+$result = $db->query("
 		SELECT
 			hlstats_Clans.clanId,
 			hlstats_Clans.name,
@@ -152,7 +142,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$table->startitem,$table->numperpage
 	");
 
-	$resultCount = $db->query("
+$resultCount = $db->query("
 		SELECT
 			hlstats_Clans.clanId,
 			SUM(activity) as activity
@@ -172,6 +162,5 @@ For support and installation notes visit http://www.hlxcommunity.com
 			activity >= 0 AND
 			COUNT(hlstats_Players.playerId) >= $minmembers
 	");
-	
-	$table->draw($result, $db->num_rows($resultCount), 100);
-?>
+
+$table->draw($result, $db->num_rows($resultCount), 100);

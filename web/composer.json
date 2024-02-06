@@ -11,7 +11,8 @@
         "php": ">=7.4",
         "ext-sockets": "*",
         "ext-mysqli": "*",
-        "ext-gd": "*"
+        "ext-gd": "*",
+      "ext-curl": "*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.49",

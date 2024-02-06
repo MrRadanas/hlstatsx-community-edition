@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,24 +36,24 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
+
+// Player Details
+$player   = valid_request(intval($_GET['player'] ?? ''), true);
+$uniqueid = valid_request(strval($_GET['uniqueid'] ?? ''), false);
+$game     = valid_request(strval($_GET['game'] ?? ''), false);
+
+if (!$player && $uniqueid) {
+    if (!$game) {
+        header('Location: '.$g_options['scripturl']."&mode=search&st=uniqueid&q=$uniqueid");
+        exit;
     }
 
-	// Player Details
-	$player = valid_request(intval($_GET['player'] ?? ''), true);
-	$uniqueid = valid_request(strval($_GET['uniqueid'] ?? ''), false);
-	$game = valid_request(strval($_GET['game'] ?? ''), false);
+    $uniqueid = preg_replace('/^STEAM_\d+?\:/i', '', $uniqueid);
 
-	if (!$player && $uniqueid) {
-		if (!$game) {
-			header("Location: " . $g_options['scripturl'] . "&mode=search&st=uniqueid&q=$uniqueid");
-			exit;
-		}
-
-		$uniqueid = preg_replace('/^STEAM_\d+?\:/i', '', $uniqueid);
-
-        $db->query("
+    $db->query("
 			SELECT
 				hlstats_PlayerUniqueIds.playerId
 			FROM
@@ -62,20 +62,20 @@ For support and installation notes visit http://www.hlxcommunity.com
 				hlstats_PlayerUniqueIds.uniqueId = '$uniqueid'
 		");
 
-		if ($db->num_rows() > 1) {
-			header("Location: " . $g_options['scripturl'] . "&mode=search&st=uniqueid&q=$uniqueid&game=$game");
-			exit;
-		} elseif ($db->num_rows() < 1) {
-			error("No players found matching uniqueId '$uniqueid'");
-		} else {
-			[$player] = $db->fetch_row();
-			$player = intval($player);
-		}
-	} elseif (!$player && !$uniqueid) {
-		error("No player ID specified.");
-	}
+    if ($db->num_rows() > 1) {
+        header('Location: '.$g_options['scripturl']."&mode=search&st=uniqueid&q=$uniqueid&game=$game");
+        exit;
+    } elseif ($db->num_rows() < 1) {
+        error("No players found matching uniqueId '$uniqueid'");
+    } else {
+        [$player] = $db->fetch_row();
+        $player   = intval($player);
+    }
+} elseif (!$player && !$uniqueid) {
+    error('No player ID specified.');
+}
 
-	$db->query("
+$db->query("
 		SELECT
 			hlstats_Players.playerId,
 			hlstats_Players.connection_time,
@@ -117,26 +117,26 @@ For support and installation notes visit http://www.hlxcommunity.com
 			1
 	");
 
-	if ($db->num_rows() != 1) {
-		error("No such player '$player'.");
-	}
+if (1 != $db->num_rows()) {
+    error("No such player '$player'.");
+}
 
-	$playerdata = $db->fetch_array();
-	$db->free_result();
-	$pl_name = $playerdata['lastName'];
+$playerdata = $db->fetch_array();
+$db->free_result();
+$pl_name = $playerdata['lastName'];
 
-    if (strlen($pl_name) > 10) {
-		$pl_shortname = substr($pl_name, 0, 8) . '...';
-	} else {
-		$pl_shortname = $pl_name;
-	}
+if (strlen($pl_name) > 10) {
+    $pl_shortname = substr($pl_name, 0, 8).'...';
+} else {
+    $pl_shortname = $pl_name;
+}
 
-	$pl_name = htmlspecialchars($pl_name, ENT_COMPAT);
-	$pl_shortname = htmlspecialchars($pl_shortname, ENT_COMPAT);
-	$pl_urlname = urlencode($playerdata['lastName']);
-	$game = $playerdata['game'];
+$pl_name      = htmlspecialchars($pl_name, ENT_COMPAT);
+$pl_shortname = htmlspecialchars($pl_shortname, ENT_COMPAT);
+$pl_urlname   = urlencode($playerdata['lastName']);
+$game         = $playerdata['game'];
 
-    $db->query("
+$db->query("
 		SELECT
 			hlstats_Games.name
 		FROM
@@ -145,19 +145,19 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Games.code = '$game'
 	");
 
-	if ($db->num_rows() != 1) {
-		$gamename = ucfirst($game);
-	} else {
-		[$gamename] = $db->fetch_row();
-	}
+if (1 != $db->num_rows()) {
+    $gamename = ucfirst($game);
+} else {
+    [$gamename] = $db->fetch_row();
+}
 
-	$hideranking = $playerdata['hideranking'];
+$hideranking = $playerdata['hideranking'];
 
-    if ($hideranking == 2) {
-		$statusmsg = '<span style="color:red;font-weight:bold;">Banned</span>';
-	} else {
-		$statusmsg = '<span style="color:green;font-weight:bold;">In good standing</span>';
-	}
+if (2 == $hideranking) {
+    $statusmsg = '<span style="color:red;font-weight:bold;">Banned</span>';
+} else {
+    $statusmsg = '<span style="color:green;font-weight:bold;">In good standing</span>';
+}
 // Required on a few pages, just decided to add it here
 // May get moved in the future
 
@@ -171,9 +171,9 @@ $db->query("
 			AND hlstats_Events_Frags.headshot = 1
 	");
 
-	[$realheadshots] = $db->fetch_row();
+[$realheadshots] = $db->fetch_row();
 
-    $db->query("
+$db->query("
 		SELECT
 			COUNT(hlstats_Events_Frags.killerId)
 		FROM
@@ -182,9 +182,9 @@ $db->query("
 			hlstats_Events_Frags.killerId = '$player'
 	");
 
-	[$realkills] = $db->fetch_row();
+[$realkills] = $db->fetch_row();
 
-    $db->query("
+$db->query("
 		SELECT
 			COUNT(hlstats_Events_Frags.victimId)
 		FROM
@@ -193,9 +193,9 @@ $db->query("
 			hlstats_Events_Frags.victimId = '$player'
 	");
 
-	[$realdeaths] = $db->fetch_row();
+[$realdeaths] = $db->fetch_row();
 
-    $db->query("
+$db->query("
 		SELECT
 			COUNT(hlstats_Events_Teamkills.killerId)
 		FROM
@@ -204,42 +204,39 @@ $db->query("
 			hlstats_Events_Teamkills.killerId = '$player'
 	");
 
-	[$realteamkills] = $db->fetch_row();
+[$realteamkills] = $db->fetch_row();
 
-	if (!isset($_GET['killLimit'])) {
-		$killLimit = 5;
-	} else {
-		$killLimit = valid_request($_GET['killLimit'], true);
-	}
+if (!isset($_GET['killLimit'])) {
+    $killLimit = 5;
+} else {
+    $killLimit = valid_request($_GET['killLimit'], true);
+}
 
-	if (isset($_GET['type']) && $_GET['type'] == 'ajax') {
-		$tabs = explode('_', preg_replace('[^a-z]', '', $_GET['tab']));
+if (isset($_GET['type']) && 'ajax' == $_GET['type']) {
+    $tabs = explode('_', preg_replace('[^a-z]', '', $_GET['tab']));
 
-		foreach ($tabs as $tab) {
-			if (file_exists(PAGE_PATH . "/playerinfo_$tab.php")) {
-				@include(PAGE_PATH . "/playerinfo_$tab.php");
-			}
-		}
+    foreach ($tabs as $tab) {
+        if (file_exists(PAGE_PATH."/playerinfo_$tab.php")) {
+            @include PAGE_PATH."/playerinfo_$tab.php";
+        }
+    }
 
-		exit;
-	}
+    exit;
+}
 
-	pageHeader
-	(
-	    [$gamename, 'Player Details', $pl_name],
-	    [
-			$gamename=>$g_options['scripturl'] . "?game=$game",
-			'Player Rankings'=>$g_options['scripturl'] . "?mode=players&game=$game",
-			'Player Details'=>"",
-		],
-	    $pl_name
-	);
+pageHeader(
+    [$gamename, 'Player Details', $pl_name],
+    [
+        $gamename         => $g_options['scripturl']."?game=$game",
+        'Player Rankings' => $g_options['scripturl']."?mode=players&game=$game",
+        'Player Details'  => '',
+    ]
+);
 ?>
 <div class="block" id="main">
-<?php	
-	if ($g_options['playerinfo_tabs']=='1')
-	{
-?>
+<?php
+    if ('1' == $g_options['playerinfo_tabs']) {
+        ?>
 	<ul class="subsection_tabs" id="tabs_playerinfo">
 		<li>
 			<a href="#" id="tab_general_aliases">General</a>
@@ -275,28 +272,26 @@ $db->query("
 		);
 	</script>
 <?php
-	}
-	else
-	{
-		echo "\n<div id=\"tabgeneral\" class=\"tab\">\n";
-			require_once PAGE_PATH.'/playerinfo_general.php';
-			require_once PAGE_PATH.'/playerinfo_aliases.php';
-		echo '</div>';
-		echo "\n<div id=\"tabteams\" class=\"tab\">\n";
-			require_once PAGE_PATH.'/playerinfo_playeractions.php';
-			require_once PAGE_PATH.'/playerinfo_teams.php';
-		echo '</div>';
-		echo "\n<div id=\"tabweapons\" class=\"tab\">\n";
-			require_once PAGE_PATH.'/playerinfo_weapons.php';
-		echo '</div>';
-		echo "\n<div id=\"tabmaps\" class=\"tab\">\n";
-			require_once PAGE_PATH.'/playerinfo_mapperformance.php';
-			require_once PAGE_PATH.'/playerinfo_servers.php';
-		echo '</div>';
-		echo "\n<div id=\"tabkills\" class=\"tab\">\n";
-			require_once PAGE_PATH.'/playerinfo_killstats.php';
-		echo '</div>';
-	}
+    } else {
+        echo "\n<div id=\"tabgeneral\" class=\"tab\">\n";
+        require_once PAGE_PATH.'/playerinfo_general.php';
+        require_once PAGE_PATH.'/playerinfo_aliases.php';
+        echo '</div>';
+        echo "\n<div id=\"tabteams\" class=\"tab\">\n";
+        require_once PAGE_PATH.'/playerinfo_playeractions.php';
+        require_once PAGE_PATH.'/playerinfo_teams.php';
+        echo '</div>';
+        echo "\n<div id=\"tabweapons\" class=\"tab\">\n";
+        require_once PAGE_PATH.'/playerinfo_weapons.php';
+        echo '</div>';
+        echo "\n<div id=\"tabmaps\" class=\"tab\">\n";
+        require_once PAGE_PATH.'/playerinfo_mapperformance.php';
+        require_once PAGE_PATH.'/playerinfo_servers.php';
+        echo '</div>';
+        echo "\n<div id=\"tabkills\" class=\"tab\">\n";
+        require_once PAGE_PATH.'/playerinfo_killstats.php';
+        echo '</div>';
+    }
 ?>
 </div>
 <div class="block" style="clear:both;padding-top:12px;">
@@ -306,12 +301,11 @@ $db->query("
 		</div>
 		<div style="float:right;">
 			<?php
-				if (isset($_SESSION['loggedin']))
-				{
-					echo 'Admin Options: <a href="'.$g_options['scripturl']."?mode=admin&amp;task=tools_editdetails_player&amp;id=$player\">Edit Player Details</a><br />";
-				}
-			?>
-			Go to: <a href="<?php echo $g_options['scripturl'] . "?mode=players&amp;game=$game"; ?>">Player Rankings</a>
+                if (isset($_SESSION['loggedin'])) {
+                    echo 'Admin Options: <a href="'.$g_options['scripturl']."?mode=admin&amp;task=tools_editdetails_player&amp;id=$player\">Edit Player Details</a><br />";
+                }
+?>
+			Go to: <a href="<?php echo $g_options['scripturl']."?mode=players&amp;game=$game"; ?>">Player Rankings</a>
 		</div>
 	</div>
 </div>

@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -35,16 +35,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 For support and installation notes visit http://www.hlxcommunity.com
 */
-	
-	if (!defined('IN_HLSTATS')) {
-		die('Do not access this file directly.');
-	}
 
-	// Country Details
-	
-	$flag = valid_request($_GET['flag'], false) or error('No country ID specified.');
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	$SQL = "
+// Country Details
+
+$flag = valid_request($_GET['flag'], false) or error('No country ID specified.');
+
+$SQL = "
 		SELECT
 			hlstats_Countries.flag,
 			hlstats_Countries.name,
@@ -70,38 +70,34 @@ For support and installation notes visit http://www.hlxcommunity.com
 		GROUP BY
 			hlstats_Countries.flag
 	";
-	
-	$db->query($SQL);
-	if ($db->num_rows() != 1)
-		error("No such countryclan '$flag'.");
-	
-	$clandata = $db->fetch_array();
-	$db->free_result();
-	
-	
-	$cl_name = str_replace(' ', '&nbsp;', htmlspecialchars($clandata['name']));
-	$cl_tag  = str_replace(' ', '&nbsp;', htmlspecialchars($clandata['tag']));
-	$cl_full = "$cl_tag $cl_name";
-	
-	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
-	if ($db->num_rows() != 1)
-	{
-		$gamename = ucfirst($game);
-	}
-	else
-	{
-		[$gamename] = $db->fetch_row();
-	}	
-	
-	pageHeader(
-	    [$gamename, 'Country Details', $cl_full],
-	    [
-			$gamename=>$g_options['scripturl'] . "?game=$game",
-			'Country Rankings'=>$g_options['scripturl'] . "?mode=countryclans&game=$game",
-			'Country Details'=>'',
-		],
-	    $clandata['name']
-	);
+
+$db->query($SQL);
+if (1 != $db->num_rows()) {
+    error("No such countryclan '$flag'.");
+}
+
+$clandata = $db->fetch_array();
+$db->free_result();
+
+$cl_name = str_replace(' ', '&nbsp;', htmlspecialchars($clandata['name']));
+$cl_tag  = str_replace(' ', '&nbsp;', htmlspecialchars($clandata['tag']));
+$cl_full = "$cl_tag $cl_name";
+
+$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
+if (1 != $db->num_rows()) {
+    $gamename = ucfirst($game);
+} else {
+    [$gamename] = $db->fetch_row();
+}
+
+pageHeader(
+    [$gamename, 'Country Details', $cl_full],
+    [
+        $gamename          => $g_options['scripturl']."?game=$game",
+        'Country Rankings' => $g_options['scripturl']."?mode=countryclans&game=$game",
+        'Country Details'  => '',
+    ]
+);
 ?>
 
 <div class="block">
@@ -116,21 +112,21 @@ For support and installation notes visit http://www.hlxcommunity.com
 				<tr class="bg1">
 					<td>Country:</td>
 					<td colspan="2"><?php
-						echo '<img src="'.getFlag($clandata['flag']).'" alt="'.strtolower($playerdata['country']).'" title="'.strtolower($playerdata['country']).'" />&nbsp;'; 
-						echo '<strong>' . $clandata['name'] . '</strong>';
-					?></td>
+                        echo '<img src="'.getFlag($clandata['flag']).'" alt="'.strtolower($playerdata['country']).'" title="'.strtolower($playerdata['country']).'" />&nbsp;';
+echo '<strong>'.$clandata['name'].'</strong>';
+?></td>
 				</tr>
 				<tr class="bg2">
 					<td style="width:45%;"><?php
-						echo 'Activity:';
-					?></td>
+    echo 'Activity:';
+?></td>
 					<td align="left" width="40%">
 		                                <meter min="0" max="100" low="25" high="50" optimum="75" value="<?php
-                                        echo $clandata['activity'] ?>"></meter>
+                    echo $clandata['activity']; ?>"></meter>
 					</td>
 					<td style="width:15%;"><?php
-						echo sprintf('%0.2f', $clandata['activity']).'%';
-					?></td>
+    echo sprintf('%0.2f', $clandata['activity']).'%';
+?></td>
 				</tr>
 				<tr class="bg1">
 					<td>Members:</td>
@@ -143,82 +139,79 @@ For support and installation notes visit http://www.hlxcommunity.com
 				<tr class="bg2">
 					<td>Total Kills:</td>
 					<td colspan="2"><?php
-						echo number_format($clandata['kills']);
-					?></td>
+    echo number_format($clandata['kills']);
+?></td>
 				</tr>
 				
 				<tr class="bg1">
 					<td>Total Deaths:</td>
 					<td colspan="2"><?php
-						echo number_format($clandata['deaths']);
-					?></td>
+    echo number_format($clandata['deaths']);
+?></td>
 				</tr>
             
 				<tr class="bg2">
 					<td>Avg. Kills:</td>
 					<td colspan="2"><?php
-						echo number_format($clandata['kills'] / ($clandata['nummembers']));
-					?></td>
+    echo number_format($clandata['kills'] / $clandata['nummembers']);
+?></td>
 				</tr>
 				
 				<tr class="bg1">
 					<td>Kills per Death:</td>
 					<td colspan="2"><?php
-						if ($clandata['deaths'] != 0)
-						{
-							printf('<strong>' . '%0.2f', $clandata['kills'] / $clandata['deaths']) . '</strong>';
-						}
-						else
-						{
-							echo '-';
-						}
-					?></td>
+    if (0 != $clandata['deaths']) {
+        printf('<strong>%0.2f', $clandata['kills'] / $clandata['deaths']).'</strong>';
+    } else {
+        echo '-';
+    }
+?></td>
 				</tr>
         
 				<tr class="bg2">
 					<td style="width:45%;">Kills per Minute:</td>
 					<td colspan="2" style="width:55%;"><?php
-						if ($clandata['connection_time'] > 0) {
-							echo sprintf('%.2f', ($clandata['kills'] / ($clandata['connection_time'] / 60)));
-						} else {
-							echo '-'; 
-						}
-					?></td>
+    if ($clandata['connection_time'] > 0) {
+        echo sprintf('%.2f', $clandata['kills'] / ($clandata['connection_time'] / 60));
+    } else {
+        echo '-';
+    }
+?></td>
 				</tr>
 
 				<tr class="bg1">
 					<td>Avg. Member Points:</td>
 					<td colspan="2"><?php
-						echo '<strong>' . number_format($clandata['avgskill']) . '</strong>';
-					?></td>
+    echo '<strong>'.number_format($clandata['avgskill']).'</strong>';
+?></td>
 				</tr>
 
 				<tr class="bg2">
 					<td >Avg. Connection Time:</td>
 					<td  colspan="2"><?php
-						if ($clandata['connection_time'] > 0) {
-							echo timestamp_to_str($clandata['connection_time'] / ($clandata['nummembers']));
-					} else {
-						echo '-'; 
-					}
-					?></td>
+    if ($clandata['connection_time'] > 0) {
+        echo timestamp_to_str($clandata['connection_time'] / $clandata['nummembers']);
+    } else {
+        echo '-';
+    }
+?></td>
 				</tr>
                     
 				<tr class="bg1">
 					<td>Total Connection Time:</td>
 					<td colspan="2"><?php
-						echo timestamp_to_str($clandata['connection_time']);
-					?></td>
+    echo timestamp_to_str($clandata['connection_time']);
+?></td>
 				</tr>
 			</table>
 		</div>
 		<div style="float:right;width:48.5%;text-align:center;padding-top:50px;">
 <?php
-			if (file_exists(IMAGE_PATH.'/flags/'.strtolower($flag).'_large.png')) {
-				echo '<img src="'.IMAGE_PATH.'/flags/'.strtolower($flag).'_large.png" style="border:0px;" alt="'.$flag.'" />';
-			} else {
-				echo '<img src="'.IMAGE_PATH.'/countryclanlogos/NA.png" style="border:0px;" alt="" />';
-			}
+            if (file_exists(IMAGE_PATH.'/flags/'.strtolower($flag).'_large.png')) {
+                echo '<img src="'.IMAGE_PATH.'/flags/'.strtolower($flag).'_large.png" style="border:0px;" alt="'.$flag.'" />';
+            } else {
+                echo '<img src="'.IMAGE_PATH.'/countryclanlogos/NA.png" style="border:0px;" alt="" />';
+            }
 ?>
 		</div>
 		<div style="clear:both;"></div>
@@ -226,73 +219,73 @@ For support and installation notes visit http://www.hlxcommunity.com
 </div>
 
 <?php
-	flush();
-	
-	$tblMembers = new Table(
-	    [
-			new TableColumn(
-			    'lastName',
-			    'Name',
-			    'width=28&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
-			),
-                        new TableColumn(
-                            'mmrank',
-                            'Rank',
-                            'width=4&type=elorank'
-                        ),
-			new TableColumn(
-			    'skill',
-			    'Points',
-			    'width=6&align=right'
-			),
-			new TableColumn(
-			    'activity',
-			    'Activity',
-			    'width=10&sort=no&type=bargraph'
-			),
-			new TableColumn(
-			    'connection_time',
-			    'Time',
-			    'width=13&align=right&type=timestamp'
-			),
-			new TableColumn(
-			    'kills',
-			    'Kills',
-			    'width=6&align=right'
-			),
-			new TableColumn(
-			    'percent',
-			    'Clan Kills',
-			    'width=10&sort=no&type=bargraph'
-			),
-			new TableColumn(
-			    'percent',
-			    '%',
-			    'width=6&sort=no&align=right&append=' . urlencode('%')
-			),
-			new TableColumn(
-			    'deaths',
-			    'Deaths',
-			    'width=6&align=right'
-			),
-			new TableColumn(
-			    'kpd',
-			    'Kpd',
-			    'width=6&align=right'
-			),
-		],
-	    'playerId',
-	    'skill',
-	    'kpd',
-	    true,
-	    20,
-	    'members_page',
-	    'members_sort',
-	    'members_sortorder',
-	    'members'
-	);
+    flush();
 
-	$result = $db->query("
+$tblMembers = new Table(
+    [
+        new TableColumn(
+            'lastName',
+            'Name',
+            'width=28&flag=1&link='.urlencode('mode=playerinfo&amp;player=%k')
+        ),
+                    new TableColumn(
+                        'mmrank',
+                        'Rank',
+                        'width=4&type=elorank'
+                    ),
+        new TableColumn(
+            'skill',
+            'Points',
+            'width=6&align=right'
+        ),
+        new TableColumn(
+            'activity',
+            'Activity',
+            'width=10&sort=no&type=bargraph'
+        ),
+        new TableColumn(
+            'connection_time',
+            'Time',
+            'width=13&align=right&type=timestamp'
+        ),
+        new TableColumn(
+            'kills',
+            'Kills',
+            'width=6&align=right'
+        ),
+        new TableColumn(
+            'percent',
+            'Clan Kills',
+            'width=10&sort=no&type=bargraph'
+        ),
+        new TableColumn(
+            'percent',
+            '%',
+            'width=6&sort=no&align=right&append='.urlencode('%')
+        ),
+        new TableColumn(
+            'deaths',
+            'Deaths',
+            'width=6&align=right'
+        ),
+        new TableColumn(
+            'kpd',
+            'Kpd',
+            'width=6&align=right'
+        ),
+    ],
+    'playerId',
+    'skill',
+    'kpd',
+    true,
+    20,
+    'members_page',
+    'members_sort',
+    'members_sortorder',
+    'members'
+);
+
+$result = $db->query('
 		SELECT
 			hlstats_Players.playerId,
 			hlstats_Players.lastName,
@@ -304,8 +297,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Players.kills,
 			hlstats_Players.deaths,
 			ROUND(hlstats_Players.kills / IF(hlstats_Players.deaths = 0, 1, hlstats_Players.deaths), 2) AS kpd,
-			ROUND(hlstats_Players.kills / IF(" . $clandata['kills'] . " = 0, 1, " . $clandata['kills'] . ") * 100, 2) AS percent,
-			IF(".$g_options['MinActivity']." > (UNIX_TIMESTAMP() - last_event), ((100/".$g_options['MinActivity'].") * (".$g_options['MinActivity']." - (UNIX_TIMESTAMP() - last_event))), -1) as activity
+			ROUND(hlstats_Players.kills / IF('.$clandata['kills'].' = 0, 1, '.$clandata['kills'].') * 100, 2) AS percent,
+			IF('.$g_options['MinActivity'].' > (UNIX_TIMESTAMP() - last_event), ((100/'.$g_options['MinActivity'].') * ('.$g_options['MinActivity']." - (UNIX_TIMESTAMP() - last_event))), -1) as activity
 		FROM
 			hlstats_Players
 		WHERE
@@ -322,11 +315,11 @@ For support and installation notes visit http://www.hlxcommunity.com
 			lastName ASC
 		LIMIT $tblMembers->startitem,$tblMembers->numperpage
 	");
-	
-	$resultCount = $db->query("
+
+$resultCount = $db->query('
 		SELECT
 			playerId,
-			IF(".$g_options['MinActivity']." > (UNIX_TIMESTAMP() - last_event), ((100/".$g_options['MinActivity'].") * (".$g_options['MinActivity']." - (UNIX_TIMESTAMP() - last_event))), -1) as activity
+			IF('.$g_options['MinActivity'].' > (UNIX_TIMESTAMP() - last_event), ((100/'.$g_options['MinActivity'].') * ('.$g_options['MinActivity']." - (UNIX_TIMESTAMP() - last_event))), -1) as activity
 		FROM
 			hlstats_Players
 		WHERE
@@ -338,11 +331,11 @@ For support and installation notes visit http://www.hlxcommunity.com
 		HAVING
 			activity >= 0
 	");
-	
-	$numitems = $db->num_rows($resultCount);
+
+$numitems = $db->num_rows($resultCount);
 ?>
 <div class="block" style="padding-top:10px;">
 <?php
-	printSectionTitle('Members');
-	$tblMembers->draw($result, $numitems, 95);
+    printSectionTitle('Members');
+$tblMembers->draw($result, $numitems, 95);
 ?></div>

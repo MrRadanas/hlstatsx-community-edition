@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,70 +36,72 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-	if (!defined('IN_HLSTATS')) {
-		die('Do not access this file directly.');
-	}
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	// Player Rankings
-	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
-	if ($db->num_rows() < 1) error("No such game '$game'.");
-	
-	[$gamename] = $db->fetch_row();
-	$db->free_result();
-	
-	$minkills = 0;
+// Player Rankings
+$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
+if ($db->num_rows() < 1) {
+    error("No such game '$game'.");
+}
 
-	$table = new Table(
-	    [
-			new TableColumn(
-			    "lastName",
-			    "Name",
-			    "width=40&flag=1&link=" . urlencode("mode=statsme&amp;player=%k")
-			),
-			new TableColumn(
-			    "ban_date",
-			    "BanDate",
-			    "width=25&align=right"
-			),
-			new TableColumn(
-			    "skill",
-			    "Points",
-			    "width=5&align=right"
-			),
-			new TableColumn(
-			    "kills",
-			    "Kills",
-			    "width=5&align=right"
-			),
-			new TableColumn(
-			    "deaths",
-			    "Deaths",
-			    "width=5&align=right"
-			),
-			new TableColumn(
-			    "headshots",
-			    "Headshots",
-			    "width=5&align=right"
-			),
-			new TableColumn(
-			    "hpk",
-			    "HS:K",
-			    "width=5&align=right"
-			),
-			new TableColumn(
-			    "kpd",
-			    "KPD",
-			    "width=5&align=right"
-			),
-		],
-	    "playerId",
-	    "last_event",
-	    "skill",
-	    true,
-	    25
-	);
-    
-	$result = $db->query("
+[$gamename] = $db->fetch_row();
+$db->free_result();
+
+$minkills = 0;
+
+$table = new Table(
+    [
+        new TableColumn(
+            'lastName',
+            'Name',
+            'width=40&flag=1&link='.urlencode('mode=statsme&amp;player=%k')
+        ),
+        new TableColumn(
+            'ban_date',
+            'BanDate',
+            'width=25&align=right'
+        ),
+        new TableColumn(
+            'skill',
+            'Points',
+            'width=5&align=right'
+        ),
+        new TableColumn(
+            'kills',
+            'Kills',
+            'width=5&align=right'
+        ),
+        new TableColumn(
+            'deaths',
+            'Deaths',
+            'width=5&align=right'
+        ),
+        new TableColumn(
+            'headshots',
+            'Headshots',
+            'width=5&align=right'
+        ),
+        new TableColumn(
+            'hpk',
+            'HS:K',
+            'width=5&align=right'
+        ),
+        new TableColumn(
+            'kpd',
+            'KPD',
+            'width=5&align=right'
+        ),
+    ],
+    'playerId',
+    'last_event',
+    'skill',
+    true,
+    25
+);
+
+$result = $db->query("
 		SELECT
 			FROM_UNIXTIME(last_event,'%Y.%m.%d %T') as ban_date,
 			playerId,
@@ -124,8 +126,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 			lastName ASC
 		LIMIT $table->startitem,$table->numperpage
 	");
-	
-	$resultCount = $db->query("
+
+$resultCount = $db->query("
 		SELECT
 			COUNT(*)
 		FROM
@@ -135,8 +137,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			AND hideranking=2
 			AND kills >= $minkills
 	");
-	
-	[$numitems] = $db->fetch_row($resultCount);
-	
-	$table->draw($result, 25, 100);
-?>
+
+[$numitems] = $db->fetch_row($resultCount);
+
+$table->draw($result, 25, 100);

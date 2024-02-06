@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -38,7 +38,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
  * Table
  * Generates an HTML table.
- * 
+ *
  * @package HLstatsX Community Edition
  * @author Nicholas Hastings (nshastings@gmail.com)
  * @copyright HLstatsX Community Edition
@@ -48,152 +48,134 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 class Table
 {
-	public $columns;
-	public $keycol;
-	public $sort;
-	public $sortorder;
-	public $sort2;
-	public $page;
-	public $showranking;
-	public $numperpage;
-	public $var_page;
-	public $var_sort;
-	public $var_sortorder;
-	public $sorthash;
-	public $ajax;
+    public $columns;
+    public $keycol;
+    public $sort;
+    public $sortorder;
+    public $sort2;
+    public $page;
+    public $showranking;
+    public $numperpage;
+    public $var_page;
+    public $var_sort;
+    public $var_sortorder;
+    public $sorthash;
+    public $ajax;
 
-	public $columnlist;
-	public $startitem;
+    public $columnlist;
+    public $startitem;
 
-	public $maxpagenumbers = 20;
+    public $maxpagenumbers = 20;
 
+    public function __construct(
+        $columns,
+        $keycol,
+        $sort_default,
+        $sort_default2,
+        $showranking = false,
+        $numperpage = 50,
+        $var_page = 'page',
+        $var_sort = 'sort',
+        $var_sortorder = 'sortorder',
+        $sorthash = '',
+        $sort_default_order = 'desc',
+        $ajax = false
+    ) {
+        global $g_options;
 
-	public function __construct(
-	    $columns,
-	    $keycol,
-	    $sort_default,
-	    $sort_default2,
-	    $showranking=false,
-	    $numperpage=50,
-	    $var_page='page',
-	    $var_sort='sort',
-	    $var_sortorder='sortorder',
-	    $sorthash='',
-	    $sort_default_order='desc',
-	    $ajax = false
-	)
-	{
+        $this->columns            = $columns;
+        $this->keycol             = $keycol;
+        $this->showranking        = $showranking;
+        $this->numperpage         = $numperpage;
+        $this->var_page           = $var_page;
+        $this->var_sort           = $var_sort;
+        $this->var_sortorder      = $var_sortorder;
+        $this->sorthash           = $sorthash;
+        $this->sort_default_order = $sort_default_order;
+        $this->ajax               = ($g_options['playerinfo_tabs']) ? $ajax : false;
 
-		global $g_options;
-		
-		$this->columns = $columns;
-		$this->keycol  = $keycol;
-		$this->showranking = $showranking;
-		$this->numperpage  = $numperpage;
-		$this->var_page = $var_page;
-		$this->var_sort = $var_sort;
-		$this->var_sortorder = $var_sortorder;
-		$this->sorthash = $sorthash;
-		$this->sort_default_order = $sort_default_order;
-		$this->ajax = ( $g_options['playerinfo_tabs'] ) ? $ajax : false;
+        $this->page      = valid_request(intval($_GET[$var_page] ?? ''), true);
+        $this->sort      = valid_request($_GET[$var_sort] ?? '', false);
+        $this->sortorder = valid_request($_GET[$var_sortorder] ?? '', false);
 
-		$this->page = valid_request(intval($_GET[$var_page] ?? ''), true);
-		$this->sort = valid_request($_GET[$var_sort] ?? '', false);
-		$this->sortorder = valid_request($_GET[$var_sortorder] ?? '', false);
+        if ($this->page < 1) {
+            $this->page = 1;
+        }
+        $this->startitem = ($this->page - 1) * $this->numperpage;
 
-		if ($this->page < 1)
-		{
-			$this->page = 1;
-		}
-		$this->startitem = ($this->page - 1) * $this->numperpage;
+        foreach ($columns as $col) {
+            if ('no' != $col->sort) {
+                $this->columnlist[] = $col->name;
+            }
+        }
 
-		foreach ($columns as $col)
-		{
-			if ($col->sort != 'no')
-			{
-				$this->columnlist[] = $col->name;
-			}
-		}
+        if (!is_array($this->columnlist) || !in_array($this->sort, $this->columnlist)) {
+            $this->sort = $sort_default;
+        }
 
-		if (!is_array($this->columnlist) || !in_array($this->sort, $this->columnlist))
-		{
-			$this->sort = $sort_default;
-		}
+        if ('asc' != $this->sortorder && 'desc' != $this->sortorder) {
+            $this->sortorder = $this->sort_default_order;
+        }
 
-		if ($this->sortorder != 'asc' && $this->sortorder != 'desc')
-		{
-			$this->sortorder = $this->sort_default_order;
-		}
+        if ($this->sort == $sort_default2) {
+            $this->sort2 = $sort_default;
+        } else {
+            $this->sort2 = $sort_default2;
+        }
+    }
 
-		if ($this->sort == $sort_default2)
-		{
-			$this->sort2 = $sort_default;
-		}
-		else
-		{
-			$this->sort2 = $sort_default2;
-		}
-	}
-	
-	public function start($numitems, $width=100, $align='center')
-	{
-		global $g_options, $game, $realgame, $db;
-		$numpages = ceil($numitems / $this->numperpage);
-?>
+    public function start($numitems, $width = 100, $align = 'center'): void
+    {
+        global $g_options, $game, $realgame, $db;
+        $numpages = ceil($numitems / $this->numperpage);
+        ?>
 
 <div class="subblock">
 
 <table class="data-table">
 	<tr class="data-table-head">
 <?php
-		$totalwidth = 0;
+                $totalwidth = 0;
 
-		if ($this->showranking)
-		{
-			$totalwidth += 5;
-			echo "<td style=\"width:5%;text-align:right;\" class=\"fSmall\">Rank</td>\n";
-		}
+        if ($this->showranking) {
+            $totalwidth += 5;
+            echo "<td style=\"width:5%;text-align:right;\" class=\"fSmall\">Rank</td>\n";
+        }
 
-		foreach ($this->columns as $col)
-		{
-			$totalwidth += $col->width;
-			echo "<td style=\"width:$col->width%;text-align:$col->align;\" class=\"fSmall\">";
-			if ($col->sort != 'no')
-			{
-				echo getSortArrow(
-				    $this->sort,
-				    $this->sortorder,
-				    $col->name,
-				    $col->title,
-				    $this->var_sort,
-				    $this->var_sortorder,
-				    $this->sorthash
-				);
-			}
-			else
-			{
-				echo $col->title;
-			}
-			echo "</td>\n";
-		}
-?>
+        foreach ($this->columns as $col) {
+            $totalwidth += $col->width;
+            echo "<td style=\"width:$col->width%;text-align:$col->align;\" class=\"fSmall\">";
+            if ('no' != $col->sort) {
+                echo getSortArrow(
+                    $this->sort,
+                    $this->sortorder,
+                    $col->name,
+                    $col->title,
+                    $this->var_sort,
+                    $this->var_sortorder,
+                    $this->sorthash
+                );
+            } else {
+                echo $col->title;
+            }
+            echo "</td>\n";
+        }
+        ?>
 	</tr>
 
 <?php
-		if ($totalwidth != 100)
-		{
-			error("Warning: Column widths do not add to 100%! (=$totalwidth%)", false);
-		}
+                if (100 != $totalwidth) {
+                    error("Warning: Column widths do not add to 100%! (=$totalwidth%)", false);
+                }
 
-		$rank = ($this->page - 1) * $this->numperpage + 1;
+        $rank = ($this->page - 1) * $this->numperpage + 1;
+    }
 
-	}
-	
-	public function draw ($result, $numitems, $width=100, $align='center')
-	{
-		global $g_options, $game, $realgame, $db;
-		$numpages = ceil($numitems / $this->numperpage);
-?>
+    public function draw($result, $numitems, $width = 100, $align = 'center'): void
+    {
+        global $g_options, $game, $realgame, $db;
+        $numpages = ceil($numitems / $this->numperpage);
+        ?>
 
 <div class="subblock" style="text-align:<?php echo $align; ?>;">
 
@@ -201,317 +183,288 @@ class Table
 
 		<tr class="data-table-head">
 <?php
-		$totalwidth = 0;
+                $totalwidth = 0;
 
-		if ($this->showranking)
-		{
-			$totalwidth += 5;
-			echo "<td style=\"width:5%;text-align=:right;\" class=\"fSmall\">Rank</td>\n";
-		}
+        if ($this->showranking) {
+            $totalwidth += 5;
+            echo "<td style=\"width:5%;text-align=:right;\" class=\"fSmall\">Rank</td>\n";
+        }
 
-		foreach ($this->columns as $col)
-		{
-			$totalwidth += $col->width;
-			echo "<td style=\"width:$col->width%;text-align:$col->align;\" class=\"fSmall\">";
-			if ($col->sort != 'no')
-			{
-				echo getSortArrow(
-				    $this->sort,
-				    $this->sortorder,
-				    $col->name,
-				    $col->title,
-				    $this->var_sort,
-				    $this->var_sortorder,
-				    $this->sorthash,
-				    $this->ajax
-				);
-			}
-			else
-			{
-				echo $col->title;
-			}
-			echo "</td>\n";
-		}
-?>
+        foreach ($this->columns as $col) {
+            $totalwidth += $col->width;
+            echo "<td style=\"width:$col->width%;text-align:$col->align;\" class=\"fSmall\">";
+            if ('no' != $col->sort) {
+                echo getSortArrow(
+                    $this->sort,
+                    $this->sortorder,
+                    $col->name,
+                    $col->title,
+                    $this->var_sort,
+                    $this->var_sortorder,
+                    $this->sorthash,
+                    $this->ajax
+                );
+            } else {
+                echo $col->title;
+            }
+            echo "</td>\n";
+        }
+        ?>
 		</tr>
 
 <?php
-		if ($totalwidth != 100)
-		{
-			error("Warning: Column widths do not add to 100%! (=$totalwidth%)", false);
-		}
+                if (100 != $totalwidth) {
+                    error("Warning: Column widths do not add to 100%! (=$totalwidth%)", false);
+                }
 
-		$rank = ($this->page - 1) * $this->numperpage + 1;
+        $rank = ($this->page - 1) * $this->numperpage + 1;
 
-		while ($rowdata = $db->fetch_array($result))
-		{
-			echo "<tr>\n";
-			$i = 0;
+        while ($rowdata = $db->fetch_array($result)) {
+            echo "<tr>\n";
+            $i = 0;
 
-			if ($this->showranking)
-			{
-				$c = ($i % 2) + 1;
-				$i++;
-				echo "<td style=\"text-align:right;\" class=\"bg$c\">$rank</td>\n";
-			}
+            if ($this->showranking) {
+                $c = ($i % 2) + 1;
+                ++$i;
+                echo "<td style=\"text-align:right;\" class=\"bg$c\">$rank</td>\n";
+            }
 
-			foreach ($this->columns as $col)
-			{
-				$c = ($i % 2) + 1;
-				$class = "";
+            foreach ($this->columns as $col) {
+                $c     = ($i % 2) + 1;
+                $class = '';
 
-				$cellbody = '';
-				$colval = $rowdata[$col->name];
+                $cellbody     = '';
+                $colval       = $rowdata[$col->name];
                 $colval_lower = (!empty($rowdata[$col->name])) ? strtolower($rowdata[$col->name]) : null;
 
-				if ($col->align != 'left')
-				{
-					$colalign = " style=\"text-align:$col->align;\"";
-				}
-				else
-				{
-					$colalign = "";
-				}
+                if ('left' != $col->align) {
+                    $colalign = " style=\"text-align:$col->align;\"";
+                } else {
+                    $colalign = '';
+                }
 
-				$class = "bg$c";
+                $class = "bg$c";
 
-				if (($col->icon) || ($col->flag))
-				{
-					$cellbody = '&nbsp;';
-				}
+                if ($col->icon || $col->flag) {
+                    $cellbody = '&nbsp;';
+                }
 
-				if ($col->link)
-				{
-					if (strpos($col->link, 'javascript:') === false) {
-						$link = str_ireplace('%k', urlencode($rowdata[$this->keycol]), $col->link);
-						$cellbody .= "<a href=\"" . $g_options['scripturl'] . "?$link\">";
-					}
-					else
-					{              
-						$col->link = str_replace('\\\\', '', $col->link);
-						$link      = str_ireplace('%k', $rowdata[$this->keycol], $col->link);
-						$cellbody .= "<a href=\"$link\">";
-					}  
-				}
+                if ($col->link) {
+                    if (false === strpos($col->link, 'javascript:')) {
+                        $link = str_ireplace('%k', urlencode($rowdata[$this->keycol]), $col->link);
+                        $cellbody .= '<a href="'.$g_options['scripturl']."?$link\">";
+                    } else {
+                        $col->link = str_replace('\\\\', '', $col->link);
+                        $link      = str_ireplace('%k', $rowdata[$this->keycol], $col->link);
+                        $cellbody .= "<a href=\"$link\">";
+                    }
+                }
 
-				if ($col->icon)
-				{
-					$image = getImage("/$col->icon");
-					if ($image)
-					{
-						$cellbody .= '<img src="'.$image['url']. "\" class=\"tableicon\" alt=\"$col->icon\" />";
-					}
-				}
-				elseif ($col->flag)
-				{
-					#$link = ereg_replace("%f", $col->link);
-					if ($g_options['countrydata'] == 1) { 
-						if ($rowdata['flag'] == '') {
-							$rowdata['flag'] = '0';
-							$alt_text        = 'No Country';
-						} else {
-							$alt_text        = ucfirst(strtolower($rowdata['country']));
-						}
-
-						$cellbody .= '<img src="' . getFlag($rowdata['flag'])."\" class=\"tableicon\" alt=\"$alt_text\" title=\"$alt_text\" />";
-					}
-					else
-					{
-						$col->flag = 'player';
-						$cellbody .= '<img src="' . IMAGE_PATH 	. "/$col->flag.gif\" class=\"tableicon\" alt=\"$col->icon.gif\" />";
-					}                
-				}  
-				
-				switch ($col->type) {
-					case 'elorank':
-                        if (empty($colval)) {
-                              $colval = '0';
+                if ($col->icon) {
+                    $image = getImage("/$col->icon");
+                    if ($image) {
+                        $cellbody .= '<img src="'.$image['url']."\" class=\"tableicon\" alt=\"$col->icon\" />";
+                    }
+                } elseif ($col->flag) {
+                    // $link = ereg_replace("%f", $col->link);
+                    if (1 == $g_options['countrydata']) {
+                        if ('' == $rowdata['flag']) {
+                            $rowdata['flag'] = '0';
+                            $alt_text        = 'No Country';
+                        } else {
+                            $alt_text = ucfirst(strtolower($rowdata['country']));
                         }
 
-						$cellbody = '<img src="' . IMAGE_PATH  . "/mmranks/" . $colval . ".png\" class=\"tableicon\" alt=\"elorank\" style=\"height:20px;width:50px;\" />";
-						break;
-					case 'timestamp':
-						$cellbody  = timestamp_to_str($colval);
-						break;           
+                        $cellbody .= '<img src="'.getFlag($rowdata['flag'])."\" class=\"tableicon\" alt=\"$alt_text\" title=\"$alt_text\" />";
+                    } else {
+                        $col->flag = 'player';
+                        $cellbody .= '<img src="'.IMAGE_PATH."/$col->flag.gif\" class=\"tableicon\" alt=\"$col->icon.gif\" />";
+                    }
+                }
 
-					case 'roleimg':
-						$image = getImage("/games/$game/roles/" . $colval_lower);
-						// check if image exists for game -- otherwise check realgame
-						if ($image)
-						{
-							$cellbody .= '<img src="' . $image['url'] . '" alt="' . $col->fname[$colval_lower] . '" title="' . $col->fname[$colval_lower] . '" />&nbsp;';
-						}
-						elseif ($image = getImage("/games/$realgame/roles/" . $colval_lower))
-						{
-							$cellbody .= '<img src="' . $image['url'] . '" alt="' . $col->fname[$colval_lower] . '" title="' . $col->fname[$colval_lower] . '" />&nbsp;';
-						}
-						
-						if (!empty($col->fname[$colval_lower]))
-						{
-							$cellbody .= '<b>' . $col->fname[$colval_lower] . '</b>';
-						}
-						else
-						{
-							$cellbody .= '<b>' . ucwords(preg_replace('/_/', ' ', $colval)) . '</b>';
-						}
+                switch ($col->type) {
+                    case 'elorank':
+                        if (empty($colval)) {
+                            $colval = '0';
+                        }
 
-						break;
-					  
-					case 'weaponimg':
-						// Check if game has the image -- if not, failback to real game.  If not, no image.
-						$image = getImage("/games/$realgame/weapons/" . $colval_lower);
-						if ($image)
-						{
-							$cellbody .= '<img src="' . $image['url'] . '" ' . $image['size'] . ' alt="' . $col->fname[$colval_lower] . '" title="' . $col->fname[$colval_lower] . '" />';
-						}
-						elseif ($image = getImage("/games/$realgame/weapons/" . $colval_lower))
-						{
-							$cellbody .= '<img src="' . $image['url'] . '" ' . $image['size'] . ' alt="' . $col->fname[$colval_lower] . '" title="' . $col->fname[$colval_lower] . '" />';
-						}
-						else
-						{
-							$cellbody .= '<b>' . (!empty($col->fname[$colval_lower])) ? $col->fname[$colval_lower] : ucwords(preg_replace('/_/', ' ', $colval)) . '</b>';
-						}
-						break;
+                        $cellbody = '<img src="'.IMAGE_PATH.'/mmranks/'.$colval.'.png" class="tableicon" alt="elorank" style="height:20px;width:50px;" />';
+                        break;
+                    case 'timestamp':
+                        $cellbody = timestamp_to_str($colval);
+                        break;
 
-					case 'bargraph':
-						$cellbody .= '<meter min="0" max="100" low="25" high="50" optimum="75" value="'.$colval.'"></meter>';
-						break;
-					case 'heatmap':
-						$heatmap = getImage("/games/$game/heatmaps/$colval-kill");
-						$heatmapthumb = getImage("/games/$game/heatmaps/$colval-kill-thumb");
+                    case 'roleimg':
+                        $image = getImage("/games/$game/roles/".$colval_lower);
+                        // check if image exists for game -- otherwise check realgame
+                        if ($image) {
+                            $cellbody .= '<img src="'.$image['url'].'" alt="'.$col->fname[$colval_lower].'" title="'.$col->fname[$colval_lower].'" />&nbsp;';
+                        } elseif ($image = getImage("/games/$realgame/roles/".$colval_lower)) {
+                            $cellbody .= '<img src="'.$image['url'].'" alt="'.$col->fname[$colval_lower].'" title="'.$col->fname[$colval_lower].'" />&nbsp;';
+                        }
 
-						if ($heatmap) {
-							$cellbody .= "<span style=\"text-align: center;\"><a href=\"" . $heatmap['url'] . "\" rel=\"boxed\"><img width=\"20\" height=\"16\" src=\"" . $heatmapthumb['url'] . "\" /></a></span>";
-						} else {
-							$cellbody .= "&nbsp;";
-						}
-						break;
-					default:
-						if ($this->showranking && $rank == 1 && $i == 1)
-							$cellbody .= '<b>';
-						if ((is_numeric($colval)) && ($colval >= 1000))
-							$colval = number_format($colval);
-						$colval = nl2br(htmlspecialchars($colval, ENT_COMPAT));
+                        if (!empty($col->fname[$colval_lower])) {
+                            $cellbody .= '<b>'.$col->fname[$colval_lower].'</b>';
+                        } else {
+                            $cellbody .= '<b>'.ucwords(preg_replace('/_/', ' ', $colval)).'</b>';
+                        }
 
-						if ($col->embedlink == 'yes')
-							{
-								$colval = preg_replace(['/%A%([^ %]+)%/','/%\/A%/'], ["<a href=\"$1\">", '</a>'], $colval);
-							}
+                        break;
 
-						$cellbody .= $colval;
-							if ($this->showranking && $rank == 1 && $i == 1)
-								$cellbody .= '</b>';
-							break;
-				}
+                    case 'weaponimg':
+                        // Check if game has the image -- if not, failback to real game.  If not, no image.
+                        $image = getImage("/games/$realgame/weapons/".$colval_lower);
+                        if ($image) {
+                            $cellbody .= '<img src="'.$image['url'].'" '.$image['size'].' alt="'.$col->fname[$colval_lower].'" title="'.$col->fname[$colval_lower].'" />';
+                        } elseif ($image = getImage("/games/$realgame/weapons/".$colval_lower)) {
+                            $cellbody .= '<img src="'.$image['url'].'" '.$image['size'].' alt="'.$col->fname[$colval_lower].'" title="'.$col->fname[$colval_lower].'" />';
+                        } else {
+                            $cellbody .= '<b>'.(!empty($col->fname[$colval_lower])) ? $col->fname[$colval_lower] : ucwords(preg_replace('/_/', ' ', $colval)).'</b>';
+                        }
+                        break;
 
-				if ($col->link)
-				{
-					$cellbody .= '</a>';
-				}
+                    case 'bargraph':
+                        $cellbody .= '<meter min="0" max="100" low="25" high="50" optimum="75" value="'.$colval.'"></meter>';
+                        break;
+                    case 'heatmap':
+                        $heatmap      = getImage("/games/$game/heatmaps/$colval-kill");
+                        $heatmapthumb = getImage("/games/$game/heatmaps/$colval-kill-thumb");
 
-				if ($col->append)
-				{
-					$cellbody .= $col->append;
-				}
-				
-				if ($col->skill_change) {
-					if ($rowdata['last_skill_change'] == '')
-						$rowdata['last_skill_change'] = 0;
-					if ($rowdata['last_skill_change'] == 0)
-						$cellbody .= "&nbsp;<img src=\"" . IMAGE_PATH
-							. "/t1.gif\" alt=\"".$rowdata['last_skill_change']." Points\" />";
-					elseif ($rowdata['last_skill_change'] > 0)
-						$cellbody .= "&nbsp;<img src=\"" . IMAGE_PATH
-							. "/t0.gif\" alt=\"".$rowdata['last_skill_change']." Points\" />";
-					elseif ($rowdata['last_skill_change'] < 0)
-						$cellbody .= "&nbsp;<img src=\"" . IMAGE_PATH
-							. "/t2.gif\" alt=\"".$rowdata['last_skill_change']." Points\" />";
-				}
-				
-				echo "<td$colalign class=\"$class\">"
-						. $cellbody
-						. "</td>\n";
-				$i++;
-			}
+                        if ($heatmap) {
+                            $cellbody .= '<span style="text-align: center;"><a href="'.$heatmap['url'].'" rel="boxed"><img width="20" height="16" src="'.$heatmapthumb['url'].'" /></a></span>';
+                        } else {
+                            $cellbody .= '&nbsp;';
+                        }
+                        break;
+                    default:
+                        if ($this->showranking && 1 == $rank && 1 == $i) {
+                            $cellbody .= '<b>';
+                        }
+                        if (is_numeric($colval) && ($colval >= 1000)) {
+                            $colval = number_format($colval);
+                        }
+                        $colval = nl2br(htmlspecialchars($colval, ENT_COMPAT));
 
-			echo "</tr>\n\n";
+                        if ('yes' == $col->embedlink) {
+                            $colval = preg_replace(['/%A%([^ %]+)%/', '/%\/A%/'], ['<a href="$1">', '</a>'], $colval);
+                        }
 
-			$rank++;
-		}
-?>
+                        $cellbody .= $colval;
+                        if ($this->showranking && 1 == $rank && 1 == $i) {
+                            $cellbody .= '</b>';
+                        }
+                        break;
+                }
+
+                if ($col->link) {
+                    $cellbody .= '</a>';
+                }
+
+                if ($col->append) {
+                    $cellbody .= $col->append;
+                }
+
+                if ($col->skill_change) {
+                    if ('' == $rowdata['last_skill_change']) {
+                        $rowdata['last_skill_change'] = 0;
+                    }
+                    if (0 == $rowdata['last_skill_change']) {
+                        $cellbody .= '&nbsp;<img src="'.IMAGE_PATH
+                            .'/t1.gif" alt="'.$rowdata['last_skill_change'].' Points" />';
+                    } elseif ($rowdata['last_skill_change'] > 0) {
+                        $cellbody .= '&nbsp;<img src="'.IMAGE_PATH
+                            .'/t0.gif" alt="'.$rowdata['last_skill_change'].' Points" />';
+                    } elseif ($rowdata['last_skill_change'] < 0) {
+                        $cellbody .= '&nbsp;<img src="'.IMAGE_PATH
+                            .'/t2.gif" alt="'.$rowdata['last_skill_change'].' Points" />';
+                    }
+                }
+
+                echo "<td$colalign class=\"$class\">"
+                        .$cellbody
+                        ."</td>\n";
+                ++$i;
+            }
+
+            echo "</tr>\n\n";
+
+            ++$rank;
+        }
+        ?>
 		</table>
 </div><br /><br />
 <?php
-		if ($numpages > 1)
-		{
-?>
+                if ($numpages > 1) {
+                    ?>
 <div class="subblock" style="text-align:right;">
 	<span style="text-align:right;">
 <?php
-			echo 'Page: ';
+                                echo 'Page: ';
 
-			$start = $this->page - intval($this->maxpagenumbers / 2);
-			if ($start < 1) $start=1;
+                    $start = $this->page - intval($this->maxpagenumbers / 2);
+                    if ($start < 1) {
+                        $start = 1;
+                    }
 
-			$end = $numpages;
-			if ($end > $this->maxpagenumbers + $start-1)
-				$end = $this->maxpagenumbers + $start-1;
+                    $end = $numpages;
+                    if ($end > $this->maxpagenumbers + $start - 1) {
+                        $end = $this->maxpagenumbers + $start - 1;
+                    }
 
-			if ($end - $start + 1 < $this->maxpagenumbers)
-				$start = $end - $this->maxpagenumbers + 1;
+                    if ($end - $start + 1 < $this->maxpagenumbers) {
+                        $start = $end - $this->maxpagenumbers + 1;
+                    }
 
-			if ($start < 1) $start=1;
+                    if ($start < 1) {
+                        $start = 1;
+                    }
 
-			if ($start > 1)
-			{
-				if ($start > 2)
-					$this->_echoPageNumber(1, "First page", "", " ...");
-				else
-					$this->_echoPageNumber(1, 1);
-			}
+                    if ($start > 1) {
+                        if ($start > 2) {
+                            $this->_echoPageNumber(1, 'First page', '', ' ...');
+                        } else {
+                            $this->_echoPageNumber(1, 1);
+                        }
+                    }
 
-			for ($i=$start; $i <= $end; $i++)
-			{
-				if ($i == $this->page)
-				{
-					echo "<b>$i</b> ";
-				}
-				else
-				{
-					$this->_echoPageNumber($i, $i);
-				}
+                    for ($i = $start; $i <= $end; ++$i) {
+                        if ($i == $this->page) {
+                            echo "<b>$i</b> ";
+                        } else {
+                            $this->_echoPageNumber($i, $i);
+                        }
 
-				if ($i == $end && $i < $numpages)
-				{
-					if ($i < $numpages - 1)
-						$this->_echoPageNumber($numpages, "Last page", "... ");
-					else
-						$this->_echoPageNumber($numpages, 10);
-				}
-			}
-		?>
+                        if ($i == $end && $i < $numpages) {
+                            if ($i < $numpages - 1) {
+                                $this->_echoPageNumber($numpages, 'Last page', '... ');
+                            } else {
+                                $this->_echoPageNumber($numpages, 10);
+                            }
+                        }
+                    }
+                    ?>
 	</span>
 </div><br /><br />
 <?php
-		}
-	}
+                }
+    }
 
-	public function _echoPageNumber ($number, $label, $prefix='', $postfix='')
-	{
-		global $g_options;
+    public function _echoPageNumber($number, $label, $prefix = '', $postfix = ''): void
+    {
+        global $g_options;
 
-		echo "$prefix<a href=\"" . $g_options['scripturl'] . '?'
-			. makeQueryString($this->var_page, $number);
-		if ($this->sorthash)
-			echo "#$this->sorthash";
-		
-		if ($this->ajax)
-			echo "\" onclick=\"Tabs.refreshTab({'" . $this->var_page . "': " . $number . "}); return false;";
-		echo "\">$label</a>$postfix ";
-	}
+        echo "$prefix<a href=\"".$g_options['scripturl'].'?'
+            .makeQueryString($this->var_page, $number);
+        if ($this->sorthash) {
+            echo "#$this->sorthash";
+        }
+
+        if ($this->ajax) {
+            echo "\" onclick=\"Tabs.refreshTab({'".$this->var_page."': ".$number.'}); return false;';
+        }
+        echo "\">$label</a>$postfix ";
+    }
 }
-
 
 //
 // TableColumn
@@ -521,52 +474,50 @@ class Table
 
 class TableColumn
 {
-	public $name;
-	public $title;
+    public $name;
+    public $title;
 
-	public $align = 'left';
-	public $width = 20;
-	public $icon;
-	public $mmrank;
-	public $link;
-	public $sort = 'yes';
-	public $append;
-	public $type = 'text';
-	public $embedlink = 'no';
-	public $flag;
-	public $skill_change;
-	public $heatmap;
+    public $align = 'left';
+    public $width = 20;
+    public $icon;
+    public $mmrank;
+    public $link;
+    public $sort = 'yes';
+    public $append;
+    public $type      = 'text';
+    public $embedlink = 'no';
+    public $flag;
+    public $skill_change;
+    public $heatmap;
 
-	public function __construct($name, $title, $attrs="", $fname=null)
-	{
-		$this->name = $name;
-		$this->title= $title;
+    public function __construct($name, $title, $attrs = '', $fname = null)
+    {
+        $this->name  = $name;
+        $this->title = $title;
 
-		$allowed_attrs = [
-			'align',
-			'width',
-			'icon',
-			'mmrank',
-			'link',
-			'sort',
-			'append',
-			'type',
-			'embedlink',
-			'flag',
-			'skill_change',
-			'heatmap',
-		];
+        $allowed_attrs = [
+            'align',
+            'width',
+            'icon',
+            'mmrank',
+            'link',
+            'sort',
+            'append',
+            'type',
+            'embedlink',
+            'flag',
+            'skill_change',
+            'heatmap',
+        ];
 
-		parse_str($attrs ?? 0, $attr_vars);
+        parse_str($attrs ?? 0, $attr_vars);
 
-		foreach ($allowed_attrs as $a)
-		{
-			if (isset($attr_vars[$a]))
-			{
-				$this->$a = mystripslashes($attr_vars[$a]);
-			}
-		}
+        foreach ($allowed_attrs as $a) {
+            if (isset($attr_vars[$a])) {
+                $this->$a = mystripslashes($attr_vars[$a]);
+            }
+        }
 
-		$this->fname = $fname;
-	}
+        $this->fname = $fname;
+    }
 }

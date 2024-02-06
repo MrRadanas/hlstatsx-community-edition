@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -37,119 +37,120 @@ For support and installation notes visit http://www.hlxcommunity.com
 */
 
 if (!defined('IN_HLSTATS')) {
-	die('Do not access this file directly.');
+    exit('Do not access this file directly.');
 }
 
 /**
- * getOptions()
- * 
- * @return Array All the options from the options/perlconfig table
+ * getOptions().
+ *
+ * @return array All the options from the options/perlconfig table
  */
 function getOptions()
 {
-	global $db;
-	$result = $db->query("SELECT `keyname`,`value` FROM hlstats_Options WHERE opttype >= 1");
-	while ($rowdata = $db->fetch_row($result))
-	{
-		$options[$rowdata[0]] = $rowdata[1];
-	}
-	if ( !count($options) )
-	{
-		error('Warning: Could not find any options in table <b>hlstats_Options</b>, database <b>' .
-			DB_NAME . '</b>. Check HLstats configuration.');
-	}
-	$options['MinActivity'] = $options['MinActivity'] * 86400;
-	return $options;
+    global $db;
+    $result = $db->query('SELECT `keyname`,`value` FROM hlstats_Options WHERE opttype >= 1');
+    while ($rowdata = $db->fetch_row($result)) {
+        $options[$rowdata[0]] = $rowdata[1];
+    }
+    if (!count($options)) {
+        error('Warning: Could not find any options in table <b>hlstats_Options</b>, database <b>'.
+            DB_NAME.'</b>. Check HLstats configuration.');
+    }
+    $options['MinActivity'] = $options['MinActivity'] * 86400;
+
+    return $options;
 }
 
 // Test if flags exists
 /**
- * getFlag()
- * 
+ * getFlag().
+ *
  * @param string $flag
  * @param string $type
+ *
  * @return string Either the flag or default flag if none exists
  */
-function getFlag($flag, $type='url')
+function getFlag($flag, $type = 'url')
 {
-	$image = getImage('/flags/'.strtolower($flag));
-	if ($image)
-		return $image[$type];
-	else
-		return IMAGE_PATH.'/flags/0.gif';
+    $image = getImage('/flags/'.strtolower($flag));
+    if ($image) {
+        return $image[$type];
+    } else {
+        return IMAGE_PATH.'/flags/0.gif';
+    }
 }
 
 /**
- * valid_request()
- * 
+ * valid_request().
+ *
  * @param string $str
- * @param boolean $numeric
+ * @param bool   $numeric
+ *
  * @return mixed request
  */
 function valid_request($str, $numeric = false)
 {
-	$search_pattern = ["/[^A-Za-z0-9\[\]*.,=()!\"$%&^`ґ':;ЯІі#+~_\-|<>\/\\\\@{}дцьДЦЬ ]/"];
-	$replace_pattern = [''];
-	$str = preg_replace($search_pattern, $replace_pattern, $str);
+    $search_pattern  = ["/[^A-Za-z0-9\[\]*.,=()!\"$%&^`ґ':;ЯІі#+~_\-|<>\/\\\\@{}дцьДЦЬ ]/"];
+    $replace_pattern = [''];
+    $str             = preg_replace($search_pattern, $replace_pattern, $str);
 
-	if (!$numeric) {
-		// Deprecated, throws an warning in php 7.4 and above
-		/*if ( get_magic_quotes_gpc() )
-			return $str = htmlspecialchars(stripslashes($str), ENT_QUOTES);
-		else
-			return $str = htmlspecialchars($str, ENT_QUOTES);*/
+    if (!$numeric) {
+        // Deprecated, throws an warning in php 7.4 and above
+        /*if ( get_magic_quotes_gpc() )
+            return $str = htmlspecialchars(stripslashes($str), ENT_QUOTES);
+        else
+            return $str = htmlspecialchars($str, ENT_QUOTES);*/
 
-		return htmlspecialchars($str, ENT_QUOTES);
-	}
+        return htmlspecialchars($str, ENT_QUOTES);
+    }
 
-	if (is_numeric($str)) {
-		return intval($str);
-	}
+    if (is_numeric($str)) {
+        return intval($str);
+    }
 
-	return -1;
+    return -1;
 }
 
 /**
- * timestamp_to_str()
- * 
- * @param integer $timestamp
+ * timestamp_to_str().
+ *
  * @return string Formatted Timestamp
  */
 function timestamp_to_str($seconds)
 {
     // We allow passing an empty parameter, for output in html
-	if (empty($seconds)) {
-		return '---';
-	}
+    if (empty($seconds)) {
+        return '---';
+    }
 
     // If something other than int or float is passed here, then return 'Undefined'
-	if (!is_numeric($seconds)) {
-		return "Undefined";
-	}
+    if (!is_numeric($seconds)) {
+        return 'Undefined';
+    }
 
     // DateTime class doesn't work with float type,
     // doesn't matter we don't need microsecond precision :D
-	$seconds = round($seconds);
+    $seconds = round($seconds);
 
-	$dtF = new \DateTime('@0');
-	$dtT = new \DateTime("@$seconds");
+    $dtF = new DateTime('@0');
+    $dtT = new DateTime("@$seconds");
 
-	return $dtF->diff($dtT)->format('%ad&nbsp;%H:%I:%Sh');
+    return $dtF->diff($dtT)->format('%ad&nbsp;%H:%I:%Sh');
 }
 
 /**
  * error()
  * Formats and outputs the given error message. Optionally terminates script
  * processing.
- * 
- * @param mixed $message
+ *
  * @param bool $exit
+ *
  * @return void
  */
 function error($message, $exit = true)
 {
-	global $g_options;
-?>
+    global $g_options;
+    ?>
 <table border="1" cellspacing="0" cellpadding="5">
 <tr>
 <td class="errorhead">ERROR</td>
@@ -158,10 +159,10 @@ function error($message, $exit = true)
 <td class="errortext"><?php echo $message; ?></td>
 </tr>
 </table>
-<?php if ($exit)
-		exit;
+<?php if ($exit) {
+    exit;
 }
-
+}
 
 //
 // string makeQueryString (string key, string value, [array notkeys])
@@ -173,30 +174,25 @@ function error($message, $exit = true)
 //
 
 /**
- * makeQueryString()
- * 
- * @param mixed $key
- * @param mixed $value
- * @param mixed $notkeys
- * @return
+ * makeQueryString().
  */
 function makeQueryString($key, $value, $notkeys = [])
 {
-	if (!is_array($notkeys)) {
-		$notkeys = [];
-	}
+    if (!is_array($notkeys)) {
+        $notkeys = [];
+    }
 
-	$querystring = '';
-	foreach ($_GET as $k => $v) {
-		$v = valid_request($v, false);
-		if ($k && $k != $key && !in_array($k, $notkeys)) {
-			$querystring .= urlencode($k) . '=' . rawurlencode($v) . '&amp;';
-		}
-	}
+    $querystring = '';
+    foreach ($_GET as $k => $v) {
+        $v = valid_request($v, false);
+        if ($k && $k != $key && !in_array($k, $notkeys)) {
+            $querystring .= urlencode($k).'='.rawurlencode($v).'&amp;';
+        }
+    }
 
-	$querystring .= urlencode($key) . '=' . urlencode($value);
+    $querystring .= urlencode($key).'='.urlencode($value);
 
-	return $querystring;
+    return $querystring;
 }
 
 //
@@ -206,19 +202,15 @@ function makeQueryString($key, $value, $notkeys = [])
 //
 
 /**
- * pageHeader()
- * 
- * @param mixed $title
- * @param mixed $location
- * @return
+ * pageHeader().
  */
 function pageHeader($title = '', $location = '')
 {
-	global $db, $g_options;
-	if ( defined('PAGE') && PAGE == 'HLSTATS' )
-		include (PAGE_PATH . '/header.php');
+    global $db, $g_options;
+    if (defined('PAGE') && PAGE == 'HLSTATS') {
+        include PAGE_PATH.'/header.php';
+    }
 }
-
 
 //
 // void pageFooter (void)
@@ -227,84 +219,70 @@ function pageHeader($title = '', $location = '')
 //
 
 /**
- * pageFooter()
- * 
- * @return
+ * pageFooter().
  */
 function pageFooter()
 {
-	global $g_options;
-	if ( defined('PAGE') && PAGE == 'HLSTATS' )
-		include (PAGE_PATH . '/footer.php');
+    global $g_options;
+    if (defined('PAGE') && PAGE == 'HLSTATS') {
+        include PAGE_PATH.'/footer.php';
+    }
 }
 
 /**
- * getSortArrow()
- * 
- * @param mixed $sort
- * @param mixed $sortorder
- * @param mixed $name
- * @param mixed $longname
+ * getSortArrow().
+ *
  * @param string $var_sort
  * @param string $var_sortorder
  * @param string $sorthash
- * @return string Returns the code for a sort arrow <IMG> tag.
+ *
+ * @return string returns the code for a sort arrow <IMG> tag
  */
 function getSortArrow($sort, $sortorder, $name, $longname, $var_sort = 'sort', $var_sortorder =
-	'sortorder', $sorthash = '', $ajax = false)
+    'sortorder', $sorthash = '', $ajax = false)
 {
-	global $g_options;
+    global $g_options;
 
-	if ($sortorder == 'asc')
-	{
-		$sortimg = 'sort-ascending.gif';
-		$othersortorder = 'desc';
-	}
-	else
-	{
-		$sortimg = 'sort-descending.gif';
-		$othersortorder = 'asc';
-	}
-	
-	$arrowstring = '<a href="' . $g_options['scripturl'] . '?' . makeQueryString(
-	    $var_sort,
-	    $name,
-	    [$var_sortorder]
-	);
+    if ('asc' == $sortorder) {
+        $sortimg        = 'sort-ascending.gif';
+        $othersortorder = 'desc';
+    } else {
+        $sortimg        = 'sort-descending.gif';
+        $othersortorder = 'asc';
+    }
 
-	if ($sort == $name)
-	{
-		$arrowstring .= "&amp;$var_sortorder=$othersortorder";
-		$jsarrow = "'" . $var_sortorder . "': '" . $othersortorder . "'";
-	}
-	else
-	{
-		$arrowstring .= "&amp;$var_sortorder=$sortorder";
-		$jsarrow = "'" . $var_sortorder . "': '" . $sortorder . "'";
-	}
+    $arrowstring = '<a href="'.$g_options['scripturl'].'?'.makeQueryString(
+        $var_sort,
+        $name,
+        [$var_sortorder]
+    );
 
-	if ($sorthash)
-	{
-		$arrowstring .= "#$sorthash";
-	}
+    if ($sort == $name) {
+        $arrowstring .= "&amp;$var_sortorder=$othersortorder";
+        $jsarrow = "'".$var_sortorder."': '".$othersortorder."'";
+    } else {
+        $arrowstring .= "&amp;$var_sortorder=$sortorder";
+        $jsarrow = "'".$var_sortorder."': '".$sortorder."'";
+    }
 
-	$arrowstring .= '" class="head"';
-	
-	if ( $ajax )
-	{
-		$arrowstring .= " onclick=\"Tabs.refreshTab({'$var_sort': '$name', $jsarrow}); return false;\"";
-	}
-	
-	$arrowstring .= ' title="Change sorting order">' . "$longname</a>";
+    if ($sorthash) {
+        $arrowstring .= "#$sorthash";
+    }
 
-	if ($sort == $name)
-	{
-		$arrowstring .= '&nbsp;<img src="' . IMAGE_PATH . "/$sortimg\"" .
-			" style=\"padding-left:4px;padding-right:4px;\" alt=\"$sortimg\" />";
-	}
+    $arrowstring .= '" class="head"';
 
+    if ($ajax) {
+        $arrowstring .= " onclick=\"Tabs.refreshTab({'$var_sort': '$name', $jsarrow}); return false;\"";
+    }
 
-	return $arrowstring;
+    $arrowstring .= ' title="Change sorting order">'."$longname</a>";
+
+    if ($sort == $name) {
+        $arrowstring .= '&nbsp;<img src="'.IMAGE_PATH."/$sortimg\"".
+            " style=\"padding-left:4px;padding-right:4px;\" alt=\"$sortimg\" />";
+    }
+
+    return $arrowstring;
 }
 
 /**
@@ -312,209 +290,185 @@ function getSortArrow($sort, $sortorder, $name, $longname, $var_sort = 'sort', $
  * Returns the HTML for a SELECT box, generated using the 'values' array.
  * Each key in the array should be a OPTION VALUE, while each value in the
  * array should be a corresponding descriptive name for the OPTION.
- * 
- * @param mixed $name
- * @param mixed $values
+ *
  * @param string $currentvalue
- * @return The 'currentvalue' will be given the SELECTED attribute.
+ *
+ * @return the 'currentvalue' will be given the SELECTED attribute
  */
 function getSelect($name, $values, $currentvalue = '')
 {
-	$select = "<select name=\"$name\" style=\"width:300px;\">\n";
+    $select = "<select name=\"$name\" style=\"width:300px;\">\n";
 
-	$gotcval = false;
+    $gotcval = false;
 
-	foreach ($values as $k => $v)
-	{
-		$select .= "\t<option value=\"$k\"";
+    foreach ($values as $k => $v) {
+        $select .= "\t<option value=\"$k\"";
 
-		if ($k == $currentvalue)
-		{
-			$select .= ' selected="selected"';
-			$gotcval = true;
-		}
+        if ($k == $currentvalue) {
+            $select .= ' selected="selected"';
+            $gotcval = true;
+        }
 
-		$select .= ">$v</option>\n";
-	}
+        $select .= ">$v</option>\n";
+    }
 
-	if ($currentvalue && !$gotcval)
-	{
-		$select .= "\t<option value=\"$currentvalue\" selected=\"selected\">$currentvalue</option>\n";
-	}
+    if ($currentvalue && !$gotcval) {
+        $select .= "\t<option value=\"$currentvalue\" selected=\"selected\">$currentvalue</option>\n";
+    }
 
-	$select .= '</select>';
+    $select .= '</select>';
 
-	return $select;
+    return $select;
 }
 
 /**
- * getLink()
- * 
- * @param mixed $url
- * @param integer $maxlength
+ * getLink().
+ *
  * @param string $type
  * @param string $target
- * @return
  */
- 
 function getLink($url, $type = 'http://', $target = '_blank')
 {
-	$urld=parse_url($url);
+    $urld = parse_url($url);
 
-	if(!isset($urld['scheme']) && (!isset($urld['host']) && isset($urld['path'])))
-	{
-			$urld['scheme']=str_replace('://', '', $type);
-			$urld['host']=$urld['path'];
-			unset($urld['path']);
-	}
+    if (!isset($urld['scheme']) && (!isset($urld['host']) && isset($urld['path']))) {
+        $urld['scheme'] = str_replace('://', '', $type);
+        $urld['host']   = $urld['path'];
+        unset($urld['path']);
+    }
 
-	if($urld['scheme']!='http' && $urld['scheme']!='https')
-	{
-			return 'Invalid Url :(';
-	}
+    if ('http' != $urld['scheme'] && 'https' != $urld['scheme']) {
+        return 'Invalid Url :(';
+    }
 
-	if(!isset($urld['path']))
-	{
-			$urld['path']='';
-	}
+    if (!isset($urld['path'])) {
+        $urld['path'] = '';
+    }
 
-	if(!isset($urld['query']))
-	{
-			$urld['query']='';
-	}
-	else
-	{
-			$urld['query']='?' . urlencode($urld['query']);
-	}
+    if (!isset($urld['query'])) {
+        $urld['query'] = '';
+    } else {
+        $urld['query'] = '?'.urlencode($urld['query']);
+    }
 
-	if(!isset($urld['fragment']))
-	{
-			$urld['fragment']='';
-	}
-	else
-	{
-			$urld['fragment']='#' . urlencode($urld['fragment']);
-	}
+    if (!isset($urld['fragment'])) {
+        $urld['fragment'] = '';
+    } else {
+        $urld['fragment'] = '#'.urlencode($urld['fragment']);
+    }
 
-	$uri=sprintf("%s%s%s", $urld['path'], $urld['query'], $urld['fragment']);
-	$host_uri=$urld['host'] . $uri;
-	return sprintf('<a href="%s://%s%s" target="%s">%s</a>', $urld['scheme'], $urld['host'], $uri, $target, htmlspecialchars($host_uri, ENT_COMPAT));
+    $uri      = sprintf('%s%s%s', $urld['path'], $urld['query'], $urld['fragment']);
+    $host_uri = $urld['host'].$uri;
+
+    return sprintf('<a href="%s://%s%s" target="%s">%s</a>', $urld['scheme'], $urld['host'], $uri, $target, htmlspecialchars($host_uri, ENT_COMPAT));
 }
 
 /**
- * getEmailLink()
- * 
+ * getEmailLink().
+ *
  * @param string $email
- * @param integer $maxlength
+ * @param int    $maxlength
+ *
  * @return string Formatted email tag
  */
 function getEmailLink($email, $maxlength = 40)
 {
-	if (preg_match('/(.+)@(.+)/', $email, $regs))
-	{
-		if (strlen($email) > $maxlength)
-		{
-			$email_title = substr($email, 0, $maxlength - 3) . '...';
-		}
-		else
-		{
-			$email_title = $email;
-		}
+    if (preg_match('/(.+)@(.+)/', $email, $regs)) {
+        if (strlen($email) > $maxlength) {
+            $email_title = substr($email, 0, $maxlength - 3).'...';
+        } else {
+            $email_title = $email;
+        }
 
-		$email = str_replace('"', urlencode('"'), $email);
-		$email = str_replace('<', urlencode('<'), $email);
-		$email = str_replace('>', urlencode('>'), $email);
+        $email = str_replace('"', urlencode('"'), $email);
+        $email = str_replace('<', urlencode('<'), $email);
+        $email = str_replace('>', urlencode('>'), $email);
 
-		return "<a href=\"mailto:$email\">" . htmlspecialchars($email_title, ENT_COMPAT) . '</a>';
-	}
-
-	else
-	{
-		return '';
-	}
+        return "<a href=\"mailto:$email\">".htmlspecialchars($email_title, ENT_COMPAT).'</a>';
+    } else {
+        return '';
+    }
 }
 
 /**
- * getImage()
- * 
+ * getImage().
+ *
  * @param string $filename
+ *
  * @return mixed Either the image if exists, or false otherwise
  */
 function getImage($filename)
 {
-	preg_match('/^(.*\/)(.+)$/', $filename, $matches);
-	$relpath = $matches[1];
-	$realfilename = $matches[2];
-	
-	$path = IMAGE_PATH . $filename;
-	$url = IMAGE_PATH . $relpath . rawurlencode($realfilename);
+    preg_match('/^(.*\/)(.+)$/', $filename, $matches);
+    $relpath      = $matches[1];
+    $realfilename = $matches[2];
 
-	// check if image exists
-	if (file_exists($path . '.png'))
-	{
-		$ext = 'png';
-	} elseif (file_exists($path . '.gif'))
-	{
-		$ext = 'gif';
-	} elseif (file_exists($path . '.jpg'))
-	{
-		$ext = 'jpg';
-	}
-	else
-	{
-		$ext = '';
-	}
+    $path = IMAGE_PATH.$filename;
+    $url  = IMAGE_PATH.$relpath.rawurlencode($realfilename);
 
-	if ($ext)
-	{
-		$size = getImageSize("$path.$ext");
+    // check if image exists
+    if (file_exists($path.'.png')) {
+        $ext = 'png';
+    } elseif (file_exists($path.'.gif')) {
+        $ext = 'gif';
+    } elseif (file_exists($path.'.jpg')) {
+        $ext = 'jpg';
+    } else {
+        $ext = '';
+    }
 
-		return ['url' => "$url.$ext", 'path' => "$path.$ext", 'width' => $size[0], 'height' => $size[1],
-			'size' => $size[3]];
-	}
+    if ($ext) {
+        $size = getimagesize("$path.$ext");
+
+        return ['url' => "$url.$ext", 'path' => "$path.$ext", 'width' => $size[0], 'height' => $size[1],
+            'size'    => $size[3]];
+    }
 
     return false;
 }
 
 function mystripslashes($text)
 {
-	// Deprecated, throws an warning in php 7.4 and above
-	// return get_magic_quotes_gpc() ? stripslashes($text) : $text;
-	return $text;
+    // Deprecated, throws an warning in php 7.4 and above
+    // return get_magic_quotes_gpc() ? stripslashes($text) : $text;
+    return $text;
 }
 
 function getRealGame($game)
 {
-	global $db;
-	$result = $db->query("SELECT realgame from hlstats_Games WHERE code='$game'");
-	[$realgame] = $db->fetch_row($result);
-	return $realgame;
+    global $db;
+    $result     = $db->query("SELECT realgame from hlstats_Games WHERE code='$game'");
+    [$realgame] = $db->fetch_row($result);
+
+    return $realgame;
 }
 
 function printSectionTitle($title)
 {
-	echo '<span class="fHeading">&nbsp;<img src="'.IMAGE_PATH."/downarrow.gif\" alt=\"\" />&nbsp;$title</span><br /><br />\n";
+    echo '<span class="fHeading">&nbsp;<img src="'.IMAGE_PATH."/downarrow.gif\" alt=\"\" />&nbsp;$title</span><br /><br />\n";
 }
 
 function getStyleText($style)
 {
-	return "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/$style.css\" />\n";
+    return "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/$style.css\" />\n";
 }
 
 function getJSText($js)
 {
-	return "\t<script type=\"text/javascript\" src=\"".INCLUDE_PATH."/js/$js.js\"></script> \n";
+    return "\t<script type=\"text/javascript\" src=\"".INCLUDE_PATH."/js/$js.js\"></script> \n";
 }
 
-function get_player_rank($playerdata) {
-	global $db, $g_options;
-	
-	$rank = 0;
-	$tempdeaths = $playerdata['deaths'];
-	if ($tempdeaths == 0)
-		$tempdeaths = 1;
+function get_player_rank($playerdata)
+{
+    global $db, $g_options;
 
-	$query = "
+    $rank       = 0;
+    $tempdeaths = $playerdata['deaths'];
+    if (0 == $tempdeaths) {
+        $tempdeaths = 1;
+    }
+
+    $query = "
 		SELECT
 			COUNT(*)
 		FROM
@@ -525,56 +479,59 @@ function get_player_rank($playerdata) {
 			AND kills >= 1
 			AND (
 					(".$g_options['rankingtype']." > '".$playerdata[$g_options['rankingtype']]."') OR (
-						(".$g_options['rankingtype']." = '".$playerdata[$g_options['rankingtype']]."') AND (kills/IF(deaths=0,1,deaths) > ".($playerdata['kills']/$tempdeaths).")
+						(".$g_options['rankingtype']." = '".$playerdata[$g_options['rankingtype']]."') AND (kills/IF(deaths=0,1,deaths) > ".($playerdata['kills'] / $tempdeaths).')
 					)
 			)
-	";
-	$db->query($query);
-	[$rank] = $db->fetch_row();
-	$rank++;
+	';
+    $db->query($query);
+    [$rank] = $db->fetch_row();
+    ++$rank;
 
-	return $rank;
+    return $rank;
 }
 
 if (!function_exists('file_get_contents')) {
-      function file_get_contents($filename, $incpath = false, $resource_context = null)
-      {
-          if (false === $fh = fopen($filename, 'rb', $incpath)) {
-              trigger_error('file_get_contents() failed to open stream: No such file or directory', E_USER_WARNING);
-              return false;
-          }
-  
-          clearstatcache();
-          if ($fsize = @filesize($filename)) {
-              $data = fread($fh, $fsize);
-          } else {
-              $data = '';
-              while (!feof($fh)) {
-                  $data .= fread($fh, 8192);
-              }
-          }
-  
-          fclose($fh);
-          return $data;
-      }
+    function file_get_contents($filename, $incpath = false, $resource_context = null)
+    {
+        if (false === $fh = fopen($filename, 'rb', $incpath)) {
+            trigger_error('file_get_contents() failed to open stream: No such file or directory', E_USER_WARNING);
+
+            return false;
+        }
+
+        clearstatcache();
+        if ($fsize = @filesize($filename)) {
+            $data = fread($fh, $fsize);
+        } else {
+            $data = '';
+            while (!feof($fh)) {
+                $data .= fread($fh, 8192);
+            }
+        }
+
+        fclose($fh);
+
+        return $data;
+    }
 }
 
 /**
- * Convert colors Usage:  color::hex2rgb("FFFFFF")
- * 
+ * Convert colors Usage:  color::hex2rgb("FFFFFF").
+ *
  * @author      Tim Johannessen <root@it.dk>
+ *
  * @version    1.0.1
  */
 function hex2rgb($hexVal = '')
 {
-	$hexVal = preg_replace('[^a-fA-F0-9]', '', $hexVal);
-	if (strlen($hexVal) != 6)
-	{
-		return 'ERR: Incorrect colorcode, expecting 6 chars (a-f, 0-9)';
-	}
-	$arrTmp = explode(' ', chunk_split($hexVal, 2, ' '));
-	$arrTmp = array_map('hexdec', $arrTmp);
-	return ['red' => $arrTmp[0], 'green' => $arrTmp[1], 'blue' => $arrTmp[2]];
+    $hexVal = preg_replace('[^a-fA-F0-9]', '', $hexVal);
+    if (6 != strlen($hexVal)) {
+        return 'ERR: Incorrect colorcode, expecting 6 chars (a-f, 0-9)';
+    }
+    $arrTmp = explode(' ', chunk_split($hexVal, 2, ' '));
+    $arrTmp = array_map('hexdec', $arrTmp);
+
+    return ['red' => $arrTmp[0], 'green' => $arrTmp[1], 'blue' => $arrTmp[2]];
 }
 
 ?>

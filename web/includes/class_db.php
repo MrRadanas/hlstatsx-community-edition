@@ -36,7 +36,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-
 /* Profile support:
 
 To see SQL run counts and run times, set the $profile variable below to something
@@ -54,252 +53,226 @@ UNIQUE KEY `source` (`source`(64))
 */
 
 if (!defined('IN_HLSTATS')) {
-	die('Do not access this file directly.');
+    exit('Do not access this file directly.');
 }
 
 class DB_mysql
 {
-	public $db_addr;
-	public $db_user;
-	public $db_pass;
-	public $db_name;
+    public $db_addr;
+    public $db_user;
+    public $db_pass;
+    public $db_name;
 
-	public $link;
-	public $last_result;
-	public $last_query;
-	public $last_insert_id;
-	public $profile = 0;
-	public $querycount = 0;
-	public $last_calc_rows = 0;
+    public $link;
+    public $last_result;
+    public $last_query;
+    public $last_insert_id;
+    public $profile        = 0;
+    public $querycount     = 0;
+    public $last_calc_rows = 0;
 
-	public function __construct($db_addr, $db_user, $db_pass, $db_name, $use_pconnect = false)
-	{
-		$this->db_addr = $db_addr;
-		$this->db_user = $db_user;
-		$this->db_pass = $db_pass;
+    public function __construct($db_addr, $db_user, $db_pass, $db_name, $use_pconnect = false)
+    {
+        $this->db_addr = $db_addr;
+        $this->db_user = $db_user;
+        $this->db_pass = $db_pass;
 
-		$this->querycount = 0;
+        $this->querycount = 0;
 
-		if ( $use_pconnect )
-		{
-			$this->link = @mysqli_pconnect($db_addr, $db_user, $db_pass);
-		}
-		else
-		{
-			$this->link = @mysqli_connect($db_addr, $db_user, $db_pass);
-		}
+        if ($use_pconnect) {
+            $this->link = @mysqli_pconnect($db_addr, $db_user, $db_pass);
+        } else {
+            $this->link = @mysqli_connect($db_addr, $db_user, $db_pass);
+        }
 
-		if ( $this->link )
-		{
-			mysqli_set_charset($this->link, DB_CHARSET);
-			$query_str = "SET collation_connection = " . DB_COLLATE;
-			mysqli_query($this->link, $query_str);
+        if ($this->link) {
+            mysqli_set_charset($this->link, DB_CHARSET);
+            $query_str = 'SET collation_connection = '.DB_COLLATE;
+            mysqli_query($this->link, $query_str);
 
-			if ( $db_name != '' )
-			{
-				$this->db_name = $db_name;
-				if ( !@mysqli_select_db($this->link, $db_name) )
-				{
-					@mysqli_close($this->link);
-					$this->error("Could not select database '$db_name'. Check that the value of DB_NAME in config.php is set correctly.");
-				}
-			}
+            if ('' != $db_name) {
+                $this->db_name = $db_name;
+                if (!@mysqli_select_db($this->link, $db_name)) {
+                    @mysqli_close($this->link);
+                    $this->error("Could not select database '$db_name'. Check that the value of DB_NAME in config.php is set correctly.");
+                }
+            }
 
-			return $this->link;
-		}
-		else
-		{
-			$this->error('Could not connect to database server. Check that the values of DB_ADDR, DB_USER and DB_PASS in config.php are set correctly.');
-		}
-	}
+            return $this->link;
+        } else {
+            $this->error('Could not connect to database server. Check that the values of DB_ADDR, DB_USER and DB_PASS in config.php are set correctly.');
+        }
+    }
 
-	public function data_seek($row_number, $query_id = 0)
-	{
-		if ( !$query_id )
-		{
-			$result = $this->last_result;
-		}
-		if ( $query_id )
-		{
-			return @mysqli_data_seek($query_id, $row_number);
-		}
-		return false;
-	}
+    public function data_seek($row_number, $query_id = 0)
+    {
+        if (!$query_id) {
+            $result = $this->last_result;
+        }
+        if ($query_id) {
+            return @mysqli_data_seek($query_id, $row_number);
+        }
 
-	public function fetch_array($query_id = 0)
-	{
-		if ( !$query_id )
-		{
-			$query_id = $this->last_result;
-		}
+        return false;
+    }
 
-		if ( $query_id )
-		{
-			return @mysqli_fetch_array($query_id);
-		}
-		return false;
-	}
+    public function fetch_array($query_id = 0)
+    {
+        if (!$query_id) {
+            $query_id = $this->last_result;
+        }
 
-	public function fetch_row($query_id = 0)
-	{
-		if ( !$query_id )
-		{
-			$query_id = $this->last_result;
-		}
+        if ($query_id) {
+            return @mysqli_fetch_array($query_id);
+        }
 
-		if ( $query_id )
-		{
-			return @mysqli_fetch_row($query_id);
-		}
-		return false;
-	}
+        return false;
+    }
 
-	public function fetch_row_set($query_id = 0)
-	{
-		if ( !$query_id )
-		{
-			$query_id = $this->last_result;
-		}
+    public function fetch_row($query_id = 0)
+    {
+        if (!$query_id) {
+            $query_id = $this->last_result;
+        }
 
-		if ( $query_id )
-		{
-			$rowset = [];
-			while ( $row = $this->fetch_array($query_id) )
-				$rowset[] = $row;
+        if ($query_id) {
+            return @mysqli_fetch_row($query_id);
+        }
 
-			return $rowset;
-		}
-		return false;
-	}
+        return false;
+    }
 
-	public function free_result($query_id = 0)
-	{
-		if ( !$query_id )
-		{
-			$query_id = $this->last_result;
-		}
+    public function fetch_row_set($query_id = 0)
+    {
+        if (!$query_id) {
+            $query_id = $this->last_result;
+        }
 
-		if ( $query_id )
-		{
-			return @mysqli_free_result($query_id);
-		}
-		return false;
-	}
+        if ($query_id) {
+            $rowset = [];
+            while ($row = $this->fetch_array($query_id)) {
+                $rowset[] = $row;
+            }
 
-	public function insert_id()
-	{
-		return $this->last_insert_id;
-	}
+            return $rowset;
+        }
 
-	public function num_rows($query_id = 0)
-	{
-		if ( !$query_id )
-		{
-			$query_id = $this->last_result;
-		}
+        return false;
+    }
 
-		if ( $query_id )
-		{
-			return @mysqli_num_rows($query_id);
-		}
-		return false;
-	}
+    public function free_result($query_id = 0)
+    {
+        if (!$query_id) {
+            $query_id = $this->last_result;
+        }
 
-	public function calc_rows()
-	{
-		return $this->last_calc_rows;
-	}
+        if ($query_id) {
+            return @mysqli_free_result($query_id);
+        }
 
-	public function query($query, $showerror=true, $calcrows=false)
-	{
-		$this->last_query = $query;
-		$starttime = microtime(true);
-		if($calcrows == true)
-		{
-			/* Add sql_calc_found_rows to this query */
-			$query = preg_replace('/select/i', 'select sql_calc_found_rows', $query, 1);
-		}
-		$this->last_result = @mysqli_query($this->link, $query);
-		$endtime = microtime(true);
+        return false;
+    }
 
-		$this->last_insert_id = @mysqli_insert_id($this->link);
+    public function insert_id()
+    {
+        return $this->last_insert_id;
+    }
 
-		if($calcrows == true)
-		{
-			$calc_result = @mysqli_query($this->link, "select found_rows() as rowcount");
-			if($row = mysqli_fetch_assoc($calc_result))
-			{
-				$this->last_calc_rows = $row['rowcount'];
-			}
-		}
+    public function num_rows($query_id = 0)
+    {
+        if (!$query_id) {
+            $query_id = $this->last_result;
+        }
 
-		$this->querycount++;
+        if ($query_id) {
+            return @mysqli_num_rows($query_id);
+        }
 
-		if ( defined('DB_DEBUG') && DB_DEBUG == true )
-		{
-			echo "<p><pre>$query</pre><hr /></p>";
-		}
+        return false;
+    }
 
-		if ( $this->last_result )
-		{
-			if($this->profile)
-			{
-				$backtrace = debug_backtrace();
-				$profilequery = "insert into hlstats_sql_web_profile (source, run_count, run_time) values ".
-					"('".basename($backtrace[0]['file']).':'.$backtrace[0]['line']."',1,'".($endtime-$starttime)."')"
-					."ON DUPLICATE KEY UPDATE run_count = run_count+1, run_time=run_time+".($endtime-$starttime);
-				@mysqli_query($this->link, $profilequery);
-			}
-			return $this->last_result;
-		}
-		else
-		{
-			if ($showerror)
-			{
-				$this->error('Bad query.');
-			}
-			else
-			{
-				return false;
-			}
-		}
-	}
+    public function calc_rows()
+    {
+        return $this->last_calc_rows;
+    }
 
-	public function result($row, $field, $query_id = 0)
-	{
-		if ( !$query_id )
-		{
-			$query_id = $this->last_result;
-		}
+    public function query($query, $showerror = true, $calcrows = false)
+    {
+        $this->last_query = $query;
+        $starttime        = microtime(true);
+        if (true == $calcrows) {
+            /* Add sql_calc_found_rows to this query */
+            $query = preg_replace('/select/i', 'select sql_calc_found_rows', $query, 1);
+        }
+        $this->last_result = @mysqli_query($this->link, $query);
+        $endtime           = microtime(true);
 
-		if ( $query_id )
-		{
-			return @mysqli_result($query_id, $row, $field);
-		}
-		return false;
-	}
+        $this->last_insert_id = @mysqli_insert_id($this->link);
 
-	public function escape($string)
-	{
-		if ( $this->link )
-		{
-			return @mysqli_real_escape_string($this->link, $string);
-		}
-	
-		return $string;	
-	}
+        if (true == $calcrows) {
+            $calc_result = @mysqli_query($this->link, 'select found_rows() as rowcount');
+            if ($row = mysqli_fetch_assoc($calc_result)) {
+                $this->last_calc_rows = $row['rowcount'];
+            }
+        }
 
-	public function error($message, $exit=true)
-	{
-		error(
-		    "<b>Database Error</b><br />\n<br />\n" .
-			"<i>Server Address:</i> $this->db_addr<br />\n" .
-			"<i>Server Username:</i> $this->db_user<br /><br />\n" .
-			"<i>Error Diagnostic:</i><br />\n$message<br /><br />\n" .
-			"<i>Server Error:</i> (" . @mysqli_errno($this->link) . ") " . @mysqli_error($this->link) . "<br /><br />\n" .
-			"<i>Last SQL Query:</i><br />\n<pre style=\"font-size:2px;\">$this->last_query</pre>",
-		    $exit
-		);
-	}
+        ++$this->querycount;
+
+        if (defined('DB_DEBUG') && DB_DEBUG == true) {
+            echo "<p><pre>$query</pre><hr /></p>";
+        }
+
+        if ($this->last_result) {
+            if ($this->profile) {
+                $backtrace    = debug_backtrace();
+                $profilequery = 'insert into hlstats_sql_web_profile (source, run_count, run_time) values '.
+                    "('".basename($backtrace[0]['file']).':'.$backtrace[0]['line']."',1,'".($endtime - $starttime)."')"
+                    .'ON DUPLICATE KEY UPDATE run_count = run_count+1, run_time=run_time+'.($endtime - $starttime);
+                @mysqli_query($this->link, $profilequery);
+            }
+
+            return $this->last_result;
+        } else {
+            if ($showerror) {
+                $this->error('Bad query.');
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public function result($row, $field, $query_id = 0)
+    {
+        if (!$query_id) {
+            $query_id = $this->last_result;
+        }
+
+        if ($query_id) {
+            return @mysqli_result($query_id, $row, $field);
+        }
+
+        return false;
+    }
+
+    public function escape($string)
+    {
+        if ($this->link) {
+            return @mysqli_real_escape_string($this->link, $string);
+        }
+
+        return $string;
+    }
+
+    public function error($message, $exit = true): void
+    {
+        error(
+            "<b>Database Error</b><br />\n<br />\n".
+            "<i>Server Address:</i> $this->db_addr<br />\n".
+            "<i>Server Username:</i> $this->db_user<br /><br />\n".
+            "<i>Error Diagnostic:</i><br />\n$message<br /><br />\n".
+            '<i>Server Error:</i> ('.@mysqli_errno($this->link).') '.@mysqli_error($this->link)."<br /><br />\n".
+            "<i>Last SQL Query:</i><br />\n<pre style=\"font-size:2px;\">$this->last_query</pre>",
+            $exit
+        );
+    }
 }
-?>

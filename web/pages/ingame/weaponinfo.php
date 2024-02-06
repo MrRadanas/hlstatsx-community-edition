@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,15 +36,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-	if (!defined('IN_HLSTATS')) {
-		die('Do not access this file directly.');
-	}
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	// Weapon Details
-	
-	$weapon = valid_request($_GET['weapon'], false) or error('No weapon ID specified.');
-        
-	$db->query("
+// Weapon Details
+
+$weapon = valid_request($_GET['weapon'], false) or error('No weapon ID specified.');
+
+$db->query("
 		SELECT
 			name
 		FROM
@@ -53,54 +53,53 @@ For support and installation notes visit http://www.hlxcommunity.com
 			code='$weapon'
 			AND game='$game'
 	");
-	
-	if ($db->num_rows() != 1) {
-		$wep_name = ucfirst($weapon);
-	} else
-	{
-		$weapondata = $db->fetch_array();
-		$db->free_result();
-		$wep_name = $weapondata['name'];
-	}
-	
-	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
-	if ($db->num_rows() != 1) {
-		error('Invalid or no game specified.');
-	} else {
-		[$gamename] = $db->fetch_row();
-	}
 
-	$table = new Table(
-	    [
-			new TableColumn(
-			    'killerName',
-			    'Player',
-			    'width=60&align=left&flag=1&link=' . urlencode('mode=statsme&amp;player=%k')
-			),
-			new TableColumn(
-			    'frags',
-			    ucfirst($weapon) . ' kills',
-			    'width=15&align=right'
-			),
-			new TableColumn(
-			    'headshots',
-			    'Headshots',
-			    'width=15&align=right'
-			),
-			new TableColumn(
-			    'hpk',
-			    'Hpk',
-			    'width=5&align=right'
-			),
-		],
-	    'killerId', // keycol
-		'frags', // sort_default
-		'killerName', // sort_default2
-		true, // showranking
-		25 // numperpage
-	);
-	
-	$result = $db->query("
+if (1 != $db->num_rows()) {
+    $wep_name = ucfirst($weapon);
+} else {
+    $weapondata = $db->fetch_array();
+    $db->free_result();
+    $wep_name = $weapondata['name'];
+}
+
+$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
+if (1 != $db->num_rows()) {
+    error('Invalid or no game specified.');
+} else {
+    [$gamename] = $db->fetch_row();
+}
+
+$table = new Table(
+    [
+        new TableColumn(
+            'killerName',
+            'Player',
+            'width=60&align=left&flag=1&link='.urlencode('mode=statsme&amp;player=%k')
+        ),
+        new TableColumn(
+            'frags',
+            ucfirst($weapon).' kills',
+            'width=15&align=right'
+        ),
+        new TableColumn(
+            'headshots',
+            'Headshots',
+            'width=15&align=right'
+        ),
+        new TableColumn(
+            'hpk',
+            'Hpk',
+            'width=5&align=right'
+        ),
+    ],
+    'killerId', // keycol
+    'frags', // sort_default
+    'killerName', // sort_default2
+    true, // showranking
+    25 // numperpage
+);
+
+$result = $db->query("
 		SELECT
 			hlstats_Events_Frags.killerId,
 			hlstats_Players.country,
@@ -125,5 +124,4 @@ For support and installation notes visit http://www.hlxcommunity.com
 		LIMIT $table->startitem,$table->numperpage
 	");
 
-  $table->draw($result, 25, 100);
-?>
+$table->draw($result, 25, 100);

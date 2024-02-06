@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,13 +36,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	global $game;
-	$resultGames = $db->query
-	("
+global $game;
+$resultGames = $db->query("
 		SELECT
 			hlstats_Games.code,
 			hlstats_Games.name
@@ -56,13 +55,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 			0,
 			1
 	");
-	[$game] = $db->fetch_row($resultGames);
+[$game] = $db->fetch_row($resultGames);
 // Help
-	pageHeader
-	(
-	    ['Help'],
-	    ['Help' => '']
-	);
+pageHeader(
+    ['Help'],
+    ['Help' => '']
+);
 ?>
 
 <div class="block">
@@ -90,37 +88,31 @@ For support and installation notes visit http://www.hlxcommunity.com
 	<div style="margin-left:2%;">
 		<h1 class="fTitle" style="padding-top:10px;"><a name="players">1. How are players tracked? Or, why is my name listed more than once?</a></h1><br /><br />
 			<?php
-				if ($g_options['Mode'] == 'NameTrack')
-				{
-			?>
+                if ('NameTrack' == $g_options['Mode']) {
+                    ?>
 			Players are tracked by nickname. All statistics for any player using a particular name will be grouped under that name. It is not possible for a name to be listed more than once for each game.<br /><br />
 			<?php
-				}
-				else
-				{
-					if ($g_options['Mode'] == 'LAN')
-					{
-						$uniqueid = 'IP Address';
-						$uniqueid_plural = 'IP Addresses';
-			?>
+                } else {
+                    if ('LAN' == $g_options['Mode']) {
+                        $uniqueid        = 'IP Address';
+                        $uniqueid_plural = 'IP Addresses';
+                        ?>
 			Players are tracked by IP Address. IP addresses are specific to a computer on a network.<br /><br />
 			<?php
-					}
-					else
-					{
-						$uniqueid = 'Unique ID';
-						$uniqueid_plural = 'Unique IDs';
-			?>
+                    } else {
+                        $uniqueid        = 'Unique ID';
+                        $uniqueid_plural = 'Unique IDs';
+                        ?>
 			Players are tracked by Unique ID. Your Unique ID is the last two sections of your Steam ID (X:XXXX).<br /><br />
 			<?php
-					}
-			?>
+                    }
+                    ?>
 			A player may have more than one name. On the Player Rankings pages, players are shown with the most recent name they used in the game. If you click on a player's name, the Player Details page will show you a list of all other names that this player uses, if any, under the Aliases section (if the player has not used any other names, the Aliases section will not be displayed).<br /><br />
 			Your name may be listed more than once if somebody else (with a different <?php echo $uniqueid; ?>) uses the same name.<br /><br />
 			You can use the <a href="<?php echo $g_options['scripturl']; ?>?mode=search">Search</a> function to find a player by name or <?php echo $uniqueid; ?>.<br /><br />
 			<?php
-				}
-			?>
+                }
+?>
 			<h1 class="fTitle" style="padding-top:10px;"><a name="points">2. How is the "points" rating calculated?</a></h1><br /><br />
 			A new player has 1000 points. Every time you make a kill, you gain a certain amount of points depending on a) the victim's points rating, and b) the weapon you used. If you kill someone with a higher points rating than you, then you gain more points than if you kill someone with a lower points rating than you. Therefore, killing newbies will not get you as far as killing the #1 player. And if you kill someone with your knife, you gain more points than if you kill them with a rifle, for example.<br /><br />
 			When you are killed, you lose a certain amount of points, which again depends on the points rating of your killer and the weapon they used (you don't lose as many points for being killed by the #1 player with a rifle than you do for being killed by a low ranked player with a knife). This makes moving up the rankings easier, but makes staying in the top spots harder.<br /><br />
@@ -133,71 +125,61 @@ For support and installation notes visit http://www.hlxcommunity.com
 			Plus, the following point bonuses are available for completing objectives in some games:<br /><br />
 			<a name="actions" />
 			<?php
-				$tblActions = new Table
-				(
-				    [
-						new TableColumn
-						(
-						    'gamename',
-						    'Game',
-						    'width=24&sort=no'
-						),
-						new TableColumn
-						(
-						    'for_PlayerActions',
-						    'Player Action',
-						    'width=4&sort=no&align=center'
-						),
-						new TableColumn
-						(
-						    'for_PlayerPlayerActions',
-						    'PlyrPlyr Action',
-						    'width=4&sort=no&align=center'
-						),
-						new TableColumn
-						(
-						    'for_TeamActions',
-						    'Team Action',
-						    'width=4&sort=no&align=center'
-						),
-						new TableColumn
-						(
-						    'for_WorldActions',
-						    'World Action',
-						    'width=4&sort=no&align=center'
-						),
-						new TableColumn
-						(
-						    'description',
-						    'Action',
-						    'width=33'
-						),
-						new TableColumn
-						(
-						    's_reward_player',
-						    'Player Reward',
-						    'width=12'
-						),
-						new TableColumn
-						(
-						    's_reward_team',
-						    'Team Reward',
-						    'width=15'
-						),
-					],
-				    'id',
-				    'description',
-				    's_reward_player',
-				    false,
-				    9999,
-				    'act_page',
-				    'act_sort',
-				    'act_sortorder',
-				    'actions',
-				    'asc'
-				);
-				$result = $db->query
-				("
+    $tblActions = new Table(
+        [
+                new TableColumn(
+                    'gamename',
+                    'Game',
+                    'width=24&sort=no'
+                ),
+                new TableColumn(
+                    'for_PlayerActions',
+                    'Player Action',
+                    'width=4&sort=no&align=center'
+                ),
+                new TableColumn(
+                    'for_PlayerPlayerActions',
+                    'PlyrPlyr Action',
+                    'width=4&sort=no&align=center'
+                ),
+                new TableColumn(
+                    'for_TeamActions',
+                    'Team Action',
+                    'width=4&sort=no&align=center'
+                ),
+                new TableColumn(
+                    'for_WorldActions',
+                    'World Action',
+                    'width=4&sort=no&align=center'
+                ),
+                new TableColumn(
+                    'description',
+                    'Action',
+                    'width=33'
+                ),
+                new TableColumn(
+                    's_reward_player',
+                    'Player Reward',
+                    'width=12'
+                ),
+                new TableColumn(
+                    's_reward_team',
+                    'Team Reward',
+                    'width=15'
+                ),
+            ],
+        'id',
+        'description',
+        's_reward_player',
+        false,
+        9999,
+        'act_page',
+        'act_sort',
+        'act_sortorder',
+        'actions',
+        'asc'
+    );
+$result = $db->query("
 					SELECT
 						hlstats_Games.name AS gamename,
 						hlstats_Actions.description,
@@ -225,55 +207,49 @@ For support and installation notes visit http://www.hlxcommunity.com
 						$tblActions->sort $tblActions->sortorder,
 						$tblActions->sort2 $tblActions->sortorder
 				");
-				$numitems = $db->num_rows($result);
-				$tblActions->draw($result, $numitems, 90, 'center');
-			?><br /><br />
+$numitems = $db->num_rows($result);
+$tblActions->draw($result, $numitems, 90, 'center');
+?><br /><br />
 			<strong>Note:</strong> The player who triggers an action may receive both the player reward and the team reward.<br /><br />
 			<h1 class="fTitle" style="padding-top:10px;"><a name="weaponmods">3. What are all the weapon points modifiers?</a></h1><br /><br />
 			Weapon points modifiers are used to determine how many points you should gain or lose when you make a kill or are killed by another player. Higher modifiers indicate that more points will be gained when killing with that weapon (and similarly, more points will be lost when being killed <em>by</em> that weapon). Modifiers generally range from 0.00 to 2.00.<br /><br />
 			<a name="weapons"></a>
 			<?php
-				$tblWeapons = new Table
-				(
-				    [
-						new TableColumn
-						(
-						    'gamename',
-						    'Game',
-						    'width=24&sort=no'
-						),
-						new TableColumn
-						(
-						    'code',
-						    'Weapon',
-						    'width=14'
-						),
-						new TableColumn
-						(
-						    'name',
-						    'Name',
-						    'width=50'
-						),
-						new TableColumn
-						(
-						    'modifier',
-						    'Points Modifier',
-						    'width=12'
-						),
-					],
-				    'weaponId',
-				    'modifier',
-				    'code',
-				    false,
-				    9999,
-				    'weap_page',
-				    'weap_sort',
-				    'weap_sortorder',
-				    'weapons',
-				    'desc'
-				);
-				$result = $db->query
-				("
+    $tblWeapons = new Table(
+        [
+                new TableColumn(
+                    'gamename',
+                    'Game',
+                    'width=24&sort=no'
+                ),
+                new TableColumn(
+                    'code',
+                    'Weapon',
+                    'width=14'
+                ),
+                new TableColumn(
+                    'name',
+                    'Name',
+                    'width=50'
+                ),
+                new TableColumn(
+                    'modifier',
+                    'Points Modifier',
+                    'width=12'
+                ),
+            ],
+        'weaponId',
+        'modifier',
+        'code',
+        false,
+        9999,
+        'weap_page',
+        'weap_sort',
+        'weap_sortorder',
+        'weapons',
+        'desc'
+    );
+$result = $db->query("
 					SELECT
 						hlstats_Games.name AS gamename,
 						hlstats_Weapons.code,
@@ -291,9 +267,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 						$tblWeapons->sort $tblWeapons->sortorder,
 						$tblWeapons->sort2 $tblWeapons->sortorder
 				");
-				$numitems = $db->num_rows($result);
-				$tblWeapons->draw($result, $numitems, 90, "center");
-			?><br /><br />
+$numitems = $db->num_rows($result);
+$tblWeapons->draw($result, $numitems, 90, 'center');
+?><br /><br />
 			<h1 class="fTitle" style="padding-top:10px;"><a name="set">4. How can I set my real name, e-mail address, and homepage?</a></h1><br /><br />
 			Player profile options can be configured by saying the appropriate <strong>HLX_SET</strong> command while you are playing on a participating game server. To say commands, push your chat key and type the command text.<br /><br />
 			Syntax: say <strong>/hlx_set option value</strong>.<br /><br />

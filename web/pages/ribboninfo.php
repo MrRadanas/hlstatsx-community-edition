@@ -36,15 +36,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	// Ribbon Statistics
+// Ribbon Statistics
 
-	$ribbon =  valid_request($_GET['ribbon'], true) or error('No ribbon ID specified.');
+$ribbon = valid_request($_GET['ribbon'], true) or error('No ribbon ID specified.');
 
-	$db->query("
+$db->query("
 		SELECT
 			ribbonName,
 			image,
@@ -55,61 +55,57 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			hlstats_Ribbons.ribbonId=$ribbon
 	");
-	
-	$actiondata = $db->fetch_array();
-	$db->free_result();
-	$act_name = $actiondata['ribbonName'];
-	$awardmin = $actiondata['awardCount'];
-	$awardcode = $actiondata['awardCode'];
-	$image = $actiondata['image'];
 
-	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
-	if ($db->num_rows() < 1) {
-		error("No such game '$game'.");
-	}
-	
-	[$gamename] = $db->fetch_row();
-	$db->free_result();
-	
-	pageHeader(
-	    [$gamename, 'Ribbon Details', $act_name],
-	    [
-			$gamename => $g_options['scripturl']."?game=$game",
-			'Ribbons' => $g_options['scripturl']."mode=awards&game=$game&tab=ribbons",
-			'Ribbon Details' => '',
-		],
-	    $act_name
-	);
+$actiondata = $db->fetch_array();
+$db->free_result();
+$act_name  = $actiondata['ribbonName'];
+$awardmin  = $actiondata['awardCount'];
+$awardcode = $actiondata['awardCode'];
+$image     = $actiondata['image'];
 
-	$table = new Table(
-	    [
-			new TableColumn
-			(
-			    'playerName',
-			    'Player',
-			    'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
-			),
-			new TableColumn
-			(
-			    'numawards',
-			    'Daily awards',
-			    'width=10&align=right&append=' . urlencode(' times')
-			),
-			new TableColumn
-			(
-			    'awardName',
-			    '',
-			    'width=40&align=left'
-			),
-		],
-	    'playerId',
-	    'numawards',
-	    'playerName',
-	    true,
-	    50
-	);
+$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
+if ($db->num_rows() < 1) {
+    error("No such game '$game'.");
+}
 
-	$result = $db->query("
+[$gamename] = $db->fetch_row();
+$db->free_result();
+
+pageHeader(
+    [$gamename, 'Ribbon Details', $act_name],
+    [
+        $gamename        => $g_options['scripturl']."?game=$game",
+        'Ribbons'        => $g_options['scripturl']."mode=awards&game=$game&tab=ribbons",
+        'Ribbon Details' => '',
+    ]
+);
+
+$table = new Table(
+    [
+        new TableColumn(
+            'playerName',
+            'Player',
+            'width=45&align=left&flag=1&link='.urlencode('mode=playerinfo&amp;player=%k')
+        ),
+        new TableColumn(
+            'numawards',
+            'Daily awards',
+            'width=10&align=right&append='.urlencode(' times')
+        ),
+        new TableColumn(
+            'awardName',
+            '',
+            'width=40&align=left'
+        ),
+    ],
+    'playerId',
+    'numawards',
+    'playerName',
+    true,
+    50
+);
+
+$result = $db->query("
 		SELECT
 			flag,
 			lastName AS playerName,
@@ -146,7 +142,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		LIMIT $table->startitem,$table->numperpage
 	");
 
-	$resultCount = $db->query("
+$resultCount = $db->query("
 		SELECT
 			flag,
 			lastName AS playerName,
@@ -179,20 +175,20 @@ For support and installation notes visit http://www.hlxcommunity.com
 			COUNT(hlstats_Awards.name) >= $awardmin  	
 	");
 
-	$numitems = mysqli_num_rows($resultCount);
+$numitems = mysqli_num_rows($resultCount);
 ?>
 
 <div class="block">
 	<?php printSectionTitle('Ribbon Details'); ?>
 	<div class="subblock">
 		<div style="float:right;">
-			Back to <a href="<?php echo $g_options['scripturl'] . "?mode=awards&amp;game=$game&tab=ribbons"; ?>">Ribbons</a>
+			Back to <a href="<?php echo $g_options['scripturl']."?mode=awards&amp;game=$game&tab=ribbons"; ?>">Ribbons</a>
 		</div>
 		<div style="clear:both;"></div>
 	</div>
 	<br /><br />
 <?php
   echo '<img src="'.IMAGE_PATH."/games/$game/ribbons/$image\" alt=\"\" /> <b>$act_name</b>";
-	$table->draw($result, $numitems, 95, 'center');
+$table->draw($result, $numitems, 95, 'center');
 ?>
 </div>

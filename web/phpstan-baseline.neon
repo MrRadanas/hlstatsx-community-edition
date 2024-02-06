@@ -111,11 +111,6 @@ parameters:
 			path: includes/class_db.php
 
 		-
-			message: "#^Method DB_mysql\\:\\:error\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: includes/class_db.php
-
-		-
 			message: "#^Method DB_mysql\\:\\:error\\(\\) has parameter \\$exit with no type specified\\.$#"
 			count: 1
 			path: includes/class_db.php
@@ -381,11 +376,6 @@ parameters:
 			path: includes/class_table.php
 
 		-
-			message: "#^Method Table\\:\\:_echoPageNumber\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: includes/class_table.php
-
-		-
 			message: "#^Method Table\\:\\:_echoPageNumber\\(\\) has parameter \\$label with no type specified\\.$#"
 			count: 1
 			path: includes/class_table.php
@@ -406,11 +396,6 @@ parameters:
 			path: includes/class_table.php
 
 		-
-			message: "#^Method Table\\:\\:draw\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: includes/class_table.php
-
-		-
 			message: "#^Method Table\\:\\:draw\\(\\) has parameter \\$align with no type specified\\.$#"
 			count: 1
 			path: includes/class_table.php
@@ -427,11 +412,6 @@ parameters:
 
 		-
 			message: "#^Method Table\\:\\:draw\\(\\) has parameter \\$width with no type specified\\.$#"
-			count: 1
-			path: includes/class_table.php
-
-		-
-			message: "#^Method Table\\:\\:start\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: includes/class_table.php
 
@@ -686,6 +666,11 @@ parameters:
 			path: includes/functions.php
 
 		-
+			message: "#^Function error\\(\\) has parameter \\$message with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
 			message: "#^Function file_get_contents\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: includes/functions.php
@@ -721,6 +706,11 @@ parameters:
 			path: includes/functions.php
 
 		-
+			message: "#^Function getLink\\(\\) has parameter \\$url with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
 			message: "#^Function getOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: includes/functions.php
@@ -736,17 +726,47 @@ parameters:
 			path: includes/functions.php
 
 		-
-			message: "#^Function getSelect\\(\\) has invalid return type The\\.$#"
+			message: "#^Function getSelect\\(\\) has invalid return type the\\.$#"
 			count: 1
 			path: includes/functions.php
 
 		-
-			message: "#^Function getSelect\\(\\) should return The but returns string\\.$#"
+			message: "#^Function getSelect\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSelect\\(\\) has parameter \\$values with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSelect\\(\\) should return the but returns string\\.$#"
 			count: 1
 			path: includes/functions.php
 
 		-
 			message: "#^Function getSortArrow\\(\\) has parameter \\$ajax with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSortArrow\\(\\) has parameter \\$longname with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSortArrow\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSortArrow\\(\\) has parameter \\$sort with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function getSortArrow\\(\\) has parameter \\$sortorder with no type specified\\.$#"
 			count: 1
 			path: includes/functions.php
 
@@ -786,6 +806,21 @@ parameters:
 			path: includes/functions.php
 
 		-
+			message: "#^Function makeQueryString\\(\\) has parameter \\$key with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function makeQueryString\\(\\) has parameter \\$notkeys with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function makeQueryString\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
 			message: "#^Function mystripslashes\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: includes/functions.php
@@ -802,6 +837,16 @@ parameters:
 
 		-
 			message: "#^Function pageHeader\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function pageHeader\\(\\) has parameter \\$location with no type specified\\.$#"
+			count: 1
+			path: includes/functions.php
+
+		-
+			message: "#^Function pageHeader\\(\\) has parameter \\$title with no type specified\\.$#"
 			count: 1
 			path: includes/functions.php
 
@@ -828,36 +873,6 @@ parameters:
 		-
 			message: "#^Offset 'host' does not exist on array\\{scheme\\: 'http'\\|'https', host\\?\\: string, port\\?\\: int\\<0, 65535\\>, user\\?\\: string, pass\\?\\: string, path\\: string, query\\: string, fragment\\: string\\}\\.$#"
 			count: 2
-			path: includes/functions.php
-
-		-
-			message: "#^PHPDoc tag @param references unknown parameter\\: \\$maxlength$#"
-			count: 1
-			path: includes/functions.php
-
-		-
-			message: "#^PHPDoc tag @param references unknown parameter\\: \\$timestamp$#"
-			count: 1
-			path: includes/functions.php
-
-		-
-			message: "#^PHPDoc tag @return has invalid value \\(\\)\\: Unexpected token \"\\\\r\\\\n \", expected type at offset 114$#"
-			count: 1
-			path: includes/functions.php
-
-		-
-			message: "#^PHPDoc tag @return has invalid value \\(\\)\\: Unexpected token \"\\\\r\\\\n \", expected type at offset 136$#"
-			count: 1
-			path: includes/functions.php
-
-		-
-			message: "#^PHPDoc tag @return has invalid value \\(\\)\\: Unexpected token \"\\\\r\\\\n \", expected type at offset 37$#"
-			count: 1
-			path: includes/functions.php
-
-		-
-			message: "#^PHPDoc tag @return has invalid value \\(\\)\\: Unexpected token \"\\\\r\\\\n \", expected type at offset 88$#"
-			count: 1
 			path: includes/functions.php
 
 		-
@@ -1106,11 +1121,6 @@ parameters:
 			path: ingame.php
 
 		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
-			count: 1
-			path: pages/actioninfo.php
-
-		-
 			message: "#^Variable \\$db might not be defined\\.$#"
 			count: 20
 			path: pages/actioninfo.php
@@ -1236,16 +1246,6 @@ parameters:
 			path: pages/admin.php
 
 		-
-			message: "#^Method Auth\\:\\:doCookies\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/admin.php
-
-		-
-			message: "#^Method Auth\\:\\:printAuth\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/admin.php
-
-		-
 			message: "#^Method EditList\\:\\:__construct\\(\\) has parameter \\$DetailsLink with no type specified\\.$#"
 			count: 1
 			path: pages/admin.php
@@ -1281,22 +1281,12 @@ parameters:
 			path: pages/admin.php
 
 		-
-			message: "#^Method EditList\\:\\:draw\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/admin.php
-
-		-
 			message: "#^Method EditList\\:\\:draw\\(\\) has parameter \\$draw_new with no type specified\\.$#"
 			count: 1
 			path: pages/admin.php
 
 		-
 			message: "#^Method EditList\\:\\:draw\\(\\) has parameter \\$result with no type specified\\.$#"
-			count: 1
-			path: pages/admin.php
-
-		-
-			message: "#^Method EditList\\:\\:drawfields\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: pages/admin.php
 
@@ -1401,17 +1391,7 @@ parameters:
 			path: pages/admin.php
 
 		-
-			message: "#^Method PropertyPage\\:\\:draw\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/admin.php
-
-		-
 			message: "#^Method PropertyPage\\:\\:draw\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: pages/admin.php
-
-		-
-			message: "#^Method PropertyPage\\:\\:update\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: pages/admin.php
 
@@ -1422,11 +1402,6 @@ parameters:
 
 		-
 			message: "#^Method PropertyPage_Group\\:\\:__construct\\(\\) has parameter \\$title with no type specified\\.$#"
-			count: 1
-			path: pages/admin.php
-
-		-
-			message: "#^Method PropertyPage_Group\\:\\:draw\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: pages/admin.php
 
@@ -1452,11 +1427,6 @@ parameters:
 
 		-
 			message: "#^Method PropertyPage_Property\\:\\:__construct\\(\\) has parameter \\$type with no type specified\\.$#"
-			count: 1
-			path: pages/admin.php
-
-		-
-			message: "#^Method PropertyPage_Property\\:\\:draw\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: pages/admin.php
 
@@ -1911,22 +1881,7 @@ parameters:
 			path: pages/admintasks/options.php
 
 		-
-			message: "#^Method Option\\:\\:draw\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/admintasks/options.php
-
-		-
 			message: "#^Method OptionGroup\\:\\:__construct\\(\\) has parameter \\$title with no type specified\\.$#"
-			count: 1
-			path: pages/admintasks/options.php
-
-		-
-			message: "#^Method OptionGroup\\:\\:draw\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/admintasks/options.php
-
-		-
-			message: "#^Method OptionGroup\\:\\:update\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: pages/admintasks/options.php
 
@@ -2451,7 +2406,7 @@ parameters:
 			path: pages/admintasks/tools_resetdbcollations.php
 
 		-
-			message: "#^Strict comparison using \\=\\=\\= between string and null will always evaluate to false\\.$#"
+			message: "#^Strict comparison using \\=\\=\\= between null and string will always evaluate to false\\.$#"
 			count: 4
 			path: pages/admintasks/tools_resetdbcollations.php
 
@@ -2821,11 +2776,6 @@ parameters:
 			path: pages/chat.php
 
 		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
-			count: 1
-			path: pages/chathistory.php
-
-		-
 			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
 			count: 1
 			path: pages/chathistory.php
@@ -2853,11 +2803,6 @@ parameters:
 		-
 			message: "#^Constant PAGE_PATH not found\\.$#"
 			count: 7
-			path: pages/claninfo.php
-
-		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
-			count: 1
 			path: pages/claninfo.php
 
 		-
@@ -3101,11 +3046,6 @@ parameters:
 			path: pages/countryclansinfo.php
 
 		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
-			count: 1
-			path: pages/countryclansinfo.php
-
-		-
 			message: "#^Variable \\$db might not be defined\\.$#"
 			count: 10
 			path: pages/countryclansinfo.php
@@ -3128,11 +3068,6 @@ parameters:
 		-
 			message: "#^Constant IMAGE_PATH not found\\.$#"
 			count: 2
-			path: pages/dailyawardinfo.php
-
-		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
-			count: 1
 			path: pages/dailyawardinfo.php
 
 		-
@@ -3691,11 +3626,6 @@ parameters:
 			path: pages/mapinfo.php
 
 		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
-			count: 1
-			path: pages/mapinfo.php
-
-		-
 			message: "#^Parameter \\#1 \\$url of function get_headers expects string, array\\<int, string\\>\\|string given\\.$#"
 			count: 1
 			path: pages/mapinfo.php
@@ -3746,11 +3676,6 @@ parameters:
 			path: pages/maps.php
 
 		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
-			count: 1
-			path: pages/playerawards.php
-
-		-
 			message: "#^Variable \\$db might not be defined\\.$#"
 			count: 13
 			path: pages/playerawards.php
@@ -3786,11 +3711,6 @@ parameters:
 			path: pages/playerhistory.php
 
 		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
-			count: 1
-			path: pages/playerhistory.php
-
-		-
 			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
 			count: 1
 			path: pages/playerhistory.php
@@ -3813,11 +3733,6 @@ parameters:
 		-
 			message: "#^Constant PAGE_PATH not found\\.$#"
 			count: 10
-			path: pages/playerinfo.php
-
-		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
-			count: 1
 			path: pages/playerinfo.php
 
 		-
@@ -4171,11 +4086,6 @@ parameters:
 			path: pages/players.php
 
 		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
-			count: 1
-			path: pages/playersessions.php
-
-		-
 			message: "#^Parameter \\#1 \\$str of function valid_request expects string, int given\\.$#"
 			count: 1
 			path: pages/playersessions.php
@@ -4194,11 +4104,6 @@ parameters:
 			message: "#^Variable \\$db might not be defined\\.$#"
 			count: 14
 			path: pages/profile.php
-
-		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
-			count: 1
-			path: pages/rankinfo.php
 
 		-
 			message: "#^Variable \\$action might not be defined\\.$#"
@@ -4227,11 +4132,6 @@ parameters:
 
 		-
 			message: "#^Constant IMAGE_PATH not found\\.$#"
-			count: 1
-			path: pages/ribboninfo.php
-
-		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
 			count: 1
 			path: pages/ribboninfo.php
 
@@ -4271,11 +4171,6 @@ parameters:
 			path: pages/roles.php
 
 		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
-			count: 1
-			path: pages/rolesinfo.php
-
-		-
 			message: "#^Variable \\$db might not be defined\\.$#"
 			count: 10
 			path: pages/rolesinfo.php
@@ -4311,22 +4206,12 @@ parameters:
 			path: pages/search-class.php
 
 		-
-			message: "#^Method Search\\:\\:drawForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/search-class.php
-
-		-
 			message: "#^Method Search\\:\\:drawForm\\(\\) has parameter \\$getvars with no type specified\\.$#"
 			count: 1
 			path: pages/search-class.php
 
 		-
 			message: "#^Method Search\\:\\:drawForm\\(\\) has parameter \\$searchtypes with no type specified\\.$#"
-			count: 1
-			path: pages/search-class.php
-
-		-
-			message: "#^Method Search\\:\\:drawResults\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: pages/search-class.php
 
@@ -4406,6 +4291,16 @@ parameters:
 			path: pages/servers.php
 
 		-
+			message: "#^Constant FOPEN not found\\.$#"
+			count: 1
+			path: pages/teamspeak.php
+
+		-
+			message: "#^Constant HTML not found\\.$#"
+			count: 2
+			path: pages/teamspeak.php
+
+		-
 			message: "#^Constant IMAGE_PATH not found\\.$#"
 			count: 5
 			path: pages/teamspeak.php
@@ -4413,16 +4308,6 @@ parameters:
 		-
 			message: "#^Constant PAGE_PATH not found\\.$#"
 			count: 3
-			path: pages/teamspeak.php
-
-		-
-			message: "#^Constant fopen not found\\.$#"
-			count: 1
-			path: pages/teamspeak.php
-
-		-
-			message: "#^Constant html not found\\.$#"
-			count: 2
 			path: pages/teamspeak.php
 
 		-
@@ -4524,11 +4409,6 @@ parameters:
 			message: "#^Variable \\$userstats might not be defined\\.$#"
 			count: 2
 			path: pages/teamspeak.php
-
-		-
-			message: "#^Method teamspeakDisplayClass\\:\\:_closeConnection\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/teamspeak_class.php
 
 		-
 			message: "#^Method teamspeakDisplayClass\\:\\:_closeConnection\\(\\) has parameter \\$socket with no type specified\\.$#"
@@ -4711,27 +4591,12 @@ parameters:
 			path: pages/teamspeak_class.php
 
 		-
-			message: "#^Method teamspeakDisplayClass\\:\\:_setChannelDisplayName\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/teamspeak_class.php
-
-		-
 			message: "#^Method teamspeakDisplayClass\\:\\:_setChannelDisplayName\\(\\) has parameter \\$channelInfo with no type specified\\.$#"
 			count: 1
 			path: pages/teamspeak_class.php
 
 		-
-			message: "#^Method teamspeakDisplayClass\\:\\:_setPlayerDisplayImage\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/teamspeak_class.php
-
-		-
 			message: "#^Method teamspeakDisplayClass\\:\\:_setPlayerDisplayImage\\(\\) has parameter \\$playerInfo with no type specified\\.$#"
-			count: 1
-			path: pages/teamspeak_class.php
-
-		-
-			message: "#^Method teamspeakDisplayClass\\:\\:_setPlayerDisplayName\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: pages/teamspeak_class.php
 
@@ -4771,11 +4636,6 @@ parameters:
 			path: pages/teamspeak_class.php
 
 		-
-			message: "#^Method teamspeakDisplayClass\\:\\:displayTeamspeak\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/teamspeak_class.php
-
-		-
 			message: "#^Method teamspeakDisplayClass\\:\\:displayTeamspeak\\(\\) has parameter \\$serverAddress with no type specified\\.$#"
 			count: 1
 			path: pages/teamspeak_class.php
@@ -4787,11 +4647,6 @@ parameters:
 
 		-
 			message: "#^Method teamspeakDisplayClass\\:\\:displayTeamspeak\\(\\) has parameter \\$serverUDPPort with no type specified\\.$#"
-			count: 1
-			path: pages/teamspeak_class.php
-
-		-
-			message: "#^Method teamspeakDisplayClass\\:\\:displayTeamspeakEx\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: pages/teamspeak_class.php
 
@@ -4832,11 +4687,6 @@ parameters:
 
 		-
 			message: "#^Method teamspeakDisplayClass\\:\\:queryTeamspeakServerEx\\(\\) has parameter \\$settings with no type specified\\.$#"
-			count: 1
-			path: pages/teamspeak_class.php
-
-		-
-			message: "#^Method teamspeakDisplayClass\\:\\:sortServerInfo\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: pages/teamspeak_class.php
 
@@ -5106,6 +4956,11 @@ parameters:
 			path: pages/teamspeak_query.php
 
 		-
+			message: "#^Undefined variable\\: \\$minutesm$#"
+			count: 1
+			path: pages/teamspeak_query.php
+
+		-
 			message: "#^Variable \\$codec might not be defined\\.$#"
 			count: 1
 			path: pages/teamspeak_query.php
@@ -5151,6 +5006,11 @@ parameters:
 			path: pages/ventrilo.php
 
 		-
+			message: "#^Constant HTML not found\\.$#"
+			count: 2
+			path: pages/ventrilo.php
+
+		-
 			message: "#^Constant IMAGE_PATH not found\\.$#"
 			count: 2
 			path: pages/ventrilo.php
@@ -5158,11 +5018,6 @@ parameters:
 		-
 			message: "#^Constant PAGE_PATH not found\\.$#"
 			count: 3
-			path: pages/ventrilo.php
-
-		-
-			message: "#^Constant html not found\\.$#"
-			count: 2
 			path: pages/ventrilo.php
 
 		-
@@ -5436,17 +5291,7 @@ parameters:
 			path: pages/ventrilostatus.php
 
 		-
-			message: "#^Method CVentriloChannel\\:\\:Parse\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/ventrilostatus.php
-
-		-
 			message: "#^Method CVentriloChannel\\:\\:Parse\\(\\) has parameter \\$str with no type specified\\.$#"
-			count: 1
-			path: pages/ventrilostatus.php
-
-		-
-			message: "#^Method CVentriloClient\\:\\:Parse\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: pages/ventrilostatus.php
 
@@ -5546,17 +5391,7 @@ parameters:
 			path: pages/ventrilostatus.php
 
 		-
-			message: "#^Method Vent\\:\\:setTimeout\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/ventrilostatus.php
-
-		-
 			message: "#^Method Vent\\:\\:setTimeout\\(\\) has parameter \\$microsecs with no type specified\\.$#"
-			count: 1
-			path: pages/ventrilostatus.php
-
-		-
-			message: "#^Method VentPacket\\:\\:mapHeader\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: pages/ventrilostatus.php
 
@@ -5572,11 +5407,6 @@ parameters:
 
 		-
 			message: "#^Method VentRequestPacket\\:\\:__construct\\(\\) has parameter \\$pass with no type specified\\.$#"
-			count: 1
-			path: pages/ventrilostatus.php
-
-		-
-			message: "#^Method VentRequestPacket\\:\\:createKeys\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: pages/ventrilostatus.php
 
@@ -5597,16 +5427,6 @@ parameters:
 
 		-
 			message: "#^Method VentRequestPacket\\:\\:createKeys\\(\\) has parameter \\$key with no type specified\\.$#"
-			count: 1
-			path: pages/ventrilostatus.php
-
-		-
-			message: "#^Method VentRequestPacket\\:\\:encodeData\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: pages/ventrilostatus.php
-
-		-
-			message: "#^Method VentRequestPacket\\:\\:encodeHeader\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: pages/ventrilostatus.php
 
@@ -5906,11 +5726,6 @@ parameters:
 			path: pages/ventrilostatus.php
 
 		-
-			message: "#^Static call to instance method Vent\\:\\:getCRC\\(\\)\\.$#"
-			count: 1
-			path: pages/ventrilostatus.php
-
-		-
 			message: "#^Variable \\$res might not be defined\\.$#"
 			count: 1
 			path: pages/ventrilostatus.php
@@ -5939,11 +5754,6 @@ parameters:
 			message: "#^Variable \\$teamspeakDisplay might not be defined\\.$#"
 			count: 2
 			path: pages/voicecomm_serverlist.php
-
-		-
-			message: "#^Function pageHeader invoked with 3 parameters, 0\\-2 required\\.$#"
-			count: 1
-			path: pages/weaponinfo.php
 
 		-
 			message: "#^Variable \\$db might not be defined\\.$#"

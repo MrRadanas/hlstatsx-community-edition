@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,106 +36,92 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-    // Player Kill Statistics
-	flush();
-	$tblPlayerKillStats = new Table
-	(
-	    [
-			new TableColumn
-			(
-			    'name',
-			    'Victim',
-			    'width=21&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
-			),
-			new TableColumn
-			(
-			    'kills',
-			    'Kills',
-			    'width=6&align=right'
-			),
-			new TableColumn
-			(
-			    'kpercent',
-			    '%',
-			    'width=7&sort=no&align=right&append=' . urlencode('%')
-			),
-			new TableColumn
-			(
-			    'kpercent',
-			    'Ratio',
-			    'width=7&sort=no&type=bargraph'
-			),
-			new TableColumn
-			(
-			    'deaths',
-			    'Deaths',
-			    'width=6&align=right'
-			),
-			new TableColumn
-			(
-			    'dpercent',
-			    '%',
-			    'width=7&sort=no&align=right&append=' . urlencode('%')
-			),
-			new TableColumn
-			(
-			    'dpercent',
-			    'Ratio',
-			    'width=7&sort=no&type=bargraph'
-			),
-			new TableColumn
-			(
-			    'kpd',
-			    'K:D',
-			    'width=7&align=right'
-			),
-			new TableColumn
-			(
-			    'headshots',
-			    'Headshots',
-			    'width=6&align=right'
-			),
-			new TableColumn
-			(
-			    'hpercent',
-			    '%',
-			    'width=7&sort=no&align=right&append=' . urlencode('%')
-			),
-			new TableColumn
-			(
-			    'hpercent',
-			    'Ratio',
-			    'width=7&sort=no&type=bargraph'
-			),
-			new TableColumn
-			(
-			    'hpk',
-			    'HS:K',
-			    'width=7&align=right'
-			),
-			
-		],
-	    'victimId',
-	    'kills',
-	    'deaths',
-	    true,
-	    50,
-	    'playerkills_page',
-	    'playerkills_sort',
-	    'playerkills_sortorder',
-	    'tabkills',
-	    'desc',
-	    true
-	);
+// Player Kill Statistics
+flush();
+$tblPlayerKillStats = new Table(
+    [
+        new TableColumn(
+            'name',
+            'Victim',
+            'width=21&flag=1&link='.urlencode('mode=playerinfo&amp;player=%k')
+        ),
+        new TableColumn(
+            'kills',
+            'Kills',
+            'width=6&align=right'
+        ),
+        new TableColumn(
+            'kpercent',
+            '%',
+            'width=7&sort=no&align=right&append='.urlencode('%')
+        ),
+        new TableColumn(
+            'kpercent',
+            'Ratio',
+            'width=7&sort=no&type=bargraph'
+        ),
+        new TableColumn(
+            'deaths',
+            'Deaths',
+            'width=6&align=right'
+        ),
+        new TableColumn(
+            'dpercent',
+            '%',
+            'width=7&sort=no&align=right&append='.urlencode('%')
+        ),
+        new TableColumn(
+            'dpercent',
+            'Ratio',
+            'width=7&sort=no&type=bargraph'
+        ),
+        new TableColumn(
+            'kpd',
+            'K:D',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'headshots',
+            'Headshots',
+            'width=6&align=right'
+        ),
+        new TableColumn(
+            'hpercent',
+            '%',
+            'width=7&sort=no&align=right&append='.urlencode('%')
+        ),
+        new TableColumn(
+            'hpercent',
+            'Ratio',
+            'width=7&sort=no&type=bargraph'
+        ),
+        new TableColumn(
+            'hpk',
+            'HS:K',
+            'width=7&align=right'
+        ),
+    ],
+    'victimId',
+    'kills',
+    'deaths',
+    true,
+    50,
+    'playerkills_page',
+    'playerkills_sort',
+    'playerkills_sortorder',
+    'tabkills',
+    'desc',
+    true
+);
 // This would be better done with a UNION query, I think, but MySQL doesn't
 // support them yet. (NOTE you need MySQL 3.23 for temporary table support.)
-	$db->query("DROP TABLE IF EXISTS hlstats_Frags_Kills");
+$db->query('DROP TABLE IF EXISTS hlstats_Frags_Kills');
 
-	$sql_create_temp_table = "
+$sql_create_temp_table = '
 		CREATE TEMPORARY TABLE hlstats_Frags_Kills
 		(
 			playerId INT(10),
@@ -144,13 +130,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 			headshot INT(10),
 			country varchar(128),
 			flag char(2)
-		) DEFAULT CHARSET=" . DB_CHARSET . " DEFAULT COLLATE=" . DB_COLLATE . ";
-	";
+		) DEFAULT CHARSET='.DB_CHARSET.' DEFAULT COLLATE='.DB_COLLATE.';
+	';
 
-	$db->query($sql_create_temp_table);
+$db->query($sql_create_temp_table);
 
-	$db->query
-	("
+$db->query("
 		INSERT INTO
 			hlstats_Frags_Kills
 			(
@@ -169,8 +154,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		GROUP BY
 			hlstats_Events_Frags.id
 	");
-	$db->query
-	("
+$db->query("
 		INSERT INTO
 			hlstats_Frags_Kills
 			(
@@ -185,8 +169,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			hlstats_Events_Frags.victimId = $player
 	");
-	$result = $db->query
-	("
+$result = $db->query("
 			SELECT
 				SUM(hlstats_Frags_Kills.headshot) AS headshots
 			FROM
@@ -196,13 +179,11 @@ For support and installation notes visit http://www.hlxcommunity.com
 			HAVING
 				COUNT(hlstats_Frags_Kills.kills) >= $killLimit
 	");
-	$realheadshots = 0;
-	while ($rowdata = $db->fetch_array($result))
-	{
-		$realheadshots += $rowdata['headshots'];
-	}	
-	$db->query
-	("
+$realheadshots = 0;
+while ($rowdata = $db->fetch_array($result)) {
+    $realheadshots += $rowdata['headshots'];
+}
+$db->query("
 		SELECT
 			hlstats_Players.lastName AS name
 		FROM
@@ -215,9 +196,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 		HAVING
 			COUNT(hlstats_Frags_Kills.kills) >= $killLimit
 	");
-	$numitems = $db->num_rows();
-	$result = $db->query
-	("
+$numitems = $db->num_rows();
+$result   = $db->query("
 		SELECT
 			hlstats_Players.lastName AS name,
 			hlstats_Players.flag AS flag,
@@ -245,31 +225,28 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$tblPlayerKillStats->sort2 $tblPlayerKillStats->sortorder
 		LIMIT $tblPlayerKillStats->startitem,$tblPlayerKillStats->numperpage
 	");
-	if ($numitems > 0)
-	{
-		printSectionTitle('Player Kill Statistics *');
-		$tblPlayerKillStats->draw($result, $numitems, 95); ?>
+if ($numitems > 0) {
+    printSectionTitle('Player Kill Statistics *');
+    $tblPlayerKillStats->draw($result, $numitems, 95); ?>
 	<br /><br />
 	<div class="subblock">
 	<form method="get" action="<?php echo $g_options['scripturl']; ?>">
 		<strong>&#8226;</strong> Show only victims this person has killed
 		<select name="killLimit" onchange="Tabs.refreshTab({'killLimit': this.options[this.selectedIndex].value, 'playerkills_page': 1})">
 			<?php
-				for($j = 0; $j < 16; $j++)
-				{
-					echo "<option value=\"$j\"";
-					if ($killLimit == $j)
-					{
-						echo ' selected="selected"';
-					}
-					echo ">$j</option>";
-				}
-			?>
+            for ($j = 0; $j < 16; ++$j) {
+                echo "<option value=\"$j\"";
+                if ($killLimit == $j) {
+                    echo ' selected="selected"';
+                }
+                echo ">$j</option>";
+            }
+    ?>
 		</select>
 		or more times
 	</form>
 	</div>
 	<br /><br />
 <?php
-	}
+}
 ?>

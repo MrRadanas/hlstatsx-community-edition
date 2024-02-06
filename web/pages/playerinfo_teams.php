@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,54 +36,48 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	flush();
-	$tblTeams = new Table
-	(
-	    [
-			new TableColumn
-			(
-			    'name',
-			    'Team',
-			    'width=35'
-			),
-			new TableColumn
-			(
-			    'teamcount',
-			    'Joined',
-			    'width=10&align=right&append=+times'
-			),
-			new TableColumn
-			(
-			    'percent',
-			    '%',
-			    'width=10&sort=no&align=right&append=' . urlencode('%')
-			),
-			new TableColumn
-			(
-			    'percent',
-			    'Ratio',
-			    'width=40&sort=no&type=bargraph'
-			),
-		],
-	    'name',
-	    'teamcount',
-	    'name',
-	    true,
-	    9999,
-	    'teams_page',
-	    'teams_sort',
-	    'teams_sortorder',
-	    'tabteams',
-	    'desc',
-	    true
-	);
-	
-	$db->query
-	("
+flush();
+$tblTeams = new Table(
+    [
+        new TableColumn(
+            'name',
+            'Team',
+            'width=35'
+        ),
+        new TableColumn(
+            'teamcount',
+            'Joined',
+            'width=10&align=right&append=+times'
+        ),
+        new TableColumn(
+            'percent',
+            '%',
+            'width=10&sort=no&align=right&append='.urlencode('%')
+        ),
+        new TableColumn(
+            'percent',
+            'Ratio',
+            'width=40&sort=no&type=bargraph'
+        ),
+    ],
+    'name',
+    'teamcount',
+    'name',
+    true,
+    9999,
+    'teams_page',
+    'teams_sort',
+    'teams_sortorder',
+    'tabteams',
+    'desc',
+    true
+);
+
+$db->query("
 		SELECT
 			COUNT(*)
 		FROM
@@ -91,14 +85,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			hlstats_Events_ChangeTeam.playerId = $player 
 	");
-	[$numteamjoins] = $db->fetch_row();
+[$numteamjoins] = $db->fetch_row();
 
-	if($numteamjoins == 0) {
-		$numteamjoins = 1;
-	}
+if (0 == $numteamjoins) {
+    $numteamjoins = 1;
+}
 
-	$result = $db->query
-	("
+$result = $db->query("
 		SELECT
 			IFNULL(hlstats_Teams.name, hlstats_Events_ChangeTeam.team) AS name,
 			COUNT(hlstats_Events_ChangeTeam.id) AS teamcount,
@@ -123,18 +116,16 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$tblTeams->sort $tblTeams->sortorder,
 			$tblTeams->sort2 $tblTeams->sortorder
 	");
-	$numitems = $db->num_rows($result);
-	if ($numitems > 0)
-	{
-		printSectionTitle('Team Selection *');
-		$tblTeams->draw($result, $numitems, 95);
-?>
+$numitems = $db->num_rows($result);
+if ($numitems > 0) {
+    printSectionTitle('Team Selection *');
+    $tblTeams->draw($result, $numitems, 95);
+    ?>
 	<br /><br />
 <?php
-	}
-	flush();
-	$result = $db->query
-	("
+}
+flush();
+$result = $db->query("
 		SELECT
 			hlstats_Roles.code,
 			hlstats_Roles.name
@@ -143,87 +134,77 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			hlstats_Roles.game = '$game'
 	");
-	while ($rowdata = $db->fetch_row($result))
-	{
-		$code = preg_replace("/[ \r\n\t]+/", "", $rowdata[0]);
-		$fname[strToLower($code)] = htmlspecialchars($rowdata[1]);
-	}
-	$tblRoles = new Table
-	(
-	    [
-			new TableColumn
-			(
-			    'code',
-			    'Role',
-			    'width=25&type=roleimg&align=left&link=' . urlencode("mode=rolesinfo&amp;role=%k&amp;game=$game"),
-			    $fname
-			),
-			new TableColumn
-			(
-			    'rolecount',
-			    'Joined',
-			    'width=10&align=right&append=+times'
-			),
-			new TableColumn
-			(
-			    'percent',
-			    '%',
-			    'width=10&sort=no&align=right&append=' . urlencode('%')
-			),
-			new TableColumn
-			(
-			    'percent',
-			    'Ratio',
-			    'width=20&sort=no&type=bargraph'
-			),
-			new TableColumn
-			(
-			    'killsTotal',
-			    'Kills',
-			    'width=10&align=right'
-			),
-			new TableColumn
-			(
-			    'deathsTotal',
-			    'Deaths',
-			    'width=10&align=right'
-			),
-			new TableColumn
-			(
-			    'kpd',
-			    'K:D',
-			    'width=10&align=right'
-			),
-		],
-	    'code',
-	    'rolecount',
-	    'name',
-	    true,
-	    9999,
-	    'roles_page',
-	    'roles_sort',
-	    'roles_sortorder',
-	    'roles',
-	    'desc',
-	    true
-	);
+while ($rowdata = $db->fetch_row($result)) {
+    $code                     = preg_replace("/[ \r\n\t]+/", '', $rowdata[0]);
+    $fname[strtolower($code)] = htmlspecialchars($rowdata[1]);
+}
+$tblRoles = new Table(
+    [
+        new TableColumn(
+            'code',
+            'Role',
+            'width=25&type=roleimg&align=left&link='.urlencode("mode=rolesinfo&amp;role=%k&amp;game=$game"),
+            $fname
+        ),
+        new TableColumn(
+            'rolecount',
+            'Joined',
+            'width=10&align=right&append=+times'
+        ),
+        new TableColumn(
+            'percent',
+            '%',
+            'width=10&sort=no&align=right&append='.urlencode('%')
+        ),
+        new TableColumn(
+            'percent',
+            'Ratio',
+            'width=20&sort=no&type=bargraph'
+        ),
+        new TableColumn(
+            'killsTotal',
+            'Kills',
+            'width=10&align=right'
+        ),
+        new TableColumn(
+            'deathsTotal',
+            'Deaths',
+            'width=10&align=right'
+        ),
+        new TableColumn(
+            'kpd',
+            'K:D',
+            'width=10&align=right'
+        ),
+    ],
+    'code',
+    'rolecount',
+    'name',
+    true,
+    9999,
+    'roles_page',
+    'roles_sort',
+    'roles_sortorder',
+    'roles',
+    'desc',
+    true
+);
 
-	$db->query("DROP TABLE IF EXISTS hlstats_Frags_as");
+$db->query('DROP TABLE IF EXISTS hlstats_Frags_as');
 
-	$sql_create_temp_table = "
+$sql_create_temp_table = "
 		CREATE TEMPORARY TABLE hlstats_Frags_as
 		(
 			playerId INT(10),
 			kills INT(10),
 			deaths INT(10),
 			role varchar(128) NOT NULL default ''
-		) DEFAULT CHARSET=" . DB_CHARSET . " DEFAULT COLLATE=" . DB_COLLATE . ";
-	";
+		) DEFAULT CHARSET=".DB_CHARSET.' DEFAULT COLLATE='.DB_COLLATE.';
+	';
 
-	$db->query($sql_create_temp_table);
+$db->query($sql_create_temp_table);
 
-	$db->query
-	("
+$db->query("
 		INSERT INTO
 			hlstats_Frags_as
 			(
@@ -240,8 +221,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE 
 			hlstats_Events_Frags.killerId = $player
 	");
-	$db->query
-	("
+$db->query("
 		INSERT INTO
 			hlstats_Frags_as
 			(
@@ -259,21 +239,20 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Events_Frags.victimId = $player 
 	");
 
-	$db->query("DROP TABLE IF EXISTS hlstats_Frags_as_res");
+$db->query('DROP TABLE IF EXISTS hlstats_Frags_as_res');
 
-	$sql_create_temp_table = "
+$sql_create_temp_table = "
 		CREATE TEMPORARY TABLE hlstats_Frags_as_res
 		(
 			killsTotal INT(10),
 			deathsTotal INT(10),
 			role varchar(128) NOT NULL default ''
-		) DEFAULT CHARSET=" . DB_CHARSET . " DEFAULT COLLATE=" . DB_COLLATE . ";
-	";
+		) DEFAULT CHARSET=".DB_CHARSET.' DEFAULT COLLATE='.DB_COLLATE.';
+	';
 
-	$db->query($sql_create_temp_table);
+$db->query($sql_create_temp_table);
 
-	$db->query
-	("
+$db->query('
 		INSERT INTO
 			hlstats_Frags_as_res
 			(
@@ -289,9 +268,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Frags_as
 		GROUP BY
 			hlstats_Frags_as.role
-	");
-	$db->query
-	("
+	');
+$db->query("
 		SELECT
 			COUNT(*)
 		FROM
@@ -299,9 +277,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			hlstats_Events_ChangeRole.playerId = $player
 	");
-	[$numrolejoins] = $db->fetch_row();
-	$result = $db->query
-	("
+[$numrolejoins] = $db->fetch_row();
+$result         = $db->query("
 		SELECT
 			IFNULL(hlstats_Roles.name, hlstats_Events_ChangeRole.role) AS name,
 			IFNULL(hlstats_Roles.code, hlstats_Events_ChangeRole.role) AS code,
@@ -334,14 +311,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$tblRoles->sort $tblRoles->sortorder,
 			$tblRoles->sort2 $tblRoles->sortorder
 	");
-	$numitems = $db->num_rows($result);
-	if ($numitems > 0)
-	{
-		printSectionTitle('Role Selection *');
-		$tblRoles->draw($result, $numitems, 95);
-?>
+$numitems = $db->num_rows($result);
+if ($numitems > 0) {
+    printSectionTitle('Role Selection *');
+    $tblRoles->draw($result, $numitems, 95);
+    ?>
 	<br /><br />
 
 <?php
-	}
+}
 ?>

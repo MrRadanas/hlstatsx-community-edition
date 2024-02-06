@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,12 +36,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	// select the available ribbons
-	$result = $db->query("
+// select the available ribbons
+$result = $db->query("
 		SELECT
 			hlstats_Ribbons.ribbonId,
 			ribbonName,
@@ -79,77 +79,63 @@ For support and installation notes visit http://www.hlxcommunity.com
 	<div class="subblock">
 		<table class="data-table">
 <?php
-	// draw the rank info table (5 columns)
-	$i = 0;
-	$i1 = 0;
-	$cnt = -1;
- 
-	$cols = $g_options['awardribbonscols'];
-	if ($cols < 1 || $cols > 10)
-	{
-		$cols = 5;
-	}
-	$colwidth = round(100 / $cols);
- 
-	while ($r = $db->fetch_array())
-	{
-		if ($cnt != $r['awardCount'])
-		{
-			$cnt = $r['awardCount'];
-			$i1++;
-			if ($i == $cols)
-			{
-				echo '</tr>';
-			}
-			$i = 0;
-			echo "<tr class=\"head\"><td colspan=\"5\"><strong>Ribbon Class #$i1 ($cnt awards required)</strong></td></tr>";
-		}
+    // draw the rank info table (5 columns)
+    $i = 0;
+$i1    = 0;
+$cnt   = -1;
 
-		if ($i == $cols)
-		{
-			echo '</tr>';
-			$i = 0;
-		}
-		if ($i == 0)
-		{
-			echo '<tr class="bg1">';
-		}
-   
-		$link = '<a href="hlstats.php?mode=ribboninfo&amp;ribbon='.$r['ribbonId']."&amp;game=$game\">";
-		if (file_exists(IMAGE_PATH."/games/$game/ribbons/".$r['image']))
-		{
-			$image = IMAGE_PATH."/games/$game/ribbons/".$r['image'];
-		}
-		elseif (file_exists(IMAGE_PATH."/games/$realgame/ribbons/".$r['image']))
-		{
-			$image = IMAGE_PATH."/games/$realgame/ribbons/".$r['image'];
-		}
-		else
-		{
-			$image = IMAGE_PATH."/award.png";
-		}
-		$image = '<img src="'.$image.'" alt="'.$r['ribbonName'].'" />';
-		$achvd = '';
-		if ($r['achievedcount'] > 0)
-		{
-			$image = "$link$image</a>";
-			$achvd = 'Achieved by '.$r['achievedcount'].' players';
-		}
+$cols = $g_options['awardribbonscols'];
+if ($cols < 1 || $cols > 10) {
+    $cols = 5;
+}
+$colwidth = round(100 / $cols);
 
-		echo "<td style=\"text-align:center;vertical-align:top;width:$colwidth%;\">
+while ($r = $db->fetch_array()) {
+    if ($cnt != $r['awardCount']) {
+        $cnt = $r['awardCount'];
+        ++$i1;
+        if ($i == $cols) {
+            echo '</tr>';
+        }
+        $i = 0;
+        echo "<tr class=\"head\"><td colspan=\"5\"><strong>Ribbon Class #$i1 ($cnt awards required)</strong></td></tr>";
+    }
+
+    if ($i == $cols) {
+        echo '</tr>';
+        $i = 0;
+    }
+    if (0 == $i) {
+        echo '<tr class="bg1">';
+    }
+
+    $link = '<a href="hlstats.php?mode=ribboninfo&amp;ribbon='.$r['ribbonId']."&amp;game=$game\">";
+    if (file_exists(IMAGE_PATH."/games/$game/ribbons/".$r['image'])) {
+        $image = IMAGE_PATH."/games/$game/ribbons/".$r['image'];
+    } elseif (file_exists(IMAGE_PATH."/games/$realgame/ribbons/".$r['image'])) {
+        $image = IMAGE_PATH."/games/$realgame/ribbons/".$r['image'];
+    } else {
+        $image = IMAGE_PATH.'/award.png';
+    }
+    $image = '<img src="'.$image.'" alt="'.$r['ribbonName'].'" />';
+    $achvd = '';
+    if ($r['achievedcount'] > 0) {
+        $image = "$link$image</a>";
+        $achvd = 'Achieved by '.$r['achievedcount'].' players';
+    }
+
+    echo "<td style=\"text-align:center;vertical-align:top;width:$colwidth%;\">
 			<strong>".$r['ribbonName'].'</strong><br /><br /><span class="fSmall">'
-			."$achvd</span><br />$image
+        ."$achvd</span><br />$image
 			</td>";
-		$i++;
-	}
-	if ($i != 0)
-	{
-		for ($i = $i; $i < $cols; $i++)
-		{
-			echo '<td class="bg1">&nbsp;</td>';
-		}
-		echo '</tr>';
-	}
+    ++$i;
+}
+if (0 != $i) {
+    for ($i = $i; $i < $cols; ++$i) {
+        echo '<td class="bg1">&nbsp;</td>';
+    }
+    echo '</tr>';
+}
 ?>
 		</table>
 	</div>

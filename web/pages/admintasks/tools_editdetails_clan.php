@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,25 +36,25 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-	if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-	if ($auth->userdata["acclevel"] < 80) {
-        die ("Access denied!");
-	}
+if ($auth->userdata['acclevel'] < 80) {
+    exit('Access denied!');
+}
 
-    $id = -1;
-	if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-		$id = valid_request($_GET['id'], true);
-	}
+$id = -1;
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = valid_request($_GET['id'], true);
+}
 
-	$result = $db->query("SELECT `value` FROM hlstats_Options_Choices WHERE `keyname` = 'google_map_region' ORDER BY `value`");
-    while ($rowdata = $db->fetch_row($result)) {
-        $mapselect.=";".$rowdata[0]."/".ucwords(strtolower($rowdata[0]));
-    }
+$result = $db->query("SELECT `value` FROM hlstats_Options_Choices WHERE `keyname` = 'google_map_region' ORDER BY `value`");
+while ($rowdata = $db->fetch_row($result)) {
+    $mapselect .= ';'.$rowdata[0].'/'.ucwords(strtolower($rowdata[0]));
+}
 
-	$mapselect.=";";   
+$mapselect .= ';';
 ?>
 
 &nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo IMAGE_PATH; ?>/downarrow.gif" width="9" height="6" class="imageformat" alt="" /><b>&nbsp;<a href="<?php echo $g_options['scripturl']; ?>?mode=admin&amp;task=tools_editdetails">Edit Player or Clan Details</a></b><br />
@@ -62,23 +62,23 @@ For support and installation notes visit http://www.hlxcommunity.com
 <img src="<?php echo IMAGE_PATH; ?>/spacer.gif" width="1" height="8" border="0"><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="<?php echo IMAGE_PATH; ?>/downarrow.gif" width="9" height="6" class="imageformat" alt="" /><b>&nbsp;<?php echo "Edit Clan #$id"; ?></b><br /><br />
 
-<form method="post" action="<?php echo $g_options['scripturl'] . "?mode=admin&amp;task=$selTask&amp;id=$id&" . strip_tags(SID); ?>">
+<form method="post" action="<?php echo $g_options['scripturl']."?mode=admin&amp;task=$selTask&amp;id=$id&".strip_tags(SID); ?>">
 <?php
-	$proppage = new PropertyPage("hlstats_Clans", "clanId", $id, [
-		new PropertyPage_Group("Profile", [
-			new PropertyPage_Property("name", "Clan Name", "text"),
-			new PropertyPage_Property("homepage", "Homepage URL", "text"),
-			new PropertyPage_Property("mapregion", "Map Region", "select", $mapselect),
-			new PropertyPage_Property("hidden", "1 = Hide from clan list", "text"),
-		]),
-	]);
+    $proppage = new PropertyPage('hlstats_Clans', 'clanId', $id, [
+        new PropertyPage_Group('Profile', [
+            new PropertyPage_Property('name', 'Clan Name', 'text'),
+            new PropertyPage_Property('homepage', 'Homepage URL', 'text'),
+            new PropertyPage_Property('mapregion', 'Map Region', 'select', $mapselect),
+            new PropertyPage_Property('hidden', '1 = Hide from clan list', 'text'),
+        ]),
+    ]);
 
-	if (isset($_POST['name'])) {
-		$proppage->update();
-		message("success", "Profile updated successfully.");
-	}
+if (isset($_POST['name'])) {
+    $proppage->update();
+    message('success', 'Profile updated successfully.');
+}
 
-	$result = $db->query("
+$result = $db->query("
 		SELECT
 			*
 		FROM
@@ -87,25 +87,25 @@ For support and installation notes visit http://www.hlxcommunity.com
 			clanId='$id'
 	");
 
-	if ($db->num_rows() < 1) {
-        die("No clan exists with ID #$id");
-	}
-	
-	$data = $db->fetch_array($result);
-	
-	echo "<span class='fTitle'>";
-	echo $data['tag'];
-	echo "</span>";
-	
-	echo "<span class='fNormal'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-		. "<a href=\"" . $g_options['scripturl'] . "?mode=claninfo&amp;clan=$id&amp;" . strip_tags(SID) . "\">"
-		. "(View Clan Details)</a></span>";
+if ($db->num_rows() < 1) {
+    exit("No clan exists with ID #$id");
+}
+
+$data = $db->fetch_array($result);
+
+echo "<span class='fTitle'>";
+echo $data['tag'];
+echo '</span>';
+
+echo "<span class='fNormal'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+    .'<a href="'.$g_options['scripturl']."?mode=claninfo&amp;clan=$id&amp;".strip_tags(SID).'">'
+    .'(View Clan Details)</a></span>';
 ?><br /><br />
 
 <table width="60%" align="center" border="0" cellspacing="0" cellpadding="0">
 <tr>
 	<td class="fNormal"><?php
-		$proppage->draw($data);
+        $proppage->draw($data);
 ?>
 	<center><input type="submit" value="  Apply  " class="submit"></center></td>
 </tr>

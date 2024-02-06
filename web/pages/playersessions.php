@@ -4,7 +4,7 @@ HLstatsX Community Edition - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Nicholas Hastings (nshastings@gmail.com)
 http://www.hlxcommunity.com
 
-HLstatsX Community Edition is a continuation of 
+HLstatsX Community Edition is a continuation of
 ELstatsNEO - Real-time player and clan rankings and statistics
 Copyleft (L) 2008-20XX Malte Bayer (steam@neo-soft.org)
 http://ovrsized.neo-soft.org/
@@ -18,7 +18,7 @@ HLstatsX is an enhanced version of HLstats made by Simon Garner
 HLstats - Real-time player and clan rankings and statistics for Half-Life
 http://sourceforge.net/projects/hlstats/
 Copyright (C) 2001  Simon Garner
-            
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -36,14 +36,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
-    if (!defined('IN_HLSTATS')) {
-        die('Do not access this file directly.');
-    }
+if (!defined('IN_HLSTATS')) {
+    exit('Do not access this file directly.');
+}
 
-    // Player History -> Sessions & Skill change
-	$player = valid_request(intval($_GET["player"]), true) or error("No player ID specified.");
+// Player History -> Sessions & Skill change
+$player = valid_request(intval($_GET['player']), true) or error('No player ID specified.');
 
-	$db->query("
+$db->query("
 		SELECT
 			hlstats_Players.lastName,
 			hlstats_Players.game
@@ -53,24 +53,24 @@ For support and installation notes visit http://www.hlxcommunity.com
 			playerId = $player
 	");
 
-	if ($db->num_rows() != 1) {
-		error("No such player '$player'.");
-	}
+if (1 != $db->num_rows()) {
+    error("No such player '$player'.");
+}
 
-	$playerdata = $db->fetch_array();
-	$pl_name = $playerdata['lastName'];
+$playerdata = $db->fetch_array();
+$pl_name    = $playerdata['lastName'];
 
-    if (strlen($pl_name) > 10) {
-		$pl_shortname = substr($pl_name, 0, 8) . '...';
-	} else {
-		$pl_shortname = $pl_name;
-	}
+if (strlen($pl_name) > 10) {
+    $pl_shortname = substr($pl_name, 0, 8).'...';
+} else {
+    $pl_shortname = $pl_name;
+}
 
-	$pl_name = htmlspecialchars($pl_name, ENT_COMPAT);
-	$pl_shortname = htmlspecialchars($pl_shortname, ENT_COMPAT);
-	$game = $playerdata['game'];
+$pl_name      = htmlspecialchars($pl_name, ENT_COMPAT);
+$pl_shortname = htmlspecialchars($pl_shortname, ENT_COMPAT);
+$game         = $playerdata['game'];
 
-    $db->query("
+$db->query("
 		SELECT
 			hlstats_Games.name
 		FROM
@@ -79,112 +79,96 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Games.code = '$game'
 	");
 
-	if ($db->num_rows() != 1) {
-		$gamename = ucfirst($game);
-	} else {
-		[$gamename] = $db->fetch_row();
-	}
+if (1 != $db->num_rows()) {
+    $gamename = ucfirst($game);
+} else {
+    [$gamename] = $db->fetch_row();
+}
 
-	pageHeader
-	(
-	    [$gamename, 'Session History', $pl_name],
-	    [
-			$gamename => $g_options['scripturl']."?game=$game",
-			'Player Rankings' => $g_options['scripturl']."?mode=players&game=$game",
-			'Player Details' => $g_options['scripturl']."?mode=playerinfo&player=$player",
-			'Session History' => '',
-		],
-	    $playername = ""
-	);
-	flush();
-	$table = new Table
-	(
-	    [
-			new TableColumn
-			(
-			    'eventTime',
-			    'Date',
-			    'width=11'
-			),
-			new TableColumn
-			(
-			    'skill_change',
-			    'Skill Change',
-			    'width=10&align=right&skill_change=1'
-			),
-			new TableColumn
-			(
-			    'skill',
-			    'Points',
-			    'width=10&align=right'
-			),
-			new TableColumn
-			(
-			    'connection_time',
-			    'Time',
-			    'width=13&align=right&type=timestamp'
-			),
-			new TableColumn
-			(
-			    'kills',
-			    'Kills',
-			    'width=7&align=right'
-			),
-			new TableColumn
-			(
-			    'deaths',
-			    'Deaths',
-			    'width=7&align=right'
-			),
-			new TableColumn
-			(
-			    'kpd',
-			    'K:D',
-			    'width=7&align=right'
-			),
-			new TableColumn
-			(
-			    'headshots',
-			    'HS',
-			    'width=7&align=right'
-			),
-			new TableColumn
-			(
-			    'hpk',
-			    'HS:K',
-			    'width=7&align=right'
-			),
-			new TableColumn
-			(
-			    'suicides',
-			    'Suicides',
-			    'width=7&align=right'
-			),
-			new TableColumn
-			(
-			    'teamkills',
-			    'TKs',
-			    'width=7&align=right'
-			),
-			new TableColumn
-			(
-			    'kill_streak',
-			    'Kill Strk',
-			    'width=7&align=right'
-			),
-		],
-	    'eventTime',
-	    'eventTime',
-	    'skill_change',
-	    false,
-	    50,
-	    'page',
-	    'sort',
-	    'sortorder'
-	);
-	$surl = $g_options['scripturl'];
-	$result = $db->query
-	("
+pageHeader(
+    [$gamename, 'Session History', $pl_name],
+    [
+        $gamename         => $g_options['scripturl']."?game=$game",
+        'Player Rankings' => $g_options['scripturl']."?mode=players&game=$game",
+        'Player Details'  => $g_options['scripturl']."?mode=playerinfo&player=$player",
+        'Session History' => '',
+    ]
+);
+flush();
+$table = new Table(
+    [
+        new TableColumn(
+            'eventTime',
+            'Date',
+            'width=11'
+        ),
+        new TableColumn(
+            'skill_change',
+            'Skill Change',
+            'width=10&align=right&skill_change=1'
+        ),
+        new TableColumn(
+            'skill',
+            'Points',
+            'width=10&align=right'
+        ),
+        new TableColumn(
+            'connection_time',
+            'Time',
+            'width=13&align=right&type=timestamp'
+        ),
+        new TableColumn(
+            'kills',
+            'Kills',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'deaths',
+            'Deaths',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'kpd',
+            'K:D',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'headshots',
+            'HS',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'hpk',
+            'HS:K',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'suicides',
+            'Suicides',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'teamkills',
+            'TKs',
+            'width=7&align=right'
+        ),
+        new TableColumn(
+            'kill_streak',
+            'Kill Strk',
+            'width=7&align=right'
+        ),
+    ],
+    'eventTime',
+    'eventTime',
+    'skill_change',
+    false,
+    50,
+    'page',
+    'sort',
+    'sortorder'
+);
+$surl   = $g_options['scripturl'];
+$result = $db->query("
 		SELECT
 			hlstats_Players_History.eventTime,
 			hlstats_Players_History.skill_change,
@@ -211,8 +195,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$table->startitem,
 			$table->numperpage
 	");
-	$resultCount = $db->query
-	("
+$resultCount = $db->query("
 		SELECT
 			COUNT(*)
 		FROM
@@ -220,25 +203,23 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			hlstats_Players_History.playerId = $player
 	");
-	[$numitems] = $db->fetch_row($resultCount);
+[$numitems] = $db->fetch_row($resultCount);
 ?>
 
 <div class="block">
 <?php
-	printSectionTitle('Player Session History');
-	if ($numitems > 0)
-	{
-		$table->draw($result, $numitems, 95);
-	}
+    printSectionTitle('Player Session History');
+if ($numitems > 0) {
+    $table->draw($result, $numitems, 95);
+}
 ?><br /><br />
 	<div class="subblock">
 		<div style="float:left;">
 			Items above are generated from the last <?php echo $g_options['DeleteDays']; ?> days.
 		</div>
 		<div style="float:right;">
-<?php 
-	$db->query
-	("
+<?php
+    $db->query("
 		SELECT
 			hlstats_Players.lastName
 		FROM
@@ -246,9 +227,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			hlstats_Players.playerId = '$player'
 	");
-	[$lastName] = $db->fetch_row();
+[$lastName] = $db->fetch_row();
 ?>
-			Go to: <a href="<?php echo $g_options['scripturl'] . "?mode=playerinfo&amp;player=$player"; ?>"><?php echo $lastName; ?>'s Statistics</a>
+			Go to: <a href="<?php echo $g_options['scripturl']."?mode=playerinfo&amp;player=$player"; ?>"><?php echo $lastName; ?>'s Statistics</a>
 		</div>
 	</div>
 </div>
