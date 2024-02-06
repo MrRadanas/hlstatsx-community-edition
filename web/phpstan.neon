@@ -1,0 +1,16 @@
+includes:
+	- phpstan-baseline.neon
+parameters:
+  level: 8
+  paths:
+    - ./autocomplete.php
+    - ./includes
+    - ./index.php
+    - ./ingame.php
+    - ./pages
+    - ./show_graph.php
+    - ./sig.php
+    - ./status.php
+    - ./trend_graph.php
+    - ./updater
+    - ./updater_1
