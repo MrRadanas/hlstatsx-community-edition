@@ -82,7 +82,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1)
 		$gamename = ucfirst($game);
 	else
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	
 ?>
 
@@ -170,62 +170,62 @@ For support and installation notes visit http://www.hlxcommunity.com
 	flush();
 	
 	$tblMembers = new Table(
-		array(
+	    [
 			new TableColumn(
-				'lastName',
-				'Name',
-				'width=32&flag=1&link=' . urlencode('mode=statsme&amp;player=%k')
+			    'lastName',
+			    'Name',
+			    'width=32&flag=1&link=' . urlencode('mode=statsme&amp;player=%k')
 			),
 			new TableColumn(
-				'skill',
-				'Points',
-				'width=7&align=right'
+			    'skill',
+			    'Points',
+			    'width=7&align=right'
 			),
 			new TableColumn(
-				'activity',
-				'Activity',
-				'width=9&sort=no&type=bargraph'
+			    'activity',
+			    'Activity',
+			    'width=9&sort=no&type=bargraph'
 			),
 			new TableColumn(
-				'connection_time',
-				'Time',
-				'width=14&align=right&type=timestamp'
+			    'connection_time',
+			    'Time',
+			    'width=14&align=right&type=timestamp'
 			),
 			new TableColumn(
-				'kills',
-				'Kills',
-				'width=7&align=right'
+			    'kills',
+			    'Kills',
+			    'width=7&align=right'
 			),
 			new TableColumn(
-				'percent',
-				'Clan Kills',
-				'width=5&sort=no&type=bargraph'
+			    'percent',
+			    'Clan Kills',
+			    'width=5&sort=no&type=bargraph'
 			),
 			new TableColumn(
-				'percent',
-				'%',
-				'width=7&sort=no&align=right&append=' . urlencode('%')
+			    'percent',
+			    '%',
+			    'width=7&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn(
-				'deaths',
-				'Deaths',
-				'width=7&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=7&align=right'
 			),
 			new TableColumn(
-				'kpd',
-				'KPD',
-				'width=7&align=right'
+			    'kpd',
+			    'KPD',
+			    'width=7&align=right'
 			),
-		),
-		'playerId',
-		'skill',
-		'kpd',
-		true,
-		20,
-		'members_page',
-		'members_sort',
-		'members_sortorder',
-		'members'
+		],
+	    'playerId',
+	    'skill',
+	    'kpd',
+	    true,
+	    20,
+	    'members_page',
+	    'members_sort',
+	    'members_sortorder',
+	    'members'
 	);
 
 	$result = $db->query("
@@ -263,7 +263,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			AND hlstats_Players.hideranking = 0
 	");
 	
-	list($numitems) = $db->fetch_row($resultCount);
+	[$numitems] = $db->fetch_row($resultCount);
 
 	$tblMembers->draw($result, $numitems, 100);
 ?>

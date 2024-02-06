@@ -46,10 +46,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 		error("No such game '$game'.");
 	}
 
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 	$db->free_result();
 
-	pageHeader(array($gamename), array($gamename => ''));
+	pageHeader([$gamename], [$gamename => '']);
 
 	include (PAGE_PATH . '/voicecomm_serverlist.php');
 
@@ -62,7 +62,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				game='$game'
 	";
 	$result = $db->query($query);
-	list($total_players) = $db->fetch_row($result);
+	[$total_players] = $db->fetch_row($result);
 
 	$query = "
 			SELECT 
@@ -76,7 +76,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				timestamp DESC LIMIT 0,1
 	";
 	$result = $db->query($query);
-	list($total_players_24h) = $db->fetch_row($result);
+	[$total_players_24h] = $db->fetch_row($result);
 	$players_last_day = -1;
 	if ($total_players_24h > 0) {
 		$players_last_day = $total_players - $total_players_24h;
@@ -93,7 +93,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				game='$game'
 	";
 	$result = $db->query($query);
-	list($total_kills, $total_headshots, $total_servers) = $db->fetch_row($result);
+	[$total_kills, $total_headshots, $total_servers] = $db->fetch_row($result);
 
 	$query = "
 			SELECT 
@@ -107,7 +107,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				timestamp DESC LIMIT 0,1
 	";
 	$result = $db->query($query);
-	list($total_kills_24h) = $db->fetch_row($result);
+	[$total_kills_24h] = $db->fetch_row($result);
 	$db->free_result();
 
 	$kills_last_day = -1;
@@ -279,7 +279,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					<?php printserverstats($server_id); ?>
 					<div class="subblock">
 <?php
-				$range_arr = array(1=>"24h View", 2=>"Last Week", 3=>"Last Month", 4=>"Last Year");
+				$range_arr = [1=>"24h View", 2=>"Last Week", 3=>"Last Month", 4=>"Last Year"];
 				foreach($range_arr as $range_code => $range_name) {
 					print('<table class="data-table"><tr class="data-table-head">');
 					print('<td class="fSmall">&nbsp;'.$range_name.'</td></tr>');
@@ -482,7 +482,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		");
 
 		if ($db->num_rows($result) == 1)
-			list($awards_numdays) = $db->fetch_row($result);
+			[$awards_numdays] = $db->fetch_row($result);
 		else
 			$awards_numdays = 1;
 
@@ -495,7 +495,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			WHERE
 				keyname='awards_d_date'
 		");
-		list($awards_d_date, $awards_s_date) = $db->fetch_row($result);
+		[$awards_d_date, $awards_s_date] = $db->fetch_row($result);
 
 		if ($db->num_rows($resultAwards) > 0 && $awards_d_date) {
 ?>

@@ -68,45 +68,45 @@ For support and installation notes visit http://www.hlxcommunity.com
 		error("No such game '$game'.");
 	}
 	
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 	$db->free_result();
 	
 	pageHeader(
-		array($gamename, 'Ribbon Details', $act_name),
-		array(
+	    [$gamename, 'Ribbon Details', $act_name],
+	    [
 			$gamename => $g_options['scripturl']."?game=$game",
 			'Ribbons' => $g_options['scripturl']."mode=awards&game=$game&tab=ribbons",
-			'Ribbon Details' => ''
-		),
-		$act_name
+			'Ribbon Details' => '',
+		],
+	    $act_name
 	);
 
 	$table = new Table(
-		array(
+	    [
 			new TableColumn
 			(
-				'playerName',
-				'Player',
-				'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
+			    'playerName',
+			    'Player',
+			    'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 			),
 			new TableColumn
 			(
-				'numawards',
-				'Daily awards',
-				'width=10&align=right&append=' . urlencode(' times')
+			    'numawards',
+			    'Daily awards',
+			    'width=10&align=right&append=' . urlencode(' times')
 			),
 			new TableColumn
 			(
-				'awardName',
-				'',
-				'width=40&align=left'
-			)
-		),
-		'playerId',
-		'numawards',
-		'playerName',
-		true,
-		50
+			    'awardName',
+			    '',
+			    'width=40&align=left'
+			),
+		],
+	    'playerId',
+	    'numawards',
+	    'playerName',
+	    true,
+	    50
 	);
 
 	$result = $db->query("

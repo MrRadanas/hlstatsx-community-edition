@@ -43,76 +43,75 @@ For support and installation notes visit http://www.hlxcommunity.com
 	flush();
 	$tblServers = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'server',
-				'Server',
-				'width=26&align=left'
-			),
-			new TableColumn
-			(
-				'kills',
-				'Kills',
-				'width=6&align=right'
+			    'server',
+			    'Server',
+			    'width=26&align=left'
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'%',
-				'width=5&sort=no&align=right&append=' . urlencode('%')
+			    'kills',
+			    'Kills',
+			    'width=6&align=right'
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'Ratio',
-				'width=15&sort=no&type=bargraph'
+			    'kpercent',
+			    '%',
+			    'width=5&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'deaths',
-				'Deaths',
-				'width=6&align=right'
+			    'kpercent',
+			    'Ratio',
+			    'width=15&sort=no&type=bargraph'
+			),
+			new TableColumn
+			(
+			    'deaths',
+			    'Deaths',
+			    'width=6&align=right'
 			),
 			new TableColumn(
-				'kpd',
-				'K:D',
-				'width=5&align=right'
+			    'kpd',
+			    'K:D',
+			    'width=5&align=right'
 			),
 			new TableColumn(
-				'headshots',
-				'Headshots',
-				'width=6&align=right'
+			    'headshots',
+			    'Headshots',
+			    'width=6&align=right'
 			),
 			new TableColumn(
-				'hpercent',
-				'Percentage of Headshots',
-				'width=16&sort=no&type=bargraph'
+			    'hpercent',
+			    'Percentage of Headshots',
+			    'width=16&sort=no&type=bargraph'
 			),
 			new TableColumn(
-				'hpercent',
-				'%',
-				'width=5&sort=no&align=right&append=' . urlencode('%')
+			    'hpercent',
+			    '%',
+			    'width=5&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn(
-				'hpk',
-				'HS:K',
-				'width=5&align=right'
-			)
+			    'hpk',
+			    'HS:K',
+			    'width=5&align=right'
+			),
 			
-		),
-		'server',
-		'kills',
-		'kills',
-		true,
-		9999,
-		'server_page',
-		'server_sort',
-		'server_sortorder',
-		'tabmaps',
-		'desc',
-		true
+		],
+	    'server',
+	    'kills',
+	    'kills',
+	    true,
+	    9999,
+	    'server_page',
+	    'server_sort',
+	    'server_sortorder',
+	    'tabmaps',
+	    'desc',
+	    true
 	);
 
 	// leave the join on this one, we do groupings..

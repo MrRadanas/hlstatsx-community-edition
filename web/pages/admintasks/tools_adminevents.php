@@ -49,42 +49,42 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 <?php
 	$table = new Table(
-		array(
+    [
 			new TableColumn(
-				"eventTime",
-				"Date",
-				"width=20"
+			    "eventTime",
+			    "Date",
+			    "width=20"
 			),
 			new TableColumn(
-				"eventType",
-				"Type",
-				"width=10&align=center"
+			    "eventType",
+			    "Type",
+			    "width=10&align=center"
 			),
 			new TableColumn(
-				"eventDesc",
-				"Description",
-				"width=40&sort=no&append=.&embedlink=yes"
+			    "eventDesc",
+			    "Description",
+			    "width=40&sort=no&append=.&embedlink=yes"
 			),
 			new TableColumn(
-				"serverName",
-				"Server",
-				"width=20"
+			    "serverName",
+			    "Server",
+			    "width=20"
 			),
 			new TableColumn(
-				"map",
-				"Map",
-				"width=10"
-			)
-		),
-		"eventTime",
-		"eventTime",
-		"eventType",
-		false,
-		50,
-		"page",
-		"sort",
-		"sortorder"
-	);
+			    "map",
+			    "Map",
+			    "width=10"
+			),
+		],
+    "eventTime",
+    "eventTime",
+    "eventType",
+    false,
+    50,
+    "page",
+    "sort",
+    "sortorder"
+);
 	
 	$db->query("DROP TABLE IF EXISTS hlstats_AdminEventHistory");
 
@@ -182,7 +182,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		$where
 	");
 	
-	list($numitems) = $db->fetch_row($resultCount);
+	[$numitems] = $db->fetch_row($resultCount);
 ?>
 <form method="get" action="<?php echo $g_options["scripturl"]; ?>">
 <input type="hidden" name="mode" value="admin" />
@@ -202,7 +202,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	
 	$types[""] = "(All)";
 	
-	while (list($k) = $db->fetch_row($resultTypes)) {
+	while ([$k] = $db->fetch_row($resultTypes)) {
 		$types[$k] = $k;
 	}
 	

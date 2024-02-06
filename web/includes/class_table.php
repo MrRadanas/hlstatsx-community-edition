@@ -48,30 +48,40 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 class Table
 {
-	var $columns;
-	var $keycol;
-	var $sort;
-	var $sortorder;
-	var $sort2;
-	var $page;
-	var $showranking;
-	var $numperpage;
-	var $var_page;
-	var $var_sort;
-	var $var_sortorder;
-	var $sorthash;
-	var $ajax;
+	public $columns;
+	public $keycol;
+	public $sort;
+	public $sortorder;
+	public $sort2;
+	public $page;
+	public $showranking;
+	public $numperpage;
+	public $var_page;
+	public $var_sort;
+	public $var_sortorder;
+	public $sorthash;
+	public $ajax;
 
-	var $columnlist;
-	var $startitem;
+	public $columnlist;
+	public $startitem;
 
-	var $maxpagenumbers = 20;
+	public $maxpagenumbers = 20;
 
 
-	function __construct($columns, $keycol, $sort_default, $sort_default2,
-	                $showranking=false, $numperpage=50, $var_page='page',
-	                $var_sort='sort', $var_sortorder='sortorder', $sorthash='',
-	                $sort_default_order='desc', $ajax = false)
+	public function __construct(
+	    $columns,
+	    $keycol,
+	    $sort_default,
+	    $sort_default2,
+	    $showranking=false,
+	    $numperpage=50,
+	    $var_page='page',
+	    $var_sort='sort',
+	    $var_sortorder='sortorder',
+	    $sorthash='',
+	    $sort_default_order='desc',
+	    $ajax = false
+	)
 	{
 
 		global $g_options;
@@ -125,7 +135,7 @@ class Table
 		}
 	}
 	
-	function start($numitems, $width=100, $align='center')
+	public function start($numitems, $width=100, $align='center')
 	{
 		global $g_options, $game, $realgame, $db;
 		$numpages = ceil($numitems / $this->numperpage);
@@ -150,9 +160,15 @@ class Table
 			echo "<td style=\"width:$col->width%;text-align:$col->align;\" class=\"fSmall\">";
 			if ($col->sort != 'no')
 			{
-				echo getSortArrow($this->sort, $this->sortorder, $col->name,
-					$col->title, $this->var_sort, $this->var_sortorder,
-					$this->sorthash);
+				echo getSortArrow(
+				    $this->sort,
+				    $this->sortorder,
+				    $col->name,
+				    $col->title,
+				    $this->var_sort,
+				    $this->var_sortorder,
+				    $this->sorthash
+				);
 			}
 			else
 			{
@@ -173,7 +189,7 @@ class Table
 
 	}
 	
-	function draw ($result, $numitems, $width=100, $align='center')
+	public function draw ($result, $numitems, $width=100, $align='center')
 	{
 		global $g_options, $game, $realgame, $db;
 		$numpages = ceil($numitems / $this->numperpage);
@@ -199,9 +215,16 @@ class Table
 			echo "<td style=\"width:$col->width%;text-align:$col->align;\" class=\"fSmall\">";
 			if ($col->sort != 'no')
 			{
-				echo getSortArrow($this->sort, $this->sortorder, $col->name,
-					$col->title, $this->var_sort, $this->var_sortorder,
-					$this->sorthash, $this->ajax);
+				echo getSortArrow(
+				    $this->sort,
+				    $this->sortorder,
+				    $col->name,
+				    $col->title,
+				    $this->var_sort,
+				    $this->var_sortorder,
+				    $this->sorthash,
+				    $this->ajax
+				);
 			}
 			else
 			{
@@ -373,7 +396,7 @@ class Table
 
 						if ($col->embedlink == 'yes')
 							{
-								$colval = preg_replace(array('/%A%([^ %]+)%/','/%\/A%/'), array("<a href=\"$1\">", '</a>'), $colval);
+								$colval = preg_replace(['/%A%([^ %]+)%/','/%\/A%/'], ["<a href=\"$1\">", '</a>'], $colval);
 							}
 
 						$cellbody .= $colval;
@@ -474,7 +497,7 @@ class Table
 		}
 	}
 
-	function _echoPageNumber ($number, $label, $prefix='', $postfix='')
+	public function _echoPageNumber ($number, $label, $prefix='', $postfix='')
 	{
 		global $g_options;
 
@@ -498,28 +521,28 @@ class Table
 
 class TableColumn
 {
-	var $name;
-	var $title;
+	public $name;
+	public $title;
 
-	var $align = 'left';
-	var $width = 20;
-	var $icon;
-	var $mmrank;
-	var $link;
-	var $sort = 'yes';
-	var $append;
-	var $type = 'text';
-	var $embedlink = 'no';
-	var $flag;
-	var $skill_change;
-	var $heatmap;
+	public $align = 'left';
+	public $width = 20;
+	public $icon;
+	public $mmrank;
+	public $link;
+	public $sort = 'yes';
+	public $append;
+	public $type = 'text';
+	public $embedlink = 'no';
+	public $flag;
+	public $skill_change;
+	public $heatmap;
 
-	function __construct($name, $title, $attrs="", $fname=null)
+	public function __construct($name, $title, $attrs="", $fname=null)
 	{
 		$this->name = $name;
 		$this->title= $title;
 
-		$allowed_attrs = array(
+		$allowed_attrs = [
 			'align',
 			'width',
 			'icon',
@@ -531,8 +554,8 @@ class TableColumn
 			'embedlink',
 			'flag',
 			'skill_change',
-			'heatmap'
-		);
+			'heatmap',
+		];
 
 		parse_str($attrs ?? 0, $attr_vars);
 

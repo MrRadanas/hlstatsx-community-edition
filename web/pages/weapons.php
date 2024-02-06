@@ -51,12 +51,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Games.code = '$game'
 	");
 	if ($db->num_rows() < 1) error("No such game '$game'.");
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 	$db->free_result();
 	pageHeader
 	(
-		array ($gamename, 'Weapon Statistics'),
-		array ($gamename => "%s?game=$game", 'Weapon Statistics' => '')
+	    [$gamename, 'Weapon Statistics'],
+	    [$gamename => "%s?game=$game", 'Weapon Statistics' => '']
 	);
 	$result = $db->query
 	("
@@ -75,73 +75,72 @@ For support and installation notes visit http://www.hlxcommunity.com
 	}
 	$tblWeapons = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'weapon',
-				'Weapon',
-				'width=20&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&amp;weapon=%k&amp;game=$game"),
-				$fname
+			    'weapon',
+			    'Weapon',
+			    'width=20&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&amp;weapon=%k&amp;game=$game"),
+			    $fname
 			),
 			new TableColumn
 			(
-				'modifier',
-				'Modifier',
-				'width=8&align=right'
+			    'modifier',
+			    'Modifier',
+			    'width=8&align=right'
 			),
 			new TableColumn
 			(
-				'kills',
-				'Kills',
-				'width=8&align=right'
+			    'kills',
+			    'Kills',
+			    'width=8&align=right'
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'%',
-				'width=5&sort=no&align=right&append=' . urlencode('%')
+			    'kpercent',
+			    '%',
+			    'width=5&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'Ratio',
-				'width=18&sort=no&type=bargraph'
+			    'kpercent',
+			    'Ratio',
+			    'width=18&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'headshots',
-				'Headshots',
-				'width=8&align=right'
+			    'headshots',
+			    'Headshots',
+			    'width=8&align=right'
 			),
 			new TableColumn
 			(
-				'hpercent',
-				'%',
-				'width=5&sort=no&align=right&append=' . urlencode('%')
+			    'hpercent',
+			    '%',
+			    'width=5&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'hpercent',
-				'Ratio',
-				'width=18&sort=no&type=bargraph'
+			    'hpercent',
+			    'Ratio',
+			    'width=18&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'hpk',
-				'HS:K',
-				'width=5&align=right'
-			)
+			    'hpk',
+			    'HS:K',
+			    'width=5&align=right'
+			),
 			
-		),
-		'weapon',
-		'kills',
-		'weapon',
-		true,
-		9999,
-		'weap_page',
-		'weap_sort',
-		'weap_sortorder'
+		],
+	    'weapon',
+	    'kills',
+	    'weapon',
+	    true,
+	    9999,
+	    'weap_page',
+	    'weap_sort',
+	    'weap_sortorder'
 	);
 	$db->query
 	("
@@ -153,7 +152,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			hlstats_Weapons.game = '$game'
 	");
-	list($realkills, $realheadshots) = $db->fetch_row();
+	[$realkills, $realheadshots] = $db->fetch_row();
 	$result = $db->query
 	("
 		SELECT

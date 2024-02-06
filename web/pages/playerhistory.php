@@ -82,65 +82,63 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1) {
 		$gamename = ucfirst($game);
 	} else {
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}
 
 	pageHeader
 	(
-		array ($gamename, 'Event History', $pl_name),
-		array
-		(
+	    [$gamename, 'Event History', $pl_name],
+	    [
 			$gamename=>$g_options['scripturl'] . "?game=$game",
 			'Player Rankings'=>$g_options['scripturl'] . "?mode=players&game=$game",
 			'Player Details'=>$g_options['scripturl'] . "?mode=playerinfo&player=$player",
-			'Event History'=>''
-		),
-		$playername = ""
+			'Event History'=>'',
+		],
+	    $playername = ""
 	);
 	flush();
 	$table = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'eventTime',
-				'Date',
-				'width=20'
+			    'eventTime',
+			    'Date',
+			    'width=20'
 			),
 			new TableColumn
 			(
-				'eventType',
-				'Type',
-				'width=10&align=center'
+			    'eventType',
+			    'Type',
+			    'width=10&align=center'
 			),
 			new TableColumn
 			(
-				'eventDesc',
-				'Description',
-				'width=40&sort=no&append=.&embedlink=yes'
+			    'eventDesc',
+			    'Description',
+			    'width=40&sort=no&append=.&embedlink=yes'
 			),
 			new TableColumn
 			(
-				'serverName',
-				'Server',
-				'width=20'
+			    'serverName',
+			    'Server',
+			    'width=20'
 			),
 			new TableColumn
 			(
-				'map',
-				'Map',
-				'width=10'
-			)
-		),
-		'eventTime',
-		'eventTime',
-		'eventType',
-		false,
-		50,
-		'page',
-		'sort',
-		'sortorder'
+			    'map',
+			    'Map',
+			    'width=10'
+			),
+		],
+	    'eventTime',
+	    'eventTime',
+	    'eventType',
+	    false,
+	    50,
+	    'page',
+	    'sort',
+	    'sortorder'
 	);
 	$surl = $g_options['scripturl'];
 // This would be better done with a UNION query, I think, but MySQL doesn't
@@ -540,7 +538,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		FROM
 			hlstats_EventHistory
 	");
-	list($numitems) = $db->fetch_row($resultCount);
+	[$numitems] = $db->fetch_row($resultCount);
 ?>
 
 <div class="block">

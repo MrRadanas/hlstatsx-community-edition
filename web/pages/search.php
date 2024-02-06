@@ -42,15 +42,15 @@ For support and installation notes visit http://www.hlxcommunity.com
 	require(PAGE_PATH . '/search-class.php');
 	pageHeader
 	(
-		array ('Search'),
-		array ('Search' => '')
+	    ['Search'],
+	    ['Search' => '']
 	);
 
 	$sr_query = $_GET['q'];
 	$sr_type = valid_request(strval($_GET['st']), false) or 'player';
 	$sr_game = valid_request(strval((isset($_GET['game'])) ? $_GET['game'] : $game), false);
 	$search = new Search($sr_query, $sr_type, $sr_game);
-	$search->drawForm(array('mode' => 'search'));
+	$search->drawForm(['mode' => 'search']);
 
 	if ($sr_query || $sr_query == '0') {
 		$search->drawResults();

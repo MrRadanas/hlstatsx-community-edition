@@ -45,7 +45,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
 	if ($db->num_rows() < 1) error("No such game '$game'.");
 
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 	$db->free_result();
 
 	$type = valid_request($_GET['type'] ?? '');
@@ -66,8 +66,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 	}
 
 	pageHeader(
-		array($gamename, 'Awards Info'),
-		array($gamename=>"%s?game=$game", 'Awards Info'=>'')
+	    [$gamename, 'Awards Info'],
+	    [$gamename=>"%s?game=$game", 'Awards Info'=>'']
 	);
 ?>
 

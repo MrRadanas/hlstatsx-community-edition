@@ -46,7 +46,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		error("No such game '$game'.");
 	}
 
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 	$db->free_result();
 	
 	$minkills = 1;
@@ -55,146 +55,144 @@ For support and installation notes visit http://www.hlxcommunity.com
 	{
 		$table = new Table
 		(
-			array
-			(
+		    [
 				new TableColumn
 				(
-					'lastName',
-					'Player',
-					'width=30&flag=1&link=' . urlencode('mode=statsme&amp;player=%k')
+				    'lastName',
+				    'Player',
+				    'width=30&flag=1&link=' . urlencode('mode=statsme&amp;player=%k')
 				),
 				new TableColumn
 				(
-					'skill',
-					'Points',
-					'width=7&align=right&skill_change=1'
+				    'skill',
+				    'Points',
+				    'width=7&align=right&skill_change=1'
 				),
 				new TableColumn
 				(
-					'activity',
-					'Activity',
-					'width=10&sort=no&type=bargraph'
+				    'activity',
+				    'Activity',
+				    'width=10&sort=no&type=bargraph'
 				),
 				new TableColumn
 				(
-					'connection_time',
-					'Connection Time',
-					'width=10&align=right&type=timestamp'
+				    'connection_time',
+				    'Connection Time',
+				    'width=10&align=right&type=timestamp'
 				),
 				new TableColumn
 				(
-					'kills',
-					'Kills',
-					'width=7&align=right'
+				    'kills',
+				    'Kills',
+				    'width=7&align=right'
 				),
 				new TableColumn
 				(
-					'deaths',
-					'Deaths',
-					'width=7&align=right'
+				    'deaths',
+				    'Deaths',
+				    'width=7&align=right'
 				),
 				new TableColumn
 				(
-					'kpd',
-					'K:D',
-					'width=6&align=right'
+				    'kpd',
+				    'K:D',
+				    'width=6&align=right'
 				),
 				new TableColumn
 				(
-					'headshots',
-					'Headshots',
-					'width=6&align=right'
+				    'headshots',
+				    'Headshots',
+				    'width=6&align=right'
 				),
 				new TableColumn
 				(
-					'hpk',
-					'HS:K',
-					'width=6&align=right'
+				    'hpk',
+				    'HS:K',
+				    'width=6&align=right'
 				),
 				new TableColumn
 				(
-					'acc',
-					'Accuracy',
-					'width=6&align=right&append=' . urlencode('%')
-				)
-			),
-			'playerId',
-			$g_options['rankingtype'],
-			'kpd',
-			true
+				    'acc',
+				    'Accuracy',
+				    'width=6&align=right&append=' . urlencode('%')
+				),
+			],
+		    'playerId',
+		    $g_options['rankingtype'],
+		    'kpd',
+		    true
 		);
 	}
 	else
 	{
 		$table = new Table
 		(
-			array
-			(
+		    [
 				new TableColumn
 				(
-					'lastName',
-					'Player',
-					'width=30&flag=1&link=' . urlencode('mode=statsme&amp;player=%k')
+				    'lastName',
+				    'Player',
+				    'width=30&flag=1&link=' . urlencode('mode=statsme&amp;player=%k')
 				),
 				new TableColumn
 				(
-					'activity',
-					'Activity',
-					'width=10&sort=no&type=bargraph'
-					),
-				new TableColumn
-				(
-					'kills',
-					'Kills',
-					'width=7&align=right'
+				    'activity',
+				    'Activity',
+				    'width=10&sort=no&type=bargraph'
 				),
 				new TableColumn
 				(
-					'deaths',
-					'Deaths',
-					'width=7&align=right'
+				    'kills',
+				    'Kills',
+				    'width=7&align=right'
 				),
 				new TableColumn
 				(
-					'kpd',
-					'K:D',
-					'width=6&align=right'
+				    'deaths',
+				    'Deaths',
+				    'width=7&align=right'
 				),
 				new TableColumn
 				(
-					'headshots',
-					'Headshots',
-					'width=6&align=right'
+				    'kpd',
+				    'K:D',
+				    'width=6&align=right'
 				),
 				new TableColumn
 				(
-					'hpk',
-					'HS:K',
-					'width=6&align=right'
+				    'headshots',
+				    'Headshots',
+				    'width=6&align=right'
 				),
 				new TableColumn
 				(
-					'acc',
-					'Accuracy',
-					'width=6&align=right&append=' . urlencode('%')
+				    'hpk',
+				    'HS:K',
+				    'width=6&align=right'
 				),
 				new TableColumn
 				(
-					'skill',
-					'Points',
-					'width=7&align=right&skill_change=1'
+				    'acc',
+				    'Accuracy',
+				    'width=6&align=right&append=' . urlencode('%')
 				),
 				new TableColumn
 				(
-					'connection_time',
-					'Connection Time',
-					'width=10&align=right&type=timestamp'
-				)
-			),
-		'playerId',
-		$g_options['rankingtype'],
-		'kpd',
-		true
+				    'skill',
+				    'Points',
+				    'width=7&align=right&skill_change=1'
+				),
+				new TableColumn
+				(
+				    'connection_time',
+				    'Connection Time',
+				    'width=10&align=right&type=timestamp'
+				),
+			],
+		    'playerId',
+		    $g_options['rankingtype'],
+		    'kpd',
+		    true
 		);
 	}
 	
@@ -241,7 +239,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			AND kills >= $minkills
 	");
 	
-	list($numitems) = $db->fetch_row($resultCount);
+	[$numitems] = $db->fetch_row($resultCount);
 	
 	$table->draw($result, 25, 100);
 ?>

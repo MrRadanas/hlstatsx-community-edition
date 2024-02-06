@@ -68,7 +68,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		} elseif ($db->num_rows() < 1) {
 			error("No players found matching uniqueId '$uniqueid'");
 		} else {
-			list($player) = $db->fetch_row();
+			[$player] = $db->fetch_row();
 			$player = intval($player);
 		}
 	} elseif (!$player && !$uniqueid) {
@@ -130,61 +130,61 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1)
 		$gamename = ucfirst($game);
 	else
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 
 	$tblPlayerKillStats = new Table(
-		array(
+	    [
 			new TableColumn(
-				'name',
-				'Victim',
-				'width=32&flag=1&link=' . urlencode('mode=statsme&player=%k')
+			    'name',
+			    'Victim',
+			    'width=32&flag=1&link=' . urlencode('mode=statsme&player=%k')
 			),
 			new TableColumn(
-				'kills',
-				'Kills',
-				'width=8&align=right'
+			    'kills',
+			    'Kills',
+			    'width=8&align=right'
 			),
 			new TableColumn(
-				'deaths',
-				'Deaths',
-				'width=8&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=8&align=right'
 			),
 			new TableColumn(
-				'kpd',
-				'Kpd',
-				'width=12&align=right'
+			    'kpd',
+			    'Kpd',
+			    'width=12&align=right'
 			),
 			new TableColumn(
-				'headshots',
-				'Headshots',
-				'width=8&align=right'
+			    'headshots',
+			    'Headshots',
+			    'width=8&align=right'
 			),
 			new TableColumn(
-				'hpercent',
-				'Perc. Headshots',
-				'width=17&sort=no&type=bargraph'
+			    'hpercent',
+			    'Perc. Headshots',
+			    'width=17&sort=no&type=bargraph'
 			),
 			new TableColumn(
-				'hpercent',
-				'%',
-				'width=5&sort=no&align=right&append=' . urlencode('%')
+			    'hpercent',
+			    '%',
+			    'width=5&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn(
-				'hpk',
-				'Hpk',
-				'width=5&align=right'
-			)
+			    'hpk',
+			    'Hpk',
+			    'width=5&align=right'
+			),
 			
-		),
-		'victimId',
-		'kills',
-		'deaths',
-		true,
-		9999,
-		'playerkills_page',
-		'playerkills_sort',
-		'playerkills_sortorder',
-		'playerkills'
+		],
+	    'victimId',
+	    'kills',
+	    'deaths',
+	    true,
+	    9999,
+	    'playerkills_page',
+	    'playerkills_sort',
+	    'playerkills_sortorder',
+	    'playerkills'
 	);
 
 	 if(!isset($_GET['killLimit'])) {

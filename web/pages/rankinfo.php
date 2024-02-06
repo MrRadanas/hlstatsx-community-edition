@@ -64,42 +64,42 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1) {
 		error('Invalid or no game specified.');
 	} else {
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}
 		
 	pageHeader(
-		array($gamename, 'Rank Details', $act_name),
-		array(
+	    [$gamename, 'Rank Details', $act_name],
+	    [
 			$gamename => $g_options['scripturl']."?game=$game",
 			'Ranks' => $g_options['scripturl']."?mode=awards&game=$game&tab=ranks",
-			'Rank Details'=>''
-		),
-		$act_name
+			'Rank Details'=>'',
+		],
+	    $act_name
 	);
     
 	$table = new Table(
-		array(
+	    [
 			new TableColumn(
-				'playerName',
-				'Player',
-				'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k') 
+			    'playerName',
+			    'Player',
+			    'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 			),
 			new TableColumn(
-				'kills',
-				'Kills',
-				'width=25&align=right'
+			    'kills',
+			    'Kills',
+			    'width=25&align=right'
 			),
 			new TableColumn(
-				'skill',
-				'Skill',
-				'width=25&align=right'
-			)
-		),
-		'playerId',
-		'skill',
-		'playerName',
-		true,
-		50
+			    'skill',
+			    'Skill',
+			    'width=25&align=right'
+			),
+		],
+	    'playerId',
+	    'skill',
+	    'playerName',
+	    true,
+	    50
 	);
 
 	
@@ -139,7 +139,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Players.hideranking<>'1'
 	");
 
-	list($numitems) = $db->fetch_array();
+	[$numitems] = $db->fetch_array();
 
 	$resultRank = $db->query("
 		SELECT

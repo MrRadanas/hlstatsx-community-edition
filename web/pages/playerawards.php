@@ -82,20 +82,19 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1) {
 		$gamename = ucfirst($game);
 	} else {
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}
 
 	pageHeader
 	(
-		array ($gamename, 'Awards History', $pl_name),
-		array
-		(
+	    [$gamename, 'Awards History', $pl_name],
+	    [
 			$gamename=>$g_options['scripturl'] . "?game=$game",
 			'Player Rankings'=>$g_options['scripturl'] . "?mode=players&game=$game",
 			'Player Details'=>$g_options['scripturl'] . "?mode=playerinfo&player=$player",
-			'Awards History'=>''
-		),
-		$playername = ""
+			'Awards History'=>'',
+		],
+	    $playername = ""
 	);
 
 	flush();
@@ -110,38 +109,37 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	$table = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'awardTime',
-				(isset($awardId))?'Date':'Date Last Earned',
-				'width=17'
+			    'awardTime',
+			    (isset($awardId))?'Date':'Date Last Earned',
+			    'width=17'
 			),
 			new TableColumn(
-				'name',
-				'Name',
-				'width=23'
+			    'name',
+			    'Name',
+			    'width=23'
 			),
 			new TableColumn(
-				'verb',
-				'Description',
-				'width=50'.$lnktext
+			    'verb',
+			    'Description',
+			    'width=50'.$lnktext
 			),
 			new TableColumn(
-				'count',
-				$cnttext,
-				'width=10&align=right'
-			)
-		),
-		'awardId',
-		'awardTime',
-		'name',
-		false,
-		50,
-		'page',
-		'sort',
-		'sortorder'
+			    'count',
+			    $cnttext,
+			    'width=10&align=right'
+			),
+		],
+	    'awardId',
+	    'awardTime',
+	    'name',
+	    false,
+	    50,
+	    'page',
+	    'sort',
+	    'sortorder'
 	);
 	$surl = $g_options['scripturl'];
 	if (isset($awardId))
@@ -220,7 +218,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				hlstats_Players_Awards.awardId
 		");
 	}
-	list($numitems) = $db->fetch_row($resultCount);
+	[$numitems] = $db->fetch_row($resultCount);
 ?>
 
 <div class="block">
@@ -243,7 +241,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					WHERE
 						hlstats_Players.playerId = $player
 				");
-				list($lastName) = $db->fetch_row();
+				[$lastName] = $db->fetch_row();
 			?>
 			Go to: <a href="<?php echo $g_options['scripturl'] . "?mode=playerinfo&amp;player=$player"; ?>"><?php echo $lastName; ?>'s Statistics</a>
 		</div>

@@ -65,14 +65,14 @@ For support and installation notes visit http://www.hlxcommunity.com
         error("No such game '$game'.");
 	}
 
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 
 	$db->free_result();
 
 	pageHeader
 	(
-		array ($gamename, 'Server Chat Statistics'),
-		array ($gamename=>"%s?game=$game", 'Server Chat Statistics'=>'')
+	    [$gamename, 'Server Chat Statistics'],
+	    [$gamename=>"%s?game=$game", 'Server Chat Statistics'=>'']
 	);
 
 	flush();
@@ -83,7 +83,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	{
 		$result=$db->fetch_array
 		(
-			$db->query
+		    $db->query
 			("
 				SELECT
 					hlstats_Servers.name
@@ -149,8 +149,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 					");
 
 					echo '<select name="server_id"><option value="0">All Servers</option>';
-					$dates = array ();
-					$serverids = array();
+					$dates =  [];
+					$serverids = [];
 					while ($rowdata = $db->fetch_array())
 					{
 						$serverids[] = $rowdata['serverId'];
@@ -161,7 +161,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 							echo '<option value="'.$rowdata['serverId'].'">'.$rowdata['name'].'</option>';
 					}
 					echo '</select>';
-					$filter=isset($_REQUEST['filter'])?$_REQUEST['filter']:"";
+					$filter=$_REQUEST['filter']??"";
 				?>
 				Filter: <input type="text" name="filter" value="<?php echo htmlentities($filter); ?>" /> 
 				<input type="submit" value="View" class="smallsubmit" />
@@ -174,87 +174,85 @@ For support and installation notes visit http://www.hlxcommunity.com
 			if ($showserver == 0)
 			{
 				$table = new Table(
-					array
-					(
+				    [
 						new TableColumn
 						(
-							'eventTime',
-							'Date',
-							'width=16'
+						    'eventTime',
+						    'Date',
+						    'width=16'
 						),
 						new TableColumn
 						(
-							'lastName',
-							'Player',
-							'width=17&sort=no&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
+						    'lastName',
+						    'Player',
+						    'width=17&sort=no&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 						),
 						new TableColumn
 						(
-							'message',
-							'Message',
-							'width=34&sort=no&embedlink=yes'
+						    'message',
+						    'Message',
+						    'width=34&sort=no&embedlink=yes'
 						),
 						new TableColumn
 						(
-							'serverName',
-							'Server',
-							'width=23&sort=no'
+						    'serverName',
+						    'Server',
+						    'width=23&sort=no'
 						),
 						new TableColumn
 						(
-							'map',
-							'Map',
-							'width=10&sort=no'
-						)
-					),
-					'playerId',
-					'eventTime',
-					'lastName',
-					false,
-					50,
-					"page",
-					"sort",
-					"sortorder"
+						    'map',
+						    'Map',
+						    'width=10&sort=no'
+						),
+					],
+				    'playerId',
+				    'eventTime',
+				    'lastName',
+				    false,
+				    50,
+				    "page",
+				    "sort",
+				    "sortorder"
 				);
 			}
 			else
 			{
 				$table = new Table(
-					array
-					(
+				    [
 						new TableColumn
 						(
-							'eventTime',
-							'Date',
-							'width=16'
+						    'eventTime',
+						    'Date',
+						    'width=16'
 						),
 						new TableColumn
 						(
-							'lastName',
-							'Player',
-							'width=24&sort=no&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
+						    'lastName',
+						    'Player',
+						    'width=24&sort=no&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 						),
 						new TableColumn
 						(
-							'message',
-							'Message',
-							'width=44&sort=no&embedlink=yes'
+						    'message',
+						    'Message',
+						    'width=44&sort=no&embedlink=yes'
 						),
 						new TableColumn
 						(
-							'map',
-							'Map',
-							'width=16&sort=no'
-						)
-					),
-					'playerId',
-					'eventTime',
-					'lastName',
-					false,
-					50,
-					"page",
-					"sort",
-					"sortorder"
+						    'map',
+						    'Map',
+						    'width=16&sort=no'
+						),
+					],
+				    'playerId',
+				    'eventTime',
+				    'lastName',
+				    false,
+				    50,
+				    "page",
+				    "sort",
+				    "sortorder"
 				);
 			}
 			$whereclause2='';
@@ -322,7 +320,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			if ($db->num_rows() < 1) $numitems = 0;
 			else 
 			{
-				list($numitems) = $db->fetch_row();
+				[$numitems] = $db->fetch_row();
 			}
 			$db->free_result();	
 

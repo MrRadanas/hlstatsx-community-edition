@@ -83,67 +83,65 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1) {
 		$gamename = ucfirst($game);
 	} else {
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}
 
 	pageHeader
 	(
-		array ($gamename, 'Chat History', $pl_name),
-		array
-		(
+	    [$gamename, 'Chat History', $pl_name],
+	    [
 			$gamename=>$g_options['scripturl'] . "?game=$game",
 			'Player Rankings'=>$g_options['scripturl'] . "?mode=players&game=$game",
 			'Player Details'=>$g_options['scripturl'] . "?mode=playerinfo&player=$player",
-			'Chat History'=>''
-		),
-		$playername = ""
+			'Chat History'=>'',
+		],
+	    $playername = ""
 	);
 
 	flush();
 
 	$table = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'eventTime',
-				'Date',
-				'width=16'
+			    'eventTime',
+			    'Date',
+			    'width=16'
 			),
 
 			new TableColumn
 			(
-				'message',
-				'Message',
-				'width=44&sort=no&append=.&embedlink=yes'
+			    'message',
+			    'Message',
+			    'width=44&sort=no&append=.&embedlink=yes'
 			),
 			new TableColumn
 			(
-				'serverName',
-				'Server',
-				'width=24'
+			    'serverName',
+			    'Server',
+			    'width=24'
 			),
 			new TableColumn
 			(
-				'map',
-				'Map',
-				'width=16'
-			)
-		),
-		'eventTime',
-		'eventTime',
-		'serverName',
-		false,
-		50,
-		'page',
-		'sort',
-		'sortorder'
+			    'map',
+			    'Map',
+			    'width=16'
+			),
+		],
+	    'eventTime',
+	    'eventTime',
+	    'serverName',
+	    false,
+	    50,
+	    'page',
+	    'sort',
+	    'sortorder'
 	);
 	$surl = $g_options['scripturl'];
 	
 	$whereclause="hlstats_Events_Chat.playerId = $player ";
-	$filter=isset($_REQUEST['filter'])?$_REQUEST['filter']:"";
+	$filter=$_REQUEST['filter']??"";
 	if(!empty($filter))
 	{
 				$whereclause.="AND MATCH (hlstats_Events_Chat.message) AGAINST ('" . $db->escape($filter) . "' in BOOLEAN MODE)";
@@ -186,7 +184,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$whereclause
 	");
 			
-	list($numitems) = $db->fetch_row($resultCount);
+	[$numitems] = $db->fetch_row($resultCount);
 	
 ?>
 <div class="block">

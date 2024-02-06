@@ -55,90 +55,90 @@ For support and installation notes visit http://www.hlxcommunity.com
         error("No such game '$game'.");
 	}
 
-    list($gamename) = $db->fetch_row();
+    [$gamename] = $db->fetch_row();
 
     $db->free_result();
 
 	if (isset($_GET['minkills'])) {
-		$minkills = valid_request(intval($_GET['minkills']),true);
+		$minkills = valid_request(intval($_GET['minkills']), true);
 	} else {
 		$minkills = 0;
 	}
 
 	pageHeader
 	(
-		array ($gamename, 'Cheaters &amp; Banned Players'),
-		array ($gamename=>"%s?game=$game", 'Cheaters &amp; Banned Players'=>'')
+	    [$gamename, 'Cheaters &amp; Banned Players'],
+	    [$gamename=>"%s?game=$game", 'Cheaters &amp; Banned Players'=>'']
 	);
 
 	$table = new Table
 	(
-		array(
+	    [
 			new TableColumn
 			(
-				'lastName',
-				'Player',
-				'width=26&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
+			    'lastName',
+			    'Player',
+			    'width=26&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 			),
 			new TableColumn
 			(
-				'ban_date',
-				'Ban Date',
-				'width=15&align=right'
+			    'ban_date',
+			    'Ban Date',
+			    'width=15&align=right'
 			),
 			new TableColumn
 			(
-				'skill',
-				'Points',
-				'width=6&align=right'
+			    'skill',
+			    'Points',
+			    'width=6&align=right'
 			),
 			new TableColumn
 			(
-				'activity',
-				'Activity',
-				'width=10&sort=no&type=bargraph'
+			    'activity',
+			    'Activity',
+			    'width=10&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'kills',
-				'Kills',
-				'width=5&align=right'
+			    'kills',
+			    'Kills',
+			    'width=5&align=right'
 			),
 			new TableColumn
 			(
-				'deaths',
-				'Deaths',
-				'width=5&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=5&align=right'
 			),
 			new TableColumn
 			(
-				'headshots',
-				'Headshots',
-				'width=7&align=right'
+			    'headshots',
+			    'Headshots',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'kpd',
-				'K:D',
-				'width=10&align=right'
+			    'kpd',
+			    'K:D',
+			    'width=10&align=right'
 			),
 			new TableColumn
 			(
-				'hpk',
-				'HS:K',
-				'width=5&align=right'
+			    'hpk',
+			    'HS:K',
+			    'width=5&align=right'
 			),
 			new TableColumn
 			(
-				'acc',
-				'Accuracy',
-				'width=6&align=right&append=' . urlencode('%')
-			)
-		),
-		'playerId',
-		'last_event',
-		'skill',
-		true
+			    'acc',
+			    'Accuracy',
+			    'width=6&align=right&append=' . urlencode('%')
+			),
+		],
+	    'playerId',
+	    'last_event',
+	    'skill',
+	    true
 	);
 
 	$day_interval = 28;
@@ -155,7 +155,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			AND hlstats_Players.kills >= $minkills
 	");
 
-	list($numitems) = $db->fetch_row($resultCount);
+	[$numitems] = $db->fetch_row($resultCount);
 
 	$result = $db->query
 	("

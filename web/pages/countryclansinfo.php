@@ -90,17 +90,17 @@ For support and installation notes visit http://www.hlxcommunity.com
 	}
 	else
 	{
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}	
 	
 	pageHeader(
-		array($gamename, 'Country Details', $cl_full),
-		array(
+	    [$gamename, 'Country Details', $cl_full],
+	    [
 			$gamename=>$g_options['scripturl'] . "?game=$game",
 			'Country Rankings'=>$g_options['scripturl'] . "?mode=countryclans&game=$game",
-			'Country Details'=>''
-		),
-		$clandata['name']
+			'Country Details'=>'',
+		],
+	    $clandata['name']
 	);
 ?>
 
@@ -229,67 +229,67 @@ For support and installation notes visit http://www.hlxcommunity.com
 	flush();
 	
 	$tblMembers = new Table(
-		array(
+	    [
 			new TableColumn(
-				'lastName',
-				'Name',
-				'width=28&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
+			    'lastName',
+			    'Name',
+			    'width=28&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 			),
                         new TableColumn(
-                                'mmrank',
-                                'Rank',
-                                'width=4&type=elorank'
+                            'mmrank',
+                            'Rank',
+                            'width=4&type=elorank'
                         ),
 			new TableColumn(
-				'skill',
-				'Points',
-				'width=6&align=right'
+			    'skill',
+			    'Points',
+			    'width=6&align=right'
 			),
 			new TableColumn(
-				'activity',
-				'Activity',
-				'width=10&sort=no&type=bargraph'
+			    'activity',
+			    'Activity',
+			    'width=10&sort=no&type=bargraph'
 			),
 			new TableColumn(
-				'connection_time',
-				'Time',
-				'width=13&align=right&type=timestamp'
+			    'connection_time',
+			    'Time',
+			    'width=13&align=right&type=timestamp'
 			),
 			new TableColumn(
-				'kills',
-				'Kills',
-				'width=6&align=right'
+			    'kills',
+			    'Kills',
+			    'width=6&align=right'
 			),
 			new TableColumn(
-				'percent',
-				'Clan Kills',
-				'width=10&sort=no&type=bargraph'
+			    'percent',
+			    'Clan Kills',
+			    'width=10&sort=no&type=bargraph'
 			),
 			new TableColumn(
-				'percent',
-				'%',
-				'width=6&sort=no&align=right&append=' . urlencode('%')
+			    'percent',
+			    '%',
+			    'width=6&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn(
-				'deaths',
-				'Deaths',
-				'width=6&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=6&align=right'
 			),
 			new TableColumn(
-				'kpd',
-				'Kpd',
-				'width=6&align=right'
+			    'kpd',
+			    'Kpd',
+			    'width=6&align=right'
 			),
-		),
-		'playerId',
-		'skill',
-		'kpd',
-		true,
-		20,
-		'members_page',
-		'members_sort',
-		'members_sortorder',
-		'members'
+		],
+	    'playerId',
+	    'skill',
+	    'kpd',
+	    true,
+	    20,
+	    'members_page',
+	    'members_sort',
+	    'members_sortorder',
+	    'members'
 	);
 
 	$result = $db->query("

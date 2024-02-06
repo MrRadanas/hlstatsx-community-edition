@@ -54,7 +54,7 @@ function printserverstats($server_id)
 				serverId='$server_id'
       ";
 	$result = $db->query($query);
-	list($total_kills, $total_headshots) = $db->fetch_row($result);
+	[$total_kills, $total_headshots] = $db->fetch_row($result);
     $query= "
             SELECT
                 serverId,
@@ -89,7 +89,7 @@ function printserverstats($server_id)
                 serverId='$server_id'
         ";
 	$result = $db->query($query);
-	$servers   = array();
+	$servers   = [];
 	$servers[] = $db->fetch_array($result);
 ?>
 
@@ -182,8 +182,8 @@ function printserverstats($server_id)
 				playerlist_index
 			LIMIT 0 , 30
 			");
-		$teamdata = array();
-		$playerdata = array();
+		$teamdata = [];
+		$playerdata = [];
 		$teamno = 0;
 		while ($thisteam = $db->fetch_array($statsdata))
 		{

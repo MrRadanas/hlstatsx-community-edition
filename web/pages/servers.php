@@ -40,10 +40,10 @@ For support and installation notes visit http://www.hlxcommunity.com
     $db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
     if ($db->num_rows() < 1) error("No such game '$game'.");
     
-    list($gamename) = $db->fetch_row();
+    [$gamename] = $db->fetch_row();
     $db->free_result();
 
-    pageHeader(array($gamename), array($gamename => ''));
+    pageHeader([$gamename], [$gamename => '']);
     
 ?>
 
@@ -72,7 +72,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	";
 
 	$result = $db->query($query);
-	list($total_kills, $total_headshots) = $db->fetch_row($result);
+	[$total_kills, $total_headshots] = $db->fetch_row($result);
         
 	$query= "
         SELECT
@@ -109,7 +109,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	";
 
 	$db->query($query);
-	$servers   = array();
+	$servers   = [];
 	$servers[] = $db->fetch_array();
         
 ?>

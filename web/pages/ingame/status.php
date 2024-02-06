@@ -57,7 +57,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	";
 
 	$result = $db->query($query);
-	list($total_players) = $db->fetch_row($result);
+	[$total_players] = $db->fetch_row($result);
 
     $query= "
 			SELECT
@@ -71,7 +71,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	";
 
 	$result = $db->query($query);
-	list($total_kills, $total_headshots, $total_servers) = $db->fetch_row($result);
+	[$total_kills, $total_headshots, $total_servers] = $db->fetch_row($result);
 
     $query= "
 			SELECT
@@ -99,7 +99,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				addr ASC
 		";
 		$db->query($query);
-		$servers = array();
+		$servers = [];
 
 		while ($rowdata = $db->fetch_array()) {
 			$servers[] = $rowdata;

@@ -53,16 +53,16 @@ function StrDecode( &$src )
 
 class CVentriloClient
 {
-	var	$m_uid;			// User ID.
-	var	$m_admin;		// Admin flag.
-	var $m_phan;		// Phantom flag.
-	var $m_cid;			// Channel ID.
-	var $m_ping;		// Ping.
-	var	$m_sec;			// Connect time in seconds.
-	var	$m_name;		// Login name.
-	var	$m_comm;		// Comment.
+	public $m_uid;			// User ID.
+	public $m_admin;		// Admin flag.
+	public $m_phan;		// Phantom flag.
+	public $m_cid;			// Channel ID.
+	public $m_ping;		// Ping.
+	public $m_sec;			// Connect time in seconds.
+	public $m_name;		// Login name.
+	public $m_comm;		// Comment.
 	
-	function Parse( $str )
+	public function Parse( $str )
 	{
 		$ary = explode( ",", $str );
 		
@@ -123,14 +123,14 @@ class CVentriloClient
 
 class CVentriloChannel
 {
-	var	$m_cid;		// Channel ID.
-	var	$m_pid;		// Parent channel ID.
-	var	$m_prot;	// Password protected flag.
-	var	$m_auth;	// Authorication protected flag.
-	var	$m_name;	// Channel name.
-	var	$m_comm;	// Channel comment.
+	public $m_cid;		// Channel ID.
+	public $m_pid;		// Parent channel ID.
+	public $m_prot;	// Password protected flag.
+	public $m_auth;	// Authorication protected flag.
+	public $m_name;	// Channel name.
+	public $m_comm;	// Channel comment.
 	
-	function Parse( $str )
+	public function Parse( $str )
 	{
 		$ary = explode( ",", $str );
 		
@@ -175,35 +175,35 @@ class CVentriloStatus
 {
 	// These need to be filled in before issueing the request.
 	
-	var	$m_cmdcode;		// Specific status request code. 1=General, 2=Detail.
-	var	$m_cmdhost;		// Hostname or IP address to perform status of.
-	var	$m_cmdport;		// Port number of server to status.
+	public $m_cmdcode;		// Specific status request code. 1=General, 2=Detail.
+	public $m_cmdhost;		// Hostname or IP address to perform status of.
+	public $m_cmdport;		// Port number of server to status.
 	
 	// These are the result variables that are filled in when the request is performed.
 	
-	var	$m_error;		// If the ERROR: keyword is found then this is the reason following it.
+	public $m_error;		// If the ERROR: keyword is found then this is the reason following it.
 	
-	var	$m_name;				// Server name.
-	var	$m_phonetic;			// Phonetic spelling of server name.
-	var	$m_comment;				// Server comment.
-	var	$m_maxclients;			// Maximum number of clients.
-	var	$m_voicecodec_code;		// Voice codec code.
-	var $m_voicecodec_desc;		// Voice codec description.
-	var	$m_voiceformat_code;	// Voice format code.
-	var	$m_voiceformat_desc;	// Voice format description.
-	var	$m_uptime;				// Server uptime in seconds.
-	var	$m_platform;			// Platform description.
-	var	$m_version;				// Version string.
+	public $m_name;				// Server name.
+	public $m_phonetic;			// Phonetic spelling of server name.
+	public $m_comment;				// Server comment.
+	public $m_maxclients;			// Maximum number of clients.
+	public $m_voicecodec_code;		// Voice codec code.
+	public $m_voicecodec_desc;		// Voice codec description.
+	public $m_voiceformat_code;	// Voice format code.
+	public $m_voiceformat_desc;	// Voice format description.
+	public $m_uptime;				// Server uptime in seconds.
+	public $m_platform;			// Platform description.
+	public $m_version;				// Version string.
 	
-	var	$m_channelcount;		// Number of channels as specified by the server.
-	var	$m_channelfields;		// Channel field names.
-	var	$m_channellist;			// Array of CVentriloChannel's.
+	public $m_channelcount;		// Number of channels as specified by the server.
+	public $m_channelfields;		// Channel field names.
+	public $m_channellist;			// Array of CVentriloChannel's.
 	
-	var	$m_clientcount;			// Number of clients as specified by the server.
-	var	$m_clientfields;		// Client field names.
-	var $m_clientlist;			// Array of CVentriloClient's.
+	public $m_clientcount;			// Number of clients as specified by the server.
+	public $m_clientfields;		// Client field names.
+	public $m_clientlist;			// Array of CVentriloClient's.
 	
-	function Parse( $str )
+	public function Parse( $str )
 	{
 		// Remove trailing newline.
 		
@@ -315,7 +315,7 @@ class CVentriloStatus
 		return 1;
 	}
 	
-	function ChannelFind( $cid )
+	public function ChannelFind( $cid )
 	{
 		for ( $i = 0; $i < count( $this->m_channellist ); $i++ )
 			if ( $this->m_channellist[ $i ]->m_cid == $cid )
@@ -324,7 +324,7 @@ class CVentriloStatus
 		return NULL;
 	}
 	
-	function ChannelPathName( $idx )
+	public function ChannelPathName( $idx )
 	{
 		$chan = $this->m_channellist[ $idx ];
 		$pathname = $chan->m_name;
@@ -341,7 +341,7 @@ class CVentriloStatus
 		return( $pathname );
 	}
 	
-	function Request()
+	public function Request()
 	{
 		$ventserv = new Vent;
 		$ventserv->setTimeout( 100000 );		// 100 ms timeout
@@ -399,7 +399,7 @@ define( "VENT_MAXPACKETNO", 32 );
 
 function &getHeadEncodeRef()
 {
-	static $ventrilo_udp_encdata_head = array(
+	static $ventrilo_udp_encdata_head = [
 		0x80, 0xe5, 0x0e, 0x38, 0xba, 0x63, 0x4c, 0x99, 0x88, 0x63, 0x4c, 0xd6, 0x54, 0xb8, 0x65, 0x7e,
 		0xbf, 0x8a, 0xf0, 0x17, 0x8a, 0xaa, 0x4d, 0x0f, 0xb7, 0x23, 0x27, 0xf6, 0xeb, 0x12, 0xf8, 0xea,
 		0x17, 0xb7, 0xcf, 0x52, 0x57, 0xcb, 0x51, 0xcf, 0x1b, 0x14, 0xfd, 0x6f, 0x84, 0x38, 0xb5, 0x24,
@@ -415,15 +415,15 @@ function &getHeadEncodeRef()
 		0x44, 0xea, 0x04, 0x40, 0xe0, 0x33, 0x11, 0xa3, 0x5b, 0x1e, 0x82, 0xff, 0x7a, 0x69, 0xe9, 0x2f,
 		0xfb, 0xea, 0x9a, 0xc6, 0x7b, 0xdb, 0xb1, 0xff, 0x97, 0x76, 0x56, 0xf3, 0x52, 0xc2, 0x3f, 0x0f,
 		0xb6, 0xac, 0x77, 0xc4, 0xbf, 0x59, 0x5e, 0x80, 0x74, 0xbb, 0xf2, 0xde, 0x57, 0x62, 0x4c, 0x1a,
-		0xff, 0x95, 0x6d, 0xc7, 0x04, 0xa2, 0x3b, 0xc4, 0x1b, 0x72, 0xc7, 0x6c, 0x82, 0x60, 0xd1, 0x0d 
-	);
+		0xff, 0x95, 0x6d, 0xc7, 0x04, 0xa2, 0x3b, 0xc4, 0x1b, 0x72, 0xc7, 0x6c, 0x82, 0x60, 0xd1, 0x0d, 
+	];
 
 	return $ventrilo_udp_encdata_head;
 }
 
 function &getDataEncodeRef()
 {
-	static $ventrilo_udp_encdata_data = array(
+	static $ventrilo_udp_encdata_data = [
 		0x82, 0x8b, 0x7f, 0x68, 0x90, 0xe0, 0x44, 0x09, 0x19, 0x3b, 0x8e, 0x5f, 0xc2, 0x82, 0x38, 0x23,
 		0x6d, 0xdb, 0x62, 0x49, 0x52, 0x6e, 0x21, 0xdf, 0x51, 0x6c, 0x76, 0x37, 0x86, 0x50, 0x7d, 0x48,
 		0x1f, 0x65, 0xe7, 0x52, 0x6a, 0x88, 0xaa, 0xc1, 0x32, 0x2f, 0xf7, 0x54, 0x4c, 0xaa, 0x6d, 0x7e,
@@ -439,15 +439,15 @@ function &getDataEncodeRef()
 		0xb4, 0xce, 0x33, 0xdb, 0x89, 0xfe, 0xd8, 0x8e, 0xcd, 0x58, 0x92, 0x41, 0x50, 0x40, 0xcb, 0x08,
 		0xe1, 0x15, 0xee, 0xf4, 0x64, 0xfe, 0x1c, 0xee, 0x25, 0xe7, 0x21, 0xe6, 0x6c, 0xc6, 0xa6, 0x2e,
 		0x52, 0x23, 0xa7, 0x20, 0xd2, 0xd7, 0x28, 0x07, 0x23, 0x14, 0x24, 0x3d, 0x45, 0xa5, 0xc7, 0x90,
-		0xdb, 0x77, 0xdd, 0xea, 0x38, 0x59, 0x89, 0x32, 0xbc, 0x00, 0x3a, 0x6d, 0x61, 0x4e, 0xdb, 0x29
-	);
+		0xdb, 0x77, 0xdd, 0xea, 0x38, 0x59, 0x89, 0x32, 0xbc, 0x00, 0x3a, 0x6d, 0x61, 0x4e, 0xdb, 0x29,
+	];
 
 	return $ventrilo_udp_encdata_data;
 }
 
 function &getCRCref()
 {
-	static $ventrilo_crc_table = array(
+	static $ventrilo_crc_table = [
 		0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50a5, 0x60c6, 0x70e7,
 		0x8108, 0x9129, 0xa14a, 0xb16b, 0xc18c, 0xd1ad, 0xe1ce, 0xf1ef,
 		0x1231, 0x0210, 0x3273, 0x2252, 0x52b5, 0x4294, 0x72f7, 0x62d6,
@@ -479,8 +479,8 @@ function &getCRCref()
 		0xfd2e, 0xed0f, 0xdd6c, 0xcd4d, 0xbdaa, 0xad8b, 0x9de8, 0x8dc9,
 		0x7c26, 0x6c07, 0x5c64, 0x4c45, 0x3ca2, 0x2c83, 0x1ce0, 0x0cc1,
 		0xef1f, 0xff3e, 0xcf5d, 0xdf7c, 0xaf9b, 0xbfba, 0x8fd9, 0x9ff8,
-		0x6e17, 0x7e36, 0x4e55, 0x5e74, 0x2e93, 0x3eb2, 0x0ed1, 0x1ef0
-	);
+		0x6e17, 0x7e36, 0x4e55, 0x5e74, 0x2e93, 0x3eb2, 0x0ed1, 0x1ef0,
+	];
 
 	return $ventrilo_crc_table;
 }
@@ -527,26 +527,26 @@ function smallCast( $val, $bits )
  */
 class Vent
 {
-	var $clock;			// u_short of the epoch time for the last request.
-	var $timeout;			// timeout for socket read in *microseconds* ( 1,000,000 microsec = 1 sec )
-	var $packets = array();	// hold all the decoded response packets, in correct order
-	var $response;			// all the decoded data
+	public $clock;			// u_short of the epoch time for the last request.
+	public $timeout;			// timeout for socket read in *microseconds* ( 1,000,000 microsec = 1 sec )
+	public $packets = [];	// hold all the decoded response packets, in correct order
+	public $response;			// all the decoded data
 
-	function getClock()			{ return $this->clock; }
-	function getTimeout()			{ return $this->timeout; }
-	function setTimeout( $microsecs )	{ $this->timeout = $microsecs; }
-	function &getPackets()		{ return $this->packets; } 		// by ref
-	function getResponse()		{ return $this->response; }
+	public function getClock()			{ return $this->clock; }
+	public function getTimeout()			{ return $this->timeout; }
+	public function setTimeout( $microsecs )	{ $this->timeout = $microsecs; }
+	public function &getPackets()		{ return $this->packets; } 		// by ref
+	public function getResponse()		{ return $this->response; }
 
 	/* makeRequest: send off a request to the vent server, return true/false. I'm not checking
 	*	for valid IP or hostname - someone else can add this stuff.
 	*	Note: The password field is no longer required for 2.3 or higher servers. Even if a server
 	*	  is password protected, it will return status info.
 	*/
-	function makeRequest( $cmd, $ip, $port, $pass = "" )
+	public function makeRequest( $cmd, $ip, $port, $pass = "" )
 	{
 		$this->clock = smallCast( time(), 16 );		// reset the clock for each request
-		$this->packets = array();					// start fresh
+		$this->packets = [];					// start fresh
 		$this->response = '';
 	
 		$data = pack( "a16", $pass );				// the only data for a request is a password, 16 bytes.
@@ -623,7 +623,7 @@ class Vent
 
 	/* getCRC: find the CRC for a data argument.
 	*/
-	function getCRC( &$data )
+	public function getCRC( &$data )
 	{
 		$crc = 0;
 		$dtoks = unpack( "c*", $data );		// Note: unpack starts output array index at 1, NOT 0.
@@ -639,7 +639,7 @@ class Vent
 
   /* constructor: (need to change method name for PHP5)
    */
-	function __construct()
+	public function __construct()
 	{
 		$this->timeout = 500000;		// default to 0.5 second timeout
 	}
@@ -653,37 +653,37 @@ class Vent
  */
 class VentPacket
 {
-	var $rawdata;		// hold raw, unencoded data portion of packet
-	var $data;		// hold encoded data
+	public $rawdata;		// hold raw, unencoded data portion of packet
+	public $data;		// hold encoded data
 
-	var $head_items;	// an array, with references to each item in the header, in proper order.
-	var $header;		// encoded header string
+	public $head_items;	// an array, with references to each item in the header, in proper order.
+	public $header;		// encoded header string
 
-	var $packet;		// hold full encoded packet (header + data)
+	public $packet;		// hold full encoded packet (header + data)
 
 	/* 10 vars for the packet header. all 2 byte unsigned shorts (20 byte header)
 	 * The order is important for packing / unpacking.
 	 */
-	var $headkey;		// key used to encode the header part
-	var $zero;			// always 0!
-	var $cmd;			// 1, 2, or 7 are valid command requests
-	var $id;			// epoch time cast into an unsigned short
-	var $totlen;		// total data length, across all packets in this request / result
-	var $len;			// data length in this packet
-	var $totpck;		// total packets in this request / result
-	var $pck;			// number of this packet
-	var $datakey;		// key used to encode the data part
-	var $crc;			// checksum
+	public $headkey;		// key used to encode the header part
+	public $zero;			// always 0!
+	public $cmd;			// 1, 2, or 7 are valid command requests
+	public $id;			// epoch time cast into an unsigned short
+	public $totlen;		// total data length, across all packets in this request / result
+	public $len;			// data length in this packet
+	public $totpck;		// total packets in this request / result
+	public $pck;			// number of this packet
+	public $datakey;		// key used to encode the data part
+	public $crc;			// checksum
 
 	/* mapHeader: Easy way to keep the correct order. We can use the array for loops when byte
 	 *	order is important, and still access each element by name. Using a straight hash would
 	 *	have lost the ordering.
 	 */
-	function mapHeader()
+	public function mapHeader()
 	{
-		$this->head_items = array( & $this->headkey, 	& $this->zero,	& $this->cmd,	& $this->id,
+		$this->head_items = [ & $this->headkey, 	& $this->zero,	& $this->cmd,	& $this->id,
 			& $this->totlen, 	& $this->len,	& $this->totpck,	& $this->pck,
-			& $this->datakey,	& $this->crc );
+			& $this->datakey,	& $this->crc ];
 	}
 
 }
@@ -696,7 +696,7 @@ class VentRequestPacket extends VentPacket
 	/* createKeys: keys are used to encode header and data parts. a1 and a2 are the two cyphers
 	 *	derived from the full key.
 	 */
-	function createKeys( &$key, &$a1, &$a2, $is_head = false )
+	public function createKeys( &$key, &$a1, &$a2, $is_head = false )
 	{
 		$rndupk = unpack( "vx", pack( "S", mt_rand( 1, 65536 )));	// need this in little endian
 		$rnd = $rndupk['x'];
@@ -718,7 +718,7 @@ class VentRequestPacket extends VentPacket
 	 *		make sure all the header info is here, and we've got encoded data of
 	 *		the correct length...
 	 */
-	function encodeHeader()
+	public function encodeHeader()
 	{
 		$this->createKeys( $key, $a1, $a2, true );
 		$table = getHeadEncodeRef();
@@ -752,7 +752,7 @@ class VentRequestPacket extends VentPacket
 	/* encodeData: The data has to be encoded first because the datakey is part of the
 	 *		header, and it needs to encoded along with the rest of the header.
 	 */
-	function encodeData()
+	public function encodeData()
 	{
 		$this->createKeys( $key, $a1, $a2 );
 
@@ -773,7 +773,7 @@ class VentRequestPacket extends VentPacket
 
 	/* Constructor (Need to change to __Constructor() for PHP5?)
 	 */
-	function __construct( $cmd, $id, $pass )
+	public function __construct( $cmd, $id, $pass )
 	{
 		$this->mapHeader();							// set up the references
 		$this->rawdata = pack( "a16", $pass );			// the only thing in the data part.
@@ -801,7 +801,7 @@ class VentResponsePacket extends VentPacket
 	/* decodeHeader: run through the header portion of the packet, get the key, decode,
 	 *	and perform some sanity checks.
 	 */
-	function decodeHeader()
+	public function decodeHeader()
 	{
 		$table = getHeadEncodeRef();
 
@@ -853,7 +853,7 @@ class VentResponsePacket extends VentPacket
 	/* decodeData: use the datakey to find the cyphers and decode the data portion of the
 		packet. Straightforward.
 	*/
-	function decodeData()
+	public function decodeData()
 	{
 		$table = getDataEncodeRef();
 
@@ -878,7 +878,7 @@ class VentResponsePacket extends VentPacket
 
 	/* constructor: change for PHP5.
 	*/
-	function __construct( $packet )
+	public function __construct( $packet )
 	{
 		$plen = strlen( $packet );
 

@@ -65,12 +65,12 @@ function check_writable() {
 	return true; 
 }
 
-function getTableFields($table,$auto_increment) {
+function getTableFields($table, $auto_increment) {
    // get a field array of specified table
    global $db;
 
    $db->query("SHOW COLUMNS FROM $table;");
-   $res = array();
+   $res = [];
    while ($r=$db->fetch_array())
    {  
       if ((!$auto_increment) && ($r['Extra']=='auto_increment'))
@@ -79,13 +79,13 @@ function getTableFields($table,$auto_increment) {
       }
       else
       {  
-         array_push($res,$r['Field']);
+         array_push($res, $r['Field']);
       }
    }
    return $res;
 }
 
-function copySettings($table,$game1,$game2) {
+function copySettings($table, $game1, $game2) {
 	global $db;
 	
 	$db->query("SELECT game FROM $table WHERE game='$game2' LIMIT 1;");
@@ -99,8 +99,8 @@ function copySettings($table,$game1,$game2) {
 		else {
 			$ret = $r['cnt'].' entries copied!';
 			$fields = '';
-			$ignoreFields = array('game','id','d_winner_id','d_winner_count','g_winner_id','g_winner_count','count','picked','kills','deaths','headshots');
-			foreach (getTableFields($table,0) AS $field) {
+			$ignoreFields = ['game','id','d_winner_id','d_winner_count','g_winner_id','g_winner_count','count','picked','kills','deaths','headshots'];
+			foreach (getTableFields($table, 0) AS $field) {
 				if (!in_array($field, $ignoreFields)) {
 					if ($fields!='')
 						$fields .= ', ';
@@ -119,7 +119,7 @@ function mkdir_recursive($pathname) {
 	return is_dir($pathname) || @mkdir($pathname);
 }
 
-function copyFile($source,$dest) {
+function copyFile($source, $dest) {
 	if ($source != '') {
 		$source = IMAGE_PATH."/games/$source";
 		$dest = IMAGE_PATH."/games/$dest";
@@ -128,7 +128,7 @@ function copyFile($source,$dest) {
 			$ret = "File not found $source (dest: $dest)<br>";
 		else {
 			mkdir_recursive(dirname($dest));
-			if (!copy($source,$dest))
+			if (!copy($source, $dest))
 				$ret = 'FAILED';
 			else
 				$ret = 'OK';
@@ -138,16 +138,16 @@ function copyFile($source,$dest) {
 	return '';
 }
 
-function scanCopyFiles($source,$dest) {
+function scanCopyFiles($source, $dest) {
 	global $files;
 	$d = dir(IMAGE_PATH.'/games/'.$source);
 
 	if ($d !== false) {
 		while (($entry=$d->read()) !== false) {
 			if (is_file(IMAGE_PATH.'/games/'.$source.'/'.$entry) && ($entry != '.') && ($entry != '..'))
-				$files[] = array($source.'/'.$entry,$dest.'/'.$entry);
+				$files[] = [$source.'/'.$entry,$dest.'/'.$entry];
 			if (is_dir(IMAGE_PATH.'/games/'.$source.'/'.$entry) && ($entry != '.') && ($entry != '..'))
-				scanCopyFiles($source.'/'.$entry,$dest.'/'.$entry); 
+				scanCopyFiles($source.'/'.$entry, $dest.'/'.$entry); 
 		}
 		$d->close();
 	}
@@ -182,37 +182,38 @@ function scanCopyFiles($source,$dest) {
 			$db->query("INSERT INTO hlstats_Games (code,name,hidden,realgame) SELECT '$game2', '$game2name', '0', realgame FROM hlstats_Games WHERE code='$game1'");
 			echo 'OK</li>';
 			
-			$dbtables = array();
-			array_push($dbtables,
-				'hlstats_Actions',
-				'hlstats_Awards',
-				'hlstats_Ribbons',
-				'hlstats_Ranks',
-				'hlstats_Roles',
-				'hlstats_Teams',
-				'hlstats_Weapons'
-				);
+			$dbtables = [];
+			array_push(
+			    $dbtables,
+			    'hlstats_Actions',
+			    'hlstats_Awards',
+			    'hlstats_Ribbons',
+			    'hlstats_Ranks',
+			    'hlstats_Roles',
+			    'hlstats_Teams',
+			    'hlstats_Weapons'
+			);
 
 			foreach ($dbtables as $dbt) {
 				echo "<li>$dbt ... ";
-				echo copySettings($dbt,$game1,$game2);
+				echo copySettings($dbt, $game1, $game2);
 			}
 
 			echo '</ul><br /><br /><br />';	
 			echo '<ul>';
 				
-			$files = array(
-				array(
+			$files = [
+				[
 				'',
-				''
-				)
-			);
+				'',
+				],
+			];
 
-			scanCopyFiles("$game1/","$game2/");
+			scanCopyFiles("$game1/", "$game2/");
 
 			foreach ($files as $f) {
 				echo '<li>';
-				echo copyFile($f[0],$f[1]);
+				echo copyFile($f[0], $f[1]);
 			}
 			echo '</ul><br /><br /><br />';
 			echo 'Done.<br /><br />';

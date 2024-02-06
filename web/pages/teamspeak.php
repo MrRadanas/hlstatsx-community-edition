@@ -1,12 +1,12 @@
 <?php
 	pageHeader(
-		array('Teamspeak viewer'),
-		array('Teamspeak viewer' => '')
-	);
+    ['Teamspeak viewer'],
+    ['Teamspeak viewer' => '']
+);
 	include (PAGE_PATH.'/voicecomm_serverlist.php');
 	 include (PAGE_PATH.'/teamspeak_query.php');
 
- 	$tsId = valid_request($_GET['tsId'],true);
+ 	$tsId = valid_request($_GET['tsId'], true);
 
 	function show($tpl, $array)
 	{
@@ -54,23 +54,23 @@
 		    $out = str_replace('OK', '', $out);
 		    $out = trim($out);
 
-  		$name=substr($out,indexOf($out,'server_name='),strlen($out));
-	  	$name=substr($name,0,indexOf($name,'server_platform=')-strlen('server_platform='));
-		  $os=substr($out,indexOf($out,'server_platform='),strlen($out));
-		  $os=substr($os,0,indexOf($os,'server_welcomemessage=')-strlen('server_welcomemessage='));
-		  $uptime=substr($out,indexOf($out,'server_uptime='),strlen($out));
-		  $uptime=substr($uptime,0,indexOf($uptime,'server_currrentusers=')-strlen('server_currrentusers='));
-		  $cAmount=substr($out,indexOf($out,'server_currentchannels='),strlen($out));
-		  $cAmount=substr($cAmount,0,indexOf($cAmount,'server_bwinlastsec=')-strlen('server_bwinlastsec='));
-		  $user=substr($out,indexOf($out,'server_currentusers='),strlen($out));
-		  $user=substr($user,0,indexOf($user,'server_currentchannels=')-strlen('server_currentchannels='));
-		  $max=substr($out,indexOf($out,'server_maxusers='),strlen($out));
-		  $max=substr($max,0,indexOf($max,'server_allow_codec_celp51=')-strlen('server_allow_codec_celp51='));
+  		$name=substr($out, indexOf($out, 'server_name='), strlen($out));
+	  	$name=substr($name, 0, indexOf($name, 'server_platform=')-strlen('server_platform='));
+		  $os=substr($out, indexOf($out, 'server_platform='), strlen($out));
+		  $os=substr($os, 0, indexOf($os, 'server_welcomemessage=')-strlen('server_welcomemessage='));
+		  $uptime=substr($out, indexOf($out, 'server_uptime='), strlen($out));
+		  $uptime=substr($uptime, 0, indexOf($uptime, 'server_currrentusers=')-strlen('server_currrentusers='));
+		  $cAmount=substr($out, indexOf($out, 'server_currentchannels='), strlen($out));
+		  $cAmount=substr($cAmount, 0, indexOf($cAmount, 'server_bwinlastsec=')-strlen('server_bwinlastsec='));
+		  $user=substr($out, indexOf($out, 'server_currentusers='), strlen($out));
+		  $user=substr($user, 0, indexOf($user, 'server_currentchannels=')-strlen('server_currentchannels='));
+		  $max=substr($out, indexOf($out, 'server_maxusers='), strlen($out));
+		  $max=substr($max, 0, indexOf($max, 'server_allow_codec_celp51=')-strlen('server_allow_codec_celp51='));
       fclose($fp);
   	}
 
-  	$uArray = array();
-	  $innerArray = array();
+  	$uArray = [];
+	  $innerArray = [];
 	  $out = "";
 	  $j = 0;
 	  $k = 0;
@@ -111,23 +111,23 @@
            &nbsp;(".setPPriv($innerArray[11])."".setCPriv($innerArray[10]).")";
            
       $class = ($color % 2) ? "bg2" : "bg1"; $color++;
-      $userstats .= show("/userstats", array("player" => $p,
-                                                  "channel" => getChannelName($innerArray[1],$uip,$port,$tPort),
+      $userstats .= show("/userstats", ["player" => $p,
+                                                  "channel" => getChannelName($innerArray[1], $uip, $port, $tPort),
                                                   "misc1" => $innerArray[6],
                                                   "class" => $class,
                                                   "misc2" => $innerArray[7],
                                                   "misc3" => time_convert($innerArray[8]),
-                                                  "misc4" => time_convert($innerArray[9])));
+                                                  "misc4" => time_convert($innerArray[9])]);
 
 	  }
 
-  	$uArr = getTSChannelUsers($uip,$port,$tPort);
-	  $pcArr = Array();
-	  $ccArr = Array();
-	  $thisArr = Array();
-	  $listArr = Array();
-	  $usedArr = Array();
-	  $cArr	= getChannels($uip,$port,$tPort);
+  	$uArr = getTSChannelUsers($uip, $port, $tPort);
+	  $pcArr = [];
+	  $ccArr = [];
+	  $thisArr = [];
+	  $listArr = [];
+	  $usedArr = [];
+	  $cArr	= getChannels($uip, $port, $tPort);
 	  $z = 0;
 	  $x = 0;
 
@@ -143,7 +143,7 @@
 		  {
 			  $innArr=$cArr[$j];
 
-			  if($innArr[3]==$listArr[$i] && usedID($usedArr,$innArr[0]))
+			  if($innArr[3]==$listArr[$i] && usedID($usedArr, $innArr[0]))
 			  {
 				  if($innArr[2]==-1)
 				  {
@@ -188,7 +188,7 @@
 		        }
 		      }
           $subchannels = "<img src=\"".IMAGE_PATH."/teamspeak/trenner.gif\" alt=\"\" class=\"tsicon\" /><img src=\"".IMAGE_PATH."/teamspeak/channel.gif\" alt=\"\" class=\"tsicon\" /><a style=\"font-weight:normal\" href=\"hlstats.php?mode=teamspeak&amp;game=$game&amp;tsId=$tsId&amp;cID=".$innerCCArray[0]."&amp;type=1\">&nbsp;".removeChar($innerCCArray[1])."&nbsp;</a><br /> ".$subusers."";
-          $subchan .= show("subchannels", array("subchannels" => $subchannels));
+          $subchan .= show("subchannels", ["subchannels" => $subchannels]);
 	      }
       }
       $users = "";
@@ -203,8 +203,8 @@
 
       $channels = "<img src=\"".IMAGE_PATH."/teamspeak/channel.gif\" alt=\"\" class=\"tsicon\" />&nbsp;<a style=\"font-weight:bold\" href=\"hlstats.php?mode=teamspeak&amp;game=$game&amp;tsId=$tsId&amp;cID=".trim($innerArr[0])."&amp;type=1\">".removeChar($innerArr[1])."&nbsp;</a><br /> ".$users."";
 
-      $chan .= show("channel", array("channel" => $channels,
-                                           "subchannels" => $subchan));
+      $chan .= show("channel", ["channel" => $channels,
+                                           "subchannels" => $subchan]);
 
     }
 
@@ -222,7 +222,7 @@
 		$info = channelInfo($uip, $tPort, $port, $cID);
 	}
 
-    $outp_str = show("teamspeak", array("name" => $name,
+    $outp_str = show("teamspeak", ["name" => $name,
                                            "os" => $os,
                                            "uptime" => time_convert($uptime),
                                            "user" => $user,
@@ -243,7 +243,7 @@
                                            "logintime" => "Login time",
                                            "idletime" => "Idle time",
                                            "channelstats" => $channelstats,
-                                           "userstats" => $userstats));
+                                           "userstats" => $userstats]);
 					   
     echo $outp_str;				   
 					   

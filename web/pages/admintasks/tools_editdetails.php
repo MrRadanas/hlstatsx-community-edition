@@ -71,12 +71,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 							<td nowrap width="45%" class="fNormal">Type:</td>
 							<td width="55%">
 								<?php
-									echo getSelect("task",
-										array(
+									echo getSelect(
+    "task",
+    [
 											"tools_editdetails_player"=>"Player",
-											"tools_editdetails_clan"=>"Clan"
-										)
-									);
+											"tools_editdetails_clan"=>"Clan",
+										]
+);
 								?></td>
 						</tr>
 						
@@ -108,8 +109,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 	require(PAGE_PATH . "/search-class.php");
 	
 	$sr_query = $_GET["q"];
-    $search_pattern  = array("/script/i", "/;/", "/%/");
-    $replace_pattern = array("", "", "");
+    $search_pattern  = ["/script/i", "/;/", "/%/"];
+    $replace_pattern = ["", "", ""];
     $sr_query = preg_replace($search_pattern, $replace_pattern, $sr_query);
 
 	$sr_type = valid_request($_GET["st"], false) or "player";
@@ -117,16 +118,16 @@ For support and installation notes visit http://www.hlxcommunity.com
 	
 	$search = new Search($sr_query, $sr_type, $sr_game);
 	
-	$search->drawForm(array(
+	$search->drawForm([
 		"mode"=>"admin",
-		"task"=>$selTask
-	));
+		"task"=>$selTask,
+	]);
 	
 	if ($sr_query)
 	{
 		$search->drawResults(
-			"mode=admin&task=tools_editdetails_player&id=%k",
-			"mode=admin&task=tools_editdetails_clan&id=%k"
+		    "mode=admin&task=tools_editdetails_player&id=%k",
+		    "mode=admin&task=tools_editdetails_clan&id=%k"
 		);
 	}
 ?>

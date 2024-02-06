@@ -51,7 +51,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			exit;
 		}
 
-		$uniqueid = preg_replace('/^STEAM_\d+?\:/i','',$uniqueid);
+		$uniqueid = preg_replace('/^STEAM_\d+?\:/i', '', $uniqueid);
 
         $db->query("
 			SELECT
@@ -68,7 +68,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		} elseif ($db->num_rows() < 1) {
 			error("No players found matching uniqueId '$uniqueid'");
 		} else {
-			list($player) = $db->fetch_row();
+			[$player] = $db->fetch_row();
 			$player = intval($player);
 		}
 	} elseif (!$player && !$uniqueid) {
@@ -148,7 +148,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1) {
 		$gamename = ucfirst($game);
 	} else {
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}
 
 	$hideranking = $playerdata['hideranking'];
@@ -171,7 +171,7 @@ $db->query("
 			AND hlstats_Events_Frags.headshot = 1
 	");
 
-	list($realheadshots) = $db->fetch_row();
+	[$realheadshots] = $db->fetch_row();
 
     $db->query("
 		SELECT
@@ -182,7 +182,7 @@ $db->query("
 			hlstats_Events_Frags.killerId = '$player'
 	");
 
-	list($realkills) = $db->fetch_row();
+	[$realkills] = $db->fetch_row();
 
     $db->query("
 		SELECT
@@ -193,7 +193,7 @@ $db->query("
 			hlstats_Events_Frags.victimId = '$player'
 	");
 
-	list($realdeaths) = $db->fetch_row();
+	[$realdeaths] = $db->fetch_row();
 
     $db->query("
 		SELECT
@@ -204,7 +204,7 @@ $db->query("
 			hlstats_Events_Teamkills.killerId = '$player'
 	");
 
-	list($realteamkills) = $db->fetch_row();
+	[$realteamkills] = $db->fetch_row();
 
 	if (!isset($_GET['killLimit'])) {
 		$killLimit = 5;
@@ -226,14 +226,13 @@ $db->query("
 
 	pageHeader
 	(
-		array ($gamename, 'Player Details', $pl_name),
-		array
-		(
+	    [$gamename, 'Player Details', $pl_name],
+	    [
 			$gamename=>$g_options['scripturl'] . "?game=$game",
 			'Player Rankings'=>$g_options['scripturl'] . "?mode=players&game=$game",
-			'Player Details'=>""
-		),
-		$pl_name
+			'Player Details'=>"",
+		],
+	    $pl_name
 	);
 ?>
 <div class="block" id="main">

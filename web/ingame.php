@@ -38,8 +38,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 foreach ($_SERVER as $key => $entry) {
 	if ($key !== "HTTP_COOKIE") {
-		$search_pattern  = array("/<script>/", "/<\/script>/", "/[^A-Za-z0-9.\-\/=:;_?#&~]/");
-		$replace_pattern = array("", "", "");
+		$search_pattern  = ["/<script>/", "/<\/script>/", "/[^A-Za-z0-9.\-\/=:;_?#&~]/"];
+		$replace_pattern = ["", "", ""];
 		$entry = preg_replace($search_pattern, $replace_pattern, $entry);
   
 		if ($key == "PHP_SELF") {
@@ -98,7 +98,7 @@ else
 $g_options = getOptions();
 
 if (!isset($g_options['scripturl']))
-	$g_options['scripturl'] = str_replace('\\','/',$_SERVER['PHP_SELF']);
+	$g_options['scripturl'] = str_replace('\\', '/', $_SERVER['PHP_SELF']);
 
 
 ////
@@ -109,9 +109,9 @@ if (isset($_GET["game"])) {
 	$game = valid_request($_GET["game"], false);
 }
 
-$mode = isset($_GET["mode"]) ? $_GET["mode"] : "";
+$mode = $_GET["mode"] ?? "";
 
-$valid_modes = array(
+$valid_modes = [
     "pro",
     "motd",
     "status",
@@ -131,8 +131,8 @@ $valid_modes = array(
     "claninfo",
     "weaponinfo",
     "mapinfo",
-    "actioninfo"
-);
+    "actioninfo",
+];
 
 if (!in_array($mode, $valid_modes))
 {

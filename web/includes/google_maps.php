@@ -132,25 +132,25 @@ function printMap($type = 'main')
 
 				$db->query("SELECT serverId, IF(publicaddress != '', publicaddress, CONCAT(address, ':', port)) AS addr, name, kills, lat, lng, city, country FROM hlstats_Servers WHERE game='$game' AND lat IS NOT NULL AND lng IS NOT NULL");
 
-				$servers = array();
+				$servers = [];
 				while ($row = $db->fetch_array())
 				{
 					//Skip this part, if we already have the location info (should be the same)
 					if (!isset($servers[$row['lat'] . ',' . $row['lng']]))
 					{
-						$servers[$row['lat'] . ',' . $row['lng']] = array('lat' => $row['lat'], 'lng' => $row['lng'], 'addr' => $row['addr'], 'city' => $row['city'], 'country' => $row['country']);
+						$servers[$row['lat'] . ',' . $row['lng']] = ['lat' => $row['lat'], 'lng' => $row['lng'], 'addr' => $row['addr'], 'city' => $row['city'], 'country' => $row['country']];
 					}
 
-					$servers[$row['lat'] . ',' . $row['lng']]['servers'][] = array('serverId' => $row['serverId'], 'addr' => $row['addr'], 'name' => $row['name'], 'kills' => $row['kills']);
+					$servers[$row['lat'] . ',' . $row['lng']]['servers'][] = ['serverId' => $row['serverId'], 'addr' => $row['addr'], 'name' => $row['name'], 'kills' => $row['kills']];
 				}
 				foreach ($servers as $map_location)
 				{
 					$kills = 0;
-					$servers_js = array();
+					$servers_js = [];
 					foreach ($map_location['servers'] as $server)
 					{
-						$search_pattern = array("/[^A-Za-z0-9\[\]*.,=()!\"$%&^`ґ':;ЯІі#+~_\-|<>\/@{}дцьДЦЬ ]/");
-						$replace_pattern = array("");
+						$search_pattern = ["/[^A-Za-z0-9\[\]*.,=()!\"$%&^`ґ':;ЯІі#+~_\-|<>\/@{}дцьДЦЬ ]/"];
+						$replace_pattern = [""];
 						$server['name'] = preg_replace($search_pattern, $replace_pattern, $server['name']);
 						$temp = "[" . $server['serverId'] . ',';
 						$temp .= "'" . htmlspecialchars(urldecode(preg_replace($search_pattern, $replace_pattern, $server['addr'])), ENT_QUOTES) . '\',';
@@ -161,7 +161,7 @@ function printMap($type = 'main')
 					echo 'createMarkerS(new google.maps.LatLng(' . $map_location['lat'] . ', ' . $map_location['lng'] . '), [' . implode(',', $servers_js) . '], "' . htmlspecialchars(urldecode($map_location['city']), ENT_QUOTES) . '", "' . htmlspecialchars(urldecode($map_location['country']), ENT_QUOTES) . '", ' . $kills . ");\n";
 				}
 
-				$data = array();
+				$data = [];
 				$db->query("SELECT 
 							hlstats_Livestats.* 
 						FROM 
@@ -174,25 +174,25 @@ function printMap($type = 'main')
 							AND hlstats_Livestats.cli_lng IS NOT NULL
 							AND hlstats_Servers.game='$game'
 							");
-				$players = array();
+				$players = [];
 				while ($row = $db->fetch_array())
 				{
 					//Skip this part, if we already have the location info (should be the same)
 					if (!isset($players[$row['cli_lat'] . ',' . $row['cli_lng']]))
 					{
-						$players[$row['cli_lat'] . ',' . $row['cli_lng']] = array('cli_lat' => $row['cli_lat'], 'cli_lng' => $row['cli_lng'], 'cli_city' => $row['cli_city'], 'cli_country' => $row['cli_country']);
+						$players[$row['cli_lat'] . ',' . $row['cli_lng']] = ['cli_lat' => $row['cli_lat'], 'cli_lng' => $row['cli_lng'], 'cli_city' => $row['cli_city'], 'cli_country' => $row['cli_country']];
 					}
-					$search_pattern = array("/[^A-Za-z0-9\[\]*.,=()!\"$%&^`ґ':;ЯІі#+~_\-|<>\/@{}дцьДЦЬ ]/");
-					$replace_pattern = array("");
+					$search_pattern = ["/[^A-Za-z0-9\[\]*.,=()!\"$%&^`ґ':;ЯІі#+~_\-|<>\/@{}дцьДЦЬ ]/"];
+					$replace_pattern = [""];
 					$row['name'] = preg_replace($search_pattern, $replace_pattern, $row['name']);
 
-					$players[$row['cli_lat'] . ',' . $row['cli_lng']]['players'][] = array('playerId' => $row['player_id'], 'name' => $row['name'], 'kills' => $row['kills'], 'deaths' => $row['deaths'], 'connected' => $row['connected']);
+					$players[$row['cli_lat'] . ',' . $row['cli_lng']]['players'][] = ['playerId' => $row['player_id'], 'name' => $row['name'], 'kills' => $row['kills'], 'deaths' => $row['deaths'], 'connected' => $row['connected']];
 				}
 
 				foreach ($players as $map_location)
 				{
 					$kills = 0;
-					$players_js = array();
+					$players_js = [];
 					foreach ($map_location['players'] as $player)
 					{
 						$stamp = time() - $player['connected'];
@@ -232,37 +232,37 @@ function printMap($type = 'main')
 					GROUP BY
 						hlstats_Players.playerId
 				");
-				$players = array();
+				$players = [];
 				while ( $row = $db->fetch_array() )
 				{
 					//Skip this part, if we already have the location info (should be the same)
 					if ( !isset($players[ $row['lat'] . ',' . $row['lng'] ]) )
 					{
-						$players[ $row['lat'] . ',' . $row['lng'] ] = array(
+						$players[ $row['lat'] . ',' . $row['lng'] ] = [
 							'lat' => $row['lat'],
 							'lng' => $row['lng'],
 							'city' => $row['city'],
-							'country' => $row['country']
-						);
+							'country' => $row['country'],
+						];
 					}
-					$search_pattern = array("/[^A-Za-z0-9\[\]*.,=()!\"$%&^`ґ':;ЯІі#+~_\-|<>\/@{}дцьДЦЬ ]/");
-					$replace_pattern = array("");
+					$search_pattern = ["/[^A-Za-z0-9\[\]*.,=()!\"$%&^`ґ':;ЯІі#+~_\-|<>\/@{}дцьДЦЬ ]/"];
+					$replace_pattern = [""];
 					$row['lastName'] = preg_replace($search_pattern, $replace_pattern, $row['lastName']);
 					
-					$players[ $row['lat'] . ',' . $row['lng'] ]['players'][] = array(
+					$players[ $row['lat'] . ',' . $row['lng'] ]['players'][] = [
 						'playerId' => $row['playerId'],
 						'name' => $row['lastName'],
 						'kills' => $row['kills'],
 						'deaths' => $row['deaths'],
                         // Where should this information come from??
 						//'connected' => $row['connected']
-					);
+					];
 				}
 				
 				foreach ( $players as $location )
 				{
 					$kills = 0;
-					$players_js = array();
+					$players_js = [];
 					foreach ( $location['players'] as $player )
 					{
 						$temp = "[" .  $player['playerId'] . ',';

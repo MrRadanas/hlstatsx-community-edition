@@ -54,81 +54,80 @@ For support and installation notes visit http://www.hlxcommunity.com
         error("No such game '$game'.");
 	}
 
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 	$db->free_result();
 
 	pageHeader(
-		array ($gamename, 'Map Statistics'),
-		array ($gamename=>"%s?game=$game", 'Map Statistics'=>'')
+	    [$gamename, 'Map Statistics'],
+	    [$gamename=>"%s?game=$game", 'Map Statistics'=>'']
 	);
 
 	$tblMaps = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'map',
-				'Map',
-				'width=20&align=left&link=' . urlencode("mode=mapinfo&amp;map=%k&amp;game=$game")
+			    'map',
+			    'Map',
+			    'width=20&align=left&link=' . urlencode("mode=mapinfo&amp;map=%k&amp;game=$game")
 			),
 			new TableColumn
 			(
-				'kills',
-				'Kills',
-				'width=8&align=right'
+			    'kills',
+			    'Kills',
+			    'width=8&align=right'
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'%',
-				'width=7&sort=no&align=right&append=' . urlencode('%')
+			    'kpercent',
+			    '%',
+			    'width=7&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'Ratio',
-				'width=16&sort=no&type=bargraph'
+			    'kpercent',
+			    'Ratio',
+			    'width=16&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'headshots',
-				'Headshots',
-				'width=8&align=right'
+			    'headshots',
+			    'Headshots',
+			    'width=8&align=right'
 			),
 			new TableColumn
 			(
-				'hpercent',
-				'%',
-				'width=7&sort=no&align=right&append=' . urlencode('%')
+			    'hpercent',
+			    '%',
+			    'width=7&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'hpercent',
-				'Ratio',
-				'width=16&sort=no&type=bargraph'
+			    'hpercent',
+			    'Ratio',
+			    'width=16&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'hpk',
-				'HS:K',
-				'width=9&align=right'
+			    'hpk',
+			    'HS:K',
+			    'width=9&align=right'
 			),
 			new TableColumn
 			(
-				'map',
-				'HeatMap',
-				'width=4&type=heatmap'
-			)
-		),
-		'map',
-		'kills',
-		'map',
-		true,
-		9999,
-		'maps_page',
-		'maps_sort',
-		'maps_sortorder'
+			    'map',
+			    'HeatMap',
+			    'width=4&type=heatmap'
+			),
+		],
+	    'map',
+	    'kills',
+	    'map',
+	    true,
+	    9999,
+	    'maps_page',
+	    'maps_sort',
+	    'maps_sortorder'
 	);
 
 	$db->query("
@@ -141,7 +140,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Maps_Counts.game = '$game'
 	");
 
-	list($realkills, $realheadshots) = $db->fetch_row();
+	[$realkills, $realheadshots] = $db->fetch_row();
 	
 	$result = $db->query("
 		SELECT

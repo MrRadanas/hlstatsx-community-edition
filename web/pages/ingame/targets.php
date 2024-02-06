@@ -67,7 +67,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		} elseif ($db->num_rows() < 1) {
 			error("No players found matching uniqueId '$uniqueid'");
 		} else {
-			list($player) = $db->fetch_row();
+			[$player] = $db->fetch_row();
 			$player = intval($player);
 		}
 	} elseif (!$player && !$uniqueid) {
@@ -108,81 +108,81 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1) {
 		$gamename = ucfirst($game);
 	} else {
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}
 
 	$tblWeaponstats2 = new Table(
-		array(
+	    [
 			new TableColumn(
-				'smweapon',
-				'Weapon',
-				'width=10&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&weapon=%k&game=$game")
+			    'smweapon',
+			    'Weapon',
+			    'width=10&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&weapon=%k&game=$game")
 			),
 			new TableColumn(
-				'smhits',
-				'Hits',
-				'width=8&align=right'
+			    'smhits',
+			    'Hits',
+			    'width=8&align=right'
 			),
 			new TableColumn(
-				'smhead',
-				'Head',
-				'width=8&align=right'
+			    'smhead',
+			    'Head',
+			    'width=8&align=right'
 			),
 			new TableColumn(
-				'smchest',
-				'Chest',
-				'width=8&align=right'
+			    'smchest',
+			    'Chest',
+			    'width=8&align=right'
 			),
 			new TableColumn(
-				'smstomach',
-				'Stomach',
-				'width=8&align=right'
+			    'smstomach',
+			    'Stomach',
+			    'width=8&align=right'
 			),
 			new TableColumn(
-				'smleftarm',
-				'L. Arm',
-				'width=8&align=right'
+			    'smleftarm',
+			    'L. Arm',
+			    'width=8&align=right'
 			),
 			new TableColumn(
-				'smrightarm',
-				'R. Arm',
-				'width=7&align=right'
+			    'smrightarm',
+			    'R. Arm',
+			    'width=7&align=right'
 			),
 			new TableColumn(
-				'smleftleg',
-				'L. Leg',
-				'width=7&align=right'
+			    'smleftleg',
+			    'L. Leg',
+			    'width=7&align=right'
 			),
 			new TableColumn(
-				'smrightleg',
-				'R. Leg',
-				'width=7&align=right'
+			    'smrightleg',
+			    'R. Leg',
+			    'width=7&align=right'
 			),
 			new TableColumn(
-				'smleft',
-				'Left',
-				'width=8&align=right&append=' . urlencode('%')
+			    'smleft',
+			    'Left',
+			    'width=8&align=right&append=' . urlencode('%')
 			),
 			new TableColumn(
-				'smmiddle',
-				'Middle',
-				'width=8&align=right&append=' . urlencode('%')
+			    'smmiddle',
+			    'Middle',
+			    'width=8&align=right&append=' . urlencode('%')
 			),
 			new TableColumn(
-				'smright',
-				'Right',
-				'width=8&align=right&append=' . urlencode('%')
-			)
-		),
-		'smweapon',
-		'smhits',
-		'smweapon',
-		true,
-		9999,
-		'weap_page',
-		'weap_sort',
-		'weap_sortorder',
-		'weaponstats2'
+			    'smright',
+			    'Right',
+			    'width=8&align=right&append=' . urlencode('%')
+			),
+		],
+	    'smweapon',
+	    'smhits',
+	    'smweapon',
+	    true,
+	    9999,
+	    'weap_page',
+	    'weap_sort',
+	    'weap_sortorder',
+	    'weaponstats2'
 	);
 
 	$result = $db->query("

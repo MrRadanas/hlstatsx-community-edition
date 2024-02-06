@@ -42,92 +42,91 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	flush();
 	$tblMaps = new Table(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'map',
-				'Map',
-				'width=22&align=left&link=' . urlencode("mode=mapinfo&amp;map=%k&amp;game=$game")
+			    'map',
+			    'Map',
+			    'width=22&align=left&link=' . urlencode("mode=mapinfo&amp;map=%k&amp;game=$game")
 			),
 			new TableColumn
 			(
-				'kills',
-				'Kills',
-				'width=7&align=right'
+			    'kills',
+			    'Kills',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'%',
-				'width=6&sort=no&align=right&append=' . urlencode('%')
+			    'kpercent',
+			    '%',
+			    'width=6&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'Ratio',
-				'width=8&sort=no&type=bargraph'
+			    'kpercent',
+			    'Ratio',
+			    'width=8&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'deaths',
-				'Deaths',
-				'width=7&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'dpercent',
-				'%',
-				'width=6&sort=no&align=right&append=' . urlencode('%')
+			    'dpercent',
+			    '%',
+			    'width=6&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'dpercent',
-				'Ratio',
-				'width=8&sort=no&type=bargraph'
+			    'dpercent',
+			    'Ratio',
+			    'width=8&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'kpd',
-				'K:D',
-				'width=5&align=right'
+			    'kpd',
+			    'K:D',
+			    'width=5&align=right'
 			),
 			new TableColumn
 			(
-				'headshots',
-				'Headshots',
-				'width=7&align=right'
+			    'headshots',
+			    'Headshots',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'hpercent',
-				'%',
-				'width=6&sort=no&align=right&append=' . urlencode('%')
+			    'hpercent',
+			    '%',
+			    'width=6&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'hpercent',
-				'Ratio',
-				'width=8&sort=no&type=bargraph'
+			    'hpercent',
+			    'Ratio',
+			    'width=8&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'hpk',
-				'HS:K',
-				'width=5&align=right'
-			)
-		),
-		'map',
-		'kpd',
-		'kills',
-		true,
-		9999,
-		'maps_page',
-		'maps_sort',
-		'maps_sortorder',
-		'tabmaps',
-		'desc',
-		true
+			    'hpk',
+			    'HS:K',
+			    'width=5&align=right'
+			),
+		],
+	    'map',
+	    'kpd',
+	    'kills',
+	    true,
+	    9999,
+	    'maps_page',
+	    'maps_sort',
+	    'maps_sortorder',
+	    'tabmaps',
+	    'desc',
+	    true
 	);
 	$result = $db->query
 	("

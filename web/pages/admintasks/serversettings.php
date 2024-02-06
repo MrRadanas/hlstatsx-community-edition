@@ -56,10 +56,10 @@ For support and installation notes visit http://www.hlxcommunity.com
     }
 	
 	if (isset($_GET['key'])) {
-		$key = valid_request(intval($_GET['key']),true);
+		$key = valid_request(intval($_GET['key']), true);
 	} else {
 		if (isset($_POST['key'])) {
-			$key = valid_request(intval($_POST['key']),true);
+			$key = valid_request(intval($_POST['key']), true);
 		} else {
 			$key = 0;
 		}
@@ -69,7 +69,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		die('Server ID not set!');
 	
 	if (isset($_POST['sourceId'])) {
-		$sourceId = valid_request(intval($_POST['sourceId']),true);
+		$sourceId = valid_request(intval($_POST['sourceId']), true);
 	} else {
 		$sourceId = 0;
 	}
@@ -94,13 +94,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 <?php
 	// get available help texts
 	$db->query("SELECT parameter,description FROM hlstats_Servers_Config_Default");
-	$helptexts = array();
+	$helptexts = [];
 	while ($r = $db->fetch_array())
 		$helptexts[strtolower($r['parameter'])] = $r['description'];
 	
-	$edlist = new EditList('serverConfigId', 'hlstats_Servers_Config','', false);
+	$edlist = new EditList('serverConfigId', 'hlstats_Servers_Config', '', false);
 	
-	$footerscript = $edlist->setHelp('helpdiv','parameter',$helptexts);
+	$footerscript = $edlist->setHelp('helpdiv', 'parameter', $helptexts);
 
 	$edlist->columns[] = new EditListColumn('serverId', 'Server ID', 0, true, 'hidden', $key);
 	$edlist->columns[] = new EditListColumn('parameter', 'Server parameter name', 30, true, 'readonly', '', 50);

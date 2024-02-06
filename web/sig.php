@@ -40,8 +40,8 @@ Originally idea for sig.php by Tankster
 
 foreach ($_SERVER as $key => $entry) {
 	if ($key !== 'HTTP_COOKIE') {
-		$search_pattern  = array('/<script>/', '/<\/script>/', '/[^A-Za-z0-9.\-\/=:;_?#&~]/');
-		$replace_pattern = array('', '', '');
+		$search_pattern  = ['/<script>/', '/<\/script>/', '/[^A-Za-z0-9.\-\/=:;_?#&~]/'];
+		$replace_pattern = ['', '', ''];
 		$entry = preg_replace($search_pattern, $replace_pattern, $entry);
   
 		if ($key == 'PHP_SELF') {
@@ -126,14 +126,14 @@ function f_num($number) {
 }
 
 	if (!isset($g_options['scripturl']))
-		$g_options['scripturl'] = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : getenv('PHP_SELF');
+		$g_options['scripturl'] = $_SERVER['PHP_SELF'] ?? getenv('PHP_SELF');
 
 	$player_id = 0;  
 	if (isset($_GET['player_id'])) {
 		$player_id = valid_request($_GET['player_id'], true);
 	} elseif (isset($_GET['steam_id']) && isset($_GET['game'])) {
 		$steam_id = valid_request($_GET['steam_id'], false);
-		$steam_id = preg_replace('/^STEAM_\d+?\:/i','',$steam_id);
+		$steam_id = preg_replace('/^STEAM_\d+?\:/i', '', $steam_id);
 		$game = valid_request($_GET['game'], false);
 
 		$steam_id_escaped=$db->escape($steam_id);
@@ -163,7 +163,7 @@ function f_num($number) {
 		
 		if ($db->num_rows() != 1)
 		error("No such player '$player'.");
-		list($player_id) = $db->fetch_row();
+		[$player_id] = $db->fetch_row();
 	}
 	
 	$show_flags = $g_options['countrydata'];
@@ -308,53 +308,53 @@ if ($player_id > 0) {
 	}
 
 	switch ($background) {
-		case 1:		$caption_color = array('red' => 0, 'green' => 0, 'blue' => 255);
-					$link_color = array('red' => 0, 'green' => 0, 'blue' => 255);
-					$color = array('red' => 0, 'green' => 0, 'blue' => 0);
+		case 1:		$caption_color = ['red' => 0, 'green' => 0, 'blue' => 255];
+					$link_color = ['red' => 0, 'green' => 0, 'blue' => 255];
+					$color = ['red' => 0, 'green' => 0, 'blue' => 0];
 					break;
-		case 2:		$caption_color = array('red' => 147, 'green' => 23, 'blue' => 18);
-					$link_color = array('red' => 147, 'green' => 23, 'blue' => 18);
-					$color = array('red' => 255, 'green' => 255, 'blue' => 255);
+		case 2:		$caption_color = ['red' => 147, 'green' => 23, 'blue' => 18];
+					$link_color = ['red' => 147, 'green' => 23, 'blue' => 18];
+					$color = ['red' => 255, 'green' => 255, 'blue' => 255];
 					break;
-		case 3:		$caption_color = array('red' => 150, 'green' => 180, 'blue' => 99);
-					$link_color = array('red' => 150, 'green' => 180, 'blue' => 99);
-					$color = array('red' => 255, 'green' => 255, 'blue' => 255);
+		case 3:		$caption_color = ['red' => 150, 'green' => 180, 'blue' => 99];
+					$link_color = ['red' => 150, 'green' => 180, 'blue' => 99];
+					$color = ['red' => 255, 'green' => 255, 'blue' => 255];
 					break;
-		case 4:		$caption_color = array('red' => 255, 'green' => 203, 'blue' => 4);
-					$link_color = array('red' => 255, 'green' => 203, 'blue' => 4);
-					$color = array('red' => 255, 'green' => 255, 'blue' => 255);
+		case 4:		$caption_color = ['red' => 255, 'green' => 203, 'blue' => 4];
+					$link_color = ['red' => 255, 'green' => 203, 'blue' => 4];
+					$color = ['red' => 255, 'green' => 255, 'blue' => 255];
 					break;
-		case 5:		$caption_color = array('red' => 255, 'green' => 255, 'blue' => 255);
-					$link_color = array('red' => 0, 'green' => 102, 'blue' => 204);
-					$color = array('red' => 255, 'green' => 255, 'blue' => 255);
+		case 5:		$caption_color = ['red' => 255, 'green' => 255, 'blue' => 255];
+					$link_color = ['red' => 0, 'green' => 102, 'blue' => 204];
+					$color = ['red' => 255, 'green' => 255, 'blue' => 255];
 					break;
-		case 6:		$caption_color = array('red' => 0, 'green' => 0, 'blue' => 0);
-					$link_color = array('red' => 255, 'green' => 255, 'blue' => 255);
-					$color = array('red' => 255, 'green' => 255, 'blue' => 255);
+		case 6:		$caption_color = ['red' => 0, 'green' => 0, 'blue' => 0];
+					$link_color = ['red' => 255, 'green' => 255, 'blue' => 255];
+					$color = ['red' => 255, 'green' => 255, 'blue' => 255];
 					break;
-		case 7:		$caption_color = array('red' => 255, 'green' => 255, 'blue' => 255);
-					$link_color = array('red' => 100, 'green' => 100, 'blue' => 100);
-					$color = array('red' => 0, 'green' => 0, 'blue' => 0);
+		case 7:		$caption_color = ['red' => 255, 'green' => 255, 'blue' => 255];
+					$link_color = ['red' => 100, 'green' => 100, 'blue' => 100];
+					$color = ['red' => 0, 'green' => 0, 'blue' => 0];
 					break;
-		case 8:		$caption_color = array('red' => 255, 'green' => 255, 'blue' => 255);
-					$link_color = array('red' => 255, 'green' => 255, 'blue' => 255);
-					$color = array('red' => 255, 'green' => 255, 'blue' => 255);
+		case 8:		$caption_color = ['red' => 255, 'green' => 255, 'blue' => 255];
+					$link_color = ['red' => 255, 'green' => 255, 'blue' => 255];
+					$color = ['red' => 255, 'green' => 255, 'blue' => 255];
 					break;
-		case 9:		$caption_color = array('red' => 255, 'green' => 255, 'blue' => 255);
-					$link_color = array('red' => 0, 'green' => 0, 'blue' => 0);
-					$color = array('red' => 0, 'green' => 0, 'blue' => 0);
+		case 9:		$caption_color = ['red' => 255, 'green' => 255, 'blue' => 255];
+					$link_color = ['red' => 0, 'green' => 0, 'blue' => 0];
+					$color = ['red' => 0, 'green' => 0, 'blue' => 0];
 					break;
-		case 10:		$caption_color = array('red' => 255, 'green' => 255, 'blue' => 255);
-					$link_color = array('red' => 255, 'green' => 255, 'blue' => 255);
-					$color = array('red' => 255, 'green' => 255, 'blue' => 255);
+		case 10:		$caption_color = ['red' => 255, 'green' => 255, 'blue' => 255];
+					$link_color = ['red' => 255, 'green' => 255, 'blue' => 255];
+					$color = ['red' => 255, 'green' => 255, 'blue' => 255];
 					break;
-		case 11:		$caption_color = array('red' => 150, 'green' => 180, 'blue' => 99);
-					$link_color = array('red' => 150, 'green' => 180, 'blue' => 99);
-					$color = array('red' => 255, 'green' => 255, 'blue' => 255);
+		case 11:		$caption_color = ['red' => 150, 'green' => 180, 'blue' => 99];
+					$link_color = ['red' => 150, 'green' => 180, 'blue' => 99];
+					$color = ['red' => 255, 'green' => 255, 'blue' => 255];
 					break;
-		default:		$caption_color = array('red' => 0, 'green' => 0, 'blue' => 255);
-					$link_color = array('red' => 0, 'green' => 155, 'blue' => 0);
-					$color = array('red' => 0, 'green' => 0, 'blue' => 0);
+		default:		$caption_color = ['red' => 0, 'green' => 0, 'blue' => 255];
+					$link_color = ['red' => 0, 'green' => 155, 'blue' => 0];
+					$color = ['red' => 0, 'green' => 0, 'blue' => 0];
 					break;
 }
 
@@ -365,11 +365,11 @@ if ($player_id > 0) {
 
 	$white			= imagecolorallocate($image, 255, 255, 255); 
 	$bgray			= imagecolorallocate($image, 192, 192, 192); 
-	$yellow		= imagecolorallocate($image, 255, 255,   0); 
-	$black			= imagecolorallocate($image,   0,   0,   0); 
-	$red			= imagecolorallocate($image, 255,   0,   0); 
-	$green			= imagecolorallocate($image,   0, 155,   0); 
-	$blue			= imagecolorallocate($image,   0,   0, 255); 
+	$yellow		= imagecolorallocate($image, 255, 255, 0); 
+	$black			= imagecolorallocate($image, 0, 0, 0); 
+	$red			= imagecolorallocate($image, 255, 0, 0); 
+	$green			= imagecolorallocate($image, 0, 155, 0); 
+	$blue			= imagecolorallocate($image, 0, 0, 255); 
 	$grey_shade		= imagecolorallocate($image, 204, 204, 204); 
 	$font_color		= imagecolorallocate($image, $color['red'], $color['green'], $color['blue']);
 	$caption_color	= imagecolorallocate($image, $caption_color['red'], $caption_color['green'], $caption_color['blue']);
@@ -455,9 +455,9 @@ if ($player_id > 0) {
 		$start_pos_x += 10;
 	}
 	imagestring($image, 2, $start_pos_x, 22, $skill_change.') points', $font_color);
-	imagestring($image, 2,  15, 34, 'Frags: '.$playerdata['kills'].' kills : '.$playerdata['deaths'].' deaths ('.$playerdata['kpd'].'), '.$playerdata['headshots'].' headshots ('.$playerdata['hpk'].'%)', $font_color);
-	imagestring($image, 2,  15, 45, 'Activity: '.$playerdata['lastevent'].' ('.$playerdata['activity'].'%), Time: '.$con_time.' hours', $font_color);
-	imagestring($image, 2,  15, 56, 'Statistics: ', $font_color);imagestring($image, 2,  85, 56, $g_options['siteurl'], $link_color);
+	imagestring($image, 2, 15, 34, 'Frags: '.$playerdata['kills'].' kills : '.$playerdata['deaths'].' deaths ('.$playerdata['kpd'].'), '.$playerdata['headshots'].' headshots ('.$playerdata['hpk'].'%)', $font_color);
+	imagestring($image, 2, 15, 45, 'Activity: '.$playerdata['lastevent'].' ('.$playerdata['activity'].'%), Time: '.$con_time.' hours', $font_color);
+	imagestring($image, 2, 15, 56, 'Statistics: ', $font_color);imagestring($image, 2, 85, 56, $g_options['siteurl'], $link_color);
 
 	$watermark = imagecreatefrompng(IMAGE_PATH.'/watermark.png');
 	imagecopymerge_alpha($image, $watermark, 334, 58, 0, 0, 60, 12, 50);

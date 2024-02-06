@@ -51,12 +51,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Games.code = '$game'
 	");
 	if ($db->num_rows() < 1) error("No such game '$game'.");
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 	$db->free_result();
 	pageHeader
 	(
-		array ($gamename, 'Role Statistics'),
-		array ($gamename => "%s?game=$game", 'Role Statistics' => '')
+	    [$gamename, 'Role Statistics'],
+	    [$gamename => "%s?game=$game", 'Role Statistics' => '']
 	);
 	$result = $db->query
 	("
@@ -75,84 +75,83 @@ For support and installation notes visit http://www.hlxcommunity.com
 	}
 	$tblRoles = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'code',
-				'Role',
-				'width=24&type=roleimg&align=left&link=' . urlencode("mode=rolesinfo&amp;role=%k&amp;game=$game"),
-				$fname
+			    'code',
+			    'Role',
+			    'width=24&type=roleimg&align=left&link=' . urlencode("mode=rolesinfo&amp;role=%k&amp;game=$game"),
+			    $fname
 			),
 			new TableColumn
 			(
-				'picked',
-				'Picked',
-				'width=9&align=right&append=+times'
+			    'picked',
+			    'Picked',
+			    'width=9&align=right&append=+times'
 			),
 			new TableColumn
 			(
-				'ppercent',
-				'%',
-				'width=6&align=right&append=' . urlencode('%')
+			    'ppercent',
+			    '%',
+			    'width=6&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'ppercent',
-				'Ratio',
-				'width=9&sort=no&type=bargraph'
+			    'ppercent',
+			    'Ratio',
+			    'width=9&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'kills',
-				'Kills',
-				'width=6&align=right'
+			    'kills',
+			    'Kills',
+			    'width=6&align=right'
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'%',
-				'width=6&align=right&append=' . urlencode('%')
+			    'kpercent',
+			    '%',
+			    'width=6&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'Ratio',
-				'width=9&sort=no&type=bargraph'
+			    'kpercent',
+			    'Ratio',
+			    'width=9&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'deaths',
-				'Deaths',
-				'width=6&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=6&align=right'
 			),
 			new TableColumn
 			(
-				'dpercent',
-				'%',
-				'width=6&sort=no&align=right&append=' . urlencode('%')
+			    'dpercent',
+			    '%',
+			    'width=6&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'dpercent',
-				'Ratio',
-				'width=9&sort=no&type=bargraph'
+			    'dpercent',
+			    'Ratio',
+			    'width=9&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'kpd',
-				'K:D',
-				'width=5&align=right'
-			)
-		),
-		'code',
-		'kills',
-		'name',
-		true,
-		9999,
-		'role_page',
-		'role_sort',
-		'role_sortorder'
+			    'kpd',
+			    'K:D',
+			    'width=5&align=right'
+			),
+		],
+	    'code',
+	    'kills',
+	    'name',
+	    true,
+	    9999,
+	    'role_page',
+	    'role_sort',
+	    'role_sortorder'
 	);
 	$db->query
 	("
@@ -166,7 +165,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Roles.game = '$game'
 			AND hlstats_Roles.hidden = '0'
 	");
-	list($realkills, $realdeaths, $realpicked) = $db->fetch_row();
+	[$realkills, $realdeaths, $realpicked] = $db->fetch_row();
 	$result = $db->query
 	("
 		SELECT

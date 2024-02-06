@@ -46,7 +46,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		error("No such game '$game'.");
 	}
 	
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 	$db->free_result();
 	
 	if (isset($_GET['minmembers'])) {
@@ -57,67 +57,66 @@ For support and installation notes visit http://www.hlxcommunity.com
 	
 	$table = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'name',
-				'Clan',
-				'width=25&icon=clan&link=' . urlencode('mode=claninfo&amp;clan=%k')
+			    'name',
+			    'Clan',
+			    'width=25&icon=clan&link=' . urlencode('mode=claninfo&amp;clan=%k')
 			),
 			new TableColumn
 			(
-				'tag',
-				'Tag',
-				'width=15&align=center'
+			    'tag',
+			    'Tag',
+			    'width=15&align=center'
 			),
 			new TableColumn
 			(
-				'skill',
-				'Avg. Points',
-				'width=8&align=right&skill_change=1'
+			    'skill',
+			    'Avg. Points',
+			    'width=8&align=right&skill_change=1'
 			),
 			new TableColumn
 			(
-				'nummembers',
-				'Members',
-				'width=5&align=right'
+			    'nummembers',
+			    'Members',
+			    'width=5&align=right'
 			),
 			new TableColumn
 			(
-				'activity',
-				'Activity',
-				'width=8&type=bargraph'
+			    'activity',
+			    'Activity',
+			    'width=8&type=bargraph'
 			),
 			new TableColumn
 			(
-				'connection_time',
-				'Connection Time',
-				'width=13&align=right&type=timestamp'
+			    'connection_time',
+			    'Connection Time',
+			    'width=13&align=right&type=timestamp'
 			),
 			new TableColumn
 			(
-				'kills',
-				'Kills',
-				'width=7&align=right'
+			    'kills',
+			    'Kills',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'deaths',
-				'Deaths',
-				'width=7&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'kpd',
-				'K:D',
-				'width=7&align=right'
-			)
-		),
-		'clanId',
-		'skill',
-		'kpd',
-		true
+			    'kpd',
+			    'K:D',
+			    'width=7&align=right'
+			),
+		],
+	    'clanId',
+	    'skill',
+	    'kpd',
+	    true
 	);
 
 	$result = $db->query("

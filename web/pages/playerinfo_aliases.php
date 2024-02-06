@@ -43,80 +43,79 @@ For support and installation notes visit http://www.hlxcommunity.com
 	flush();
 	$tblAliases = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'name',
-				'Name',
-				'width=21'
+			    'name',
+			    'Name',
+			    'width=21'
 			),
 			new TableColumn
 			(
-				'connection_time',
-				'Time',
-				'width=8&align=right&type=timestamp'
+			    'connection_time',
+			    'Time',
+			    'width=8&align=right&type=timestamp'
 			),
 			new TableColumn
 			(
-				'lastuse',
-				'Last Use',
-				'width=15'
+			    'lastuse',
+			    'Last Use',
+			    'width=15'
 			),
 			new TableColumn
 			(
-				'kills',
-				'Kills',
-				'width=7&align=right'
+			    'kills',
+			    'Kills',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'deaths',
-				'Deaths',
-				'width=7&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'kpd',
-				'K:D',
-				'width=11&align=right'
+			    'kpd',
+			    'K:D',
+			    'width=11&align=right'
 			),
 			new TableColumn
 			(
-				'headshots',
-				'Headshots',
-				'width=8&align=right'
+			    'headshots',
+			    'Headshots',
+			    'width=8&align=right'
 			),
 			new TableColumn
 			(
-				'hpk',
-				'HS:K',
-				'width=6&align=right'
+			    'hpk',
+			    'HS:K',
+			    'width=6&align=right'
 			),
 			new TableColumn
 			(
-				'suicides',
-				'Suicides',
-				'width=6&align=right'
+			    'suicides',
+			    'Suicides',
+			    'width=6&align=right'
 			),
 			new TableColumn
 			(
-				'acc',
-				'Accuracy',
-				'width=6&align=right&append=' . urlencode('%')
-			)
-		),
-		'name',
-		'lastuse',
-		'name',
-		true,
-		20,
-		'aliases_page',
-		'aliases_sort',
-		'aliases_sortorder',
-		'tabteams',
-		'desc',
-		true
+			    'acc',
+			    'Accuracy',
+			    'width=6&align=right&append=' . urlencode('%')
+			),
+		],
+	    'name',
+	    'lastuse',
+	    'name',
+	    true,
+	    20,
+	    'aliases_page',
+	    'aliases_sort',
+	    'aliases_sortorder',
+	    'tabteams',
+	    'desc',
+	    true
 	);
 	$result = $db->query
 	("
@@ -151,7 +150,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			hlstats_PlayerNames.playerId = $player
 	");
-	list($numitems) = $db->fetch_row($resultCount);
+	[$numitems] = $db->fetch_row($resultCount);
 	if ($numitems > 1)
 	{
 ?>

@@ -638,19 +638,19 @@ function setCPrivText($str)
 	return $str;
 }
 
-function indexOf($str,$strChar)
+function indexOf($str, $strChar)
 {
-	if(strlen(strchr($str,$strChar))>0) {
-		$position_num = strpos($str,$strChar) + strlen($strChar);		
+	if(strlen(strchr($str, $strChar))>0) {
+		$position_num = strpos($str, $strChar) + strlen($strChar);		
 		return $position_num;
 	} else {
 		return -1;
 	}
 }
-function getChannelName($cid,$ip,$port,$tPort)
+function getChannelName($cid, $ip, $port, $tPort)
 {		
 	$name = 'Unknown';
-	$cArray = getChannels($ip,$port,$tPort);
+	$cArray = getChannels($ip, $port, $tPort);
 	
 	for($i=0;$i<count($cArray);$i++)
 	{
@@ -661,9 +661,9 @@ function getChannelName($cid,$ip,$port,$tPort)
 	return $name;
 }
 
-function getChannels($ip,$port,$tPort)
+function getChannels($ip, $port, $tPort)
 {
-	$cArray 	= array();
+	$cArray 	= [];
 	$out		= "";
 	$j			= 0; 
 	$k			= 0;
@@ -697,10 +697,10 @@ function getChannels($ip,$port,$tPort)
 
 	return $cArray;
 }
-function getTSChannelUsers($ip,$port,$tPort)
+function getTSChannelUsers($ip, $port, $tPort)
 {
-	$uArray 	= array();
-	$innerArray = array();
+	$uArray 	= [];
+	$innerArray = [];
 	$out		= "";
 	$j			= 0; 
 	$k			= 0;
@@ -733,7 +733,7 @@ function getTSChannelUsers($ip,$port,$tPort)
 	 return $uArray;		
 }
 
-function usedID($usedArray,$cid)
+function usedID($usedArray, $cid)
 {		
 	$ok = true;
 	for($i=0;$i<count($usedArray);$i++)
@@ -745,7 +745,7 @@ function usedID($usedArray,$cid)
 	return $ok;
 }
 
-function defaultInfo($ip,$tPort,$port)
+function defaultInfo($ip, $tPort, $port)
 {
 	$out = '';
 	$html = '';	
@@ -763,17 +763,17 @@ function defaultInfo($ip,$tPort,$port)
 		$out   	= str_replace('OK', '', $out);
 		$out 	= trim($out);
 		
-		$name=substr($out,indexOf($out,"server_name="),strlen($out));
-		$name=convertCharset(substr($name,0,indexOf($name,"server_platform=")-strlen("server_platform=")));
+		$name=substr($out, indexOf($out, "server_name="), strlen($out));
+		$name=convertCharset(substr($name, 0, indexOf($name, "server_platform=")-strlen("server_platform=")));
 		
-		$os=substr($out,indexOf($out,"server_platform="),strlen($out));
-		$os=convertCharset(substr($os,0,indexOf($os,"server_welcomemessage=")-strlen("server_welcomemessage=")));
+		$os=substr($out, indexOf($out, "server_platform="), strlen($out));
+		$os=convertCharset(substr($os, 0, indexOf($os, "server_welcomemessage=")-strlen("server_welcomemessage=")));
 		
-		$tsType=substr($out,indexOf($out,"server_clan_server="),strlen($out));
-		$tsType=substr($tsType,0,indexOf($tsType,"server_udpport=")-strlen("server_udpport="));			
+		$tsType=substr($out, indexOf($out, "server_clan_server="), strlen($out));
+		$tsType=substr($tsType, 0, indexOf($tsType, "server_udpport=")-strlen("server_udpport="));			
 		
-		$welcomeMsg=substr($out,indexOf($out,"server_welcomemessage="),strlen($out));
-		$welcomeMsg=convertCharset(substr($welcomeMsg,0,indexOf($welcomeMsg,"server_webpost_linkurl=")-strlen("server_webpost_linkurl=")));
+		$welcomeMsg=substr($out, indexOf($out, "server_welcomemessage="), strlen($out));
+		$welcomeMsg=convertCharset(substr($welcomeMsg, 0, indexOf($welcomeMsg, "server_webpost_linkurl=")-strlen("server_webpost_linkurl=")));
 				
 		
 		if($tsType[0]==1) $tsTypeText = "Freeware Clan Server";
@@ -784,7 +784,7 @@ function defaultInfo($ip,$tPort,$port)
 		$html .= "<tr class=\"bg1\"><td id=\"contentMainFirst\" style=\"border:0\" class=\"fHeading\">Server IP:</td></tr>\n";
 		$html .= "<tr class=\"bg1\"><td id=\"contentMainFirst\" style=\"border:0\">$ip:$port<br /><br /></td></tr>\n";
 		$html .= "<tr class=\"bg1\"><td id=\"contentMainFirst\" style=\"border:0\" class=\"fHeading\">Version:</td></tr>\n";
-		$html .= "<tr class=\"bg1\"><td id=\"contentMainFirst\" style=\"border:0\">".getTSVersion($ip,$tPort,$port)."<br /><br /></td></tr>\n";
+		$html .= "<tr class=\"bg1\"><td id=\"contentMainFirst\" style=\"border:0\">".getTSVersion($ip, $tPort, $port)."<br /><br /></td></tr>\n";
 		$html .= "<tr class=\"bg1\"><td id=\"contentMainFirst\" style=\"border:0\" class=\"fHeading\">Type:</td></tr>\n";
 		$html .= "<tr class=\"bg1\"><td id=\"contentMainFirst\" style=\"border:0\">$tsTypeText<br /><br /></td></tr>\n";
 		$html .= "<tr class=\"bg1\"><td id=\"contentMainFirst\" style=\"border:0\" class=\"fHeading\">Welcome Message:</td></tr>\n";
@@ -795,10 +795,10 @@ function defaultInfo($ip,$tPort,$port)
 	return $html;
 }
 
-function channelInfo($ip,$tPort,$port,$cID)
+function channelInfo($ip, $tPort, $port, $cID)
 {
-	$cArray		= getChannels($ip,$port,$tPort);
-	$uArray 	= getTSChannelUsers($ip,$port,$tPort);
+	$cArray		= getChannels($ip, $port, $tPort);
+	$uArray 	= getTSChannelUsers($ip, $port, $tPort);
 	$html 		= '';
 	$cUser		= 0;
 	$ok 		= false;	
@@ -831,7 +831,7 @@ function channelInfo($ip,$tPort,$port,$cID)
 		$html .= "<tr class=\"bg1\"><td>".$cUser."/".removeChar($max)."<br /><br /></td></tr>\n";
 		$html .= "<tr class=\"bg1\"><td>Codec:</td></tr>\n";
 		$html .= "<tr class=\"bg1\"><td>".getCodec($codec)."<br /><br /></td></tr>\n";
-		$name = str_replace("'","¶",$name);
+		$name = str_replace("'", "¶", $name);
 //		$html .= "<tr><td><br /><input type=\"button\" id=\"submit\" onclick=\"javascript:w('login.php?cName=".removeChar($name)."', 'TS2', '420', '150');\" value=\"Join Channel\" class=\"submit\" /></td></tr>\n";
 	} else {
 		$html = "<tr class=\"bg1\"><td>Channel is deleted!</td></tr>\n";
@@ -840,7 +840,7 @@ function channelInfo($ip,$tPort,$port,$cID)
 	return $html;	
 }
 
-function getTSVersion($ip,$tPort,$port)
+function getTSVersion($ip, $tPort, $port)
 {
 	$out = "";
 	$fp = fsockopen($ip, $tPort, $errno, $errstr, 30);

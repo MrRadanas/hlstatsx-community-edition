@@ -68,7 +68,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		} elseif ($db->num_rows() < 1) {
 			error("No players found matching uniqueId '$uniqueid'");
 		} else {
-			list($player) = $db->fetch_row();
+			[$player] = $db->fetch_row();
 			$player = intval($player);
 		}
 	} elseif (!$player && !$uniqueid) {
@@ -110,72 +110,72 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1) {
 		$gamename = ucfirst($game);
 	} else {
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}
 
 	$tblMaps = new Table(
-		array(
+	    [
 			new TableColumn(
-				'map',
-				'Map Name',
-				'width=18&align=left&link=' . urlencode("mode=mapinfo&map=%k&game=$game")
+			    'map',
+			    'Map Name',
+			    'width=18&align=left&link=' . urlencode("mode=mapinfo&map=%k&game=$game")
 			),
 			new TableColumn(
-				'kills',
-				'Kills',
-				'width=7&align=right'
+			    'kills',
+			    'Kills',
+			    'width=7&align=right'
 			),
 			new TableColumn(
-				'kpercent',
-				'Perc. Kills',
-				'width=10&sort=no&type=bargraph'
+			    'kpercent',
+			    'Perc. Kills',
+			    'width=10&sort=no&type=bargraph'
 			),
 			new TableColumn(
-				'kpercent',
-				'%',
-				'width=6&sort=no&align=right&append=' . urlencode('%')
+			    'kpercent',
+			    '%',
+			    'width=6&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn(
-				'deaths',
-				'Deaths',
-				'width=7&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=7&align=right'
 			),
 			new TableColumn(
-				'kpd',
-				'Kpd',
-				'width=13&align=right'
+			    'kpd',
+			    'Kpd',
+			    'width=13&align=right'
 			),
 			new TableColumn(
-				'headshots',
-				'Headshots',
-				'width=10&align=right'
+			    'headshots',
+			    'Headshots',
+			    'width=10&align=right'
 			),
 			new TableColumn(
-				'hpercent',
-				'Perc. Headshots',
-				'width=12&sort=no&type=bargraph'
+			    'hpercent',
+			    'Perc. Headshots',
+			    'width=12&sort=no&type=bargraph'
 			),
 			new TableColumn(
-				'hpercent',
-				'%',
-				'width=6&sort=no&align=right&append=' . urlencode('%')
+			    'hpercent',
+			    '%',
+			    'width=6&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn(
-				'hpk',
-				'Hpk',
-				'width=6&align=right'
-			)
+			    'hpk',
+			    'Hpk',
+			    'width=6&align=right'
+			),
 			
-		),
-		'map',
-		'kpd',
-		'kills',
-		true,
-		9999,
-		'maps_page',
-		'maps_sort',
-		'maps_sortorder',
-		'maps'
+		],
+	    'map',
+	    'kpd',
+	    'kills',
+	    true,
+	    9999,
+	    'maps_page',
+	    'maps_sort',
+	    'maps_sortorder',
+	    'maps'
 	);
     
 	$db->query("
@@ -188,7 +188,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			hlstats_Servers.game='$game' AND killerId='$player'
 	");
-	list($realkills) = $db->fetch_row();
+	[$realkills] = $db->fetch_row();
 
 	$db->query("
 		SELECT
@@ -201,7 +201,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Servers.game='$game' AND killerId='$player'
 			AND headshot=1      
 	");
-	list($realheadshots) = $db->fetch_row();
+	[$realheadshots] = $db->fetch_row();
 
 	$result = $db->query("
 		SELECT

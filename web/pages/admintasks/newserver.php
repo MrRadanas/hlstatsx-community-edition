@@ -52,18 +52,19 @@ For support and installation notes visit http://www.hlxcommunity.com
 		else
 		{
 			$db->query("SELECT `realgame` FROM `hlstats_Games` WHERE `code` = '" . $db->escape($selGame) . "'");
-			if ( list($game) = $db->fetch_row() )
+			if ( [$game] = $db->fetch_row() )
 			{
 				$script_path = (isset($_SERVER['SSL']) || (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on")) ? 'https://' : 'http://';
 				$script_path .= $_SERVER['HTTP_HOST'];
-				$script_path .= str_replace("\\","/",dirname($_SERVER["PHP_SELF"]));
-				$db->query(sprintf("INSERT INTO `hlstats_Servers` (`address`, `port`, `name`, `game`, `publicaddress`, `rcon_password`) VALUES ('%s', '%d', '%s', '%s', '%s', '%s')",
-					$db->escape(clean_data($_POST['server_address'])),
-					$db->escape(clean_data($_POST['server_port'])),
-					$db->escape(clean_data($_POST['server_name'])),
-					$db->escape($selGame),
-					$db->escape(clean_data($_POST['public_address'])),
-					$db->escape(mystripslashes($_POST['server_rcon']))
+				$script_path .= str_replace("\\", "/", dirname($_SERVER["PHP_SELF"]));
+				$db->query(sprintf(
+				    "INSERT INTO `hlstats_Servers` (`address`, `port`, `name`, `game`, `publicaddress`, `rcon_password`) VALUES ('%s', '%d', '%s', '%s', '%s', '%s')",
+				    $db->escape(clean_data($_POST['server_address'])),
+				    $db->escape(clean_data($_POST['server_port'])),
+				    $db->escape(clean_data($_POST['server_name'])),
+				    $db->escape($selGame),
+				    $db->escape(clean_data($_POST['public_address'])),
+				    $db->escape(mystripslashes($_POST['server_rcon']))
 				));
 				$insert_id = $db->insert_id();
 				$db->query("INSERT INTO `hlstats_Servers_Config` (`serverId`, `parameter`, `value`)
@@ -78,7 +79,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				$db->query("UPDATE hlstats_Servers_Config
 							SET `value` = '" . $db->escape($script_path) . "'
 							WHERE serverId = '" . $insert_id . "' AND `parameter` = 'HLStatsURL'");
-				$_POST = array();
+				$_POST = [];
 				
 				// psychonic - worst. redirect. ever.
 				//   but we can't just use header() since admin.php already started part of the page and hacking it in before would be even messier

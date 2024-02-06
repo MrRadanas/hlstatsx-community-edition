@@ -44,93 +44,92 @@ For support and installation notes visit http://www.hlxcommunity.com
 	flush();
 	$tblPlayerKillStats = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'name',
-				'Victim',
-				'width=21&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
+			    'name',
+			    'Victim',
+			    'width=21&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 			),
 			new TableColumn
 			(
-				'kills',
-				'Kills',
-				'width=6&align=right'
+			    'kills',
+			    'Kills',
+			    'width=6&align=right'
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'%',
-				'width=7&sort=no&align=right&append=' . urlencode('%')
+			    'kpercent',
+			    '%',
+			    'width=7&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'Ratio',
-				'width=7&sort=no&type=bargraph'
+			    'kpercent',
+			    'Ratio',
+			    'width=7&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'deaths',
-				'Deaths',
-				'width=6&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=6&align=right'
 			),
 			new TableColumn
 			(
-				'dpercent',
-				'%',
-				'width=7&sort=no&align=right&append=' . urlencode('%')
+			    'dpercent',
+			    '%',
+			    'width=7&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'dpercent',
-				'Ratio',
-				'width=7&sort=no&type=bargraph'
+			    'dpercent',
+			    'Ratio',
+			    'width=7&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'kpd',
-				'K:D',
-				'width=7&align=right'
+			    'kpd',
+			    'K:D',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'headshots',
-				'Headshots',
-				'width=6&align=right'
+			    'headshots',
+			    'Headshots',
+			    'width=6&align=right'
 			),
 			new TableColumn
 			(
-				'hpercent',
-				'%',
-				'width=7&sort=no&align=right&append=' . urlencode('%')
+			    'hpercent',
+			    '%',
+			    'width=7&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'hpercent',
-				'Ratio',
-				'width=7&sort=no&type=bargraph'
+			    'hpercent',
+			    'Ratio',
+			    'width=7&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'hpk',
-				'HS:K',
-				'width=7&align=right'
-			)
+			    'hpk',
+			    'HS:K',
+			    'width=7&align=right'
+			),
 			
-		),
-		'victimId',
-		'kills',
-		'deaths',
-		true,
-		50,
-		'playerkills_page',
-		'playerkills_sort',
-		'playerkills_sortorder',
-		'tabkills',
-		'desc',
-		true
+		],
+	    'victimId',
+	    'kills',
+	    'deaths',
+	    true,
+	    50,
+	    'playerkills_page',
+	    'playerkills_sort',
+	    'playerkills_sortorder',
+	    'tabkills',
+	    'desc',
+	    true
 	);
 // This would be better done with a UNION query, I think, but MySQL doesn't
 // support them yet. (NOTE you need MySQL 3.23 for temporary table support.)

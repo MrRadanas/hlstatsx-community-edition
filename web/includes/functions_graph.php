@@ -122,24 +122,24 @@ For support and installation notes visit http://www.hlxcommunity.com
 		if ($write_legend > 0) {
 			if ($legend_x == 0)
 				$legend_x += $bounds['indent_x'][0] + 10;
-			imagesetpixel($image, $legend_x,   $bounds['indent_y'][0]-7, $color[0]);
+			imagesetpixel($image, $legend_x, $bounds['indent_y'][0]-7, $color[0]);
 			imagesetpixel($image, $legend_x+1, $bounds['indent_y'][0]-7, $color[0]);
 			imagesetpixel($image, $legend_x+2, $bounds['indent_y'][0]-7, $color[0]);
-			imagesetpixel($image, $legend_x,   $bounds['indent_y'][0]-8, $color[0]);
+			imagesetpixel($image, $legend_x, $bounds['indent_y'][0]-8, $color[0]);
 			imagesetpixel($image, $legend_x+1, $bounds['indent_y'][0]-8, $color[0]);
 			imagesetpixel($image, $legend_x+2, $bounds['indent_y'][0]-8, $color[0]);
-			imagesetpixel($image, $legend_x,   $bounds['indent_y'][0]-9, $color[0]);
+			imagesetpixel($image, $legend_x, $bounds['indent_y'][0]-9, $color[0]);
 			imagesetpixel($image, $legend_x+1, $bounds['indent_y'][0]-9, $color[0]);
 			imagesetpixel($image, $legend_x+2, $bounds['indent_y'][0]-9, $color[0]);
 			$legend_x += 7;
-			imagestring($image, 1, $legend_x, $bounds['indent_y'][0]-11, $name , $color[2]);
+			imagestring($image, 1, $legend_x, $bounds['indent_y'][0]-11, $name, $color[2]);
 			$legend_x += (imagefontwidth(1) * strlen($name)) + 7;
 		}
       
-		$start_pos = array("x" => $bounds['width']-$bounds['indent_x'][1], "y" => $bounds['indent_y'][1]);
+		$start_pos = ["x" => $bounds['width']-$bounds['indent_x'][1], "y" => $bounds['indent_y'][1]];
        
 		$pos   = $start_pos;
-		$cache = array("x" => 0, "y" => 0);
+		$cache = ["x" => 0, "y" => 0];
       
 		$step_y = ($bounds['height']-$bounds['indent_y'][0]-$bounds['indent_y'][1]) / 10;
 		if ($step_y < 15)
@@ -197,11 +197,14 @@ For support and installation notes visit http://www.hlxcommunity.com
 			for ($i=1; $i<$steps; $i++) {
 				$temp_y = (($bounds['height']-$bounds['indent_y'][0]-$bounds['indent_y'][1]) - ((($bounds['height']-$bounds['indent_y'][0]-$bounds['indent_y'][1]) / $max_pos_y[$max_index]) * ($i*$step_width))) + $bounds['indent_y'][0];
 				if ($temp_y > $bounds['indent_y'][0]+5)
-					image_dashed_line($image, $bounds['indent_x'][0]+1, 
-						$temp_y, 
-						($bounds['width']-$bounds['indent_x'][1]-1), 
-						$temp_y, 
-						array($color[4], $color[4], $color[4], -1, -1, -1));
+					image_dashed_line(
+					    $image,
+					    $bounds['indent_x'][0]+1,
+					    $temp_y,
+					    ($bounds['width']-$bounds['indent_x'][1]-1),
+					    $temp_y,
+					    [$color[4], $color[4], $color[4], -1, -1, -1]
+					);
 				imageline($image, $bounds['indent_x'][0]+1, $temp_y, $bounds['indent_x'][0]+4, $temp_y, $color[3]);
 
 				if ($max_pos_y[$max_index] > 10000) {
@@ -241,9 +244,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 				break; 
 		}
       
-		$mov_avg_array        = array();
+		$mov_avg_array        = [];
 		$mov_avg_value        = 0;
-		$mov_avg_display_value = array();
+		$mov_avg_display_value = [];
 
 		$i = 0;
 		while (($i < count($data_array)) && ($i < $mov_avg_precision / 2)) {
@@ -342,7 +345,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			switch ($server_load_type)  {
 				case 1:
 					if (($write_timestamp > 0) && ($key > 0 && $key % 12 == 0))  {
-						image_dashed_line($image, $pos['x'], $pos['y'], $pos['x'], $bounds['height']-$bounds['indent_y'][1], array($color[1], $color[1], $color[1], -1, -1, -1));
+						image_dashed_line($image, $pos['x'], $pos['y'], $pos['x'], $bounds['height']-$bounds['indent_y'][1], [$color[1], $color[1], $color[1], -1, -1, -1]);
 						$str = date("H:i", $entry['timestamp']);
 						imagestring($image, 1, $pos['x']-10, $bounds['height']-$bounds['indent_y'][1]+3, $str, $color[2]);
 					}
@@ -354,7 +357,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 						if ($bounds['width']-$bounds['indent_x'][1]-$pos['x'] > 120)
 							$first_day++;
 						if ($first_day > 0) { 
-							image_dashed_line($image, $pos['x'], $pos['y'], $pos['x'], $bounds['height']-$bounds['indent_y'][1], array($color[1], $color[1], $color[1], -1, -1, -1));
+							image_dashed_line($image, $pos['x'], $pos['y'], $pos['x'], $bounds['height']-$bounds['indent_y'][1], [$color[1], $color[1], $color[1], -1, -1, -1]);
 							$first_day++;  
 							if ($last_day_timestamp == 0)
 								$last_day_timestamp = $first_timestamp;
@@ -371,7 +374,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 						if ($bounds['width']-$bounds['indent_x'][1]-$pos['x'] > 0)
 							$first_day++;
 						if ($first_day > 0) { 
-							image_dashed_line($image, $pos['x'], $pos['y'], $pos['x'], $bounds['height']-$bounds['indent_y'][1], array($color[1], $color[1], $color[1], -1, -1, -1));
+							image_dashed_line($image, $pos['x'], $pos['y'], $pos['x'], $bounds['height']-$bounds['indent_y'][1], [$color[1], $color[1], $color[1], -1, -1, -1]);
 							if ($last_day_timestamp == 0)
 								$last_day_timestamp = $first_timestamp;
 							$str = date("d", $last_day_timestamp);
@@ -386,7 +389,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 						if ($bounds['width']-$bounds['indent_x'][1]-$pos['x'] > 30)
 							$first_day++;
 						if ($first_day > 0) { 
-							image_dashed_line($image, $pos['x'], $pos['y'], $pos['x'], $bounds['height']-$bounds['indent_y'][1], array($color[1], $color[1], $color[1], -1, -1, -1));
+							image_dashed_line($image, $pos['x'], $pos['y'], $pos['x'], $bounds['height']-$bounds['indent_y'][1], [$color[1], $color[1], $color[1], -1, -1, -1]);
 							$first_day++;  
 							if ($last_month_timestamp == 0)
 								$last_month_timestamp = $first_timestamp;
@@ -399,7 +402,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					
 				default:
 					if (($write_timestamp > 0) && ($key > 0 && $key % 12 == 0)) {
-						image_dashed_line($image, $pos['x'], $pos['y'], $pos['x'], $bounds['height']-$bounds['indent_y'][1], array($color[1], $color[1], $color[1], -1, -1, -1));
+						image_dashed_line($image, $pos['x'], $pos['y'], $pos['x'], $bounds['height']-$bounds['indent_y'][1], [$color[1], $color[1], $color[1], -1, -1, -1]);
 						$str = date("H:i", $entry['timestamp']);
 						imagestring($image, 1, $pos['x']-10, $bounds['height']-$bounds['indent_y'][1]+3, $str, $color[2]);
                     }
@@ -407,17 +410,17 @@ For support and installation notes visit http://www.hlxcommunity.com
 			}
                         
 			if ($dot > 0) {
-				imagesetpixel($image, $pos['x'],   $pos['y'],   $color[0]);
-				imagesetpixel($image, $pos['x']-1, $pos['y'],   $color[0]);
+				imagesetpixel($image, $pos['x'], $pos['y'], $color[0]);
+				imagesetpixel($image, $pos['x']-1, $pos['y'], $color[0]);
 				imagesetpixel($image, $pos['x']-1, $pos['y']-1, $color[0]);
 				imagesetpixel($image, $pos['x']-1, $pos['y']+1, $color[0]);
-				imagesetpixel($image, $pos['x']+1, $pos['y'],   $color[0]);
+				imagesetpixel($image, $pos['x']+1, $pos['y'], $color[0]);
 				imagesetpixel($image, $pos['x']+1, $pos['y']-1, $color[0]);
 				imagesetpixel($image, $pos['x']+1, $pos['y']+1, $color[0]);
-				imagesetpixel($image, $pos['x'],   $pos['y']-1, $color[0]);
-				imagesetpixel($image, $pos['x'],   $pos['y']+1, $color[0]);
+				imagesetpixel($image, $pos['x'], $pos['y']-1, $color[0]);
+				imagesetpixel($image, $pos['x'], $pos['y']+1, $color[0]);
 			} else {
-				imagesetpixel($image, $pos['x'],   $pos['y'],   $color[0]);
+				imagesetpixel($image, $pos['x'], $pos['y'], $color[0]);
 			}
         
 			$cache['x'] = $pos['x'];

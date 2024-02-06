@@ -95,7 +95,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		$timeout    = 5;
 		$answer     = "";
 		$packets    = 0;
-		$read       = array($socket);
+		$read       = [$socket];
 		while (socket_select($read, $write = NULL, $except = NULL, $timeout) > 0) {
 			$recv_bytes += socket_recvfrom($socket, $buffer, 2000, 0, $host, $port);
 			$answer     .= $buffer;

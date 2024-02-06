@@ -88,8 +88,8 @@ function getFlag($flag, $type='url')
  */
 function valid_request($str, $numeric = false)
 {
-	$search_pattern = array("/[^A-Za-z0-9\[\]*.,=()!\"$%&^`ґ':;ЯІі#+~_\-|<>\/\\\\@{}дцьДЦЬ ]/");
-	$replace_pattern = array('');
+	$search_pattern = ["/[^A-Za-z0-9\[\]*.,=()!\"$%&^`ґ':;ЯІі#+~_\-|<>\/\\\\@{}дцьДЦЬ ]/"];
+	$replace_pattern = [''];
 	$str = preg_replace($search_pattern, $replace_pattern, $str);
 
 	if (!$numeric) {
@@ -180,10 +180,10 @@ function error($message, $exit = true)
  * @param mixed $notkeys
  * @return
  */
-function makeQueryString($key, $value, $notkeys = array())
+function makeQueryString($key, $value, $notkeys = [])
 {
 	if (!is_array($notkeys)) {
-		$notkeys = array();
+		$notkeys = [];
 	}
 
 	$querystring = '';
@@ -266,8 +266,11 @@ function getSortArrow($sort, $sortorder, $name, $longname, $var_sort = 'sort', $
 		$othersortorder = 'asc';
 	}
 	
-	$arrowstring = '<a href="' . $g_options['scripturl'] . '?' . makeQueryString($var_sort, $name,
-		array($var_sortorder));
+	$arrowstring = '<a href="' . $g_options['scripturl'] . '?' . makeQueryString(
+	    $var_sort,
+	    $name,
+	    [$var_sortorder]
+	);
 
 	if ($sort == $name)
 	{
@@ -395,7 +398,7 @@ function getLink($url, $type = 'http://', $target = '_blank')
 
 	$uri=sprintf("%s%s%s", $urld['path'], $urld['query'], $urld['fragment']);
 	$host_uri=$urld['host'] . $uri;
-	return sprintf('<a href="%s://%s%s" target="%s">%s</a>',$urld['scheme'], $urld['host'], $uri, $target, htmlspecialchars($host_uri, ENT_COMPAT));
+	return sprintf('<a href="%s://%s%s" target="%s">%s</a>', $urld['scheme'], $urld['host'], $uri, $target, htmlspecialchars($host_uri, ENT_COMPAT));
 }
 
 /**
@@ -466,8 +469,8 @@ function getImage($filename)
 	{
 		$size = getImageSize("$path.$ext");
 
-		return array('url' => "$url.$ext", 'path' => "$path.$ext", 'width' => $size[0], 'height' => $size[1],
-			'size' => $size[3]);
+		return ['url' => "$url.$ext", 'path' => "$path.$ext", 'width' => $size[0], 'height' => $size[1],
+			'size' => $size[3]];
 	}
 
     return false;
@@ -484,7 +487,7 @@ function getRealGame($game)
 {
 	global $db;
 	$result = $db->query("SELECT realgame from hlstats_Games WHERE code='$game'");
-	list($realgame) = $db->fetch_row($result);
+	[$realgame] = $db->fetch_row($result);
 	return $realgame;
 }
 
@@ -527,7 +530,7 @@ function get_player_rank($playerdata) {
 			)
 	";
 	$db->query($query);
-	list($rank) = $db->fetch_row();
+	[$rank] = $db->fetch_row();
 	$rank++;
 
 	return $rank;
@@ -571,7 +574,7 @@ function hex2rgb($hexVal = '')
 	}
 	$arrTmp = explode(' ', chunk_split($hexVal, 2, ' '));
 	$arrTmp = array_map('hexdec', $arrTmp);
-	return array('red' => $arrTmp[0], 'green' => $arrTmp[1], 'blue' => $arrTmp[2]);
+	return ['red' => $arrTmp[0], 'green' => $arrTmp[1], 'blue' => $arrTmp[2]];
 }
 
 ?>

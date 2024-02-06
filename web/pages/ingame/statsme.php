@@ -52,7 +52,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			exit;
 		}
 
-		$uniqueid = preg_replace('/^STEAM_\d+?\:/i','',$uniqueid);
+		$uniqueid = preg_replace('/^STEAM_\d+?\:/i', '', $uniqueid);
 		$db->query("
 			SELECT
 				playerId
@@ -69,7 +69,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		} elseif ($db->num_rows() < 1) {
 			error("No players found matching uniqueId '$uniqueid'");
 		} else {
-			list($player) = $db->fetch_row();
+			[$player] = $db->fetch_row();
 			$player = intval($player);
 		}
 	} elseif (!$player && !$uniqueid) {
@@ -136,7 +136,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1) {
 		$gamename = ucfirst($game);
 	} else {
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}
 
 ?>
@@ -209,7 +209,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					WHERE
 						hlstats_Servers.game='$game' AND killerId='$player'
 				");
-				list($realkills) = $db->fetch_row();
+				[$realkills] = $db->fetch_row();
 				echo ' ('.number_format($realkills).')';
 			?></td>
 		</tr>
@@ -239,7 +239,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 							AND (hlstats_Events_Frags.killerId='$player' OR hlstats_Events_Frags.victimId='$player')
 							AND hlstats_Servers.game='$game'
 				");
-				list($realkpd) = $db->fetch_row();
+				[$realkpd] = $db->fetch_row();
 				echo $playerdata['kpd'];
 				echo " ($realkpd)";
 			?></td>
@@ -258,7 +258,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 						hlstats_Servers.game='$game' AND killerId='$player'
 						AND headshot=1		
 				");
-				list($realheadshots) = $db->fetch_row();
+				[$realheadshots] = $db->fetch_row();
 				if ($playerdata['headshots'] == 0) 
 					echo number_format($realheadshots);
 				else
@@ -279,7 +279,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 						WHERE
 							hlstats_Servers.game='$game' AND killerId='$player'
 				");
-				list($realhpk) = $db->fetch_row();
+				[$realhpk] = $db->fetch_row();
 				echo $playerdata['hpk'];
 				echo " ($realhpk)";
 			?></td>
@@ -299,7 +299,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					WHERE
 						hlstats_Servers.game='$game' AND playerId='$player'
 				");
-				list($playerdata['accuracy'], $sm_shots, $sm_hits) = $db->fetch_row();
+				[$playerdata['accuracy'], $sm_shots, $sm_hits] = $db->fetch_row();
 				echo $playerdata['acc'] . '%';
 				echo ' ('.$playerdata['accuracy'] . '%)';
 			?></td>
@@ -318,7 +318,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					WHERE
 						hlstats_Servers.game='$game' AND killerId='$player'
 				");
-				list($realteamkills) = $db->fetch_row();
+				[$realteamkills] = $db->fetch_row();
 				echo ' ('.number_format($realteamkills).')';
 			?></td>
 		</tr>

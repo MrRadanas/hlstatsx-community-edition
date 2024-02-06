@@ -48,33 +48,33 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1) {
 		error('Invalid or no game specified.');
 	} else {
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}
 
 	$table = new Table(
-		array(
+	    [
 			new TableColumn(
-				'killerName',
-				'Player',
-				'width=60&align=left&flag=1&link=' . urlencode('mode=statsme&amp;player=%k') 
+			    'killerName',
+			    'Player',
+			    'width=60&align=left&flag=1&link=' . urlencode('mode=statsme&amp;player=%k')
 			),
 			new TableColumn(
-				'frags',
-				'Kills on $map',
-				'width=15&align=right'
+			    'frags',
+			    'Kills on $map',
+			    'width=15&align=right'
 			),
 			new TableColumn(
-				'headshots',
-				'Headshots',
-				'width=15&align=right'
+			    'headshots',
+			    'Headshots',
+			    'width=15&align=right'
 			),
 			new TableColumn(
-				'hpk',
-				'Hpk',
-				'width=5&align=right'
+			    'hpk',
+			    'Hpk',
+			    'width=5&align=right'
 			),
-		),
-		'killerId', // keycol
+		],
+	    'killerId', // keycol
 		'frags', // sort_default
 		'killerName', // sort_default2
 		true, // showranking
@@ -118,7 +118,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			AND hlstats_Servers.game='$game'
 	");
 	
-	list($numitems, $totalkills) = $db->fetch_row($resultCount);
+	[$numitems, $totalkills] = $db->fetch_row($resultCount);
 ?>
 
 

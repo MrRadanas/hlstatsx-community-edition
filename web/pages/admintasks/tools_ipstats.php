@@ -73,29 +73,29 @@ For support and installation notes visit http://www.hlxcommunity.com
 <?php
     if (isset($_GET['hostgroup'])) {
 		$table = new Table(
-			array(
+		    [
 				new TableColumn(
-					"host",
-					"Host",
-					"width=41"
+				    "host",
+				    "Host",
+				    "width=41"
 				),
 				new TableColumn(
-					"freq",
-					"Connects",
-					"width=12&align=right"
+				    "freq",
+				    "Connects",
+				    "width=12&align=right"
 				),
 				new TableColumn(
-					"percent",
-					"Percentage of Connects",
-					"width=30&sort=no&type=bargraph"
+				    "percent",
+				    "Percentage of Connects",
+				    "width=30&sort=no&type=bargraph"
 				),
 				new TableColumn(
-					"percent",
-					"%",
-					"width=12&sort=no&align=right&append=" . urlencode("%")
-				)
-			),
-			"host",			// keycol
+				    "percent",
+				    "%",
+				    "width=12&sort=no&align=right&append=" . urlencode("%")
+				),
+			],
+		    "host",			// keycol
 			"freq",			// sort
 			"host",			// sort2
 			true,			// showranking
@@ -115,7 +115,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				hostgroup='".$db->escape($hostgroup)."'
 		");
 		
-		list($totalconnects, $numitems) = $db->fetch_row($result);
+		[$totalconnects, $numitems] = $db->fetch_row($result);
 		
 		$result = $db->query("
 			SELECT
@@ -140,29 +140,29 @@ For support and installation notes visit http://www.hlxcommunity.com
 	else
 	{
 		$table = new Table(
-			array(
+		    [
 				new TableColumn(
-					"hostgroup",
-					"Host",
-					"width=41&icon=server&link=" . urlencode("mode=admin&task=tools_ipstats&hostgroup=%k")
+				    "hostgroup",
+				    "Host",
+				    "width=41&icon=server&link=" . urlencode("mode=admin&task=tools_ipstats&hostgroup=%k")
 				),
 				new TableColumn(
-					"freq",
-					"Connects",
-					"width=12&align=right"
+				    "freq",
+				    "Connects",
+				    "width=12&align=right"
 				),
 				new TableColumn(
-					"percent",
-					"Percentage of Connects",
-					"width=30&sort=no&type=bargraph"
+				    "percent",
+				    "Percentage of Connects",
+				    "width=30&sort=no&type=bargraph"
 				),
 				new TableColumn(
-					"percent",
-					"%",
-					"width=12&sort=no&align=right&append=" . urlencode("%")
-				)
-			),
-			"hostgroup",	// keycol
+				    "percent",
+				    "%",
+				    "width=12&sort=no&align=right&append=" . urlencode("%")
+				),
+			],
+		    "hostgroup",	// keycol
 			"freq",			// sort
 			"hostgroup",	// sort2
 			true,			// showranking
@@ -177,7 +177,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				hlstats_Events_Connects
 		");
 		
-		list($totalconnects, $numitems) = $db->fetch_row($result);
+		[$totalconnects, $numitems] = $db->fetch_row($result);
 		
 		$result = $db->query("
 			SELECT

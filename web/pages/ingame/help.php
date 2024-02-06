@@ -202,8 +202,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 			serverId
 	";
 	$db->query($query);
-	$this_server = array();
-	$servers = array();
+	$this_server = [];
+	$servers = [];
 	while ($rowdata = $db->fetch_array()) {
 		$servers[] = $rowdata;
 		if ($rowdata['serverId'] == $server_id)

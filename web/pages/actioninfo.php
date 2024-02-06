@@ -76,42 +76,42 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1)
 		error('Invalid or no game specified.');
 	else
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 		
 	pageHeader(
-		array($gamename, 'Action Details', $act_name),
-		array(
+	    [$gamename, 'Action Details', $act_name],
+	    [
 			$gamename=>$g_options['scripturl'] . "?game=$game",
 			'Action Statistics'=>$g_options['scripturl'] . "?mode=actions&game=$game",
-			'Action Details'=>''
-		),
-		$act_name
+			'Action Details'=>'',
+		],
+	    $act_name
 	);
     
 
 	$table = new Table(
-		array(
+	    [
 			new TableColumn(
-				'playerName',
-				'Player',
-				'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k') 
+			    'playerName',
+			    'Player',
+			    'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 			),
 			new TableColumn(
-				'obj_count',
-				'Achieved',
-				'width=25&align=right'
+			    'obj_count',
+			    'Achieved',
+			    'width=25&align=right'
 			),
 			new TableColumn(
-				'obj_bonus',
-				'Skill Bonus Total',
-				'width=25&align=right&sort=no'
-			)
-		),
-		'playerId',
-		'obj_count',
-		'playerName',
-		true,
-		40
+			    'obj_bonus',
+			    'Skill Bonus Total',
+			    'width=25&align=right&sort=no'
+			),
+		],
+	    'playerId',
+	    'obj_count',
+	    'playerName',
+	    true,
+	    40
 	);
 
 	if ($actiondata['for_PlayerActions']==1)
@@ -193,7 +193,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		");
 	}	
 		
-	list($numitems, $totalact) = $db->fetch_row($resultCount);
+	[$numitems, $totalact] = $db->fetch_row($resultCount);
   
 	if ($totalact == 0)
 	{
@@ -233,7 +233,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				hlstats_Events_TeamBonuses.actionId = hlstats_Actions.id AND
 				hlstats_Players.hideranking = '0'
 		");
-		list($numitems, $totalact) = $db->fetch_row($resultCount);    
+		[$numitems, $totalact] = $db->fetch_row($resultCount);    
 	}
 ?>
 <div class="block">
@@ -255,29 +255,29 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($actiondata['for_PlayerPlayerActions'] == 1)
 	{
 		$table = new Table(
-		array(
+		    [
 			new TableColumn(
-				'playerName',
-				'Player',
-				'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k') 
+			    'playerName',
+			    'Player',
+			    'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 			),
 			new TableColumn(
-				'obj_count',
-				'Times Victimized',
-				'width=25&align=right'
+			    'obj_count',
+			    'Times Victimized',
+			    'width=25&align=right'
 			),
 			new TableColumn(
-				'obj_bonus',
-				'Skill Bonus Total',
-				'width=25&align=right&sort=no'
-			)
-		),
-		'victimId',
-		'obj_count',
-		'playerName',
-		true,
-		40,
-		'vpage'
+			    'obj_bonus',
+			    'Skill Bonus Total',
+			    'width=25&align=right&sort=no'
+			),
+		],
+		    'victimId',
+		    'obj_count',
+		    'playerName',
+		    true,
+		    40,
+		    'vpage'
 		);
 	
 		$result = $db->query("
@@ -317,7 +317,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				hlstats_Players.hideranking = '0'
 		");
 	
-		list($numitems, $totalact) = $db->fetch_row($resultCount);
+		[$numitems, $totalact] = $db->fetch_row($resultCount);
 ?>
 <div class="block">
 	<a name="victims"><?php printSectionTitle("Action Victim Details"); ?></a>

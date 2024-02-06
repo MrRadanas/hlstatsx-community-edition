@@ -40,7 +40,7 @@ For support and installation notes visit http://www.hlxcommunity.com
         die('Do not access this file directly.');
     }
 
-	pageHeader(array('Admin'), array('Admin' => ''));
+	pageHeader(['Admin'], ['Admin' => '']);
 ?>
 <div class="block">
 	<?php printSectionTitle('Authorization Required'); ?>

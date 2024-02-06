@@ -47,8 +47,8 @@ if(defined('HISTORICAL_CACHE'))
 if($historical_cache==1)
 {
 	$rawmd5=md5(http_build_query($_REQUEST));
-	$dir1=substr($rawmd5,0,1);
-	$dir2=substr($rawmd5,1,1);
+	$dir1=substr($rawmd5, 0, 1);
+	$dir2=substr($rawmd5, 1, 1);
 	$cachetarget=sprintf("cache/%s/%s/%s", $dir1, $dir2, $rawmd5);
 
 	@mkdir("cache/$dir1");
@@ -56,7 +56,7 @@ if($historical_cache==1)
 
 	if(file_exists($cachetarget))
 	{
-		file_put_contents("cache/cachehit",$cachetarget . "\n", FILE_APPEND);
+		file_put_contents("cache/cachehit", $cachetarget . "\n", FILE_APPEND);
 		echo file_get_contents($cachetarget);
 		die;
 	}
@@ -73,15 +73,15 @@ if (!empty($_GET['logout']) && $_GET['logout'] == '1') {
 // Several stuff added by Malte Bayer
 global $scripttime, $siteurlneo;
 $scripttime = microtime(true);
-$siteurlneo='http://'.$_SERVER['HTTP_HOST'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],strrchr($_SERVER['PHP_SELF'],'/'))+1);
-$siteurlneo=str_replace('\\','/',$siteurlneo);
+$siteurlneo='http://'.$_SERVER['HTTP_HOST'].substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], strrchr($_SERVER['PHP_SELF'], '/'))+1);
+$siteurlneo=str_replace('\\', '/', $siteurlneo);
 
 // Several Stuff end
 
 foreach ($_SERVER as $key => $entry) {
 	if ($key !== 'HTTP_COOKIE') {
-		$search_pattern  = array('/<script>/', '/<\/script>/', '/[^A-Za-z0-9.\-\/=:;_?#&~]/');
-		$replace_pattern = array('', '', '');
+		$search_pattern  = ['/<script>/', '/<\/script>/', '/[^A-Za-z0-9.\-\/=:;_?#&~]/'];
+		$replace_pattern = ['', '', ''];
 		$entry = preg_replace($search_pattern, $replace_pattern, $entry);
   
 		if ($key == "PHP_SELF") {
@@ -137,20 +137,20 @@ else
 $g_options = getOptions();
 
 if (!isset($g_options['scripturl'])) {
-	$g_options['scripturl'] = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : getenv('PHP_SELF');
+	$g_options['scripturl'] = $_SERVER['PHP_SELF'] ?? getenv('PHP_SELF');
 }
 
 ////
 //// Main
 ////
 
-$game = valid_request(isset($_GET['game']) ? $_GET['game'] : '', false);
+$game = valid_request($_GET['game'] ?? '', false);
 
 $realgame = $_SESSION['realgame'] ?? null;
 
 if (!$game)
 {
-	$game = isset($_SESSION['game'])?$_SESSION['game']:'';
+	$game = $_SESSION['game']??'';
 }
 else
 {
@@ -163,9 +163,9 @@ if (!$realgame && $game)
 	$_SESSION['realgame'] = $realgame;
 }
 
-$mode = isset($_GET['mode']) ? $_GET['mode'] : '';
+$mode = $_GET['mode'] ?? '';
 
-$valid_modes = array(
+$valid_modes = [
 	'players',
 	'clans',
 	'weapons',
@@ -200,12 +200,12 @@ $valid_modes = array(
 	'teamspeak',
 	'ventrilo',
 	'updater',
-	'profile'
-);
+	'profile',
+];
    
 if (file_exists('./updater') && $mode != 'updater')
 {
-	pageHeader(array('Update Notice'), array('Update Notice' => ''));
+	pageHeader(['Update Notice'], ['Update Notice' => '']);
 	echo "<div class=\"warning\">\n" . 
 	"<span class=\"warning-heading\"><img src=\"".IMAGE_PATH."/warning.gif\" alt=\"Warning\"> Warning:</span><br />\n" .
 	"<span class=\"warning-text\">The updater folder was detected in your web directory.<br />

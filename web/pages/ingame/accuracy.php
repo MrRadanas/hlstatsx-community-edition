@@ -67,7 +67,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		} elseif ($db->num_rows() < 1) {
 			error("No players found matching uniqueId '$uniqueid'");
 		} else {
-			list($player) = $db->fetch_row();
+			[$player] = $db->fetch_row();
 			$player = intval($player);
 		}
 	} elseif (!$player && !$uniqueid) {
@@ -109,65 +109,65 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1)
 		$gamename = ucfirst($game);
 	else
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	
 	$tblWeaponstats = new Table(
-		array(
+	    [
 			new TableColumn(
-				'smweapon',
-				'Weapon',
-				'width=10&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&weapon=%k&game=$game")
+			    'smweapon',
+			    'Weapon',
+			    'width=10&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&weapon=%k&game=$game")
 			),
 			new TableColumn(
-				'smshots',
-				'Shots',
-				'width=10&align=right'
+			    'smshots',
+			    'Shots',
+			    'width=10&align=right'
 			),
 			new TableColumn(
-				'smhits',
-				'Hits',
-				'width=10&align=right'
+			    'smhits',
+			    'Hits',
+			    'width=10&align=right'
 			),
 			new TableColumn(
-				'smdamage',
-				'Damage',
-				'width=10&align=right'
+			    'smdamage',
+			    'Damage',
+			    'width=10&align=right'
 			),
 			new TableColumn(
-				'smheadshots',
-				'Headshots',
-				'width=9&align=right'
+			    'smheadshots',
+			    'Headshots',
+			    'width=9&align=right'
 			),
 			new TableColumn(
-				'smkills',
-				'Kills',
-				'width=9&align=right'
+			    'smkills',
+			    'Kills',
+			    'width=9&align=right'
 			),
 			new TableColumn(
-				'smaccuracy',
-				'Accuracy',
-				'width=9&align=right&append=' . urlencode('%')
+			    'smaccuracy',
+			    'Accuracy',
+			    'width=9&align=right&append=' . urlencode('%')
 			),
 			new TableColumn(
-				'smdhr',
-				'Damage Per Hit',
-				'width=14&align=right'
+			    'smdhr',
+			    'Damage Per Hit',
+			    'width=14&align=right'
 			),
 			new TableColumn(
-				'smspk',
-				'Shots Per Kill',
-				'width=14&align=right'
-			)
-		),
-		'smweapon',
-		'smkdr',
-		'smweapon',
-		true,
-		9999,
-		'weap_page',
-		'weap_sort',
-		'weap_sortorder',
-		'weaponstats'
+			    'smspk',
+			    'Shots Per Kill',
+			    'width=14&align=right'
+			),
+		],
+	    'smweapon',
+	    'smkdr',
+	    'smweapon',
+	    true,
+	    9999,
+	    'weap_page',
+	    'weap_sort',
+	    'weap_sortorder',
+	    'weaponstats'
 	);
 	
 	$result = $db->query("

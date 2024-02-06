@@ -53,15 +53,15 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	class OptionGroup
 	{
-		var $title = '';
-		var $options = array();
+		public $title = '';
+		public $options = [];
 
-		function __construct($title)
+		public function __construct($title)
 		{
 			$this->title = $title;
 		}
 
-		function draw ()
+		public function draw ()
 		{
 			global $g_options;
 ?>
@@ -77,7 +77,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 <?php
 		}
 		
-		function update ()
+		public function update ()
 		{
 			global $db;
 			
@@ -85,8 +85,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 			{
 				if (($this->title == 'Fonts') || ($this->title == 'General')) {
 					$optval = $_POST[$opt->name];
-					$search_pattern  = array('/script/i', '/;/', '/%/');
-					$replace_pattern = array('', '', '');
+					$search_pattern  = ['/script/i', '/;/', '/%/'];
+					$replace_pattern = ['', '', ''];
 					$optval = preg_replace($search_pattern, $replace_pattern, $optval);
 				} else {
 					$optval = valid_request($_POST[$opt->name], false);
@@ -134,18 +134,18 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	class Option
 	{
-		var $name;
-		var $title;
-		var $type;
+		public $name;
+		public $title;
+		public $type;
 
-		function __construct($name, $title, $type)
+		public function __construct($name, $title, $type)
 		{
 			$this->name = $name;
 			$this->title = $title;
 			$this->type = $type;
 		}
 
-		function draw()
+		public function draw()
 		{
 			global $g_options, $optiondata, $db;
 			
@@ -168,7 +168,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					$d = dir('styles');
 					while (false !== ($e = $d->read()))  {
 						if (is_file("styles/$e") && ($e != '.') && ($e != '..')) {
-							$ename = ucwords(strtolower(str_replace(array('_','.css'), array(' ',''), $e)));
+							$ename = ucwords(strtolower(str_replace(['_','.css'], [' ',''], $e)));
 							$sel = '';
 							if ($e==$g_options['style'])
 								$sel = 'selected="selected"';
@@ -203,7 +203,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		}
 	}
 
-	$optiongroups = array();
+	$optiongroups = [];
 
 	$optiongroups[0] = new OptionGroup('Site Settings');
 	$optiongroups[0]->options[] = new Option('sitename', 'Site Name', 'text');

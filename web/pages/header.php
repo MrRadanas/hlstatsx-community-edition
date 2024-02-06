@@ -59,7 +59,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	// see if they have a defined style or a new style they'd like
 	$selectedStyle = (isset($_COOKIE['style']) && $_COOKIE['style']) ? $_COOKIE['style'] : "";
-	$selectedStyle = isset($_POST['stylesheet']) ? $_POST['stylesheet'] : $selectedStyle; 
+	$selectedStyle = $_POST['stylesheet'] ?? $selectedStyle; 
 
 	// if they do make sure it exists
 	if(!empty($selectedStyle))
@@ -87,9 +87,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 // this code here assumes that styles end with .css (the selector box for users and for admin does NOT check), someone may want to change this -octo
 	// Determine if we have custom nav images available
     if ($selectedStyle) {
-        $style = preg_replace('/\.css$/','',$selectedStyle);
+        $style = preg_replace('/\.css$/', '', $selectedStyle);
     } else {
-        $style = preg_replace('/\.css$/','',$g_options['style']);
+        $style = preg_replace('/\.css$/', '', $g_options['style']);
     }
 	$iconpath = IMAGE_PATH . "/icons";
 	if (file_exists($iconpath . "/" . $style)) {
@@ -183,7 +183,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				hidden='0'
 		");
 		
-		list($num_games) = $db->fetch_row($resultGames);
+		[$num_games] = $db->fetch_row($resultGames);
 		
 		if ($num_games > 1 && $g_options['display_gamelist'] == 1) {
 ?>
@@ -237,13 +237,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 					$d = dir('styles'); 
 					while (false !== ($e = $d->read())) { 
 						if (is_file("styles/$e") && ($e != '.') && ($e != '..') && $e != $g_options['style']) { 
-							$ename = ucwords(strtolower(str_replace(array('_','.css'), array(' ',''), $e))); 
+							$ename = ucwords(strtolower(str_replace(['_','.css'], [' ',''], $e))); 
 							$styles[$e] = $ename; 
 						} 
 					}
 					$d->close(); 
 					asort($styles); 
-					$styles = array_merge(array($g_options['style'] => 'Default'),$styles);
+					$styles = array_merge([$g_options['style'] => 'Default'], $styles);
 					foreach ($styles as $e => $ename) { 
 						$sel = ''; 
 						if ($e == $selectedStyle) $sel = ' selected="selected"'; 

@@ -68,32 +68,32 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1) {
 		error('Invalid or no game specified.');
 	} else {
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}
 
 	$table = new Table(
-		array(
+	    [
 			new TableColumn(
-				'playerName',
-				'Player',
-				'width=45&align=left&flag=1&link=' . urlencode("mode=statsme&amp;player=%k") 
+			    'playerName',
+			    'Player',
+			    'width=45&align=left&flag=1&link=' . urlencode("mode=statsme&amp;player=%k")
 			),
 			new TableColumn(
-				'obj_count',
-				'Achieved',
-				'width=25&align=right'
+			    'obj_count',
+			    'Achieved',
+			    'width=25&align=right'
 			),
 			new TableColumn(
-				'obj_bonus',
-				'Skill Bonus Total',
-				'width=25&align=right&sort=no'
-			)
-		),
-		'playerId',
-		'obj_count',
-		'playerName',
-		true,
-		50
+			    'obj_bonus',
+			    'Skill Bonus Total',
+			    'width=25&align=right&sort=no'
+			),
+		],
+	    'playerId',
+	    'obj_count',
+	    'playerName',
+	    true,
+	    50
 	);
 	
 	$result = $db->query("
@@ -132,7 +132,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Events_PlayerActions.actionId = hlstats_Actions.id
 	");
 	
-	list($numitems, $totalact) = $db->fetch_row($resultCount);
+	[$numitems, $totalact] = $db->fetch_row($resultCount);
   
   if ($totalact == 0)  {
     $result = $db->query("
@@ -170,7 +170,7 @@ For support and installation notes visit http://www.hlxcommunity.com
             hlstats_Players.playerId = hlstats_Events_TeamBonuses.playerId AND
             hlstats_Events_TeamBonuses.actionId = hlstats_Actions.id
     ");
-    list($numitems, $totalact) = $db->fetch_row($resultCount);
+    [$numitems, $totalact] = $db->fetch_row($resultCount);
     
   }    
     

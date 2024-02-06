@@ -58,7 +58,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		$dbtables = null;
 		$result = $db->query("SHOW TABLES");
 
-		while (list($table) = $db->fetch_row($result))
+		while ([$table] = $db->fetch_row($result))
 		{
 			if ($dbtables) {
 				$dbtables .= ", ";
@@ -68,33 +68,33 @@ For support and installation notes visit http://www.hlxcommunity.com
 		}
 
 		$tableOptimize = new Table(
-			array(
+		    [
 				new TableColumn(
-					"Table",
-					"Table",
-					"width=30&sort=no"
+				    "Table",
+				    "Table",
+				    "width=30&sort=no"
 				),
 				new TableColumn(
-					"Op",
-					"Operation",
-					"width=12&sort=no"
+				    "Op",
+				    "Operation",
+				    "width=12&sort=no"
 				),
 				new TableColumn(
-					"Msg_type",
-					"Msg. Type",
-					"width=12&sort=no"
+				    "Msg_type",
+				    "Msg. Type",
+				    "width=12&sort=no"
 				),
 				new TableColumn(
-					"Msg_text",
-					"Message",
-					"width=46&sort=no"
-				)
-			),
-			"Table",
-			"Table",
-			"Msg_type",
-			false,
-			9999
+				    "Msg_text",
+				    "Message",
+				    "width=46&sort=no"
+				),
+			],
+		    "Table",
+		    "Table",
+		    "Msg_type",
+		    false,
+		    9999
 		);
 		
 		$result = $db->query("OPTIMIZE TABLE $dbtables");
@@ -112,34 +112,34 @@ For support and installation notes visit http://www.hlxcommunity.com
 	
 <?php
 		$tableAnalyze = new Table(
-			array(
+    [
 				new TableColumn(
-					"Table",
-					"Table",
-					"width=30&sort=no"
+				    "Table",
+				    "Table",
+				    "width=30&sort=no"
 				),
 				new TableColumn(
-					"Op",
-					"Operation",
-					"width=12&sort=no"
+				    "Op",
+				    "Operation",
+				    "width=12&sort=no"
 				),
 				new TableColumn(
-					"Msg_type",
-					"Msg. Type",
-					"width=12&sort=no"
+				    "Msg_type",
+				    "Msg. Type",
+				    "width=12&sort=no"
 				),
 				new TableColumn(
-					"Msg_text",
-					"Message",
-					"width=46&sort=no"
-				)
-			),
-			"Table",
-			"Table",
-			"Msg_type",
-			false,
-			9999
-		);
+				    "Msg_text",
+				    "Message",
+				    "width=46&sort=no"
+				),
+			],
+    "Table",
+    "Table",
+    "Msg_type",
+    false,
+    9999
+);
 		
 		$result = $db->query("ANALYZE TABLE $dbtables");
 

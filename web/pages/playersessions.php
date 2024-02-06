@@ -82,107 +82,105 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1) {
 		$gamename = ucfirst($game);
 	} else {
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}
 
 	pageHeader
 	(
-		array ($gamename, 'Session History', $pl_name),
-		array
-		(
+	    [$gamename, 'Session History', $pl_name],
+	    [
 			$gamename => $g_options['scripturl']."?game=$game",
 			'Player Rankings' => $g_options['scripturl']."?mode=players&game=$game",
 			'Player Details' => $g_options['scripturl']."?mode=playerinfo&player=$player",
-			'Session History' => ''
-		),
-		$playername = ""
+			'Session History' => '',
+		],
+	    $playername = ""
 	);
 	flush();
 	$table = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'eventTime',
-				'Date',
-				'width=11'
+			    'eventTime',
+			    'Date',
+			    'width=11'
 			),
 			new TableColumn
 			(
-				'skill_change',
-				'Skill Change',
-				'width=10&align=right&skill_change=1'
+			    'skill_change',
+			    'Skill Change',
+			    'width=10&align=right&skill_change=1'
 			),
 			new TableColumn
 			(
-				'skill',
-				'Points',
-				'width=10&align=right'
+			    'skill',
+			    'Points',
+			    'width=10&align=right'
 			),
 			new TableColumn
 			(
-				'connection_time',
-				'Time',
-				'width=13&align=right&type=timestamp'
+			    'connection_time',
+			    'Time',
+			    'width=13&align=right&type=timestamp'
 			),
 			new TableColumn
 			(
-				'kills',
-				'Kills',
-				'width=7&align=right'
+			    'kills',
+			    'Kills',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'deaths',
-				'Deaths',
-				'width=7&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'kpd',
-				'K:D',
-				'width=7&align=right'
+			    'kpd',
+			    'K:D',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'headshots',
-				'HS',
-				'width=7&align=right'
+			    'headshots',
+			    'HS',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'hpk',
-				'HS:K',
-				'width=7&align=right'
+			    'hpk',
+			    'HS:K',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'suicides',
-				'Suicides',
-				'width=7&align=right'
+			    'suicides',
+			    'Suicides',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'teamkills',
-				'TKs',
-				'width=7&align=right'
+			    'teamkills',
+			    'TKs',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'kill_streak',
-				'Kill Strk',
-				'width=7&align=right'
+			    'kill_streak',
+			    'Kill Strk',
+			    'width=7&align=right'
 			),
-		),
-		'eventTime',
-		'eventTime',
-		'skill_change',
-		false,
-		50,
-		'page',
-		'sort',
-		'sortorder'
+		],
+	    'eventTime',
+	    'eventTime',
+	    'skill_change',
+	    false,
+	    50,
+	    'page',
+	    'sort',
+	    'sortorder'
 	);
 	$surl = $g_options['scripturl'];
 	$result = $db->query
@@ -222,7 +220,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			hlstats_Players_History.playerId = $player
 	");
-	list($numitems) = $db->fetch_row($resultCount);
+	[$numitems] = $db->fetch_row($resultCount);
 ?>
 
 <div class="block">
@@ -248,7 +246,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			hlstats_Players.playerId = '$player'
 	");
-	list($lastName) = $db->fetch_row();
+	[$lastName] = $db->fetch_row();
 ?>
 			Go to: <a href="<?php echo $g_options['scripturl'] . "?mode=playerinfo&amp;player=$player"; ?>"><?php echo $lastName; ?>'s Statistics</a>
 		</div>

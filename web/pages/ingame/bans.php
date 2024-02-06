@@ -44,59 +44,59 @@ For support and installation notes visit http://www.hlxcommunity.com
 	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
 	if ($db->num_rows() < 1) error("No such game '$game'.");
 	
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 	$db->free_result();
 	
 	$minkills = 0;
 
 	$table = new Table(
-		array(
+	    [
 			new TableColumn(
-				"lastName",
-				"Name",
-				"width=40&flag=1&link=" . urlencode("mode=statsme&amp;player=%k")
+			    "lastName",
+			    "Name",
+			    "width=40&flag=1&link=" . urlencode("mode=statsme&amp;player=%k")
 			),
 			new TableColumn(
-				"ban_date",
-				"BanDate",
-				"width=25&align=right"
+			    "ban_date",
+			    "BanDate",
+			    "width=25&align=right"
 			),
 			new TableColumn(
-				"skill",
-				"Points",
-				"width=5&align=right"
+			    "skill",
+			    "Points",
+			    "width=5&align=right"
 			),
 			new TableColumn(
-				"kills",
-				"Kills",
-				"width=5&align=right"
+			    "kills",
+			    "Kills",
+			    "width=5&align=right"
 			),
 			new TableColumn(
-				"deaths",
-				"Deaths",
-				"width=5&align=right"
+			    "deaths",
+			    "Deaths",
+			    "width=5&align=right"
 			),
 			new TableColumn(
-				"headshots",
-				"Headshots",
-				"width=5&align=right"
+			    "headshots",
+			    "Headshots",
+			    "width=5&align=right"
 			),
 			new TableColumn(
-				"hpk",
-				"HS:K",
-				"width=5&align=right"
+			    "hpk",
+			    "HS:K",
+			    "width=5&align=right"
 			),
 			new TableColumn(
-				"kpd",
-				"KPD",
-				"width=5&align=right"
+			    "kpd",
+			    "KPD",
+			    "width=5&align=right"
 			),
-		),
-		"playerId",
-		"last_event",
-		"skill",
-		true,
-		25
+		],
+	    "playerId",
+	    "last_event",
+	    "skill",
+	    true,
+	    25
 	);
     
 	$result = $db->query("
@@ -136,7 +136,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			AND kills >= $minkills
 	");
 	
-	list($numitems) = $db->fetch_row($resultCount);
+	[$numitems] = $db->fetch_row($resultCount);
 	
 	$table->draw($result, 25, 100);
 ?>

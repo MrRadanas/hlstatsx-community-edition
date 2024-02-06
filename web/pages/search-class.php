@@ -39,13 +39,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 // Search Class
 	class Search
 	{
-		var $query;
-		var $type;
-		var $game;
-		var $uniqueid_string = 'Unique ID';
-		var $uniqueid_string_plural = 'Unique IDs';
+		public $query;
+		public $type;
+		public $game;
+		public $uniqueid_string = 'Unique ID';
+		public $uniqueid_string_plural = 'Unique IDs';
 
-		function __construct($query, $type, $game)
+		public function __construct($query, $type, $game)
 		{
 			global $g_options;
 
@@ -60,16 +60,16 @@ For support and installation notes visit http://www.hlxcommunity.com
 			}
 		}
 
-		function drawForm ($getvars = array(), $searchtypes = -1)
+		public function drawForm ($getvars = [], $searchtypes = -1)
 		{
 			global $g_options, $db;
 
 			if (!is_array($searchtypes))
 			{
-				$searchtypes = array(
+				$searchtypes = [
 					'player' => 'Player Names',
-					'uniqueid' => 'Player' . $this->uniqueid_string_plural
-				);
+					'uniqueid' => 'Player' . $this->uniqueid_string_plural,
+				];
 				if ($g_options['Mode'] != 'LAN' && isset($_SESSION['loggedin']) && $_SESSION['acclevel'] >= 80) {
 					$searchtypes['ip'] = 'Player IP Addresses';
 				}
@@ -106,7 +106,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 							<td nowrap="nowrap" style="width:30%;">Game:</td>
 							<td style="width:70%;">
 								<?php
-									$games = array ();
+									$games =  [];
 									$games[''] = '(All)';
 									$result = $db->query("
 										SELECT
@@ -142,7 +142,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 <?php
 		}
-		function drawResults ($link_player=-1, $link_clan=-1)
+		public function drawResults ($link_player=-1, $link_clan=-1)
 		{
 			global $g_options, $db;
 			if ($link_player == -1) $link_player = "mode=playerinfo&amp;player=%k";
@@ -155,44 +155,43 @@ For support and installation notes visit http://www.hlxcommunity.com
 	<br /><br />
 
 <?php
-			$sr_query = preg_replace('/^STEAM_\d+?\:/i','',$this->query);
+			$sr_query = preg_replace('/^STEAM_\d+?\:/i', '', $this->query);
 			$sr_query = $db->escape($sr_query);
 			$sr_query = preg_replace('/\s/', '%', $sr_query);
 			if ($this->type == 'player')
 			{
 				$table = new Table
 				(
-					array
-					(
+				    [
 						new TableColumn
 						(
-							'player_id',
-							'ID',
-							'width=5&align=right'
+						    'player_id',
+						    'ID',
+						    'width=5&align=right'
 						),
 						new TableColumn
 						(
-							'name',
-							'Player',
-							'width=65&flag=1&link=' . urlencode($link_player)
+						    'name',
+						    'Player',
+						    'width=65&flag=1&link=' . urlencode($link_player)
 						),
 						new TableColumn
 						(
-							'gamename',
-							'Game',
-							'width=30'
-						)
-					),
-					'player_id',
-					'name',
-					'player_id',
-					false,
-					50,
-					'page',
-					'sort',
-					'sortorder',
-					'results',
-					'asc'
+						    'gamename',
+						    'Game',
+						    'width=30'
+						),
+					],
+				    'player_id',
+				    'name',
+				    'player_id',
+				    false,
+				    50,
+				    'page',
+				    'sort',
+				    'sortorder',
+				    'results',
+				    'asc'
 				);
 				if ($this->game)
 					$andgame = "AND hlstats_Players.game='" . $this->game . "'";
@@ -246,50 +245,49 @@ For support and installation notes visit http://www.hlxcommunity.com
 						AND hlstats_PlayerNames.name LIKE '%$sr_query%'
 						$andgame
 				");
-				list($numitems) = $db->fetch_row($resultCount);
+				[$numitems] = $db->fetch_row($resultCount);
 				$table->draw($result, $numitems, 95);
 			}
 			elseif ($this->type == 'uniqueid')
 			{
 				$table = new Table
 				(
-					array
-					(
+				    [
 						new TableColumn
 						(
-							'uniqueId',
-							$this->uniqueid_string,
-							'width=15'
+						    'uniqueId',
+						    $this->uniqueid_string,
+						    'width=15'
 						),
 						new TableColumn
 						(
-							'lastName',
-							'Player',
-							'width=50&flag=1&link=' . urlencode($link_player)
+						    'lastName',
+						    'Player',
+						    'width=50&flag=1&link=' . urlencode($link_player)
 						),
 						new TableColumn
 						(
-							'gamename',
-							'Game',
-							'width=30'
+						    'gamename',
+						    'Game',
+						    'width=30'
 						),
 						new TableColumn
 						(
-							'playerId',
-							'ID',
-							'width=5&align=right'
-						)
-					),
-					'playerId',
-					'lastName',
-					'uniqueId',
-					false,
-					50,
-					'page',
-					'sort',
-					'sortorder',
-					'results',
-					'asc'
+						    'playerId',
+						    'ID',
+						    'width=5&align=right'
+						),
+					],
+				    'playerId',
+				    'lastName',
+				    'uniqueId',
+				    false,
+				    50,
+				    'page',
+				    'sort',
+				    'sortorder',
+				    'results',
+				    'asc'
 				);
 				if ($this->game)
 					$andgame = "AND hlstats_PlayerUniqueIds.game='" . $this->game . "'";
@@ -339,7 +337,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 						hlstats_PlayerUniqueIds.uniqueId LIKE '%$sr_query%'
 						$andgame
 				");
-				list($numitems) = $db->fetch_row($resultCount);
+				[$numitems] = $db->fetch_row($resultCount);
 				$table->draw($result, $numitems, 95);
 			}
 			elseif ($this->type == 'ip')
@@ -349,37 +347,36 @@ For support and installation notes visit http://www.hlxcommunity.com
 				}
 				$table = new Table
 				(
-					array
-					(
+				    [
 						new TableColumn
 						(
-							'player_id',
-							'ID',
-							'width=5&align=right'
+						    'player_id',
+						    'ID',
+						    'width=5&align=right'
 						),
 						new TableColumn
 						(
-							'name',
-							'Player',
-							'width=65&flag=1&link=' . urlencode($link_player)
+						    'name',
+						    'Player',
+						    'width=65&flag=1&link=' . urlencode($link_player)
 						),
 						new TableColumn
 						(
-							'gamename',
-							'Game',
-							'width=30'
-						)
-					),
-					'player_id',
-					'name',
-					'player_id',
-					false,
-					50,
-					'page',
-					'sort',
-					'sortorder',
-					'results',
-					'asc'
+						    'gamename',
+						    'Game',
+						    'width=30'
+						),
+					],
+				    'player_id',
+				    'name',
+				    'player_id',
+				    false,
+				    50,
+				    'page',
+				    'sort',
+				    'sortorder',
+				    'results',
+				    'asc'
 				);
 				if ($this->game)
 					$andgame = "AND hlstats_Players.game='" . $this->game . "'";
@@ -451,50 +448,49 @@ For support and installation notes visit http://www.hlxcommunity.com
 						AND connects.ipAddress LIKE '$sr_query%'
 						$andgame
 				");
-				list($numitems) = $db->fetch_row($resultCount);
+				[$numitems] = $db->fetch_row($resultCount);
 				$table->draw($result, $numitems, 95);
 			}
 			elseif ($this->type == 'clan')
 			{
 				$table = new Table
 				(
-					array
-					(
+				    [
 						new TableColumn
 						(
-							'tag',
-							'Tag',
-							'width=15'
+						    'tag',
+						    'Tag',
+						    'width=15'
 						),
 						new TableColumn
 						(
-							'name',
-							'Name',
-							'width=50&icon=clan&link=' . urlencode($link_clan)
+						    'name',
+						    'Name',
+						    'width=50&icon=clan&link=' . urlencode($link_clan)
 						),
 						new TableColumn
 						(
-							'gamename',
-							'Game',
-							'width=30'
+						    'gamename',
+						    'Game',
+						    'width=30'
 						),
 						new TableColumn
 						(
-							'clanId',
-							'ID',
-							'width=5&align=right'
-						)
-					),
-					'clanId',
-					'name',
-					'tag',
-					false,
-					50,
-					'page',
-					'sort',
-					'sortorder',
-					'results',
-					'asc'
+						    'clanId',
+						    'ID',
+						    'width=5&align=right'
+						),
+					],
+				    'clanId',
+				    'name',
+				    'tag',
+				    false,
+				    50,
+				    'page',
+				    'sort',
+				    'sortorder',
+				    'results',
+				    'asc'
 				);
 				if ($this->game)
 					$andgame = "AND hlstats_Clans.game='" . $this->game . "'";
@@ -536,7 +532,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 						OR hlstats_Clans.name LIKE '%$sr_query%'
 						$andgame
 				");
-				list($numitems) = $db->fetch_row($resultCount);
+				[$numitems] = $db->fetch_row($resultCount);
 				$table->draw($result, $numitems, 95);
 			}
 ?>

@@ -552,11 +552,11 @@ For support and installation notes visit http://www.hlxcommunity.com
 		}
 		if ($clearAllDelete)
 		{
-			$dbtables = array(
+			$dbtables = [
 				'hlstats_Clans',
 				'hlstats_PlayerUniqueIds',
-				'hlstats_Players'
-			);
+				'hlstats_Players',
+			];
 			
 			foreach ($dbtables as $dbt)
 			{
@@ -581,7 +581,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		$result = $db->query("SELECT code, name, hidden FROM `hlstats_Games` ORDER BY hidden, name, code;");
 		unset($games);
 		$games[] = '<option value="" selected="selected" />All games';
-		while (list($code, $name, $hidden) = $db->fetch_row($result))
+		while ([$code, $name, $hidden] = $db->fetch_row($result))
 		{
 			$disabled_flag = "";
 			if ($hidden == 1) {

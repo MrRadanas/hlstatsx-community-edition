@@ -55,20 +55,20 @@ if ( empty($game) )
         LIMIT 0,1
 
 	");
-	list($game) = $db->fetch_row($resultGames);
+	[$game] = $db->fetch_row($resultGames);
 }
 
 class Auth
 {
-	var $ok = false;
-	var $error = false;
+	public $ok = false;
+	public $error = false;
 
-	var $username, $password, $savepass;
-	var $sessionStart, $session;
+	public $username, $password, $savepass;
+	public $sessionStart, $session;
 
-	var $userdata = array();
+	public $userdata = [];
 
-	function __construct()
+	public function __construct()
 	{
 		//@session_start();
 
@@ -81,7 +81,7 @@ class Auth
 
 			# clear POST vars so as not to confuse the receiving page
 			unset($_POST);
-			$_POST = array();
+			$_POST = [];
 
 			$this->session = false;
 
@@ -120,7 +120,7 @@ class Auth
 		}
 	}
 
-	function checkPass()
+	public function checkPass()
 	{
 		global $db;
 
@@ -215,7 +215,7 @@ class Auth
 		}
 	}
 
-	function doCookies()
+	public function doCookies()
 	{
 		return;
 		setcookie('authusername', $this->username, time() + 31536000, '', '', 0);
@@ -232,7 +232,7 @@ class Auth
 		setcookie('authsessionStart', time(), 0, '', '', 0);
 	}
 
-	function printAuth()
+	public function printAuth()
 	{
 		global $g_options;
 
@@ -242,12 +242,12 @@ class Auth
 
 class AdminTask
 {
-	var $title = '';
-	var $acclevel = 0;
-	var $type = '';
-	var $description = '';
+	public $title = '';
+	public $acclevel = 0;
+	public $type = '';
+	public $description = '';
 
-	function __construct($title, $acclevel, $type = 'general', $description = '', $group = '')
+	public function __construct($title, $acclevel, $type = 'general', $description = '', $group = '')
 	{
 		$this->title = $title;
 		$this->acclevel = $acclevel;
@@ -259,23 +259,23 @@ class AdminTask
 
 class EditList
 {
-	var $columns;
-	var $keycol;
-	var $table;
-	var $deleteCallback;
-	var $icon;
-	var $showid;
-	var $drawDetailsLink;
-	var $DetailsLink;
+	public $columns;
+	public $keycol;
+	public $table;
+	public $deleteCallback;
+	public $icon;
+	public $showid;
+	public $drawDetailsLink;
+	public $DetailsLink;
 
-	var $errors;
-	var $newerror;
+	public $errors;
+	public $newerror;
 
-	var $helpTexts;
-	var $helpKey;
-	var $helpDIV;
+	public $helpTexts;
+	public $helpKey;
+	public $helpDIV;
 
-	function __construct($keycol, $table, $icon, $showid = true, $drawDetailsLink = false, $DetailsLink = '', $deleteCallback = null)
+	public function __construct($keycol, $table, $icon, $showid = true, $drawDetailsLink = false, $DetailsLink = '', $deleteCallback = null)
 	{
 		$this->keycol = $keycol;
 		$this->table = $table;
@@ -287,7 +287,7 @@ class EditList
 		$this->deleteCallback = $deleteCallback;
 	}
 
-	function setHelp($div, $key, $texts)
+	public function setHelp($div, $key, $texts)
 	{
 		$this->helpDIV = $div;
 		$this->helpKey = $key;
@@ -324,7 +324,7 @@ class EditList
 		return $returnstr;
 	}
 
-	function update()
+	public function update()
 	{
 		global $db;
 
@@ -397,7 +397,7 @@ class EditList
 		}
 		elseif ($okcols == 0)
 		{
-			$this->errors = array();
+			$this->errors = [];
 			$this->newerror = false;
 		}
 
@@ -498,7 +498,7 @@ class EditList
         return true;
 	}
 
-	function draw($result, $draw_new = true)
+	public function draw($result, $draw_new = true)
 	{
 		global $g_options, $db;
 
@@ -600,7 +600,7 @@ class EditList
 			}
 			else
 			{
-				$this->drawfields(array(), true);
+				$this->drawfields([], true);
 			}
 
 			echo "<td class=\"bg1\"></td>\n";
@@ -615,7 +615,7 @@ class EditList
 <?php
 	}
 
-	function drawfields($rowdata = array(), $new = false, $stripslashes = false)
+	public function drawfields($rowdata = [], $new = false, $stripslashes = false)
 	{
 		global $g_options, $db;
 
@@ -664,22 +664,22 @@ class EditList
 						if ($sections == 2)
 						{
 							// for SQL datasource in format "table.column/keycolumn/where"
-							list($col_table, $col_col) = explode('.', $v);
-							list($col_col, $col_key, $col_where) = explode('/', $col_col);
+							[$col_table, $col_col] = explode('.', $v);
+							[$col_col, $col_key, $col_where] = explode('/', $col_col);
 							if ($col_where)
 							{
 								$col_where = "WHERE $col_where";
 							}
 							$col_result = $db->query("SELECT $col_key, $col_col FROM $col_table $col_where ORDER BY $col_col");
-							$coldata = array();
-							while (list($a, $b) = $db->fetch_row($col_result))
+							$coldata = [];
+							while ([$a, $b] = $db->fetch_row($col_result))
 							{
 								$coldata[$a] = $b;
 							}
 						}
 						else if ($sections > 0)
 						{
-							list($a, $b) = explode('/', $v);
+							[$a, $b] = explode('/', $v);
 							$coldata[$a] = $b;
 						}
 						else
@@ -792,7 +792,7 @@ class EditList
 		}
 	}
 
-	function error()
+	public function error()
 	{
 		if (is_array($this->errors))
 		{
@@ -807,15 +807,15 @@ class EditList
 
 class EditListColumn
 {
-	var $name;
-	var $title;
-	var $width;
-	var $required;
-	var $type;
-	var $datasource;
-	var $maxlength;
+	public $name;
+	public $title;
+	public $width;
+	public $required;
+	public $type;
+	public $datasource;
+	public $maxlength;
 
-	function __construct($name, $title, $width = 20, $required = false, $type = 'text', $datasource = '', $maxlength = 0)
+	public function __construct($name, $title, $width = 20, $required = false, $type = 'text', $datasource = '', $maxlength = 0)
 	{
 		$this->name = $name;
 		$this->title = $title;
@@ -829,12 +829,12 @@ class EditListColumn
 
 class PropertyPage
 {
-	var $table;
-	var $keycol;
-	var $keyval;
-	var $propertygroups = array();
+	public $table;
+	public $keycol;
+	public $keyval;
+	public $propertygroups = [];
 
-	function __construct($table, $keycol, $keyval, $groups)
+	public function __construct($table, $keycol, $keyval, $groups)
 	{
 		$this->table = $table;
 		$this->keycol = $keycol;
@@ -842,7 +842,7 @@ class PropertyPage
 		$this->propertygroups = $groups;
 	}
 
-	function draw($data)
+	public function draw($data)
 	{
 		foreach ($this->propertygroups as $group)
 		{
@@ -850,11 +850,11 @@ class PropertyPage
 		}
 	}
 
-	function update()
+	public function update()
 	{
 		global $db;
 
-		$setstrings = array();
+		$setstrings = [];
 		foreach ($this->propertygroups as $group)
 		{
 			foreach ($group->properties as $prop)
@@ -862,8 +862,8 @@ class PropertyPage
 				if ($prop->name == 'name')
 				{
 					$value = $_POST[$prop->name];
-					$search_pattern = array('/script/i', '/;/', '/%/');
-					$replace_pattern = array('', '', '');
+					$search_pattern = ['/script/i', '/;/', '/%/'];
+					$replace_pattern = ['', '', ''];
 					$value = preg_replace($search_pattern, $replace_pattern, $value);
 					$setstrings[] = $prop->name . "='" . $value . "'";
 				}
@@ -887,16 +887,16 @@ class PropertyPage
 
 class PropertyPage_Group
 {
-	var $title = '';
-	var $properties = array();
+	public $title = '';
+	public $properties = [];
 
-	function __construct($title, $properties)
+	public function __construct($title, $properties)
 	{
 		$this->title = $title;
 		$this->properties = $properties;
 	}
 
-	function draw($data)
+	public function draw($data)
 	{
 		global $g_options;
 ?>
@@ -921,11 +921,11 @@ class PropertyPage_Group
 
 class PropertyPage_Property
 {
-	var $name;
-	var $title;
-	var $type;
+	public $name;
+	public $title;
+	public $type;
 
-	function __construct($name, $title, $type, $datasource = '')
+	public function __construct($name, $title, $type, $datasource = '')
 	{
 		$this->name = $name;
 		$this->title = $title;
@@ -933,7 +933,7 @@ class PropertyPage_Property
 		$this->datasource = $datasource;
 	}
 
-	function draw($value)
+	public function draw($value)
 	{
 		global $g_options;
 ?>
@@ -954,7 +954,7 @@ class PropertyPage_Property
 				{
 					if (preg_match('/\//', $v))
 					{
-						list($a, $b) = explode('/', $v);
+						[$a, $b] = explode('/', $v);
 						$coldata[$a] = $b;
 					}
 					else
@@ -1001,7 +1001,7 @@ if($auth->ok===false)
 	return;
 }
 
-pageHeader(array('Admin'), array('Admin' => ''));
+pageHeader(['Admin'], ['Admin' => '']);
 
 $selTask = valid_request($_GET['task'], false);
 $selGame = valid_request($_GET['game'], false);

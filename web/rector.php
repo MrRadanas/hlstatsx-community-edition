@@ -18,5 +18,5 @@ return RectorConfig::configure()
         AddVoidReturnTypeWhereNoReturnRector::class,
     ])
     ->withSets([
-        LevelSetList::UP_TO_PHP_74
+        LevelSetList::UP_TO_PHP_74,
     ]);

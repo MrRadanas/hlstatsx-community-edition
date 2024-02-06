@@ -91,7 +91,7 @@
 			clan
     ");
 
-	list($totalclanplayers) = $db->fetch_array();
+	[$totalclanplayers] = $db->fetch_array();
 
 	$db->free_result();
 	
@@ -105,7 +105,7 @@
     if ($db->num_rows() != 1) {
 		$gamename = ucfirst($game);
 	} else {
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}
 
     if (!empty($_GET['type']) && $_GET['type'] == 'ajax') {
@@ -122,13 +122,13 @@
 	}
 
 	pageHeader(
-		array($gamename, 'Clan Details', $cl_full),
-		array(
+	    [$gamename, 'Clan Details', $cl_full],
+	    [
 			$gamename=>$g_options['scripturl'] . "?game=$game",
 			'Clan Rankings'=>$g_options['scripturl'] . "?mode=clans&game=$game",
-			'Clan Details'=>''
-		),
-		$clandata['name']
+			'Clan Details'=>'',
+		],
+	    $clandata['name']
 	);
 
 	if ($g_options['show_google_map'] == 1) {

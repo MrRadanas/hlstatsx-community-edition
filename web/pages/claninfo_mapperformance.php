@@ -43,70 +43,70 @@ For support and installation notes visit http://www.hlxcommunity.com
 	flush();
 	
 	$tblMaps = new Table(
-		array(
+	    [
 			new TableColumn(
-				'map',
-				'Map Name',
-				'width=15&align=left&link=' . urlencode("mode=mapinfo&amp;map=%k&amp;game=$game")
+			    'map',
+			    'Map Name',
+			    'width=15&align=left&link=' . urlencode("mode=mapinfo&amp;map=%k&amp;game=$game")
 			),
 			new TableColumn(
-				'kills',
-				'Kills',
-				'width=6&align=right'
+			    'kills',
+			    'Kills',
+			    'width=6&align=right'
 			),
 			new TableColumn(
-				'kpercent',
-				'Percentage of Kills',
-				'width=15&sort=no&type=bargraph'
+			    'kpercent',
+			    'Percentage of Kills',
+			    'width=15&sort=no&type=bargraph'
 			),
 			new TableColumn(
-				'kpercent',
-				'%',
-				'width=5&sort=no&align=right&append=' . urlencode('%')
+			    'kpercent',
+			    '%',
+			    'width=5&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn(
-				'deaths',
-				'Deaths',
-				'width=6&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=6&align=right'
 			),
 			new TableColumn(
-				'kpd',
-				'Kills per Death',
-				'width=13&align=right'
+			    'kpd',
+			    'Kills per Death',
+			    'width=13&align=right'
 			),
 			new TableColumn(
-				'headshots',
-				'Headshots',
-				'width=9&align=right'
+			    'headshots',
+			    'Headshots',
+			    'width=9&align=right'
 			),
 			new TableColumn(
-				'hpercent',
-				'Percentage of Headshots',
-				'width=16&sort=no&type=bargraph'
+			    'hpercent',
+			    'Percentage of Headshots',
+			    'width=16&sort=no&type=bargraph'
 			),
 			new TableColumn(
-				'hpercent',
-				'%',
-				'width=5&sort=no&align=right&append=' . urlencode('%')
+			    'hpercent',
+			    '%',
+			    'width=5&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn(
-				'hpk',
-				'Hpk',
-				'width=5&align=right'
-			)
+			    'hpk',
+			    'Hpk',
+			    'width=5&align=right'
+			),
 			
-		),
-		'map',
-		'kills',
-		'kills',
-		true,
-		9999,
-		'maps_page',
-		'maps_sort',
-		'maps_sortorder',
-		'tabmaps',
-		'desc',
-		true
+		],
+	    'map',
+	    'kills',
+	    'kills',
+	    true,
+	    9999,
+	    'maps_page',
+	    'maps_sort',
+	    'maps_sortorder',
+	    'tabmaps',
+	    'desc',
+	    true
 	);
 	
 	$db->query("

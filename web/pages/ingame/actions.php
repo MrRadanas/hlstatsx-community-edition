@@ -48,35 +48,35 @@ For support and installation notes visit http://www.hlxcommunity.com
 	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
 	if ($db->num_rows() < 1) error("No such game '$game'.");
 	
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 	$db->free_result();
 
 	$tblPlayerActions = new Table(
-		array(
+	    [
 			new TableColumn(
-				'description',
-				'Action',
-				'width=45&link=' . urlencode("mode=actioninfo&amp;action=%k&amp;game=$game")
+			    'description',
+			    'Action',
+			    'width=45&link=' . urlencode("mode=actioninfo&amp;action=%k&amp;game=$game")
 			),
 			new TableColumn(
-				'obj_count',
-				'Achieved',
-				'width=25&align=right&append=+times'
+			    'obj_count',
+			    'Achieved',
+			    'width=25&align=right&append=+times'
 			),
 			new TableColumn(
-				'obj_bonus',
-				'Skill Bonus',
-				'width=25&align=right'
-			)
-		),
-		'code',
-		'obj_count',
-		'description',
-		true,
-		9999,
-		'obj_page',
-		'obj_sort',
-		'obj_sortorder'
+			    'obj_bonus',
+			    'Skill Bonus',
+			    'width=25&align=right'
+			),
+		],
+	    'code',
+	    'obj_count',
+	    'description',
+	    true,
+	    9999,
+	    'obj_page',
+	    'obj_sort',
+	    'obj_sortorder'
 	);
 
 	$db->query("
@@ -88,7 +88,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			hlstats_Actions.game='$game'
 	");
 	
-	list($totalactions) = $db->fetch_row();
+	[$totalactions] = $db->fetch_row();
 	
 	$result = $db->query("
 		SELECT

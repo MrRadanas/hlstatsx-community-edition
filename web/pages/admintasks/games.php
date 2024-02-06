@@ -48,7 +48,7 @@ For support and installation notes visit http://www.hlxcommunity.com
     {
     	global $db;
 		
-		$srvtables = array(
+		$srvtables = [
 			"hlstats_Events_Admin",
 			"hlstats_Events_ChangeName",
 			"hlstats_Events_ChangeRole",
@@ -69,12 +69,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 			"hlstats_Events_Suicides",
 			"hlstats_Events_TeamBonuses",
 			"hlstats_Events_Teamkills",
-			"hlstats_Servers_Config"
-		);
-		$pltables = array(
-			"hlstats_PlayerNames"
-		);
-		$dbtables = array(
+			"hlstats_Servers_Config",
+		];
+		$pltables = [
+			"hlstats_PlayerNames",
+		];
+		$dbtables = [
 			"hlstats_Actions",
 			"hlstats_Awards",
 			"hlstats_Ribbons",
@@ -90,8 +90,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 			"hlstats_PlayerUniqueIds",
 			"hlstats_Players",
 			"hlstats_Clans",
-			"hlstats_Trend"
-		);
+			"hlstats_Trend",
+		];
 		
 		$resultServers = $db->query("SELECT serverId FROM hlstats_Servers WHERE game = '$game'");
 		if ($db->num_rows($resultServers) > 0)
@@ -101,7 +101,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			{
 				$serverlist .= $server[0].',';
 			}
-			$serverlist = preg_replace('/,$/', ')',$serverlist);
+			$serverlist = preg_replace('/,$/', ')', $serverlist);
 			foreach ($srvtables as $srvt)
 			{
 				echo "<li>$srvt ... ";
@@ -121,7 +121,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			{
 				$playerlist .= $player[0].',';
 			}
-			$playerlist = preg_replace('/,$/', ')',$playerlist);
+			$playerlist = preg_replace('/,$/', ')', $playerlist);
 			foreach ($pltables as $plt)
 			{
 				echo "<li>$plt ... ";

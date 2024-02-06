@@ -67,42 +67,42 @@ For support and installation notes visit http://www.hlxcommunity.com
 		error("No such game '$game'.");
 	}
 	
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 	$db->free_result();
 	
 	pageHeader(
-		array($gamename, 'Award Details', $awardname),
-		array(
+	    [$gamename, 'Award Details', $awardname],
+	    [
 			$gamename=>$g_options['scripturl'] . "?game=$game",
 			'Awards Statistics' => $g_options['scripturl'] . "?mode=awards&game=$game",
-			'Awards Details' => ''
-		),
-		$awardname
+			'Awards Details' => '',
+		],
+	    $awardname
 	);
 
 	$table = new Table(
-		array(
+	    [
 			new TableColumn(
-				'awardTime',
-				'Day',
-				'width=20&align=left'
+			    'awardTime',
+			    'Day',
+			    'width=20&align=left'
 			),
 			new TableColumn(
-				'lastName',
-				'Player',
-				'width=40&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k') 
+			    'lastName',
+			    'Player',
+			    'width=40&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 			),
 			new TableColumn(
-				'count',
-				'Count for the Day',
-				'width=35&align=right&append=' . urlencode(" $awardverb")
-			)
-		),
-		'playerId',
-		'awardTime',
-		'lastName',
-		true,
-		30
+			    'count',
+			    'Count for the Day',
+			    'width=35&align=right&append=' . urlencode(" $awardverb")
+			),
+		],
+	    'playerId',
+	    'awardTime',
+	    'lastName',
+	    true,
+	    30
 	);
 
 

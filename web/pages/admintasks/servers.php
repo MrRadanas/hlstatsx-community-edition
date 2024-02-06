@@ -51,7 +51,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		$db->query("DELETE FROM `hlstats_server_load` WHERE `server_id`  = '" . $db->escape($server) . "'");
     }
 	
-	$edlist = new EditList("serverId", "hlstats_Servers", "server",true,true,"serversettings", 'delete_server');
+	$edlist = new EditList("serverId", "hlstats_Servers", "server", true, true, "serversettings", 'delete_server');
 	$edlist->columns[] = new EditListColumn("address", "IP Address", 15, true, "ipaddress", "", 15);
 	$edlist->columns[] = new EditListColumn("port", "Port", 5, true, "text", "27015", 5);
 	$edlist->columns[] = new EditListColumn("name", "Server Name", 35, true, "text", "", 255);

@@ -55,7 +55,7 @@ For support and installation notes visit http://www.hlxcommunity.com
         error("No such game '$game'.");
 	}
 
-    list($gamename) = $db->fetch_row();
+    [$gamename] = $db->fetch_row();
 
     $db->free_result();
 
@@ -67,67 +67,66 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	pageHeader
 	(
-		array ($gamename, 'Country Rankings'),
-		array ($gamename=>"%s?game=$game", 'Country Rankings' => '')
+	    [$gamename, 'Country Rankings'],
+	    [$gamename=>"%s?game=$game", 'Country Rankings' => '']
 	);
 
 	$table = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'name',
-				'Country',
-				'width=40&flag=1&link=' . urlencode('mode=countryclansinfo&amp;flag=%k&amp;game='.$game)
+			    'name',
+			    'Country',
+			    'width=40&flag=1&link=' . urlencode('mode=countryclansinfo&amp;flag=%k&amp;game='.$game)
 			),
 			new TableColumn
 			(
-				'skill',
-				'Avg. Points',
-				'width=8&skill_change=1&align=right'
+			    'skill',
+			    'Avg. Points',
+			    'width=8&skill_change=1&align=right'
 			),
 			new TableColumn
 			(
-				"nummembers",
-				"Members",
-				"width=5&align=right"
+			    "nummembers",
+			    "Members",
+			    "width=5&align=right"
 			),
 			new TableColumn
 			(
-				'activity',
-				'Activity',
-				'width=8&type=bargraph'
+			    'activity',
+			    'Activity',
+			    'width=8&type=bargraph'
 			),
 			new TableColumn
 			(
-				'connection_time',
-				'Connection Time',
-				'width=13&align=right&type=timestamp'
+			    'connection_time',
+			    'Connection Time',
+			    'width=13&align=right&type=timestamp'
 			),
 			new TableColumn
 			(
-				'kills',
-				'Kills',
-				'width=7&align=right'
+			    'kills',
+			    'Kills',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'deaths',
-				'Deaths',
-				'width=7&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'kpd',
-				'K:D',
-				'width=7&align=right'
-			)
-		),
-		'flag',
-		'skill',
-		'kpd',
-		true
+			    'kpd',
+			    'K:D',
+			    'width=7&align=right'
+			),
+		],
+	    'flag',
+	    'skill',
+	    'kpd',
+	    true
 	);
 	$result = $db->query
 	("
@@ -208,7 +207,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			AND hlstats_Players.hideranking = 0
 	");
 	
-	list($total_countrys) = $db->fetch_row();
+	[$total_countrys] = $db->fetch_row();
 	
 	foreach ($_GET as $k=>$v)
 	{

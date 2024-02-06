@@ -12,7 +12,7 @@
 	
 	pageHeader
 	(
-		array ($gamename, 'Updater')
+	    [$gamename, 'Updater']
 	);
 	echo "<div class=\"warning\">\n" .
 	"<span id=\"warning-header\"><strong>HLX:CE Database Updater log</span></strong><br /><br />\n";

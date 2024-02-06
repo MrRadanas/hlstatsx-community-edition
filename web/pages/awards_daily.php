@@ -74,7 +74,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	");
 
 	if ($db->num_rows($result) == 1)
-		list($awards_numdays) = $db->fetch_row($result);
+		[$awards_numdays] = $db->fetch_row($result);
 	else
 		$awards_numdays = 1;
 
@@ -87,7 +87,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			keyname='awards_d_date'
 	");
-	list($awards_d_date, $awards_s_date) = $db->fetch_row($result);
+	[$awards_d_date, $awards_s_date] = $db->fetch_row($result);
 
 ?>
 <div class="block">

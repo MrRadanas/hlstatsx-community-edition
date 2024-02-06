@@ -1,8 +1,8 @@
 <?php
 
 	pageHeader(
-		array('Ventrilo viewer'),
-		array('Ventrilo viewer'=>'')
+	    ['Ventrilo viewer'],
+	    ['Ventrilo viewer'=>'']
 	);
 
 	require_once(PAGE_PATH . '/ventrilostatus.php');
@@ -186,10 +186,10 @@ function show($tpl, $array)
 		$user = $stat->m_clientcount;
 		$max = $stat->m_maxclients;
 		$channels = VentriloDisplayEX1( $stat, 'nil232143241432432131', 0, 0 );
-		$chan .= show("channel", array("channel" => $channels , "subchannels" => $subchan ));
+		$chan .= show("channel", ["channel" => $channels, "subchannels" => $subchan ]);
     }
 
-    $outp_str = show("ventrilo", array(
+    $outp_str = show("ventrilo", [
 		"name" => $name,
 		"os" => $os,
 		"uptime" => time_convert($uptime),
@@ -211,8 +211,8 @@ function show($tpl, $array)
 		"logintime" => "Login time",
 		"idletime" => "Idle time",
 		"channelstats" => $channelstats,
-		"userstats" => $userstats
-	));
+		"userstats" => $userstats,
+	]);
 					   
     echo $outp_str;
 

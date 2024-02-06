@@ -64,14 +64,14 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 <form method="post" action="<?php echo $g_options['scripturl'] . "?mode=admin&amp;task=$selTask&amp;id=$id&" . strip_tags(SID); ?>">
 <?php
-	$proppage = new PropertyPage("hlstats_Clans", "clanId", $id, array(
-		new PropertyPage_Group("Profile", array(
+	$proppage = new PropertyPage("hlstats_Clans", "clanId", $id, [
+		new PropertyPage_Group("Profile", [
 			new PropertyPage_Property("name", "Clan Name", "text"),
 			new PropertyPage_Property("homepage", "Homepage URL", "text"),
 			new PropertyPage_Property("mapregion", "Map Region", "select", $mapselect),
-			new PropertyPage_Property("hidden", "1 = Hide from clan list", "text")
-		))
-	));
+			new PropertyPage_Property("hidden", "1 = Hide from clan list", "text"),
+		]),
+	]);
 
 	if (isset($_POST['name'])) {
 		$proppage->update();

@@ -60,7 +60,7 @@ For support and installation notes visit http://www.hlxcommunity.com
         error("No such game '$game'.");
 	}
 	
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 	$db->free_result();
 	
 	$minkills = 1;
@@ -86,38 +86,38 @@ For support and installation notes visit http://www.hlxcommunity.com
 	//
 	if($players > 0) {  
 		$table_players = new Table(
-			array(
+		    [
 				new TableColumn(
-					'lastName',
-					'Playername',
-					'width=50&flag=1&link=' . urlencode('mode=statsme&amp;player=%k')
+				    'lastName',
+				    'Playername',
+				    'width=50&flag=1&link=' . urlencode('mode=statsme&amp;player=%k')
 				),
 				new TableColumn(
-					'skill',
-					'Points',
-					'width=10&align=right'
+				    'skill',
+				    'Points',
+				    'width=10&align=right'
 				),
 				new TableColumn(
-					'activity',
-					'Activity',
-					'width=10&sort=no&type=bargraph'
+				    'activity',
+				    'Activity',
+				    'width=10&sort=no&type=bargraph'
 				),
 				new TableColumn(
-					'connection_time',
-					'Time',
-					'width=15&align=right&type=timestamp'
+				    'connection_time',
+				    'Time',
+				    'width=15&align=right&type=timestamp'
 				),
 				new TableColumn(
-					'kpd',
-					'Kpd',
-					'width=10&align=right'
+				    'kpd',
+				    'Kpd',
+				    'width=10&align=right'
 				),
-			),
-			'playerId',
-			'skill',
-			'kpd',
-			true,
-			10
+			],
+		    'playerId',
+		    'skill',
+		    'kpd',
+		    true,
+		    10
 		);
   	  
 		$result_players = $db->query("
@@ -149,33 +149,33 @@ For support and installation notes visit http://www.hlxcommunity.com
 	//
 	if($clans > 0) {
 		$table_clans = new Table(
-			array(
+		    [
 				new TableColumn(
-					'name',
-					'Clanname',
-					'width=50&link=' . urlencode('mode=claninfo&amp;clan=%k')
+				    'name',
+				    'Clanname',
+				    'width=50&link=' . urlencode('mode=claninfo&amp;clan=%k')
 				),
 				new TableColumn(
-					'tag',
-					'Tag',
-					'width=25&align=center'
+				    'tag',
+				    'Tag',
+				    'width=25&align=center'
 				),
 				new TableColumn(
-					'skill',
-					'Points',
-					'width=10&align=right'
+				    'skill',
+				    'Points',
+				    'width=10&align=right'
 				),
 				new TableColumn(
-					'nummembers',
-					'Members',
-					'width=10&align=right'
+				    'nummembers',
+				    'Members',
+				    'width=10&align=right'
 				),
-			),
-			'clanId',
-			'skill',
-			'kpd',
-			true,
-			3
+			],
+		    'clanId',
+		    'skill',
+		    'kpd',
+		    true,
+		    3
 		);
 	  
 		$result_clans = $db->query("
@@ -246,8 +246,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 			LIMIT 0, $servers
         ";
 	$db->query($query);
-	$this_server = array();
-	$servers = array();
+	$this_server = [];
+	$servers = [];
 	while ($rowdata = $db->fetch_array()) {
 		$servers[] = $rowdata;
 		if ($rowdata['serverId'] == $server_id)

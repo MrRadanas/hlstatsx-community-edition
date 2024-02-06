@@ -61,14 +61,14 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($num_games == 1 || !empty($game)) {
 		$redirect_to_game++;
 		if ($num_games == 1) {
-			list($game) = $db->fetch_row($resultGames);
+			[$game] = $db->fetch_row($resultGames);
 		}
 		
 		include(PAGE_PATH . '/game.php');
 	} else {
 		unset($_SESSION['game']);
 		
-		pageHeader(array('Contents'), array('Contents' => ''));
+		pageHeader(['Contents'], ['Contents' => '']);
 		include(PAGE_PATH . '/voicecomm_serverlist.php');
 		printSectionTitle('Games');
 	?>
@@ -234,19 +234,19 @@ For support and installation notes visit http://www.hlxcommunity.com
 		$nonhiddengamestring = preg_replace('/,$/', ')', $nonhiddengamestring);
 		
 		$result = $db->query("SELECT COUNT(playerId) FROM hlstats_Players WHERE game IN $nonhiddengamestring");
-		list($num_players) = $db->fetch_row($result);
+		[$num_players] = $db->fetch_row($result);
 		$num_players = number_format($num_players);
 
 		$result = $db->query("SELECT COUNT(clanId) FROM hlstats_Clans WHERE game IN $nonhiddengamestring");
-		list($num_clans) = $db->fetch_row($result);
+		[$num_clans] = $db->fetch_row($result);
 		$num_clans = number_format($num_clans);
 
 		$result = $db->query("SELECT COUNT(serverId) FROM hlstats_Servers WHERE game IN $nonhiddengamestring");
-		list($num_servers) = $db->fetch_row($result);
+		[$num_servers] = $db->fetch_row($result);
 		$num_servers = number_format($num_servers);
 		
 		$result = $db->query("SELECT SUM(kills) FROM hlstats_Servers WHERE game IN $nonhiddengamestring");
-		list($num_kills) = $db->fetch_row($result);
+		[$num_kills] = $db->fetch_row($result);
 		$num_kills = number_format($num_kills);
 
 		$result = $db->query("
@@ -258,7 +258,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				id DESC
 			LIMIT 1
 		");
-		list($lastevent) = $db->fetch_row($result);
+		[$lastevent] = $db->fetch_row($result);
 ?>
 
 		<div class="subblock">

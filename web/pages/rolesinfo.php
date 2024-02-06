@@ -69,33 +69,33 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($db->num_rows() != 1) {
 		error('Invalid or no game specified.');
 	} else {
-		list($gamename) = $db->fetch_row();
+		[$gamename] = $db->fetch_row();
 	}
 
 	pageHeader(
-		array($gamename, 'Roles Details', htmlspecialchars($role_name)),
-		array(
+	    [$gamename, 'Roles Details', htmlspecialchars($role_name)],
+	    [
 			$gamename => $g_options['scripturl']."?game=$game",
 			'Roles Statistics' => $g_options['scripturl']."?mode=roles&game=$game",
-			'Role Details' => ''
-		),
-		$role_name
+			'Role Details' => '',
+		],
+	    $role_name
 	);
 
 	$table = new Table(
-		array(
+	    [
 			new TableColumn(
-				'killerName',
-				'Player',
-				'width=60&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k') 
+			    'killerName',
+			    'Player',
+			    'width=60&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 			),
 			new TableColumn(
-				'frags',
-				ucfirst($role_name) . ' kills',
-				'width=35&align=right'
+			    'frags',
+			    ucfirst($role_name) . ' kills',
+			    'width=35&align=right'
 			),
-		),
-		'killerId', // keycol
+		],
+	    'killerId', // keycol
 		'frags', // sort_default
 		'killerName', // sort_default2
 		true, // showranking
@@ -138,7 +138,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			AND hlstats_Servers.game='$game'
 	");
 	
-	list($numitems, $totalkills, $totalheadshots) = $db->fetch_row($resultCount);
+	[$numitems, $totalkills, $totalheadshots] = $db->fetch_row($resultCount);
 ?>
 
 <div class="block">
@@ -149,7 +149,7 @@ For support and installation notes visit http://www.hlxcommunity.com
     $wep_content = "<strong>".htmlspecialchars($role_name)."</strong>: ";
     $image = getImage("/games/$game/roles/$role");
     if ($image) {
-		$wep_content .= '<img src="' . str_replace('#','%23',$image['url']) ."\" alt=\"".htmlspecialchars($role_name)."\" />";   
+		$wep_content .= '<img src="' . str_replace('#', '%23', $image['url']) ."\" alt=\"".htmlspecialchars($role_name)."\" />";   
     }
 ?>
 		<div style="float:left;">

@@ -56,46 +56,45 @@ For support and installation notes visit http://www.hlxcommunity.com
         error("No such game '$game'.");
 	}
 
-	list($gamename) = $db->fetch_row();
+	[$gamename] = $db->fetch_row();
 	$db->free_result();
 
 	pageHeader
 	(
-		array ($gamename, 'Action Statistics'),
-		array ($gamename=>"%s?game=$game", 'Action Statistics'=>'')
+	    [$gamename, 'Action Statistics'],
+	    [$gamename=>"%s?game=$game", 'Action Statistics'=>'']
 	);
 
 	$tblPlayerActions = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'description',
-				'Action',
-				'width=45&link=' . urlencode('mode=actioninfo&amp;action=%k&amp;game='.$game)
+			    'description',
+			    'Action',
+			    'width=45&link=' . urlencode('mode=actioninfo&amp;action=%k&amp;game='.$game)
 			),
 			new TableColumn
 			(
-				'obj_count',
-				'Earned',
-				'width=25&align=right&append=+times'
+			    'obj_count',
+			    'Earned',
+			    'width=25&align=right&append=+times'
 			),
 			new TableColumn
 			(
-				'obj_bonus',
-				'Reward',
-				'width=25&align=right'
-			)
-		),
-		'code',
-		'obj_count',
-		'description',
-		true,
-		9999,
-		'obj_page',
-		'obj_sort',
-		'obj_sortorder'
+			    'obj_bonus',
+			    'Reward',
+			    'width=25&align=right'
+			),
+		],
+	    'code',
+	    'obj_count',
+	    'description',
+	    true,
+	    9999,
+	    'obj_page',
+	    'obj_sort',
+	    'obj_sortorder'
 	);
 
 	$result = $db->query("
@@ -129,7 +128,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				WHERE
 					hlstats_Actions.game = '$game'
 			");
-			list($totalactions) = $db->fetch_row();
+			[$totalactions] = $db->fetch_row();
 			?>From a total of <strong><?php echo number_format($totalactions); ?></strong> earned actions
 	</div><br /><br />
 	<?php

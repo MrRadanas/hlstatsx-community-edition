@@ -59,20 +59,20 @@ if (!defined('IN_HLSTATS')) {
 
 class DB_mysql
 {
-	var $db_addr;
-	var $db_user;
-	var $db_pass;
-	var $db_name;
+	public $db_addr;
+	public $db_user;
+	public $db_pass;
+	public $db_name;
 
-	var $link;
-	var $last_result;
-	var $last_query;
-	var $last_insert_id;
-	var $profile = 0;
-	var $querycount = 0;
-	var $last_calc_rows = 0;
+	public $link;
+	public $last_result;
+	public $last_query;
+	public $last_insert_id;
+	public $profile = 0;
+	public $querycount = 0;
+	public $last_calc_rows = 0;
 
-	function __construct($db_addr, $db_user, $db_pass, $db_name, $use_pconnect = false)
+	public function __construct($db_addr, $db_user, $db_pass, $db_name, $use_pconnect = false)
 	{
 		$this->db_addr = $db_addr;
 		$this->db_user = $db_user;
@@ -113,7 +113,7 @@ class DB_mysql
 		}
 	}
 
-	function data_seek($row_number, $query_id = 0)
+	public function data_seek($row_number, $query_id = 0)
 	{
 		if ( !$query_id )
 		{
@@ -126,7 +126,7 @@ class DB_mysql
 		return false;
 	}
 
-	function fetch_array($query_id = 0)
+	public function fetch_array($query_id = 0)
 	{
 		if ( !$query_id )
 		{
@@ -140,7 +140,7 @@ class DB_mysql
 		return false;
 	}
 
-	function fetch_row($query_id = 0)
+	public function fetch_row($query_id = 0)
 	{
 		if ( !$query_id )
 		{
@@ -154,7 +154,7 @@ class DB_mysql
 		return false;
 	}
 
-	function fetch_row_set($query_id = 0)
+	public function fetch_row_set($query_id = 0)
 	{
 		if ( !$query_id )
 		{
@@ -163,7 +163,7 @@ class DB_mysql
 
 		if ( $query_id )
 		{
-			$rowset = array();
+			$rowset = [];
 			while ( $row = $this->fetch_array($query_id) )
 				$rowset[] = $row;
 
@@ -172,7 +172,7 @@ class DB_mysql
 		return false;
 	}
 
-	function free_result($query_id = 0)
+	public function free_result($query_id = 0)
 	{
 		if ( !$query_id )
 		{
@@ -186,12 +186,12 @@ class DB_mysql
 		return false;
 	}
 
-	function insert_id()
+	public function insert_id()
 	{
 		return $this->last_insert_id;
 	}
 
-	function num_rows($query_id = 0)
+	public function num_rows($query_id = 0)
 	{
 		if ( !$query_id )
 		{
@@ -205,12 +205,12 @@ class DB_mysql
 		return false;
 	}
 
-	function calc_rows()
+	public function calc_rows()
 	{
 		return $this->last_calc_rows;
 	}
 
-	function query($query, $showerror=true, $calcrows=false)
+	public function query($query, $showerror=true, $calcrows=false)
 	{
 		$this->last_query = $query;
 		$starttime = microtime(true);
@@ -265,7 +265,7 @@ class DB_mysql
 		}
 	}
 
-	function result($row, $field, $query_id = 0)
+	public function result($row, $field, $query_id = 0)
 	{
 		if ( !$query_id )
 		{
@@ -279,7 +279,7 @@ class DB_mysql
 		return false;
 	}
 
-	function escape($string)
+	public function escape($string)
 	{
 		if ( $this->link )
 		{
@@ -289,16 +289,16 @@ class DB_mysql
 		return $string;	
 	}
 
-	function error($message, $exit=true)
+	public function error($message, $exit=true)
 	{
 		error(
-			"<b>Database Error</b><br />\n<br />\n" .
+		    "<b>Database Error</b><br />\n<br />\n" .
 			"<i>Server Address:</i> $this->db_addr<br />\n" .
 			"<i>Server Username:</i> $this->db_user<br /><br />\n" .
 			"<i>Error Diagnostic:</i><br />\n$message<br /><br />\n" .
 			"<i>Server Error:</i> (" . @mysqli_errno($this->link) . ") " . @mysqli_error($this->link) . "<br /><br />\n" .
 			"<i>Last SQL Query:</i><br />\n<pre style=\"font-size:2px;\">$this->last_query</pre>",
-			$exit
+		    $exit
 		);
 	}
 }

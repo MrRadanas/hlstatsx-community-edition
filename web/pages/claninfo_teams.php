@@ -43,39 +43,39 @@ For support and installation notes visit http://www.hlxcommunity.com
 	flush();
 	
 	$tblTeams = new Table(
-		array(
+	    [
 			new TableColumn(
-				'name',
-				'Team',
-				'width=35'
+			    'name',
+			    'Team',
+			    'width=35'
 			),
 			new TableColumn(
-				'teamcount',
-				'Joined',
-				'width=10&align=right&append=+times'
+			    'teamcount',
+			    'Joined',
+			    'width=10&align=right&append=+times'
 			),
 			new TableColumn(
-				'percent',
-				'Percentage of Times',
-				'width=40&sort=no&type=bargraph'
+			    'percent',
+			    'Percentage of Times',
+			    'width=40&sort=no&type=bargraph'
 			),
 			new TableColumn(
-				'percent',
-				'%',
-				'width=10&sort=no&align=right&append=' . urlencode('%')
-			)
-		),
-		'name',
-		'teamcount',
-		'name',
-		true,
-		9999,
-		'teams_page',
-		'teams_sort',
-		'teams_sortorder',
-		'tabteams',
-		'desc',
-		true
+			    'percent',
+			    '%',
+			    'width=10&sort=no&align=right&append=' . urlencode('%')
+			),
+		],
+	    'name',
+	    'teamcount',
+	    'name',
+	    true,
+	    9999,
+	    'teams_page',
+	    'teams_sort',
+	    'teams_sortorder',
+	    'tabteams',
+	    'desc',
+	    true
 	);
 
 	$db->query("
@@ -88,7 +88,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			clan=$clan
 	");
-	list($numteamjoins) = $db->fetch_row();
+	[$numteamjoins] = $db->fetch_row();
 
 	$result  = $db->query("SELECT `code`,`name` FROM hlstats_Roles WHERE game='$game'");
 	while ($rowdata = $db->fetch_row($result)) 
@@ -133,64 +133,63 @@ For support and installation notes visit http://www.hlxcommunity.com
 	flush();
 	
         $tblRoles = new Table(
-        array
-		(
+            [
             new TableColumn
 			(
-                'code',
-                'Role',
-                'width=25&type=roleimg&align=left&link=' . urlencode("mode=rolesinfo&amp;role=%k&amp;game=$game"),
-				$fname
-            ),
-            new TableColumn
-			(
-                'rolecount',
-				'Joined',
-				'width=10&align=right&append=+times'
-			),
-			new TableColumn
-			(
-				'percent',
-				'%',
-				'width=10&sort=no&align=right&append=' . urlencode('%')
-            ),
-			new TableColumn
-			(
-                'percent',
-                'Ratio',
-                'width=20&sort=no&type=bargraph'            
+			    'code',
+			    'Role',
+			    'width=25&type=roleimg&align=left&link=' . urlencode("mode=rolesinfo&amp;role=%k&amp;game=$game"),
+			    $fname
 			),
             new TableColumn
 			(
-                'killsTotal',
-                'Kills',
-                'width=10&align=right'
-            ),
+			    'rolecount',
+			    'Joined',
+			    'width=10&align=right&append=+times'
+			),
+			new TableColumn
+			(
+			    'percent',
+			    '%',
+			    'width=10&sort=no&align=right&append=' . urlencode('%')
+			),
+			new TableColumn
+			(
+			    'percent',
+			    'Ratio',
+			    'width=20&sort=no&type=bargraph'
+			),
             new TableColumn
 			(
-                'deathsTotal',
-                'Deaths',
-                'width=10&align=right'
-            ),
+			    'killsTotal',
+			    'Kills',
+			    'width=10&align=right'
+			),
             new TableColumn
 			(
-                'kpd',
-                'K:D',
-                'width=10&align=right'
-			)
-		),
-		'code',
-		'rolecount',
-		'name',
-		true,
-		9999,
-		'roles_page',
-		'roles_sort',
-		'roles_sortorder',
-		'roles',
-		'desc',
-		true
-	);
+			    'deathsTotal',
+			    'Deaths',
+			    'width=10&align=right'
+			),
+            new TableColumn
+			(
+			    'kpd',
+			    'K:D',
+			    'width=10&align=right'
+			),
+		],
+            'code',
+            'rolecount',
+            'name',
+            true,
+            9999,
+            'roles_page',
+            'roles_sort',
+            'roles_sortorder',
+            'roles',
+            'desc',
+            true
+        );
 	$db->query("DROP TABLE IF EXISTS hlstats_Frags_as");
 
 	$sql_create_temp_table = "
@@ -290,7 +289,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		WHERE
 			clan=$clan
 	");
-	list($numrolejoins) = $db->fetch_row();
+	[$numrolejoins] = $db->fetch_row();
 
 	$result = $db->query("
 		SELECT

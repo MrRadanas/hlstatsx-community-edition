@@ -56,12 +56,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 			0,
 			1
 	");
-	list($game) = $db->fetch_row($resultGames);
+	[$game] = $db->fetch_row($resultGames);
 // Help
 	pageHeader
 	(
-		array ('Help'),
-		array ('Help' => '')
+	    ['Help'],
+	    ['Help' => '']
 	);
 ?>
 
@@ -135,67 +135,66 @@ For support and installation notes visit http://www.hlxcommunity.com
 			<?php
 				$tblActions = new Table
 				(
-					array
-					(
+				    [
 						new TableColumn
 						(
-							'gamename',
-							'Game',
-							'width=24&sort=no'
+						    'gamename',
+						    'Game',
+						    'width=24&sort=no'
 						),
 						new TableColumn
 						(
-							'for_PlayerActions',
-							'Player Action',
-							'width=4&sort=no&align=center'
+						    'for_PlayerActions',
+						    'Player Action',
+						    'width=4&sort=no&align=center'
 						),
 						new TableColumn
 						(
-							'for_PlayerPlayerActions',
-							'PlyrPlyr Action',
-							'width=4&sort=no&align=center'
+						    'for_PlayerPlayerActions',
+						    'PlyrPlyr Action',
+						    'width=4&sort=no&align=center'
 						),
 						new TableColumn
 						(
-							'for_TeamActions',
-							'Team Action',
-							'width=4&sort=no&align=center'
+						    'for_TeamActions',
+						    'Team Action',
+						    'width=4&sort=no&align=center'
 						),
 						new TableColumn
 						(
-							'for_WorldActions',
-							'World Action',
-							'width=4&sort=no&align=center'
+						    'for_WorldActions',
+						    'World Action',
+						    'width=4&sort=no&align=center'
 						),
 						new TableColumn
 						(
-							'description',
-							'Action',
-							'width=33'
+						    'description',
+						    'Action',
+						    'width=33'
 						),
 						new TableColumn
 						(
-							's_reward_player',
-							'Player Reward',
-							'width=12'
+						    's_reward_player',
+						    'Player Reward',
+						    'width=12'
 						),
 						new TableColumn
 						(
-							's_reward_team',
-							'Team Reward',
-							'width=15'
-						)
-					),
-					'id',
-					'description',
-					's_reward_player',
-					false,
-					9999,
-					'act_page',
-					'act_sort',
-					'act_sortorder',
-					'actions',
-					'asc'
+						    's_reward_team',
+						    'Team Reward',
+						    'width=15'
+						),
+					],
+				    'id',
+				    'description',
+				    's_reward_player',
+				    false,
+				    9999,
+				    'act_page',
+				    'act_sort',
+				    'act_sortorder',
+				    'actions',
+				    'asc'
 				);
 				$result = $db->query
 				("
@@ -236,43 +235,42 @@ For support and installation notes visit http://www.hlxcommunity.com
 			<?php
 				$tblWeapons = new Table
 				(
-					array
-					(
+				    [
 						new TableColumn
 						(
-							'gamename',
-							'Game',
-							'width=24&sort=no'
+						    'gamename',
+						    'Game',
+						    'width=24&sort=no'
 						),
 						new TableColumn
 						(
-							'code',
-							'Weapon',
-							'width=14'
+						    'code',
+						    'Weapon',
+						    'width=14'
 						),
 						new TableColumn
 						(
-							'name',
-							'Name',
-							'width=50'
+						    'name',
+						    'Name',
+						    'width=50'
 						),
 						new TableColumn
 						(
-							'modifier',
-							'Points Modifier',
-							'width=12'
-						)
-					),
-					'weaponId',
-					'modifier',
-					'code',
-					false,
-					9999,
-					'weap_page',
-					'weap_sort',
-					'weap_sortorder',
-					'weapons',
-					'desc'
+						    'modifier',
+						    'Points Modifier',
+						    'width=12'
+						),
+					],
+				    'weaponId',
+				    'modifier',
+				    'code',
+				    false,
+				    9999,
+				    'weap_page',
+				    'weap_sort',
+				    'weap_sortorder',
+				    'weapons',
+				    'desc'
 				);
 				$result = $db->query
 				("

@@ -59,75 +59,74 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	$tblWeapons = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'weapon',
-				'Weapon',
-				'width=15&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&amp;weapon=%k&amp;game=$game"),
-				$fname
+			    'weapon',
+			    'Weapon',
+			    'width=15&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&amp;weapon=%k&amp;game=$game"),
+			    $fname
 			),
 			new TableColumn
 			(
-				'modifier',
-				'Modifier',
-				'width=10&align=right'
+			    'modifier',
+			    'Modifier',
+			    'width=10&align=right'
 			),
 			new TableColumn
 			(
-				'kills',
-				'Kills',
-				'width=11&align=right'
+			    'kills',
+			    'Kills',
+			    'width=11&align=right'
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'%',
-				'width=5&sort=no&align=right&append=' . urlencode('%')
+			    'kpercent',
+			    '%',
+			    'width=5&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'kpercent',
-				'Ratio',
-				'width=18&sort=no&type=bargraph'
+			    'kpercent',
+			    'Ratio',
+			    'width=18&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'headshots',
-				'Headshots',
-				'width=8&align=right'
+			    'headshots',
+			    'Headshots',
+			    'width=8&align=right'
 			),
 			new TableColumn
 			(
-				'hpercent',
-				'%',
-				'width=5&sort=no&align=right&append=' . urlencode('%')
+			    'hpercent',
+			    '%',
+			    'width=5&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'hpercent',
-				'Ratio',
-				'width=18&sort=no&type=bargraph'
+			    'hpercent',
+			    'Ratio',
+			    'width=18&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
-				'hpk',
-				'HS:K',
-				'width=5&align=right'
-			)
-		),
-		'weapon',
-		'kills',
-		'weapon',
-		true,
-		9999,
-		'weap_page',
-		'weap_sort',
-		'weap_sortorder',
-		'tabweapons',
-		'desc',
-		true
+			    'hpk',
+			    'HS:K',
+			    'width=5&align=right'
+			),
+		],
+	    'weapon',
+	    'kills',
+	    'weapon',
+	    true,
+	    9999,
+	    'weap_page',
+	    'weap_sort',
+	    'weap_sortorder',
+	    'tabweapons',
+	    'desc',
+	    true
 	);
 
 	$result = $db->query("
@@ -174,80 +173,79 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	$tblWeaponstats = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'smweapon',
-				'Weapon',
-				'width=15&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&amp;weapon=%k&amp;game=$game"),
-				$fname
+			    'smweapon',
+			    'Weapon',
+			    'width=15&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&amp;weapon=%k&amp;game=$game"),
+			    $fname
 			),
 			new TableColumn
 			(
-				'smshots',
-				'Shots',
-				'width=8&align=right'
+			    'smshots',
+			    'Shots',
+			    'width=8&align=right'
 			),
 			new TableColumn
 			(
-				'smhits',
-				'Hits',
-				'width=8&align=right'
+			    'smhits',
+			    'Hits',
+			    'width=8&align=right'
 			),
 			new TableColumn
 			(
-				'smdamage',
-				'Damage',
-				'width=8&align=right'
+			    'smdamage',
+			    'Damage',
+			    'width=8&align=right'
 			),
 			new TableColumn
 			(
-				'smheadshots',
-				'Headshots',
-				'width=8&align=right'
+			    'smheadshots',
+			    'Headshots',
+			    'width=8&align=right'
 			),
 			new TableColumn
 			(
-				'smkills',
-				'Kills',
-				'width=7&align=right'
+			    'smkills',
+			    'Kills',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'smkdr',
-				'K:D',
-				'width=12&align=right'
+			    'smkdr',
+			    'K:D',
+			    'width=12&align=right'
 			),
 			new TableColumn
 			(
-				'smaccuracy',
-				'Accuracy',
-				'width=8&align=right&append=' . urlencode('%')
+			    'smaccuracy',
+			    'Accuracy',
+			    'width=8&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'smdhr',
-				'Damage per Hit',
-				'width=10&align=right'
+			    'smdhr',
+			    'Damage per Hit',
+			    'width=10&align=right'
 			),
 			new TableColumn(
-				'smspk',
-				'Shots per Kill',
-				'width=11&align=right'
-			)
-		),
-		'smweapon',
-		'smkills',
-		'smweapon',
-		true,
-		9999,
-		'weap_page',
-		'weap_sort',
-		'weap_sortorder',
-		'tabweapons',
-		'desc',
-		true
+			    'smspk',
+			    'Shots per Kill',
+			    'width=11&align=right'
+			),
+		],
+	    'smweapon',
+	    'smkills',
+	    'smweapon',
+	    true,
+	    9999,
+	    'weap_page',
+	    'weap_sort',
+	    'weap_sortorder',
+	    'tabweapons',
+	    'desc',
+	    true
 	);
 
 	$result = $db->query("
@@ -290,144 +288,143 @@ For support and installation notes visit http://www.hlxcommunity.com
 	{
 		$tblWeaponstats2 = new Table
 		(
-			array
-			(
+		    [
 				new TableColumn
 				(
-					'smweapon',
-					'Weapon',
-					'width=35&type=weaponimg&align=center&link='.urlencode("javascript:switch_weapon('%k');"),
-					$fname
+				    'smweapon',
+				    'Weapon',
+				    'width=35&type=weaponimg&align=center&link='.urlencode("javascript:switch_weapon('%k');"),
+				    $fname
 				),
 				new TableColumn
 				(
-					'smhits',
-					'Hits',
-					'width=15&align=right'
+				    'smhits',
+				    'Hits',
+				    'width=15&align=right'
 				),
 				new TableColumn
 				(
-					'smleft',
-					'Left',
-					'width=15&align=right&append=' . urlencode('%')
+				    'smleft',
+				    'Left',
+				    'width=15&align=right&append=' . urlencode('%')
 				),
 				new TableColumn
 				(
-					'smmiddle',
-					'Middle',
-					'width=15&align=right&append=' . urlencode('%')
+				    'smmiddle',
+				    'Middle',
+				    'width=15&align=right&append=' . urlencode('%')
 				),
 				new TableColumn
 				(
-					'smright',
-					'Right',
-					'width=15&align=right&append=' . urlencode('%')
-				)
-			),
-			'smweapon',
-			'smhits',
-			'smweapon',
-			true,
-			9999,
-			'weap_page',
-			'weap_sort',
-			'weap_sortorder',
-			'tabweapons',
-			'desc',
-			true
+				    'smright',
+				    'Right',
+				    'width=15&align=right&append=' . urlencode('%')
+				),
+			],
+		    'smweapon',
+		    'smhits',
+		    'smweapon',
+		    true,
+		    9999,
+		    'weap_page',
+		    'weap_sort',
+		    'weap_sortorder',
+		    'tabweapons',
+		    'desc',
+		    true
 		);
 	}
 	else
 	{
 	$tblWeaponstats2 = new Table
 	(
-		array(
+	    [
 			new TableColumn
 			(
-				'smweapon',
-				'Weapon',
-				'width=15&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&amp;weapon=%k&amp;game=$game"),
-				$fname
+			    'smweapon',
+			    'Weapon',
+			    'width=15&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&amp;weapon=%k&amp;game=$game"),
+			    $fname
 			),
 			new TableColumn
 			(
-				'smhits',
-				'Hits',
-				'width=7&align=right'
+			    'smhits',
+			    'Hits',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'smhead',
-				'Head',
-				'width=7&align=right'
+			    'smhead',
+			    'Head',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'smchest',
-				'Chest',
-				'width=7&align=right'
+			    'smchest',
+			    'Chest',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'smstomach',
-				'Stomach',
-				'width=7&align=right'
+			    'smstomach',
+			    'Stomach',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'smleftarm',
-				'Left Arm',
-				'width=7&align=right'
+			    'smleftarm',
+			    'Left Arm',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'smrightarm',
-				'Right Arm',
-				'width=7&align=right'
+			    'smrightarm',
+			    'Right Arm',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'smleftleg',
-				'Left Leg',
-				'width=7&align=right'
+			    'smleftleg',
+			    'Left Leg',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'smrightleg',
-				'Right Leg',
-				'width=7&align=right'
+			    'smrightleg',
+			    'Right Leg',
+			    'width=7&align=right'
 			),
 			new TableColumn
 			(
-				'smleft',
-				'Left',
-				'width=8&align=right&append=' . urlencode('%')
+			    'smleft',
+			    'Left',
+			    'width=8&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'smmiddle',
-				'Middle',
-				'width=8&align=right&append=' . urlencode('%')
+			    'smmiddle',
+			    'Middle',
+			    'width=8&align=right&append=' . urlencode('%')
 			),
 			new TableColumn
 			(
-				'smright',
-				'Right',
-				'width=8&align=right&append=' . urlencode('%')
-			)
-		),
-		'smweapon',
-		'smhits',
-		'smweapon',
-		true,
-		9999,
-		'weap_page',
-		'weap_sort',
-		'weap_sortorder',
-		'weaponstats2',
-		'desc',
-		true
-		);
+			    'smright',
+			    'Right',
+			    'width=8&align=right&append=' . urlencode('%')
+			),
+		],
+	    'smweapon',
+	    'smhits',
+	    'smweapon',
+	    true,
+	    9999,
+	    'weap_page',
+	    'weap_sort',
+	    'weap_sortorder',
+	    'weaponstats2',
+	    'desc',
+	    true
+	);
 	}
 	$query = "
 		SELECT
@@ -473,21 +470,21 @@ For support and installation notes visit http://www.hlxcommunity.com
 			<script type="text/javascript">
 			/* <![CDATA[ */
 			<?php
-			$weapon_data = array ();
-			$css_models = array ('ct', 'ct2', 'ct3', 'ct4', 'ts', 'ts2', 'ts3', 'ts4');
-			$css_ct_weapons = array ('usp', 'tmp', 'm4a1', 'aug', 'famas', 'sig550');
-			$css_ts_weapons = array ('glock', 'elite', 'mac10', 'ak47', 'sg552', 'galil', 'g3sg1');
-			$css_random_weapons = array ('knife', 'deagle', 'p228', 'm3', 'xm1014', 'mp5navy', 'p90', 'scout', 'awp', 'm249', 'hegrenade', 'flashbang', 'ump45', 'smokegrenade_projectile');
-			$dods_models = array ('allies', 'axis');
-			$dods_allies_weapons = array ('thompson', 'colt', 'spring', 'garand', 'riflegren_us', 'm1carbine', 'bar', 'amerknife', '30cal', 'bazooka', 'frag_us', 'riflegren_us', 'smoke_us');
-			$dods_axis_weapons = array ('spade', 'riflegren_ger', 'k98', 'mp40', 'p38', 'frag_ger', 'smoke_ger', 'mp44', 'k98_scoped', 'mg42', 'pschreck', 'c96');
-			$l4d_models = array ('zombie1', 'zombie2', 'zombie3');
-			$insmod_models = array ('insmod1', 'insmod2');
-			$fof_models = array ('fof1', 'fof2');
-			$ges_models = array ('ges-bond', 'ges-boris');
-			$dinodday_models			= array('ddd_allies', 'ddd_axis');
-			$dinodday_allies_weapons	= array('garand', 'greasegun', 'thompson', 'shotgun', 'sten', 'carbine', 'bar', 'mosin', 'p38', 'piat', 'nagant', 'flechette', 'pistol', 'trigger');
-			$dinodday_axis_weapons		= array('mp40', 'k98', 'mp44', 'k98sniper', 'luger', 'stygimoloch', 'mg42', 'trex');
+			$weapon_data =  [];
+			$css_models =  ['ct', 'ct2', 'ct3', 'ct4', 'ts', 'ts2', 'ts3', 'ts4'];
+			$css_ct_weapons =  ['usp', 'tmp', 'm4a1', 'aug', 'famas', 'sig550'];
+			$css_ts_weapons =  ['glock', 'elite', 'mac10', 'ak47', 'sg552', 'galil', 'g3sg1'];
+			$css_random_weapons =  ['knife', 'deagle', 'p228', 'm3', 'xm1014', 'mp5navy', 'p90', 'scout', 'awp', 'm249', 'hegrenade', 'flashbang', 'ump45', 'smokegrenade_projectile'];
+			$dods_models =  ['allies', 'axis'];
+			$dods_allies_weapons =  ['thompson', 'colt', 'spring', 'garand', 'riflegren_us', 'm1carbine', 'bar', 'amerknife', '30cal', 'bazooka', 'frag_us', 'riflegren_us', 'smoke_us'];
+			$dods_axis_weapons =  ['spade', 'riflegren_ger', 'k98', 'mp40', 'p38', 'frag_ger', 'smoke_ger', 'mp44', 'k98_scoped', 'mg42', 'pschreck', 'c96'];
+			$l4d_models =  ['zombie1', 'zombie2', 'zombie3'];
+			$insmod_models =  ['insmod1', 'insmod2'];
+			$fof_models =  ['fof1', 'fof2'];
+			$ges_models =  ['ges-bond', 'ges-boris'];
+			$dinodday_models			= ['ddd_allies', 'ddd_axis'];
+			$dinodday_allies_weapons	= ['garand', 'greasegun', 'thompson', 'shotgun', 'sten', 'carbine', 'bar', 'mosin', 'p38', 'piat', 'nagant', 'flechette', 'pistol', 'trigger'];
+			$dinodday_axis_weapons		= ['mp40', 'k98', 'mp44', 'k98sniper', 'luger', 'stygimoloch', 'mg42', 'trex'];
 			while ($rowdata = $db->fetch_array())
 			{
 				$weapon_data['total']['head'] += $rowdata['smhead'];

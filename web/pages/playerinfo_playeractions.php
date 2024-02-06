@@ -43,37 +43,37 @@ For support and installation notes visit http://www.hlxcommunity.com
 	flush();
 	$tblPlayerActions = new Table
 	(
-		array(
+	    [
 			new TableColumn
 			(
-				'description',
-				'Action',
-				'width=45&link=' . urlencode("mode=actioninfo&amp;action=%k&amp;game=$game")
+			    'description',
+			    'Action',
+			    'width=45&link=' . urlencode("mode=actioninfo&amp;action=%k&amp;game=$game")
 			),
 			new TableColumn
 			(
-				'obj_count',
-				'Earned',
-				'width=25&align=right&append=+times'
+			    'obj_count',
+			    'Earned',
+			    'width=25&align=right&append=+times'
 			),
 			new TableColumn
 			(
-				'obj_bonus',
-				'Accumulated Points',
-				'width=25&align=right'
-			)
-		),
-		'code',
-		'obj_count',
-		'description',
-		true,
-		9999,
-		'obj_page',
-		'obj_sort',
-		'obj_sortorder',
-		'tabteams',
-		'desc',
-		true
+			    'obj_bonus',
+			    'Accumulated Points',
+			    'width=25&align=right'
+			),
+		],
+	    'code',
+	    'obj_count',
+	    'description',
+	    true,
+	    9999,
+	    'obj_page',
+	    'obj_sort',
+	    'obj_sortorder',
+	    'tabteams',
+	    'desc',
+	    true
 	);
 	$result = $db->query
 	("
@@ -130,38 +130,37 @@ For support and installation notes visit http://www.hlxcommunity.com
 	}
 	$tblPlayerPlayerActionsV = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'description',
-				'Action',
-				'width=45&link=' . urlencode("mode=actioninfo&amp;action=%k&amp;game=$game#victims")
+			    'description',
+			    'Action',
+			    'width=45&link=' . urlencode("mode=actioninfo&amp;action=%k&amp;game=$game#victims")
 			),
 			new TableColumn
 			(
-				'obj_count',
-				'Earned Against',
-				'width=25&align=right&append=+times'
+			    'obj_count',
+			    'Earned Against',
+			    'width=25&align=right&append=+times'
 			),
 			new TableColumn
 			(
-				'obj_bonus',
-				'Accumulated Points',
-				'width=25&align=right'
-			)
-		),
-		'code',
-		'obj_count',
-		'description',
-		true,
-		9999,
-		'ppa_page',
-		'ppa_sort',
-		'ppa_sortorder',
-		'tabteams',
-		'desc',
-		true
+			    'obj_bonus',
+			    'Accumulated Points',
+			    'width=25&align=right'
+			),
+		],
+	    'code',
+	    'obj_count',
+	    'description',
+	    true,
+	    9999,
+	    'ppa_page',
+	    'ppa_sort',
+	    'ppa_sortorder',
+	    'tabteams',
+	    'desc',
+	    true
 	);
 	$result = $db->query
 	("

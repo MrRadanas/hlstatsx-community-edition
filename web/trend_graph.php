@@ -54,12 +54,12 @@
 
 	$g_options = getOptions();
 	
-	$bg_color = array('red' => 90, 'green' => 90, 'blue' => 90);
+	$bg_color = ['red' => 90, 'green' => 90, 'blue' => 90];
 	if (isset($_GET['bgcolor']) && is_string($_GET['bgcolor'])) {
 		$bg_color = hex2rgb(valid_request($_GET['bgcolor'], false));
 	}
 
-	$color = array('red' => 213, 'green' => 217, 'blue' => 221);
+	$color = ['red' => 213, 'green' => 217, 'blue' => 221];
 	if (isset($_GET['color']) && is_string($_GET['color'])) {
 		$color = hex2rgb(valid_request($_GET['color'], false));
 	}
@@ -73,9 +73,9 @@
 	}
 	
 	$res = $db->query("SELECT UNIX_TIMESTAMP(eventTime) AS ts, skill, skill_change FROM hlstats_Players_History WHERE playerId = '$player' ORDER BY eventTime DESC LIMIT 30");
-	$skill = array();
-	$skill_change = array();
-	$date = array();
+	$skill = [];
+	$skill_change = [];
+	$date = [];
 	$rowcnt = $db->num_rows();
 	$last_time = 0;
 	for ($i = 1; $i <= $rowcnt; $i++)
@@ -128,8 +128,17 @@
 		$DataSet->SetYAxisName('Skill');
 		$DataSet->SetYAxisUnit('K');
 		$Chart->setColorPalette(0, 255, 255, 0);
-		$Chart->drawRightScale($DataSet->GetData(), $DataSet->GetDataDescription(),
-			SCALE_NORMAL, $color['red'], $color['green'], $color['blue'], TRUE, 0, 0);
+		$Chart->drawRightScale(
+		    $DataSet->GetData(),
+		    $DataSet->GetDataDescription(),
+		    SCALE_NORMAL,
+		    $color['red'],
+		    $color['green'],
+		    $color['blue'],
+		    TRUE,
+		    0,
+		    0
+		);
 		$Chart->drawGrid(1, FALSE, 55, 55, 55, 100);
 		$Chart->setShadowProperties(3, 3, 0, 0, 0, 30, 4);
 		$Chart->drawCubicCurve($DataSet->GetData(), $DataSet->GetDataDescription());
@@ -143,18 +152,40 @@
 		$DataSet->AddSerie('SerieSession');
 		$DataSet->SetYAxisName('Session');
 		$DataSet->SetYAxisUnit('');
-		$Chart->setColorPalette(1, 255, 0,   0);
-		$Chart->setColorPalette(2,   0, 0, 255);
-		$Chart->drawScale($DataSet->GetData(), $DataSet->GetDataDescription(),
-			SCALE_NORMAL, $color['red'], $color['green'], $color['blue'], TRUE, 0, 0);
+		$Chart->setColorPalette(1, 255, 0, 0);
+		$Chart->setColorPalette(2, 0, 0, 255);
+		$Chart->drawScale(
+		    $DataSet->GetData(),
+		    $DataSet->GetDataDescription(),
+		    SCALE_NORMAL,
+		    $color['red'],
+		    $color['green'],
+		    $color['blue'],
+		    TRUE,
+		    0,
+		    0
+		);
 		$Chart->setShadowProperties(3, 3, 0, 0, 0, 30, 4);
 		$Chart->drawCubicCurve($DataSet->GetData(), $DataSet->GetDataDescription());
 		$Chart->clearShadow();
 		$Chart->drawPlotGraph($DataSet->GetData(), $DataSet->GetDataDescription(), 1, 1, 255, 255, 255);
 		
-		$Chart->setFontProperties(IMAGE_PATH . '/sig/font/DejaVuSans.ttf',7);
-		$Chart->drawHorizontalLegend(235, -1, $DataSet->GetDataDescription(),
-			0, 0, 0, 0, 0, 0, $color['red'], $color['green'], $color['blue'], FALSE);
+		$Chart->setFontProperties(IMAGE_PATH . '/sig/font/DejaVuSans.ttf', 7);
+		$Chart->drawHorizontalLegend(
+		    235,
+		    -1,
+		    $DataSet->GetDataDescription(),
+		    0,
+		    0,
+		    0,
+		    0,
+		    0,
+		    0,
+		    $color['red'],
+		    $color['green'],
+		    $color['blue'],
+		    FALSE
+		);
 	}
 	
 	$cache_image = IMAGE_PATH . "/progress/trend_{$player}_{$last_time}.png";

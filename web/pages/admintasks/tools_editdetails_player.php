@@ -66,12 +66,12 @@ For support and installation notes visit http://www.hlxcommunity.com
     }
 	$flagselect.=";";
 
-	$proppage = new PropertyPage("hlstats_Players", "playerId", $id, array(
-		new PropertyPage_Group("Profile", array(
+	$proppage = new PropertyPage("hlstats_Players", "playerId", $id, [
+		new PropertyPage_Group("Profile", [
 			new PropertyPage_Property("fullName", "Real Name", "text"),
 			new PropertyPage_Property("email", "E-mail Address", "text"),
 			new PropertyPage_Property("homepage", "Homepage URL", "text"),
-			new PropertyPage_Property("flag", "Country Flag", "select",$flagselect),
+			new PropertyPage_Property("flag", "Country Flag", "select", $flagselect),
 			new PropertyPage_Property("skill", "Points", "text"),
 			new PropertyPage_Property("kills", "Kills", "text"),
 			new PropertyPage_Property("deaths", "Deaths", "text"),
@@ -79,8 +79,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new PropertyPage_Property("suicides", "Suicides", "text"),
 			new PropertyPage_Property("hideranking", "Hide Ranking", "select", "0/No;1/Yes;2/Flag as Banned;3/Inactive (Automatic);"),
 			new PropertyPage_Property("blockavatar", "Force Default Avatar Image (note that this overrides images in hlstatsimg/avatars)", "select", "0/No;1/Yes;"),
-		))
-	));
+		]),
+	]);
 	
 	if (isset($_POST['fullName']))
 	{
@@ -122,24 +122,23 @@ For support and installation notes visit http://www.hlxcommunity.com
 <?php
 	$tblIps = new Table
 	(
-		array
-		(
+	    [
 			new TableColumn
 			(
-				'ipAddress',
-				'IP Address',
-				'width=40'
+			    'ipAddress',
+			    'IP Address',
+			    'width=40'
 			),
 			new TableColumn
 			(
-				'eventTime',
-				'Last Used',
-				'width=60'
-			)
-		),
-		'ipAddress',
-		'eventTime',
-		'eventTime'
+			    'eventTime',
+			    'Last Used',
+			    'width=60'
+			),
+		],
+	    'ipAddress',
+	    'eventTime',
+	    'eventTime'
 	);
 	$result = $db->query
 	("

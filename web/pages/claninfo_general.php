@@ -186,7 +186,7 @@ printSectionTitle('Clan Information');
 						LIMIT 1  	
 					");
 				    		
-					list($favServerId,$favServerName) = $db->fetch_row();
+					[$favServerId, $favServerName] = $db->fetch_row();
 
 					echo "<a href='hlstats.php?game=$game&amp;mode=servers&amp;server_id=$favServerId'> $favServerName </a>";
     			?></td>
@@ -214,7 +214,7 @@ printSectionTitle('Clan Information');
 						LIMIT 1  	
 					");
 
-				    list($favMap) = $db->fetch_row();
+				    [$favMap] = $db->fetch_row();
 
 					echo "<a href='hlstats.php?game=$game&amp;mode=mapinfo&amp;map=$favMap'> $favMap </a>";
 				?></td>
@@ -296,69 +296,69 @@ printSectionTitle('Clan Information');
 	flush();
 	
 	$tblMembers = new Table(
-		array(
+	    [
 			new TableColumn(
-				'lastName',
-				'Name',
-				'width=28&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
+			    'lastName',
+			    'Name',
+			    'width=28&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 			),
                         new TableColumn(
-                                'mmrank',
-                                'Rank',
-                                'width=4&type=elorank'
+                            'mmrank',
+                            'Rank',
+                            'width=4&type=elorank'
                         ),
 			new TableColumn(
-				'skill',
-				'Points',
-				'width=6&align=right'
+			    'skill',
+			    'Points',
+			    'width=6&align=right'
 			),
 			new TableColumn(
-				'activity',
-				'Activity',
-				'width=10&sort=no&type=bargraph'
+			    'activity',
+			    'Activity',
+			    'width=10&sort=no&type=bargraph'
 			),
 			new TableColumn(
-				'connection_time',
-				'Time',
-				'width=13&align=right&type=timestamp'
+			    'connection_time',
+			    'Time',
+			    'width=13&align=right&type=timestamp'
 			),
 			new TableColumn(
-				'kills',
-				'Kills',
-				'width=6&align=right'
+			    'kills',
+			    'Kills',
+			    'width=6&align=right'
 			),
 			new TableColumn(
-				'percent',
-				'Clan Kills',
-				'width=10&sort=no&type=bargraph'
+			    'percent',
+			    'Clan Kills',
+			    'width=10&sort=no&type=bargraph'
 			),
 			new TableColumn(
-				'percent',
-				'%',
-				'width=6&sort=no&align=right&append=' . urlencode('%')
+			    'percent',
+			    '%',
+			    'width=6&sort=no&align=right&append=' . urlencode('%')
 			),
 			new TableColumn(
-				'deaths',
-				'Deaths',
-				'width=6&align=right'
+			    'deaths',
+			    'Deaths',
+			    'width=6&align=right'
 			),
 			new TableColumn(
-				'kpd',
-				'Kpd',
-				'width=6&align=right'
+			    'kpd',
+			    'Kpd',
+			    'width=6&align=right'
 			),
-		),
-		'playerId',
-		'skill',
-		'kpd',
-		true,
-		20,
-		'members_page',
-		'members_sort',
-		'members_sortorder',
-		'members',
-		'desc',
-		true
+		],
+	    'playerId',
+	    'skill',
+	    'kpd',
+	    true,
+	    20,
+	    'members_page',
+	    'members_sort',
+	    'members_sortorder',
+	    'members',
+	    'desc',
+	    true
 	);
 
 	$result = $db->query("
@@ -399,7 +399,7 @@ printSectionTitle('Clan Information');
 			AND hlstats_Players.hideranking = 0
 	");
 	
-	list($numitems) = $db->fetch_row($resultCount);
+	[$numitems] = $db->fetch_row($resultCount);
 ?>
 
 <div style="clear:both;padding-top:20px;"></div>

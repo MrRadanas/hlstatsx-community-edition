@@ -40,8 +40,8 @@ define('IN_HLSTATS', true);
 
 foreach ($_SERVER as $key => $entry) {
 	if ($key !== 'HTTP_COOKIE') {
-		$search_pattern  = array('/<script>/', '/<\/script>/', '/[^A-Za-z0-9.\-\/=:;_?#&~]/');
-		$replace_pattern = array('', '', '');
+		$search_pattern  = ['/<script>/', '/<\/script>/', '/[^A-Za-z0-9.\-\/=:;_?#&~]/'];
+		$replace_pattern = ['', '', ''];
 		$entry = preg_replace($search_pattern, $replace_pattern, $entry);
 
 		if ($key == 'PHP_SELF') {
@@ -101,7 +101,7 @@ else
 $g_options = getOptions();
 
 if (!isset($g_options['scripturl'])) {
-	$g_options['scripturl'] = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : getenv('PHP_SELF');
+	$g_options['scripturl'] = $_SERVER['PHP_SELF'] ?? getenv('PHP_SELF');
 }
 
 $g_options['scriptbase'] = str_replace('/status.php', '', $g_options['scripturl']);
@@ -425,8 +425,8 @@ if ($server_data['addr'] != '')  {
 			LIMIT 0 , 30
 			");
 
-		$teamdata = array();
-		$playerdata = array();
+		$teamdata = [];
+		$playerdata = [];
 		$teamno = 0;
 
 		while ($thisteam = $db->fetch_array($statsdata))

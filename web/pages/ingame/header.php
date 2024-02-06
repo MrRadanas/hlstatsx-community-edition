@@ -47,7 +47,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	 * This file can contain PHP code.
 	 */
 Header ('Cache-Control: no-cache');
-$lastpage = isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:"";
+$lastpage = $_SERVER['HTTP_REFERER']??"";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
